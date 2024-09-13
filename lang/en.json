@@ -1,0 +1,241 @@
+{   
+    "trans": {      
+        "Back" : "Volver",
+        "Save" : "Guardar",
+        "Saved-Male" : "Guardado",
+        "Saved-Error" : "Error al guardar",
+        "Sent-Male" : "Enviado",
+        "Search" : "Buscar",
+        "Reset" : "Borrar",
+        "Policy" : "Política de privacidad",
+        "Terms" : "Términos de uso"
+    },
+    "Title" : {
+        "Home" : "Inicio",
+        "Events" : "Eventos",
+        "Groups" : "Grupos",
+        "Contact" : "Contacto",
+        "User" : "Usuario",
+        "Login" : "Login"
+    },
+    "MenuBar": {
+        "Groups" : "Grupos",
+        "Events" : "Eventos",
+        "User" : "Usuario",
+        "Contact" : "Contacto"
+    },
+    "under-development" : "En desarrollo",
+    "introduction": {
+        "title" : "Bienvenid@s",
+        "line1" : "Esta web se ha desarrollado pensando en ayudarte a encontrar gente afín para hacer planes o actividades.",
+        "line2" : "Su uso es similar (pero sin ánimo de lucro) al de:",
+        "line3" : "No hay publicidad molesta ni se obtiene dinero de la misma. Más bien es al revés porque se ha invertido tiempo y dinero en desarrollarla, contratar el hosting, pagar el dominio, etc.",
+        "line4" : "Simplemente se pretende poder hacer amistades para la gente que vivimos en la provincia de Girona.",
+        "line5" : "En el menú tienes la opción de buscar grupos o actividades que te puedan interesar. También puedes crear tus propios grupos o actividades si te registras.",
+        "line6" : "Cualquier sugerencia para mejorar el servicio es bien recibida. Escríbenos a: "
+    },
+    "groups": {
+        "title" : "Grupos",
+        "empty" : "No hay grupos",
+        "link" : "Abrir",
+        "edit" : "Editar",
+        "Created-Male" : "Creado",
+        "Create" : "Crear",
+        "Search" : "Buscar",
+        "types" : {
+            "all" : "Todos",
+            "whatsapp" : "Whatsapp",
+            "telegram" : "Telegram",
+            "discord" : "Discord"
+        }
+    },
+    "group": {
+        "edit": {
+            "title" : "Editar grupo",
+            "name" : "Nombre",
+            "description" : "Descripción",
+            "tag" : "Etiqueta",
+            "type" : "Tipo",
+            "link" : "Enlace"
+        },
+        "edited" : "Grupo modificado",
+        "created" : "Grupo creado"
+    },
+    "events": {
+        "title" : "Eventos",
+        "empty" : "No hay eventos",
+        "link" : "Abrir",
+        "edit" : "Editar",
+        "Created-Male" : "Creado",
+        "Create" : "Crear",
+        "Date" : "Fecha",
+        "Location" : "Ubicación",
+        "Search" : "Buscar",
+        "types" : {
+            "all" : "Todos",
+            "whatsapp" : "Whatsapp",
+            "telegram" : "Telegram",
+            "discord" : "Discord"
+        }
+    },
+    "event": {
+        "edit": {
+            "title" : "Editar evento",
+            "name" : "Nombre",
+            "description" : "Descripción",
+            "tag" : "Etiqueta",
+            "type" : "Tipo",
+            "link" : "Enlace",
+            "date" : "Fecha",
+            "time" : "Hora",
+            "location" : "Ubicación"
+        },
+        "edited" : "Evento modificado",
+        "created" : "Evento creado"
+    },
+    "user": {
+        "title" : "Usuario",
+        "sections": {
+            "groups" : "Grupos",
+            "events" : "Eventos",
+            "profile" : "Perfil"
+        },
+        "profile": {
+            "sections": {
+                "Information" : "Información",
+                "Password" : "Contraseña",
+                "Account" : "Cuenta"
+            },
+            "information": {
+                "description" : "Actualizar información",
+                "name" : "Nombre",
+                "email" : "Email",
+                "email-not-verified" : "Tu dirección de email no está verificada.",
+                "email-verify" : "Enviar email verificación",
+                "email-sent" : "Un nuevo email de verificación ha sido enviado a tu dirección de email."
+            },
+            "settings": {
+                "description" : "Aquí puedes cambiar diferentes ajustes de tu cuenta",
+                "dark-mode" : "Modo oscuro"
+            },
+            "password": {
+                "description" : "Cambiar contraseña",
+                "password" : "Contraseña",
+                "password-current" : "Contraseña actual",
+                "password-new" : "Contraseña nueva",
+                "password-confirm" : "Confirmar contraseña"
+            },
+            "account": {
+                "title" : "Borrar cuenta",
+                "description" : "Una vez tu cuenta ha sido borrada, todos los datos y recursos son borrados permanentemente. Antes de borrar tu cuenta guarda los datos que necesites, por favor.",
+                "delete" : "Borrar",
+                "confirm" : "Borrar cuenta",
+                "password-confirm" : "Por favor, introduce tu contraseña para borrar la cuenta permanentemente.",
+                "password" : "Contraseña",
+                "cancel" : "Cancelar",
+                "delete" : "Borrar"
+            }         
+        },
+        "email": {
+            "title" : "Verificar email",
+            "description" : "Debes verificar tu email para poder acceder a tu cuenta. Habrás recibido un enlace para validarlo. Si no lo has recibido, prueba a enviarte el email de verificación de nuevo, por favor.",
+            "verified" : "Email verificado",
+            "verification-link-sent" : "Email enviado",
+            "resend-link" : "Reenviar"
+        }
+    },
+    "tags": {
+        "names": {
+            "Friendship": "Amistad",
+            "Sports": "Deporte",
+            "Games": "",
+            "Love": "",
+            "Anime": "",
+            "Languages": "",
+            "Gambling": "",
+            "Art": "",
+            "Astronomy": "",
+            "Au Pairs": "",
+            "Dance": "",
+            "BDSM": "",
+            "Babies": "",
+            "Beauty": "",
+            "Sex": "",
+            "Camping": "",
+            "Religion": "",
+            "Celiacs": "",
+            "Science": "",
+            "Cinema": "",
+            "Coaching": "",
+            "Cooking": "",
+            "Colections": "",
+            "Comics": "",
+            "Travel": "",
+            "Accommodation": "",
+            "Buy/Sell": "",
+            "Music": "",
+            "Culture": "",
+            "Curses": "",
+            "Books": "",
+            "Economy": "",
+            "Jobs": "",
+            "Feminism": "",
+            "Philosophy": "",
+            "Flowers": "",
+            "Photography": "",
+            "Gastronomy": "",
+            "Gays": "",
+            "Gym": "",
+            "History": "",
+            "Horoscope": "",
+            "Humour": "",
+            "Computing": "",
+            "Real estate": "",
+            "Social networks": "",
+            "Gardening": "",
+            "Karaoke": "",
+            "Lesbians": "",
+            "Flirting": "",
+            "Mobiles": "",
+            "Magic": "",
+            "Manga": "",
+            "DIY": "",
+            "Marketing": "",
+            "Health": "",
+            "Fashion": "",
+            "Mountaineering": "",
+            "Motor": "",
+            "Business": "",
+            "Beach": "",
+            "Politics": "",
+            "Psicology": "",
+            "Recipes": "",
+            "Vegans": "",
+            "Vegetarians": ""
+        }
+    },
+    "login": {
+        "title" : "Identificarse",
+        "title-forgot" : "Recordar contraseña",
+        "login" : "Acceder",
+        "login2" : "Loguearse",
+        "name" : "Nombre",
+        "email" : "Email",
+        "password" : "Contraseña",
+        "password-confirm": "Confirmar contraseña",
+        "remember" : "Recuérdame",
+        "forgot" : "Recordar contraseña",
+        "forgot-sentence" : "Indica tu email para enviarte un enlace para poder resetear la contraseña",
+        "forgot-send" : "Enviar",
+        "reset" : "Resetear",
+        "register" : "Registrarse",
+        "google" : "Google"
+    },
+    "contact": {
+        "title" : "Contactar",
+        "name" : "Nombre",
+        "email" : "Email",
+        "message" : "Mensaje",
+        "send" : "Enviar"
+    }
+}

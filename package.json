@@ -1,0 +1,51 @@
+{
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build"
+    },
+    "devDependencies": {
+        "@headlessui/react": "^1.4.2",
+        "@inertiajs/react": "^1.0.0",
+        "@popperjs/core": "^2.11.6",
+        "@tailwindcss/forms": "^0.5.3",
+        "@vitejs/plugin-react": "^4.2.0",
+        "autoprefixer": "^10.4.12",
+        "axios": "^1.7.2",
+        "bootstrap": "^5.2.3",
+        "laravel-vite-plugin": "^1.0",
+        "postcss": "^8.4.31",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "sass": "^1.56.1",
+        "tailwindcss": "^3.2.1",
+        "vite": "^5.0"
+    },
+    "dependencies": {
+        "@emotion/react": "^11.11.4",
+        "@emotion/styled": "^11.11.5",
+        "@fontsource/roboto": "^5.0.13",
+        "@material-ui/core": "^4.12.4",
+        "@mui/icons-material": "^5.15.18",
+        "@mui/lab": "^5.0.0-alpha.170",
+        "@mui/material": "^5.15.18",
+        "@mui/styles": "^5.15.18",
+        "@mui/x-date-pickers": "^6.20.0",
+        "dayjs": "^1.11.11",
+        "dayjs-plugin-utc": "^0.1.2",
+        "i18next": "^23.11.4",
+        "i18next-browser-languagedetector": "^8.0.0",
+        "i18next-http-backend": "^2.5.2",
+        "install": "^0.13.0",
+        "npm": "^10.8.0",
+        "react-i18next": "^14.1.1",
+        "react-refresh": "^0.14.2",
+        "universal-cookie": "^7.1.4",
+        "vite-plugin-commonjs": "^0.10.1",
+        "vite-plugin-require": "^1.2.14"
+    },
+    "optionalDependencies": {
+        "@rollup/rollup-linux-x64-gnu": "4.6.1"
+    }
+}

@@ -1,0 +1,1 @@
+import{_ as u,a as n}from"./ButtonBase-DMtFuzan.js";import{j as a,r as o}from"./app-lhdY4JXM.js";const l=["value"],r=o.createContext();function i(t){let{value:e}=t,s=u(t,l);return a.jsx(r.Provider,n({value:e??!0},s))}const p=()=>{const t=o.useContext(r);return t??!1};export{i as R,p as u};

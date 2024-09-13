@@ -1,0 +1,236 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*https://tailwindcss.com/docs*/
+/*
+html{
+	font-family: 'Roboto';
+}
+*/
+body{
+	background-color: #DCDCDC;
+	@apply mx-1 max-w-screen-xl mx-auto;
+}
+
+.lightmode{
+	@apply text-black;
+}
+
+.darkmode{
+	@apply text-white;	
+}
+
+.main-generic{
+	@apply rounded px-2 mx-1 pt-8 pb-16 my-1 shadow-lg;	
+}
+
+.lightmode main{
+	@apply main-generic bg-white;
+}
+
+.darkmode main{
+	@apply main-generic bg-black;
+}
+
+.tab{
+	transform: scale(0.5);
+}
+
+.app-text-color{
+	color: #FF8C00;
+}
+
+.app-background-color{
+	background-color: #FF8C00;
+}
+
+.title{
+	@apply text-3xl font-bold text-center mb-8;
+}
+
+.user-title{
+	@apply text-lg font-bold mb-2 text-center;
+}
+
+p{
+	@apply mb-4;
+}
+
+a{
+	@apply app-text-color;
+}
+
+#logo{
+	/*max-width: 70%;*/
+}
+
+.lightmode #logo-text{
+	@apply text-black;
+}
+
+.darkmode #logo-text{
+	@apply text-white;
+}
+
+#logo-text{
+	@apply font-bold text-2xl text-black text-opacity-70;
+}
+
+.lightmode .language-item{
+	@apply py-2 text-black;
+}
+
+.darkmode .language-item{
+	@apply py-2 text-white;
+}	
+
+.language-item-selected{
+	@apply font-bold text-orange-400;
+}
+
+.lightmode .MuiAppBar-root{
+	@apply bg-white;
+}
+
+.darkmode .MuiAppBar-root{
+	@apply bg-black;
+}
+
+.lightmode .MuiAppBar-root #language{
+	@apply text-black;	
+}
+
+.darkmode .MuiAppBar-root #language{
+	@apply text-white;	
+}
+
+.lightmode .MuiTab-root{
+	color: rgba(0, 0, 0, 0.6);
+}
+
+.darkmode .MuiTab-root{
+	@apply text-white;
+}
+
+.barbottom-div{
+    /*z-index:2;*/
+    @apply w-full;
+}
+
+.barbottom-div .MuiPaper-root{
+    /*@apply max-w-screen-xl w-full mx-auto;*/
+    @apply w-full;
+}
+
+.menuiconsbottom .MuiButtonBase-root{
+    /*min-width: unset !important;*/
+}
+
+.MuiBottomNavigation-root .MuiBadge-badge{
+    /*top: 7px !important;*/
+    /*background-color: rgb(156, 39, 176);*/
+   	/*@apply bg-pink text-white;*/
+}
+
+.group-name,.event-name{
+	@apply font-bold ml-2;
+}
+
+.app-button{
+	@apply rounded;
+	color: white;
+	/*border-radius: 5px;*/
+	border-style: none;
+	box-sizing: border-box;
+	cursor: pointer;
+	display: inline-block;
+	height: 40px;
+	line-height: 20px;
+	list-style: none;
+	margin: 0;
+	outline: none;
+	padding: 10px 16px;
+	position: relative;
+	text-align: center;
+	text-decoration: none;
+	transition: color 100ms;
+	vertical-align: baseline;
+	user-select: none;
+	-webkit-user-select: none;
+	touch-action: manipulation;
+}
+
+.group-link,.event-link,.login-button,.policy-link,.terms-link{
+	@apply app-button app-background-color;
+}
+
+.google-button{
+	@apply app-button text-white bg-black;
+}
+
+.group-link-edit,.event-link-edit{
+	@apply app-button bg-red-500;
+}
+
+.group-search,.event-search{
+	@apply app-button bg-blue-500;
+}
+
+.group-search-box{
+	/*height: 350px;*/
+}
+
+.back-button, .cancel-button{
+	@apply app-button;
+	background-color: black;
+	border: 1px solid white;
+}
+
+input,textarea{
+	box-shadow: none !important;
+}
+
+.delete-button{
+	@apply app-button bg-red-600;
+}
+
+.group-link:hover, .group-link:focus,
+.group-link-edit:hover, .group-link-edit:focus,
+.event-link:hover, .event-link:focus,
+.event-link-edit:hover, .event-link-edit:focus,
+.login-button:hover,.login-button:focus,
+.back-button:hover,.back-button:focus 
+{
+ 	background-color: #F082AC;
+}
+
+.login-remember{
+	@apply ms-2 text-sm text-gray-600;
+}
+
+.login-status{
+	@apply mb-4 font-medium text-sm text-green-600;
+}
+
+.login-label{
+	/*@apply block font-medium text-sm text-gray-700;*/
+	@apply block;
+}
+
+.app-input-generic{
+	@apply rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500;
+	@apply w-full;	
+}
+
+.lightmode .app-input{
+	@apply app-input-generic border-gray-300 bg-white;
+}
+
+.darkmode .app-input{
+	@apply app-input-generic border-white bg-black;
+}
+
+.app-input-readonly{
+	@apply bg-slate-100;
+}

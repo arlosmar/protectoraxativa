@@ -1,0 +1,1 @@
+import{j as t,Y as r}from"./app-lhdY4JXM.js";function o({t:a,from:s}){var e="Web";switch(s){case"home":e=a("Title.Home");break;case"groups":e=a("Title.Groups");break;case"events":e=a("Title.Events");break;case"login":e=a("Title.Login");break;case"user":e=a("Title.User");break;case"contact":e=a("Title.Contact");break}return t.jsx(r,{title:e})}export{o as default};

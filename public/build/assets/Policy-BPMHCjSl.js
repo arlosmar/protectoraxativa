@@ -1,0 +1,1 @@
+import{j as e}from"./app-lhdY4JXM.js";function r({t:s}){return e.jsxs("div",{children:[e.jsx("h1",{className:"title",children:s("trans.Policy")}),e.jsx("div",{className:"mt-4 text-center",children:e.jsx("a",{href:route("home"),className:"back-button",children:s("trans.Back")})})]})}export{r as default};
