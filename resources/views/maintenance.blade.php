@@ -12,11 +12,4 @@
 
 <article>
     <h1>En manteniment...</h1>
-    <div>
-        <p>Estem en manteniment. Si necessites qualsevol cosa no dubtes en contactar-nos en <a href="mailto:info@amicsgirona.cat">info@amicsgirona.cat</a>. Tornarem pronte!</p>
-        <p>&mdash; amicsgirona.cat</p>
-    </div>
-    <div class='ip'>
-        <p>La teua IP és: {{ $ip }}</p>
-    </div>
 </article>

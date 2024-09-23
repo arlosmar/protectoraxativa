@@ -10,12 +10,12 @@ export default function Title({t,from}){
 			title = t('Title.Home');
 			break;
 
-		case 'groups':
-			title = t('Title.Groups');
+		case 'animals':
+			title = t('Title.Animals');
 			break;
 
-		case 'events':
-			title = t('Title.Events');
+		case 'news':
+			title = t('Title.News');
 			break;
 
 		case 'login':

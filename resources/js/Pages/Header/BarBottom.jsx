@@ -1,23 +1,23 @@
 import { useState } from 'react';
 
-import { Typography } from '@mui/material';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-
-import Button from "@mui/material/Button";
-import IconButton from '@mui/material/IconButton';
-
-import GroupIcon from '@mui/icons-material/Group';
-import EventIcon from '@mui/icons-material/Event';
-import AccountIcon from '@mui/icons-material/AccountCircle';
-import EmailIcon from '@mui/icons-material/Email';
-
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+//import { Typography } from '@mui/material';
+//import AppBar from '@mui/material/AppBar';
+//import Toolbar from '@mui/material/Toolbar';
+//import Button from "@mui/material/Button";
+//import IconButton from '@mui/material/IconButton';
 
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import Paper from '@mui/material/Paper';
+
+import Box from '@mui/material/Box';
+
+import HomeIcon from '@mui/icons-material/Home';
+import AnimalsIcon from '@mui/icons-material/Pets';
+import NewsIcon from '@mui/icons-material/Newspaper';
+import ContactIcon from '@mui/icons-material/Email';
+
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 //https://mui.com/material-ui/material-icons/
 
@@ -35,17 +35,16 @@ export default function BarBottom({t,from}){
     var highlighted = '';
     switch(from){
 
-        case 'groups':
-            highlighted = 'groups';
+        case 'home':
+            highlighted = 'home';
             break;
 
-        case 'events':
-            highlighted = 'events';
+        case 'animals':
+            highlighted = 'animals';
             break;
 
-        case 'login':
-        case 'user':
-            highlighted = 'user';
+        case 'news':
+            highlighted = 'news';
             break;
 
         case 'contact':
@@ -66,16 +65,16 @@ export default function BarBottom({t,from}){
         
         switch(id){
 
-            case 'groups':
-                link = 'groups';
+            case 'home':
+                link = 'home';
                 break;
 
-            case 'events':
-                link = 'events';
+            case 'animals':
+                link = 'animals';
                 break;
 
-            case 'user':
-                link = 'user';
+            case 'news':
+                link = 'news';
                 break;
 
             case 'contact':
@@ -159,27 +158,27 @@ export default function BarBottom({t,from}){
                     <Box sx={{ flexGrow: 1 }}/>
 
                     <BottomNavigationAction
-                        label={t('MenuBar.Groups')}
-                        icon={<GroupIcon/>}                    
-                        value='groups'
+                        label={t('MenuBar.Home')}
+                        icon={<HomeIcon/>}                    
+                        value='home'
                         sx={sxIcon}
                     />
 
                     <Box sx={{ flexGrow: 1 }}/>
 
                     <BottomNavigationAction
-                        label={t('MenuBar.Events')}
-                        icon={<EventIcon/>}                    
-                        value='events'
+                        label={t('MenuBar.Animals')}
+                        icon={<AnimalsIcon/>}                    
+                        value='animals'
                         sx={sxIcon}
                     />
 
                     <Box sx={{ flexGrow: 1 }}/>
 
                     <BottomNavigationAction
-                        label={t('MenuBar.User')}
-                        icon={<AccountIcon/>}                    
-                        value='user'
+                        label={t('MenuBar.News')}
+                        icon={<NewsIcon/>}                    
+                        value='news'
                         sx={sxIcon}
                     />
 
@@ -187,7 +186,7 @@ export default function BarBottom({t,from}){
 
                     <BottomNavigationAction
                         label={t('MenuBar.Contact')}
-                        icon={<EmailIcon/>}                    
+                        icon={<ContactIcon/>}                    
                         value='contact'
                         sx={sxIcon}
                     />

@@ -11,7 +11,6 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 
 import Profile from '@/Pages/Profile/Partials/Profile';
-import GroupsList from '@/Pages/Groups/GroupsList';
 import EventsList from '@/Pages/Events/EventsList';
 
 import Toast from '@/Components/Toast';
@@ -91,11 +90,11 @@ export default function User({auth,user,section,subsection,groups,events,status,
                                 </a>
                             </div>
                         }
-                        <GroupsList 
+                        <EventsList 
                             t={t}
-                            groups={groups}
-                            user={user}    
-                            from=''                        
+                            events={events}
+                            user={user}     
+                            from=''                           
                         />
                         </>
                     :

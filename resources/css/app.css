@@ -22,7 +22,7 @@ body{
 }
 
 .main-generic{
-	@apply rounded px-2 mx-1 pt-8 pb-16 my-1 shadow-lg;	
+	@apply rounded px-4 mx-1 pt-8 pb-16 my-1 shadow-lg;	
 }
 
 .lightmode main{
@@ -49,6 +49,18 @@ body{
 	@apply text-3xl font-bold text-center mb-8;
 }
 
+.title-home{
+	@apply text-2xl font-bold text-center mb-8 border-b;
+}
+
+.subtitle-home{
+	@apply text-xl font-bold;
+}
+
+.title-subsection{
+	@apply text-xl font-bold text-center my-4;
+}
+
 .user-title{
 	@apply text-lg font-bold mb-2 text-center;
 }
@@ -61,8 +73,9 @@ a{
 	@apply app-text-color;
 }
 
-#logo{
-	/*max-width: 70%;*/
+#logo-home{
+	width: 100%;
+	max-width: 150px;
 }
 
 .lightmode #logo-text{
@@ -233,4 +246,103 @@ input,textarea{
 
 .app-input-readonly{
 	@apply bg-slate-100;
+}
+
+.home-div-icon{
+	@apply flex items-center text-center justify-center;
+}
+
+.social-div-icon{
+	width: 100%;
+	max-width: 50px;
+	@apply text-center;
+}
+
+#bizum{
+	@apply mx-auto w-full;
+}
+
+.home-icon{
+	font-size: 85px !important;
+	@apply mb-2;
+}
+
+.home-image-icon{
+	width: 100%;
+	max-width: 150px;
+	@apply mb-2;
+}
+
+.social-icon{
+	font-size: 40px !important;
+}
+
+#social-icon-whatsapp{
+	@apply text-green-800;
+}
+
+#social-icon-facebook{
+	@apply text-blue-800;
+}
+
+#social-icon-instagram{
+	@apply text-rose-400;
+}
+
+#social-icon-twitter{
+	@apply text-cyan-800;
+}
+
+#social-icon-youtube{
+	@apply text-rose-800;
+}
+
+#social-icon-blog{
+	@apply text-blue-700;
+}
+
+#social-icon-soundcloud{
+	@apply text-orange-700;
+}
+
+#social-icon-ladridos{
+	@apply text-orange-500;
+}
+
+.home-div-box{
+	@apply border border-neutral-800 rounded p-1 mb-8;
+}
+
+.home-colaboration-list{
+	@apply pl-4 font-bold;
+}
+
+ul{
+	list-style: unset !important;
+}
+
+.home-colaboration-sponsorship-list{
+	@apply pl-4;
+}
+
+.home-colaboration-sponsorship-list li{
+	@apply pt-4;
+}
+
+.social-div{
+	@apply flex items-center justify-center;
+}
+
+.partners-div, .apu-div{
+	@apply w-1/2 border border-neutral-800 rounded p-1;
+}
+
+.partners-image, .apu-image{
+	@apply mx-auto;
+	height: 200px;
+	max-width: 100%;
+}
+
+.paragraph-top-separation{
+	@apply mt-4;
 }

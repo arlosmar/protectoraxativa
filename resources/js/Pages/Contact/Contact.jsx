@@ -6,7 +6,9 @@ import Toast from '@/Components/Toast';
 
 import { useTranslation } from "react-i18next";
 
-export default function Contact({user,email}) {
+import Grid from '@mui/material/Grid2';
+
+export default function Contact({user,status,email,emails,social}) {
 
     const { t } = useTranslation('global');
     
@@ -46,58 +48,113 @@ export default function Contact({user,email}) {
             <h1 className="title">
                 {t('contact.title')}
             </h1>
-    
-            <form onSubmit={submit}>
-                <div>
-                    <Input
-                        id="name"
-                        name="name"
-                        type="text"
-                        value={data.name}                        
-                        autoComplete="name"
-                        isFocused={true}
-                        onChange={handleInput}                        
-                        placeholder={t('contact.name')}                        
-                        error={errors.name}
-                    />
-                </div>
+            <Grid container spacing={0} className=''>
+                <Grid size={{ xs: 12, md: 5 }} className='mb-8 text-center'>
+                    <h1 className='subtitle-home'>
+                        {t('contact.info.title1')}
+                    </h1>
+                    <a href={'mailto:'+emails.info} target='_new'>
+                        {emails.info}
+                    </a>
+                    <h1 className='subtitle-home paragraph-top-separation'>
+                        {t('contact.info.phone')}
+                    </h1>
+                    <a href={'tel:'+social.phone} target='_new'>
+                        {social.phone}
+                    </a>
+                    <h1 className='subtitle-home paragraph-top-separation'>
+                        {t('contact.info.title2')}
+                    </h1>
+                    <a href={'mailto:'+emails.colaboration} target='_new'>
+                        {emails.colaboration}
+                    </a>
+                    <h1 className='subtitle-home paragraph-top-separation'>
+                        {t('contact.info.title3')}
+                    </h1>
+                    <a href={'mailto:'+emails.adoptions} target='_new'>
+                        {emails.adoptions}
+                    </a>
+                    <h1 className='subtitle-home paragraph-top-separation'>
+                        {t('contact.info.title4')}
+                    </h1>
+                    <a href={'mailto:'+emails.volunteering} target='_new'>
+                        {emails.volunteering}
+                    </a>
+                    <h1 className='subtitle-home paragraph-top-separation'>
+                        {t('contact.info.shift-phone-title')}
+                    </h1>
+                    <div>
+                        {t('contact.info.shift-phone-line1')}<br/>
+                        {t('contact.info.shift-phone-line2')}
+                    </div>
+                    <div className='paragraph-top-separation'>
+                        {t('contact.info.shift-phone-footer1')}<br/>
+                        {t('contact.info.shift-phone-footer2')}
+                    </div>
+                    <h1 className='subtitle-home paragraph-top-separation'>
+                        {t('contact.info.shift-live-title')}
+                    </h1>
+                    <div>
+                        {t('contact.info.shift-live-line1')}<br/>
+                        {t('contact.info.shift-live-line2')}
+                    </div>
+                    <div className='paragraph-top-separation'>
+                        {t('contact.info.title5')}
+                    </div>
+                </Grid>
+                <Grid size={{ xs: 12, md: 7 }} className=''>
+                    <form onSubmit={submit}>
+                        <div>
+                            <Input
+                                id="name"
+                                name="name"
+                                type="text"
+                                value={data.name}                        
+                                autoComplete="name"
+                                isFocused={true}
+                                onChange={handleInput}                        
+                                placeholder={t('contact.name')}                        
+                                error={errors.name}
+                            />
+                        </div>
 
-                <div className="mt-4">
-                    <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        value={data.email}                        
-                        autoComplete="email"                        
-                        onChange={handleInput}                        
-                        placeholder={t('contact.email')}                        
-                        error={errors.email}
-                    />
-                </div>
+                        <div className="paragraph-top-separation">
+                            <Input
+                                id="email"
+                                name="email"
+                                type="email"
+                                value={data.email}                        
+                                autoComplete="email"                        
+                                onChange={handleInput}                        
+                                placeholder={t('contact.email')}                        
+                                error={errors.email}
+                            />
+                        </div>
 
-                <div className="mt-4">
-                    <Input
-                        id="message"
-                        name="message"
-                        type="message"
-                        value={data.message}                        
-                        autoComplete="new-password"                        
-                        onChange={handleInput}                        
-                        placeholder={t('contact.message')}                        
-                        error={errors.message}
-                        multiline
-                        rows={6}
-                    />                   
-                </div>
+                        <div className="paragraph-top-separation">
+                            <Input
+                                id="message"
+                                name="message"
+                                type="message"
+                                value={data.message}                        
+                                autoComplete="new-password"                        
+                                onChange={handleInput}                        
+                                placeholder={t('contact.message')}                        
+                                error={errors.message}
+                                multiline
+                                rows={6}
+                            />                   
+                        </div>
 
-                <div className="text-center mt-4">
-                    <button className={`login-button mx-1 ${processing && 'opacity-25'}`} disabled={processing}>
-                        {t('contact.send')}
-                    </button>
-                </div>
+                        <div className="text-center paragraph-top-separation">
+                            <button className={`login-button mx-1 ${processing && 'opacity-25'}`} disabled={processing}>
+                                {t('contact.send')}
+                            </button>
+                        </div>
 
-            </form>
-        
+                    </form>
+                </Grid>
+            </Grid>
         </main>
         </>
     );

@@ -25,7 +25,7 @@ else{
     document.body.classList.add('lightmode');
 }
 
-const appName = import.meta.env.VITE_APP_NAME || 'amicsgirona.cat';
+const appName = import.meta.env.VITE_APP_NAME || '';
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,

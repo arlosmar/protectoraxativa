@@ -23,11 +23,16 @@ return new class extends Migration
             $table->timestamps();
         });
 
+        $date = gmdate('Y-m-d H:i:s');
+        
         DB::table('users')->insert(
             [
                 'name' => 'Admin',
-                'email' => 'amicsengirona@gmail.com',                
-                'password' => '$2y$12$fOOW8O2YqTB2cYQV/uSEYOhTOTVuS9rgZzimArA9ieYRm4ZCWqm.a'
+                'email' => 'admin@admin.com',                
+                'password' => '$2y$12$U33xS7NDAFm.PPF0OvCyweZB.gayyWzsuvbSjgYqBxVgvZ6zFhQZC',
+                'email_verified_at' => '2024-09-13 12:00:00', // $4&dm?1#n!%)·%=faN5T
+                'created_at'    => $date,
+                'updated_at'   => $date
             ]
         );
 

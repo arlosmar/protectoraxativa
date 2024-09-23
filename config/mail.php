@@ -111,8 +111,23 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'info@amicsgirona.cat'),
-        'name' => env('MAIL_FROM_NAME', 'amicsgirona.cat'),
+        'address' => env('MAIL_FROM_ADDRESS', ''),
+        'name' => env('MAIL_FROM_NAME', ''),
     ],
-
+    'adoptions' => [
+        'address' => env('MAIL_FROM_ADDRESS_ADOPTIONS', ''),
+        'name' => env('MAIL_FROM_NAME_ADOPTIONS', ''),
+    ],
+    'colaboration' => [
+        'address' => env('MAIL_FROM_ADDRESS_COLABORATION', ''),
+        'name' => env('MAIL_FROM_NAME_COLABORATION', ''),
+    ],
+    'volunteering' => [
+        'address' => env('MAIL_FROM_ADDRESS_VOLUNTEERING', ''),
+        'name' => env('MAIL_FROM_NAME_VOLUNTEERING', ''),
+    ],
+    'info' => [
+        'address' => env('MAIL_FROM_ADDRESS_INFO', ''),
+        'name' => env('MAIL_FROM_NAME_INFO', ''),
+    ]
 ];

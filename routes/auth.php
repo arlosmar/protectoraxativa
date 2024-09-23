@@ -13,7 +13,7 @@ use App\Http\Controllers\Auth\{
     ProfileController
 };
 
-use App\Http\Controllers\{GroupController,EventController,SettingsController};
+use App\Http\Controllers\{SettingsController};
 use Illuminate\Support\Facades\Route;
 
 
@@ -71,18 +71,13 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['auth','verified'])->group(function () {
-
-    Route::get('/group/edit/{group}', [GroupController::class, 'edit'])->name('group.edit');
-    Route::patch('/group/edit', [GroupController::class, 'editSave'])->name('group.edit.save');
-    Route::get('/group/create', [GroupController::class, 'create'])->name('group.create');
-});
-
+/*
 Route::middleware(['auth','verified'])->group(function () {
     Route::get('/event/edit/{event}', [EventController::class, 'edit'])->name('event.edit');
     Route::patch('/event/edit', [EventController::class, 'editSave'])->name('event.edit.save');
     Route::get('/event/create', [EventController::class, 'create'])->name('event.create');
 });
+*/
 
 Route::middleware(['auth','verified'])->group(function () {
     

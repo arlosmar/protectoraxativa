@@ -1,7 +1,7 @@
 export const languages = () => {
 
     const languages = [
-        { 'name' : 'Català', 'value' : 'ca'},
+        { 'name' : 'Valencià', 'value' : 'ca'},
         { 'name' : 'Español', 'value' : 'es'},
         { 'name' : 'English', 'value' : 'en'}
     ];

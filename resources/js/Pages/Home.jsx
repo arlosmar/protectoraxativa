@@ -1,11 +1,29 @@
-import { useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { useTranslation } from "react-i18next";
+
+import { makeStyles } from '@mui/styles';
+
 //import i18n from 'i18next';
 //const lang =  i18n.language // lang === 'es' etc.
+
 import Header from '@/Pages/Header/Header';
 import { setLanguage } from "@/Utils/Cookies";
 
-export default function Home({user,email,language}){
+import EuroIcon from '@mui/icons-material/Euro';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import ShareIcon from '@mui/icons-material/Share';
+import InfoIcon from '@mui/icons-material/Info';
+import HandshakeIcon from '@mui/icons-material/Handshake';
+
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+
+import Colaboration from '@/Pages/Home/Colaboration';
+import Social from '@/Pages/Home/Social';
+import Partners from '@/Pages/Home/Partners';
+import Info from '@/Pages/Home/Info';
+
+export default function Home({user,language,section,email_colaboration,email_volunteering,social,partners,prices}){
 
 	const { t, i18n } = useTranslation('global');
 
@@ -18,6 +36,33 @@ export default function Home({user,email,language}){
 
     }, []);
 
+	const [ tab, setTab ] = useState(section ? section : "colaboration");
+
+    const handleTabChange = (event, newValue) => {
+        
+        setTab(newValue);
+
+        // change url on the browser
+        var url = route("home")+'/'+newValue;
+        window.history.pushState({path:url},'',url);
+    };
+
+    const useStyles = makeStyles({
+
+        tabs: {
+            "& .MuiTabs-indicator": {
+                backgroundColor: "#FF8C00",
+                height: 3,
+            },
+            "& .MuiTab-root.Mui-selected": {
+                color: '#FF8C00'
+            }
+        }
+    });
+    const classes = useStyles();
+
+	const sx = {minWidth: "fit-content", flex: 1 };
+
     return (
     	<>
     	<Header user={user} t={t} from='home'/>
@@ -25,38 +70,49 @@ export default function Home({user,email,language}){
     		<h1 className="title">
     			{t('introduction.title')}
     		</h1>
-			<p>
-				{t('introduction.line1')}
-			</p>
-			<p>
-				{t('introduction.line2')}<br/>
-				<ul>
-					<li> - <a href='https://amigosbarcelona.com' target='_blank'>amigosbarcelona</a></li>
-					<li> - <a href='https://amigosvalencia.com' target='_blank'>amigosvalencia</a></li>
-				</ul>
-			</p>
-			<p>
-				{t('introduction.line3')}
-			</p>
-			<p>
-				{t('introduction.line4')}
-			</p>
-			<p>
-				{t('introduction.line5')}
-			</p>
-			<p>
-				{t('introduction.line6')} <a href='mailto:{email}' target='_blank'>{email}</a>
-			</p>
-			<p className='mt-16 text-center'>
-				<a href={route('policy')} className='policy-link'>
-					{t('trans.Policy')}
-				</a>
-			</p>
-			<p className='mt-4 text-center'>
-				<a href={route('terms')} className='terms-link'>
-					{t('trans.Terms')}
-				</a>
-			</p>
+			<div className='text-center'>
+				<img
+					className='mx-auto'
+					alt=""
+					src='/logo.png'
+					id='logo-home'
+				/>
+			</div>
+			<div className='mt-8'>
+                <Tabs 					
+                    value={tab} 
+                    onChange={handleTabChange}                     
+                    className={classes.tabs}
+					variant="scrollable"
+                >
+                    <Tab icon={<EuroIcon/>} value="colaboration" sx={sx}/>
+                    <Tab icon={<ShareIcon/>} value="social" sx={sx}/>
+					<Tab icon={<HandshakeIcon/>} value="partners" sx={sx}/>
+					<Tab icon={<InfoIcon/>} value="info" sx={sx}/>
+                </Tabs>
+                <div className='mt-4 pt-4'>
+                {
+                    tab === 'colaboration' ?
+                        <Colaboration 
+                            t={t} 
+                            email_colaboration={email_colaboration}
+                            email_volunteering={email_volunteering}
+                            prices={prices}
+                        />
+                    :						
+						tab === 'social' ?
+							<Social t={t} social={social}/>
+						:
+							tab === 'partners' ?
+								<Partners t={t} partners={partners}/>
+							:
+								tab === 'info' ?
+									<Info t={t}/>
+								:
+									''
+                }
+                </div>
+            </div>
     	</main>
     	</>
     )

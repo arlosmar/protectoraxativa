@@ -12,86 +12,145 @@
     },
     "Title" : {
         "Home" : "Inicio",
-        "Events" : "Eventos",
-        "Groups" : "Grupos",
+        "Animals" : "Animales",
+        "News" : "Noticias",
         "Contact" : "Contacto",
         "User" : "Usuario",
         "Login" : "Login"
     },
     "MenuBar": {
-        "Groups" : "Grupos",
-        "Events" : "Eventos",
-        "User" : "Usuario",
+        "Home" : "Inicio",
+        "Animals" : "Animales",
+        "News" : "Noticias",
         "Contact" : "Contacto"
     },
     "under-development" : "En desarrollo",
     "introduction": {
         "title" : "Bienvenid@s",
-        "line1" : "Esta web se ha desarrollado pensando en ayudarte a encontrar gente afín para hacer planes o actividades.",
-        "line2" : "Su uso es similar (pero sin ánimo de lucro) al de:",
-        "line3" : "No hay publicidad molesta ni se obtiene dinero de la misma. Más bien es al revés porque se ha invertido tiempo y dinero en desarrollarla, contratar el hosting, pagar el dominio, etc.",
-        "line4" : "Simplemente se pretende poder hacer amistades para la gente que vivimos en la provincia de Girona.",
-        "line5" : "En el menú tienes la opción de buscar grupos o actividades que te puedan interesar. También puedes crear tus propios grupos o actividades si te registras.",
-        "line6" : "Cualquier sugerencia para mejorar el servicio es bien recibida. Escríbenos a: "
-    },
-    "groups": {
-        "title" : "Grupos",
-        "empty" : "No hay grupos",
-        "link" : "Abrir",
-        "edit" : "Editar",
-        "Created-Male" : "Creado",
-        "Create" : "Crear",
-        "Search" : "Buscar",
-        "types" : {
-            "all" : "Todos",
-            "whatsapp" : "Whatsapp",
-            "telegram" : "Telegram",
-            "discord" : "Discord"
+        "colaboration" : {
+            "title" : "Colaborar",
+            "bizum": "Bizum",
+            "line1" : "Si quieres puedes realizar una donación a la SPAX por <b>Bizum</b>. Sigue las siguientes instrucciones:",
+            "line2" : "Entra en la app bancaria de tu móvil en <b>Bizum</b>, haz click en <b>\"hacer donación\"</b>, <b>\"aportar a causa solidaria\"</b> o similar dependiendo de la banca que se opera y después la aplicación te pedirá nuestro <b>\"código de campaña\"</b> o <b>\"código de ong\"</b> o similar también dependiendo de tu entidad bancaria.",
+            "line3" : "Nuestro <b>código</b> es el:",
+            "line4" : "<h1 class='text-xl'>04318</h1>",
+            "line5" : "Muchas gracias.",
+            "line6" : "<b>Nota muy importante:</b> No lo realices enviando el Bizum directamente a nuestro móvil. De esa manera no constará como donativo y no podrás desgravártelo de la declaración de la renta.",
+            "bank": "Transferencia bancaria",
+            "line7" : "También puedes realizar una donación por <b>transferencia bancaria</b>.",
+            "line8" : "Aquí puedes ver las oficinas bancarias y los números de cuenta en el que puedes hacer la transferencia de tu donación:",
+            "line9" : "Caixa Popular<br><b>ES1031590004662253405720</b><br>BIC BCOEESMM159",
+            "line10": "Caixa Ontinyent<br><b>ES5820456008743000036569</b><br>BIC CECAESMM045",
+            "line11": "Gracias",
+            "materials": "Donativos materiales",
+            "line12": "Se puede donar entregando en el refugio cualquier tipo de material:",
+            "line13": "<ul><li>Construcción</li><li>Limpieza</li><li>Mantas</li><li>Material quirúrgico</li><li>Medicamentos</li><li>Accesorios para perros</li><li>Material desinfectante</li><li>Útiles de limpieza</li><li>Pienso</li><li>etc.</li></ul>",
+            "partner"  :    "Soci@",
+            "line14"    :   "La cuota mínima mensual es de {{price_partner}}€.",
+            "line15"    :   "Para jubilad@s y pensionistas es de {{price_retired}}€.",
+            "line16"    :   "Para menores de 14 años (siempre con autorización de sus representantes legales) es de {{price_child}}€.",
+            "line17"    :   "Si quieres hacerte soci@ puedes contactar con:",
+            "sponsorship"    :   "Apadrinamiento",
+            "line18"    :   "La cuota mínima mensual es de {{price_sponsorship}}€.",
+            "line19"    :   "Pueden colaborar tanto personas físicas como empresas.",
+            "line20"    :   "Se distinguen dos tipos de apadrinamiento:",
+            "line21"    :   "<ul><li><b>Perr@s del refugio</b><br>{{shelter}}</li><li><b>Perr@s de APU</b><br>{{apu}}</li></ul>",
+            "shelter"    :  "El horario de visitas de padrinos/madrinas es de 11:00h a 14:00h los sábados y avisando con antelación. No está permitido traerles cualquier tipo de alimento o golosina por razones de seguridad y para evitar de peleas entre ell@s. Siempre que el padrino/madrina lo solicite, se le dará la debida información sobre el estado de su apadrinad@. Si fuera adoptad@ o cualquier otra circunstancia le sería comunicado inmediatamente tanto para conocimiento del padrino/madrina como para ofrecer la posibilidad de apadrinar/amadrinar a otro animal.<br><br>Si quieres colaborar apadrinando un perro de nuestro refugio, escribe a:<br><a href='mailto:{{email_colaboration}}'>{{email_colaboration}}</a>",
+            "apu"   :   "Adquisición y/o colaboración en proyectos o compra material de útiles necesarios, puntuales o periódicos. Estos proyectos de construcción, reparación o adquisición de productos necesarios pueden apadrinarse de forma total o parcial. Se puede dar dinero para su compra o suministrar directamente el material para comprarlo. Se solicitará permiso en su caso para que la persona o entidad que apadrinara apareciera en nuestra web en calidad de padrino/madrina del objetivo conseguido.",
+            "volunteering"  :   "Voluntariado",
+            "line22"    :   "Actividad totalmente necesaria en este tipo de asociaciones donde la ayuda y colaboración resulta básica y casi imprescindible.",
+            "line23"    :   "Es de vital importancia dado que las actividades están basadas en la cooperación solidaria.",
+            "line24"    :   "Si estás interesad@ en colaborar como voluntari@ puedes ponerte en contacto en:",
+            "lottery"   :   "Lotería",
+            "line25"    :   "Es otra fuente de ingreso para la asociación.",
+            "line26"    :   "Solemos participar en este juego de azar en la Lotería Nacional de Navidad del 22 de Diciembre.",
+            "line27"    :   "El ámbito de venta es local pero lo pondremos siempre en conocimiento de quienes puedan estar interesad@s en colaborar con la asociación.",
+            "line28"    :   "Para cualquier información sobre este tema podéis dirigiros a:"
+        },
+        "social"    :   {
+            "title" :   "Redes sociales",
+            "whatsapp"  :   "Whatsapp",
+            "facebook" :   "Facebook",
+            "instagram" :   "Instagram",
+            "twitter" :   "Twitter",
+            "youtube" :   "Youtube",
+            "blog" :   "Blog",
+            "soundcloud" :   "Soundcloud",
+            "ladridos" :   "Ladridos y lametones"
+        },
+        "partners"  :   {
+            "title"  :   "Entidades y empresas colaboradoras"
+        },
+        "info"  :   {
+            "title" :   "¿Quiénes somos?",
+            "paragraph1"  :   "Asociación sin ánimo de lucro, legalmente constituida e inscrita en el Registro Autonómico de Asociaciones de Valencia. Todos sus cargos directivos son gratuitos. La labor desempeñada por todos sus miembros, es altruista y desinteresada.<br><br>Su mayor actividad es desarrollada en el Refugio para perros abandonados que posee en el municipio de Xàtiva. Tiene todas las licencias y autorizaciones administrativas, tanto municipales como autonómicas. Posee la declaración de Núcleo Zoológico desde el 7 de mayo de 2002 y es Entidad Colaboradora de la Consellería de Agricultura, Pesca y Alimentación de la Generalitat Valenciana por resolución de fecha el 14 de octubre de 1997.<br><br>Dicho Refugio se encuentra ubicado en unos terrenos en propiedad gracias a la primera donación de D, Roberto Cortes y posteriormente de D. Francisco Aguado quien, este último, facilitó económicamente la adquisición de un terreno colindante lo que propició la instalación y asentamiento definitivo del albergue.<br><br>Han sido muchos los esfuerzos tanto personales como económicos por acondicionarlo mediante nuevas construcciones, instalación de instalación eléctrica, bebederos automáticos, espacio libre para esparcimiento, clínica veterinaria para asistencia a los animales albergados, plantación de árboles para sombra, construcción de fosas sépticas, desagües, almacén para la alimentación y pienso y muchos proyectos necesarios que aún quedan por realizar.<br><br>Situado en zona altamente inundable, ha propiciado en varias ocasiones la inundación de una parte del recinto si bien, poco a poco a poco y gracias a la inestimable ayuda de las donaciones puntuales y extraordinarias se han podido garantizar nuevas obras tendentes a que el impacto de las lluvias y torrentes cause el menor daño posible.<br><br>Su ÚNICO COMPROMISO es la protección y defensa de los animales en general y de perros en particular. SOLO ACOGE PERROS. No alberga gatos al carecer de recursos económicos y humanos como para ofrecerles una vida digna en cautividad, disponiendo de escasas y saturadas casas de acogida que en ningún caso palian el gravísimo problema que sufren estos animales.<br><br>SE OPONE Y CONDENA cualquier maltrato, agresión o injusticia hacia ellos. Venga de donde venga y de quien venga. De quien lo aplauda y de quien lo promueva. De quien lo justifique y de quien lo tolere y difunda. Una legislación blanda, insensible y permisiva en este sentido es, continua siendo y será la mejor aliada para que la brutalidad en este país, sea desgraciadamente, nuestro signo distintivo.<br><br>Sólo deseamos ADOPCIONES RESPONSABLES. Somos contrarios a regalar animalesen Navidad, cumpleaños y fechas señaladas y muy cansados de la pasividad e indiferencia de los poderes públicos respecto a las injusticias que se comenten contra los animales. También de los propietarios incapaces y caprichosos que abandonan a sus animales sin importarles nada de lo que les pueda ocurrir y de aquellos que, irresponsablemente, nos arrojan animales por las verjas del refugio o los dejan atados a su suerte. O animales caseros ancianos que morirán de tristeza y de penay a veces, no podremos hacer nada por impedirlo.<br><br>Nunca ha sido ni será obstáculo para la permanencia en nuestro albergue, cualquier animal tenga la edad que tenga o esté limitado física o funcionalmente, manteniendo especial atención por los animales mayores abandonados, los no adaptados y los cachorros.<br><br>Consideramos la ESTERILIZACION como único medio para erradicar las camadas indeseadas que llenan de muerte y sangre las perreras municipales y las carreteras y creemos en la educación y sensibilización sobre este drama silenciosamente sangrante que se vive día a día en este país.<br><br>Confiamos en el VOLUNTARIADO como pieza clave para el funcionamiento de esta Sociedad y basamos la supervivencia económica de la Asociación en los socios, padrinos, donaciones de particulares, subvenciones públicas, empresas y APU .<br><br>A los que nos ayudan, socios, padrinos, particulares y empresas, les agradecemos continúen facilitándonos la labor como hasta ahora y confiando en todo el trabajo que hemos realizado durante todos estos años. A los que acceden por primera vez, si no puedes darles una oportunidad a los que tanto lo desean y merecen por lo menos que, con tu ayuda, puedan vivir un poco mejor, gracias. ",
+            "paragraph2-title"  :  "Un poco de historia",
+            "paragraph2"  :   "La idea de crear una asociación de defensa de los animales en Xàtiva surgió tras la reunión de un grupo de personas sensibilizadas con el tema de los animales, con muchas ganas e ilusiones de realizar cosas en este ámbito, pues la alternativa municipal al problema del animal abandonado era  que tras unos días en la perrera municipal y si no lo reclamaba nadie como solía ser lo más frecuente, el animal era sacrificado. <br><br>La reunión que se menciona anteriormente tuvo lugar en la antigua 4ª planta de la Casa de la Cultura sobre el mes de febrero de 1985, posteriormente y con fecha 5 de marzo del mismo año se constituía : \"La Sociedad Protectora de Animales y plantas de Xàtiva\", legalizándose posteriormente el 10 de abril del mismo año.<br><br>Como que no había ningún tipo de infraestructura , una socia llamada \"Rosarín\", cedió su terreno, que era parte de su propia casa para comenzar a acoger perros abandonados, ya desde el primer momento del nacimiento de esta sociedad.<br><br>Después fue el socio Antonio Romero quién cedió también temporalmente su chalet en Rotglà, invadido y con grandes desperfectos debidos a la gran cantidad de perros que allí se alojaron.<br><br>Por último y gracias al socio D. Roberto Cortés la asociación tuvo un lugar propio y definitivo. Fue en el año 1987 cuando donó los actuales terrenos y un donativo (que no fue el último) para comenzar las obras de las actuales instalaciones, que se encuentran en el \"Camí Senda de Murcia\" en la cara Este del Puig",
+            "paragraph2-footer" :   "Pie de foto: D. Roberto Cortés con su mujer en la construcción de las instalaciones del refugio del Puig.",
+            "paragraph3"  :   "La Asociación  cuyas siglas son SPAX , a lo largo de sus 37 años de funcionamiento ha tenido en la Presidencia a : <br><br>Mercedes Hernández, Roberto Cortés ( que fue nombrado antes de morir \"presidente honorífico perpetuo\") alguna Junta Gestora, Pilar Baraza, Lucía y a Mª Carmen Jachán Sánchez.<br><br> Mª Carmen Jachán Sánchez es Socia-fundadora y desde su inicio hace ya 37 años siempre ha estado en la junta directiva como secretaria, portavoz y  los últimos  12 años como presidenta.<br><br>Fue reconocida el pasado 16 de febrero de 2019 por el Cuerpo de Policía Local de Xàtiva por su espíritu solidario con los animales y su colaboración con la Policía Local en la recogida de animales extraviados.<br><br>Ya en el año 1998 fue también reconocida su larga labor en agradecimiento por tantos años de colaboración, esfuerzo y dedicación a la esta Sociedad por parte de toda la junta directiva y socios de aquel año.<br><br>Durante estos últimos años con la brillante gestión de Mª Carmen Jachán en la presidencia, la SPAX se encuentra en una época dorada a nivel económico y de socios y padrinos; además  goza de un gran prestigio en Xàtiva y comarcas de los alrededores siendo una Protectora  referente a seguir. Todas las asociaciones de la ciudad e instituciones mantienen una admiración hacia nuestra SPAX y colaboran a lo largo del año muchas de ellas para recaudar fondos con diversos actos que organizan.",
+            "poem-title"  :   "A vosotros",
+            "poem"  :   "A los que, sin rumbo, por las calles vagan.<br>A los que, entre rejas, malviven cautivos.<br>A los que están solos, viejos, desvalidos,<br>sin nadie que vele por su bienestar.<br><br>A vosotros dedico estos versos,<br>que salen del alma y que al aire van,<br>confiando al papel mis anhelos,<br>por si el aire los lleva hasta el cielo,<br>y el cielo se apiada de vuestra orfandad.<br><br>Compartir con vosotros quisiera<br>los juegos alegres, los largos paseos,<br>y las sobremesas de tarde estival,<br>y en las noches frías del oscuro invierno,<br>bajo el mismo techo, juntos descansar,<br>lejos de los golpes, del hambre y del miedo,<br>al calor del fuego, saciados, y en paz.<br><br>Pero sé que estoy pidiendo demasiado,<br>y que mi deseo no se cumplirá.<br>En el mundo hay tantos perros olvidados,<br>pidiendo caricias y un trozo de pan,<br>que, aunque de par en par abra los brazos,<br>de abrazar a todos no seré capaz.<br><br>Y los que se quedan fuera del regazo<br>son los que más pesan en el corazón,<br>poblando mis noches de sueños amargos,<br>tiñendo mis días de desolación.<br><br>Incluso en las horas buenas de la vida,<br>fugaces oasis de felicidad,<br>me invade de pronto la melancolía,<br>porque su mirada, clavada en la mía,<br>de mi pensamiento no logro apartar.<br><br>Su triste recuerdo empaña la alegría,<br>que sentir podría, si olvidar pudiera,<br>que en todo momento, en algún lugar,<br>un perro perdido y desorientado,<br>a su ingrato dueño todavía espera,<br>sin saber siquiera… que lo ha abandonado.",
+            "poem-footer"   : "Elena Negueroles"
         }
     },
-    "group": {
-        "edit": {
-            "title" : "Editar grupo",
-            "name" : "Nombre",
-            "description" : "Descripción",
-            "tag" : "Etiqueta",
-            "type" : "Tipo",
-            "link" : "Enlace"
+    "animals":   {
+        "title" :   "Animales",
+        "adopt" :   {
+            "icon"  :   "Adoptar",
+            "title" :   "Adoptar",
+            "info"  :   {
+                "icon"  :   "Info",
+                "title" :   "Información",
+                "title-preadoptions"    :   "Pre-Adopción",
+                "line1" :   "Si estás interesad@ en adoptar un perr@ o gat@ de nuestra asociación descarga el siguiente formulario:",
+                "form"  :   "Formulario",
+                "line2" :   "Tienes que rellenarlo y mandarlo al siguiente email:",
+                "title-protocol" :   "Protocolo adopción",
+                "line3" :   "El/la adoptante puede contactar con nosotr@s mediante email o teléfono:",
+                "line4" :   "Una vez realizado el contacto, se debe cumplimentar el siguiente cuestionario:",
+                "line5" :   "La finalidad del cuestionario es la de asegurar el éxito de la adopción.",
+                "line6" :   "Una vez se considere que la adopción es favorable y el/la adoptante se haya decidido por un animal en concreto o haya definido las características deseadas (edad, carácter, tamaño,…), se concertará una cita en el refugio para conocer al animal.",
+                "line7" :   "Para formalizar la adopción el/la adoptante, previa presentación de su DNI/NIE o pasaporte en vigor (imprescindible ser mayor de edad), firmará un contrato de adopción con la Asociación.",
+                "line8" :   "Todos los animales de nuestro refugio se entregan con microchip, vacuna antirrábica y pasaporte europeo obligatorios en la Comunidad Valenciana (Decreto 49/2005, de 4 de marzo del Consell de la Generalitat Valenciana sobre obligatoriedad de chip, pasaporte y vacuna).",
+                "line9" :   "Este trámite será realizado por un/a veterinari@ colegiad@ y asignad@ por esta Asociación, con independencia de que con posterioridad el/la propietari@ del animal acuda a cualquier otr@ veterinari@.",
+                "line10":   "El/la adoptante deberá abonar a esta Asociación los costes veterinarios derivados de lo descrito anteriormente."
+            },
+            "animals"  :   {
+                "icon"  :   "Animales",
+                "title" :   "Animales"
+            },
+            "adopted"  :   {
+                "icon"  :   "Adoptados",
+                "title" :   "Adoptados"
+            }
         },
-        "edited" : "Grupo modificado",
-        "created" : "Grupo creado"
-    },
-    "events": {
-        "title" : "Eventos",
-        "empty" : "No hay eventos",
-        "link" : "Abrir",
-        "edit" : "Editar",
-        "Created-Male" : "Creado",
-        "Create" : "Crear",
-        "Date" : "Fecha",
-        "Location" : "Ubicación",
-        "Search" : "Buscar",
-        "types" : {
-            "all" : "Todos",
-            "whatsapp" : "Whatsapp",
-            "telegram" : "Telegram",
-            "discord" : "Discord"
+        "sponsor" :   {
+            "icon"  :   "Apadrinar",
+            "title" :   "Apadrinar",
+            "info"  :   {
+                "icon"  :   "Info",
+                "title" :   "Información",
+                "line1" :   "Esta sección está dedicada tanto al apadrinamiento/amadrinamiento de nuestr@s animales albergados como a los particulares o empresas que por su colaboración o donación han apadrinado/amadrinado algunas necesidades del refugio y, con ello, que la vida que hay dentro de él pueda mejorar o, por lo menos, mantenerse.",
+                "line2" :   "Respecto a los animales aquí expuestos, algunos se encuentra en el apartado de adopción, otros son recién llegados y otros, sin embargo, por sus circunstancias, edad, patología, enfermedades crónicas, secuelas físicas o traumas que arrastran, carácter, inadaptación o características peculiares, son igualmente adoptables pero tal vez (y desgraciadamente) con menos posibilidades que el resto.",
+                "line3" :   "Nunca entenderemos por qué pero es así. Hay animales que llevan toda su vida en el refugio y pensamos que morirán de viejos en él. A los animales mayores muy poca gente les quiere.",
+                "line4" :   "Por ello y para que no nos olvidemos de su existencia, de que están vivos, de que necesitan el mismo cariño y atención que el resto, te ofrecemos la posibilidad de que los apadrines si no puedes adoptarlos.",
+                "line5" :   "Si deseas información sobre cualquiera de ellos no tienes más que pedirla. Te la enviaremos encantad@s porque normalmente nadie se acuerda ni se fija en ellos.",
+                "line6" :   "En cuanto a los particulares y empresas que han colaborado y colaboran desde hace años con algunas de las necesidades de nuestro refugio, a los que nos puedan ayudar a partir de ahora o en su proyecto se encuentre tal colaboración en forma de apadrinamiento/amadrinamiento de Apu, nuestro agradecimiento será permanente.",
+                "line7" :   "Tanto a los padrinos/madrinas de nuestros animales como de las necesidades del refugio sólo podemos decirles algo que sentimos y sentiremos siempre muy profundamente: <b>GRACIAS</b>"
+            },
+            "animals"  :   {
+                "icon"  :   "Animales",
+                "title" :   "Animales"
+            },
+            "sponsored"  :   {
+                "icon"  :   "Apadrinados",
+                "title" :   "Apadrinados"
+            },
+            "apu"  :   {
+                "icon"  :   "APU",
+                "title" :   "Padrinos/madrinas APU"
+            }
         }
-    },
-    "event": {
-        "edit": {
-            "title" : "Editar evento",
-            "name" : "Nombre",
-            "description" : "Descripción",
-            "tag" : "Etiqueta",
-            "type" : "Tipo",
-            "link" : "Enlace",
-            "date" : "Fecha",
-            "time" : "Hora",
-            "location" : "Ubicación"
-        },
-        "edited" : "Evento modificado",
-        "created" : "Evento creado"
     },
     "user": {
         "title" : "Usuario",
@@ -128,7 +187,6 @@
             "account": {
                 "title" : "Borrar cuenta",
                 "description" : "Una vez tu cuenta ha sido borrada, todos los datos y recursos son borrados permanentemente. Antes de borrar tu cuenta guarda los datos que necesites, por favor.",
-                "delete" : "Borrar",
                 "confirm" : "Borrar cuenta",
                 "password-confirm" : "Por favor, introduce tu contraseña para borrar la cuenta permanentemente.",
                 "password" : "Contraseña",
@@ -142,76 +200,6 @@
             "verified" : "Email verificado",
             "verification-link-sent" : "Email enviado",
             "resend-link" : "Reenviar"
-        }
-    },
-    "tags": {
-        "names": {
-            "Friendship": "Amistad",
-            "Sports": "Deporte",
-            "Games": "",
-            "Love": "",
-            "Anime": "",
-            "Languages": "",
-            "Gambling": "",
-            "Art": "",
-            "Astronomy": "",
-            "Au Pairs": "",
-            "Dance": "",
-            "BDSM": "",
-            "Babies": "",
-            "Beauty": "",
-            "Sex": "",
-            "Camping": "",
-            "Religion": "",
-            "Celiacs": "",
-            "Science": "",
-            "Cinema": "",
-            "Coaching": "",
-            "Cooking": "",
-            "Colections": "",
-            "Comics": "",
-            "Travel": "",
-            "Accommodation": "",
-            "Buy/Sell": "",
-            "Music": "",
-            "Culture": "",
-            "Curses": "",
-            "Books": "",
-            "Economy": "",
-            "Jobs": "",
-            "Feminism": "",
-            "Philosophy": "",
-            "Flowers": "",
-            "Photography": "",
-            "Gastronomy": "",
-            "Gays": "",
-            "Gym": "",
-            "History": "",
-            "Horoscope": "",
-            "Humour": "",
-            "Computing": "",
-            "Real estate": "",
-            "Social networks": "",
-            "Gardening": "",
-            "Karaoke": "",
-            "Lesbians": "",
-            "Flirting": "",
-            "Mobiles": "",
-            "Magic": "",
-            "Manga": "",
-            "DIY": "",
-            "Marketing": "",
-            "Health": "",
-            "Fashion": "",
-            "Mountaineering": "",
-            "Motor": "",
-            "Business": "",
-            "Beach": "",
-            "Politics": "",
-            "Psicology": "",
-            "Recipes": "",
-            "Vegans": "",
-            "Vegetarians": ""
         }
     },
     "login": {
@@ -236,6 +224,22 @@
         "name" : "Nombre",
         "email" : "Email",
         "message" : "Mensaje",
-        "send" : "Enviar"
+        "send" : "Enviar",
+        "info"  :   {
+            "title1"  :   "Información general y Refugio",
+            "title2"  :   "Colaborar",
+            "title3"  :   "Adopciones",
+            "title4"  :   "Voluntariado",
+            "phone"  :   "Teléfono",
+            "shift-phone-title"  :   "Horario de atención telefónica",
+            "shift-phone-line1"  :   "Lunes a viernes de 16:00h a 18:00h",
+            "shift-phone-line2"   :   "Sábados de 10:30h a 13:30h",
+            "shift-phone-footer1"  :   "Se ruega respeten este horario.",
+            "shift-phone-footer2" :   "Está atendido por personal voluntario.",
+            "shift-live-title"  :   "Horario de atención al público",
+            "shift-live-line1"  :   "Lunes a viernes de 10:00h a 18:00h",
+            "shift-live-line2"  :   "Sábados de 10:30h a 13:30h",
+            "title5"    :   "Refugio atendido los 365 días del año"
+        }
     }
 }

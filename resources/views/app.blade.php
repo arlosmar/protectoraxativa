@@ -2,20 +2,22 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-TYX7GGRJ27"></script>
+        <!--
+        <script async src="https://www.googletagmanager.com/gtag/js?id="></script>
         <script>
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
-            gtag('config', 'G-TYX7GGRJ27');
+            gtag('config', '');
         </script>
+        -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title inertia>{{ config('app.name', 'amicsgirona.cat') }}</title>
+        <title inertia>{{ config('app.name', '') }}</title>
 
-        <link rel="icon" href="{{url('amicsgirona_favicon.ico')}}">
+        <link rel="icon" href="{{url('favicon.ico')}}">
 
         <!-- Fonts -->
         <!--

@@ -20,9 +20,18 @@ class ContactController extends Controller{
 
         $email = config('mail.from.address');
 
+        $emails = [
+            'info' => config('mail.info.address'),
+            'adoptions' => config('mail.adoptions.address'),
+            'colaboration' => config('mail.colaboration.address'),
+            'volunteering' => config('mail.volunteering.address')
+        ];
+
+        $social = config('social.social');
+
         $status = session('status');
 
-        return Inertia::render('Contact/Contact',compact('user','email','status'));
+        return Inertia::render('Contact/Contact',compact('user','email','status','emails','social'));
     }
 
     public function contactSend(ContactSendRequest $request){

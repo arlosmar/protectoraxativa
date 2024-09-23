@@ -148,36 +148,38 @@ export default function BarTop({user,t,from}){
                 
                 <AppBar position="static" sx={{ /*bgcolor: darkmode ? "black" : "white",*/ width: '100%', borderRadius: '5px 5px 5px 5px', padding: '0px' }}>
                 
-                    <Toolbar sx={{ padding: '0px 5px 0px 5px' }}>                        
+                    <Toolbar sx={{ padding: '0px 5px 0px 5px' }}>           
                         
+                        <Box sx={{ flexGrow: 1 }}/>
+
                         <a href='/'>
                             <Box
                                 component="img"
                                 sx={{height: 60}}
-                                alt="amicsgirona.cat"
-                                src='/amicsgirona_favicon.png'
+                                alt=""
+                                src='/logo.png'
                                 id='logo'
                             />                            
                         </a>
-
+                        {/*
                         <Box sx={{ flexGrow: 1 }}/>
 
                         <a href='/'>
-                            <span id='logo-text'>amicsgirona</span>
+                            <span id='logo-text'>protectoraxativa.org</span>
                         </a>
-
+                        */}
                         <Box sx={{ flexGrow: 1 }}/>
 
                         <IconButton color="primary" onClick={changeLanguage} id='language'>
                             <LanguageIcon/>                  
-                        </IconButton>
+                        </IconButton>                        
 
-                        {
-                            user &&
+                        {/*
+                            user &&                                                        
                             <IconButton variant="red" color="primary" onClick={logout} id='logout' sx={{marginLeft:'5px'}}>
                                 <LogoutIcon/>                  
-                            </IconButton>
-                        }
+                            </IconButton>                            
+                        */}
 
                     </Toolbar>
                 
