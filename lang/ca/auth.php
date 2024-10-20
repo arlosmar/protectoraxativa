@@ -4,17 +4,17 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Authentication Language Lines
+    | Línies de idioma d'autenticació
     |--------------------------------------------------------------------------
     |
-    | The following language lines are used during authentication for various
-    | messages that we need to display to the user. You are free to modify
-    | these language lines according to your application's requirements.
+    | Les següents línies de idioma s'utilitzen durant l'autenticació per a diversos
+    | missatges que necessitem mostrar a l'usuari. Pots modificar lliurement
+    | aquestes línies de idioma segons els requisits de la teva aplicació.
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
-    'password' => 'The provided password is incorrect.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'failed' => 'Aquestes credencials no coincideixen amb els nostres registres.',
+    'password' => 'La contrasenya proporcionada no és correcta.',
+    'throttle' => 'Massa intents d\'inici de sessió. Si us plau, torna a provar-ho en :seconds segons.',
 
 ];

@@ -33,7 +33,8 @@ return [
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
-            'throw' => false,
+            'throw' => false,            
+            //'serve' => true, to enable temporary urls Storage::temporaryUrl('public/test.png', now()->addMinutes(5)) 
         ],
 
         'public' => [
@@ -70,7 +71,14 @@ return [
     */
 
     'links' => [
-        public_path('storage') => storage_path('app/public'),
+        // this creates link from public/storage => storage/app/public
+        public_path('storage') => storage_path('app/public'), 
+
+        // this creates link from public/images => storage/app/images
+        public_path('images') => storage_path('app/images'),
+
+        // this creates link from public/forms => storage/app/forms
+        public_path('forms') => storage_path('app/forms')
     ],
 
 ];

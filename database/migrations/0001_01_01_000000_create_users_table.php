@@ -28,7 +28,7 @@ return new class extends Migration
         DB::table('users')->insert(
             [
                 'name' => 'Admin',
-                'email' => 'admin@admin.com',                
+                'email' => 'admin@protectoraxativa.org',                
                 'password' => '$2y$12$U33xS7NDAFm.PPF0OvCyweZB.gayyWzsuvbSjgYqBxVgvZ6zFhQZC',
                 'email_verified_at' => '2024-09-13 12:00:00', // $4&dm?1#n!%)·%=faN5T
                 'created_at'    => $date,

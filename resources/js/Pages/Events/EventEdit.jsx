@@ -1,3 +1,4 @@
+/*
 import { useState } from 'react';
 import { useForm } from '@inertiajs/react';
 import { useTranslation } from "react-i18next";
@@ -33,9 +34,9 @@ import {
     timeToTimePicker, 
     getTimesFromTimepicker 
 } from "@/Utils/Format";
-
+*/
 export default function EventEdit({user,event,tags,types,from}){
-
+/*
 	const { t } = useTranslation('global');
 
     const [ fromString, setFromString ] = useState('');
@@ -264,5 +265,5 @@ export default function EventEdit({user,event,tags,types,from}){
             			
     	</main>
     	</>
-    )
+    )*/
 }

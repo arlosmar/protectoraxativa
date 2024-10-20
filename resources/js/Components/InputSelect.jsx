@@ -73,7 +73,8 @@ export default function Select({
                 onInputChange={onInputChange}
                 onChange={onChange}
                 disablePortal                        
-                options={options}     
+                //options={[...options]}     
+                options={options}
                 required={required}
                 disabled={disabled}   
                 InputProps={inputProperties}                

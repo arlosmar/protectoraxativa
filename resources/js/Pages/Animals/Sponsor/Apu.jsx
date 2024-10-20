@@ -10,7 +10,7 @@ export default function Apu({t,apus}){
                 if(index % 2 === 0){
 
                     return (
-                        <Grid container spacing={0}>
+                        <Grid container spacing={1}>
                             <Grid size={{ xs: 12, md: 6 }} className='apu-div'>
                                 {
                                     (apus.links[index] && apus.links[index].length > 0) ?

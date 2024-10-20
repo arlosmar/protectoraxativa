@@ -3,7 +3,7 @@
 return [
     // resul=$(ls public/images/partners/)
     // echo $resul | sed 's/ /","/g'
-    'partners'  =>  [
+    'companies'  =>  [
         "logos" => ["caixaontinyent.jpg","caixapopular.jpg","dentalcarralero.jpg",
             "fasnet.jpg","graficastormo.jpg","joaquinvidal.jpg",
             "saetabissport.jpg","xativaajuntament.jpg"],
@@ -16,6 +16,14 @@ return [
             "",
             "https://www.facebook.com/setabis.sport/",
             "http://www.xativa.es/"
+        ]
+    ],
+    'friends' =>  [
+        "logos" => ["martinezbellver.jpg","racingxativa.jpg","tierschutz.jpg"],
+        "links" => [
+            "https://portal.edu.gva.es/46004723/",
+            "http://racingxativa.blogspot.com/",
+            "https://www.tierschutz-pur.org/"
         ]
     ]
 ];

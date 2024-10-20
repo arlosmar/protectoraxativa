@@ -50,6 +50,7 @@ class RedirectIfAuthenticated
      */
     protected function defaultRedirectUri(): string
     {
+        /*
         foreach (['dashboard', 'home'] as $uri) {
             if (Route::has($uri)) {
                 return route($uri);
@@ -63,8 +64,10 @@ class RedirectIfAuthenticated
                 return '/'.$uri;
             }
         }
-
+        
         return '/';
+        */
+        return route('user');
     }
 
     /**

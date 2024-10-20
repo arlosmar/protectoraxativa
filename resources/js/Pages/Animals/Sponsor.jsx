@@ -14,13 +14,17 @@ import Animals from '@/Pages/Animals/Sponsor/Animals';
 import Sponsored from '@/Pages/Animals/Sponsor/Sponsored';
 import Apu from '@/Pages/Animals/Sponsor/Apu';
 
-export default function Sponsor({t,subsection,apus,animals,sponsored,images_path}){
+export default function Sponsor({t,subsection,setSubsection,apus,animals,sponsored,
+    images_path,page,options,email_colaboration,forms,prices}){
 
     const [ tab, setTab ] = useState(subsection ? subsection : "info");
 
     const handleTabChange = (event, newValue) => {
         
         setTab(newValue);
+
+        // to inform the parent view and call by ajax to get animals
+        setSubsection(newValue);
 
         // change url on the browser
         var url = route("animals")+'/sponsor/'+newValue;
@@ -41,7 +45,7 @@ export default function Sponsor({t,subsection,apus,animals,sponsored,images_path
     });
     const classes = useStyles();
 
-    const sx = {};
+    const sx = {minWidth: "fit-content", flex: 1 };
 
     return (    	
         <>
@@ -53,7 +57,7 @@ export default function Sponsor({t,subsection,apus,animals,sponsored,images_path
                 value={tab} 
                 onChange={handleTabChange}                     
                 className={classes.tabs}
-                centered
+                variant="scrollable"
             >
                 <Tab icon={<InfoIcon/>} value="info" sx={sx} iconPosition="top" label={t('animals.sponsor.info.icon')}/>
                 <Tab icon={<AnimalsIcon/>} value="animals" sx={sx} iconPosition="top" label={t('animals.sponsor.animals.icon')}/>
@@ -63,20 +67,29 @@ export default function Sponsor({t,subsection,apus,animals,sponsored,images_path
             <div className='mt-4 pt-4'>
             {
                 tab === 'info' ?
-                    <Info t={t}/>
+                    <Info 
+                        t={t}
+                        email_colaboration={email_colaboration}
+                        forms={forms}
+                        prices={prices}
+                    />
                 :						
                     tab === 'animals' ?
                         <Animals 
                             t={t} 
                             animals={animals}
                             images_path={images_path}
+                            page={page}
+                            options={options}
                         />
                     :
                         tab === 'sponsored' ?
                             <Sponsored 
                                 t={t} 
-                                sponsored={sponsored}
+                                animals={animals}
                                 images_path={images_path}
+                                page={page}
+                                options={options}
                             />
                         :
                             tab === 'apu' ?

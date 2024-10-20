@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import DeleteIcon from '@mui/icons-material/Delete';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -27,7 +28,9 @@ export default function Input({
     rows,
     maxRows,
     maxLength,
-    handleKeyDown
+    handleKeyDown,
+    handleFileRemove,
+    accept
 }){
 
     if(ref){
@@ -69,6 +72,12 @@ export default function Input({
         inputProperties.maxLength = maxLength;
     }
 
+    if(accept){
+        inputProperties.accept = accept;
+    }
+
+    var inputLabelProperties = {shrink: true};
+
     const [showPassword, setShowPassword] = useState(false);
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -95,8 +104,9 @@ export default function Input({
                 value={value}
                 error={error && error.length > 0 ?true:false}
                 helperText={error && error.length > 0 ? error : ''}
-                InputProps={inputProperties}
-                onChange={onChange}   
+                inputProps={inputProperties}
+                onChange={onChange} 
+                onKeyDown={handleKeyDown}  
                 fullWidth                     
             /> 
         :
@@ -118,8 +128,9 @@ export default function Input({
                     value={value}
                     error={error && error.length > 0 ?true:false}
                     helperText={error && error.length > 0 ? error : ''}
-                    InputProps={inputProperties}
+                    //inputProps={inputProperties}
                     onChange={onChange}
+                    onKeyDown={handleKeyDown}
                     fullWidth
                 />                        
             :
@@ -140,9 +151,10 @@ export default function Input({
                             value={value}                                                       
                             error={error && error.length > 0 ?true:false}
                             helperText={error && error.length > 0 ? error : ''}
-                            InputProps={inputProperties}
+                            inputProps={inputProperties}
                             onChange={onChange}
                             fullWidth
+                            onKeyDown={handleKeyDown}
                             endAdornment={
                                 <InputAdornment position="end">
                                     <IconButton
@@ -162,48 +174,77 @@ export default function Input({
                             </FormHelperText>
                         )}
                     </FormControl>
-                :
-                    multiline ?
-                        <TextField 
-                            variant="outlined"
+                :               
+                    type === 'file' ?
+                        <OutlinedInput                               
                             ref={input}
                             name={name}
-                            type={type}                            
+                            type={type}
                             autoComplete={autoComplete}
-                            placeholder={placeholder}
-                            label={placeholder}       
+                            //placeholder={placeholder}
+                            //label={placeholder}       
                             required={required}
                             disabled={disabled}
-                            defaultValue={value} 
-                            value={value}                                                       
                             error={error && error.length > 0 ?true:false}
                             helperText={error && error.length > 0 ? error : ''}
-                            InputProps={inputProperties}
+                            inputProps={inputProperties}
                             onChange={onChange}
-                            multiline
-                            rows={rows}
-                            maxRows={maxRows}
                             fullWidth                            
-                        />
+                            endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        onClick={(event) => handleFileRemove(name)}                                        
+                                        edge="end"
+                                    >
+                                        <DeleteIcon/>
+                                    </IconButton>
+                                </InputAdornment>
+                            }
+
+                        />                       
                     :
-                        <TextField 
-                            variant="outlined"
-                            ref={input}
-                            name={name}
-                            type={type}                            
-                            autoComplete={autoComplete}
-                            placeholder={placeholder}
-                            label={placeholder}       
-                            required={required}
-                            disabled={disabled}
-                            defaultValue={value}  
-                            value={value}                                                        
-                            error={error && error.length > 0 ?true:false}
-                            helperText={error && error.length > 0 ? error : ''}
-                            InputProps={inputProperties}
-                            onChange={onChange}
-                            onKeyDown={handleKeyDown}
-                            fullWidth
-                        />
+                        multiline ?
+                            <TextField 
+                                variant="outlined"
+                                ref={input}
+                                name={name}
+                                type={type}                            
+                                autoComplete={autoComplete}
+                                placeholder={placeholder}
+                                label={placeholder}       
+                                required={required}
+                                disabled={disabled}
+                                defaultValue={value} 
+                                value={value}                                                       
+                                error={error && error.length > 0 ?true:false}
+                                helperText={error && error.length > 0 ? error : ''}
+                                inputProps={inputProperties}
+                                onChange={onChange}
+                                multiline
+                                rows={rows}
+                                maxRows={maxRows}
+                                fullWidth                            
+                            />
+                        :
+                            <TextField 
+                                variant="outlined"
+                                ref={input}
+                                name={name}
+                                type={type}                            
+                                autoComplete={autoComplete}
+                                placeholder={placeholder}
+                                label={placeholder}     
+                                InputLabelProps={type === 'date' ? inputLabelProperties : ''}  
+                                required={required}
+                                disabled={disabled}
+                                defaultValue={value}  
+                                value={value}                                                        
+                                error={error && error.length > 0 ?true:false}
+                                helperText={error && error.length > 0 ? error : ''}
+                                inputProps={inputProperties}
+                                onChange={onChange}
+                                onKeyDown={handleKeyDown}
+                                fullWidth
+                            />
     );
 }

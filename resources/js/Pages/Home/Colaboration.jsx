@@ -6,7 +6,7 @@ import PetsIcon from '@mui/icons-material/Pets';
 import ChairIcon from '@mui/icons-material/Chair';
 import CasinoIcon from '@mui/icons-material/Casino';
 
-export default function Colaboration({t,email_colaboration,email_volunteering,prices}){
+export default function Colaboration({t,email_colaboration,email_volunteering,prices,forms}){
 
     return (    	
         <>
@@ -142,6 +142,26 @@ export default function Colaboration({t,email_colaboration,email_volunteering,pr
                 >                
                 </div>
                 <div>
+                    <a href={forms?.partner} target='_blank'>
+                        {t('introduction.colaboration.form-line1')}
+                    </a>
+                </div>
+                <div
+                    className='paragraph-top-separation'
+                    dangerouslySetInnerHTML={{__html: t('introduction.colaboration.form-line2')}}
+                >                
+                </div>
+                <div>
+                    <a href={forms?.sepa} target='_blank'>
+                        {t('introduction.colaboration.form-line3')}
+                    </a>
+                </div>  
+                <div
+                    className='paragraph-top-separation'
+                    dangerouslySetInnerHTML={{__html: t('introduction.colaboration.form-line4')}}
+                >                
+                </div>              
+                <div>
                     <a href={'mailto:'+email_colaboration} target='_blank'>
                         {email_colaboration}
                     </a>
@@ -168,13 +188,43 @@ export default function Colaboration({t,email_colaboration,email_volunteering,pr
                 </div>
                 <div
                     className='paragraph-top-separation'
+                    dangerouslySetInnerHTML={{__html: t('introduction.colaboration.form-sponsor-line1')}}
+                >                
+                </div>
+                <div>
+                    <a href={forms?.sponsor} target='_blank'>
+                        {t('introduction.colaboration.form-sponsor-line2')}
+                    </a>
+                </div>
+                <div
+                    className='paragraph-top-separation'
+                    dangerouslySetInnerHTML={{__html: t('introduction.colaboration.form-sponsor-line3')}}
+                >                
+                </div>
+                <div>
+                    <a href={forms?.sepa} target='_blank'>
+                        {t('introduction.colaboration.form-sponsor-line4')}
+                    </a>
+                </div>  
+                <div
+                    className='paragraph-top-separation'
+                    dangerouslySetInnerHTML={{__html: t('introduction.colaboration.form-sponsor-line5')}}
+                >                
+                </div>              
+                <div>
+                    <a href={'mailto:'+email_colaboration} target='_blank'>
+                        {email_colaboration}
+                    </a>
+                </div>
+                <div
+                    className='paragraph-top-separation'
                     dangerouslySetInnerHTML={{__html: t('introduction.colaboration.line20')}}
                 >                
                 </div>
                 <div
                     className='home-colaboration-sponsorship-list'
                     dangerouslySetInnerHTML={{__html: t('introduction.colaboration.line21',
-                        {shelter:t('introduction.colaboration.shelter',{email_colaboration:email_colaboration}),
+                        {shelter:t('introduction.colaboration.shelter'),
                         apu:t('introduction.colaboration.apu')})
                     }}
                 >                

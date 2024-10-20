@@ -8,7 +8,21 @@
         "Search" : "Buscar",
         "Reset" : "Borrar",
         "Policy" : "Política de privacidad",
-        "Terms" : "Términos de uso"
+        "Terms" : "Términos de uso",
+        "Close" : "Cerrar",
+        "Yes"   :   "Sí",
+        "No"    :   "No",
+        "Person"    :   "Persona",
+        "Create"    :   "Crear",
+        "Edit"  :   "Editar",
+        "Deleted"   :   "Borrado correctamente",
+        "removeFilters" :  "Quitar filtros",
+        "Images"    :   "Imágenes",
+        "newImage"  :   "Nueva imagen",
+        "currentImage"  :   "Imagen actual",
+        "Remove"    :   "Quitar",
+        "Videos"    :   "Vídeos",
+        "Filter"    :   "Filtrar"
     },
     "Title" : {
         "Home" : "Inicio",
@@ -49,13 +63,22 @@
             "line14"    :   "La cuota mínima mensual es de {{price_partner}}€.",
             "line15"    :   "Para jubilad@s y pensionistas es de {{price_retired}}€.",
             "line16"    :   "Para menores de 14 años (siempre con autorización de sus representantes legales) es de {{price_child}}€.",
-            "line17"    :   "Si quieres hacerte soci@ puedes contactar con:",
+            "line17"    :   "Si quieres hacerte soci@ debes rellenar el siguiente formulario:",
+            "form-line1"    :   "Formulario",
+            "form-line2"    :   "Acto seguido a rellenar el formulario, debes descargar, rellenar y enviar el siguiente mandato:",
+            "form-line3"    :   "SEPA",
+            "form-line4"    :   "A la dirección:",
             "sponsorship"    :   "Apadrinamiento",
             "line18"    :   "La cuota mínima mensual es de {{price_sponsorship}}€.",
             "line19"    :   "Pueden colaborar tanto personas físicas como empresas.",
+            "form-sponsor-line1"    :   "Si quieres apadrinar debes rellenar el siguiente formulario:",
+            "form-sponsor-line2"    :   "Formulario",
+            "form-sponsor-line3"    :   "Acto seguido a rellenar el formulario, debes descargar, rellenar y enviar el siguiente mandato:",
+            "form-sponsor-line4"    :   "SEPA",
+            "form-sponsor-line5"    :   "A la dirección:",          
             "line20"    :   "Se distinguen dos tipos de apadrinamiento:",
             "line21"    :   "<ul><li><b>Perr@s del refugio</b><br>{{shelter}}</li><li><b>Perr@s de APU</b><br>{{apu}}</li></ul>",
-            "shelter"    :  "El horario de visitas de padrinos/madrinas es de 11:00h a 14:00h los sábados y avisando con antelación. No está permitido traerles cualquier tipo de alimento o golosina por razones de seguridad y para evitar de peleas entre ell@s. Siempre que el padrino/madrina lo solicite, se le dará la debida información sobre el estado de su apadrinad@. Si fuera adoptad@ o cualquier otra circunstancia le sería comunicado inmediatamente tanto para conocimiento del padrino/madrina como para ofrecer la posibilidad de apadrinar/amadrinar a otro animal.<br><br>Si quieres colaborar apadrinando un perro de nuestro refugio, escribe a:<br><a href='mailto:{{email_colaboration}}'>{{email_colaboration}}</a>",
+            "shelter"    :  "El horario de visitas de padrinos/madrinas es de 11:00h a 14:00h los sábados y avisando con antelación. No está permitido traerles cualquier tipo de alimento o golosina por razones de seguridad y para evitar de peleas entre ell@s. Siempre que el padrino/madrina lo solicite, se le dará la debida información sobre el estado de su apadrinad@. Si fuera adoptad@ o cualquier otra circunstancia le sería comunicado inmediatamente tanto para conocimiento del padrino/madrina como para ofrecer la posibilidad de apadrinar/amadrinar a otro animal.",
             "apu"   :   "Adquisición y/o colaboración en proyectos o compra material de útiles necesarios, puntuales o periódicos. Estos proyectos de construcción, reparación o adquisición de productos necesarios pueden apadrinarse de forma total o parcial. Se puede dar dinero para su compra o suministrar directamente el material para comprarlo. Se solicitará permiso en su caso para que la persona o entidad que apadrinara apareciera en nuestra web en calidad de padrino/madrina del objetivo conseguido.",
             "volunteering"  :   "Voluntariado",
             "line22"    :   "Actividad totalmente necesaria en este tipo de asociaciones donde la ayuda y colaboración resulta básica y casi imprescindible.",
@@ -79,7 +102,13 @@
             "ladridos" :   "Ladridos y lametones"
         },
         "partners"  :   {
-            "title"  :   "Entidades y empresas colaboradoras"
+            "title"  :   "Colaboradores",
+            "companies"  :   {
+                "title" :   "Entidades y empresas"
+            },
+            "friends"  :   {
+                "title"  :   "Webs amigas"
+            }
         },
         "info"  :   {
             "title" :   "¿Quiénes somos?",
@@ -116,8 +145,8 @@
                 "line10":   "El/la adoptante deberá abonar a esta Asociación los costes veterinarios derivados de lo descrito anteriormente."
             },
             "animals"  :   {
-                "icon"  :   "Animales",
-                "title" :   "Animales"
+                "icon"  :   "Adoptar",
+                "title" :   "Adoptar"
             },
             "adopted"  :   {
                 "icon"  :   "Adoptados",
@@ -130,17 +159,26 @@
             "info"  :   {
                 "icon"  :   "Info",
                 "title" :   "Información",
+                "title-details"    :   "Detalles",
                 "line1" :   "Esta sección está dedicada tanto al apadrinamiento/amadrinamiento de nuestr@s animales albergados como a los particulares o empresas que por su colaboración o donación han apadrinado/amadrinado algunas necesidades del refugio y, con ello, que la vida que hay dentro de él pueda mejorar o, por lo menos, mantenerse.",
                 "line2" :   "Respecto a los animales aquí expuestos, algunos se encuentra en el apartado de adopción, otros son recién llegados y otros, sin embargo, por sus circunstancias, edad, patología, enfermedades crónicas, secuelas físicas o traumas que arrastran, carácter, inadaptación o características peculiares, son igualmente adoptables pero tal vez (y desgraciadamente) con menos posibilidades que el resto.",
                 "line3" :   "Nunca entenderemos por qué pero es así. Hay animales que llevan toda su vida en el refugio y pensamos que morirán de viejos en él. A los animales mayores muy poca gente les quiere.",
                 "line4" :   "Por ello y para que no nos olvidemos de su existencia, de que están vivos, de que necesitan el mismo cariño y atención que el resto, te ofrecemos la posibilidad de que los apadrines si no puedes adoptarlos.",
                 "line5" :   "Si deseas información sobre cualquiera de ellos no tienes más que pedirla. Te la enviaremos encantad@s porque normalmente nadie se acuerda ni se fija en ellos.",
                 "line6" :   "En cuanto a los particulares y empresas que han colaborado y colaboran desde hace años con algunas de las necesidades de nuestro refugio, a los que nos puedan ayudar a partir de ahora o en su proyecto se encuentre tal colaboración en forma de apadrinamiento/amadrinamiento de Apu, nuestro agradecimiento será permanente.",
-                "line7" :   "Tanto a los padrinos/madrinas de nuestros animales como de las necesidades del refugio sólo podemos decirles algo que sentimos y sentiremos siempre muy profundamente: <b>GRACIAS</b>"
+                "line7" :   "Tanto a los padrinos/madrinas de nuestros animales como de las necesidades del refugio sólo podemos decirles algo que sentimos y sentiremos siempre muy profundamente: <b>GRACIAS</b>",
+                "title-steps"    :   "Pasos",                
+                "line8"    :   "La cuota mínima mensual es de {{price_sponsorship}}€.",
+                "line9"    :   "Pueden colaborar tanto personas físicas como empresas.",
+                "form-sponsor-line1"    :   "Si quieres apadrinar debes rellenar el siguiente formulario:",
+                "form-sponsor-line2"    :   "Formulario",
+                "form-sponsor-line3"    :   "Acto seguido a rellenar el formulario, debes descargar, rellenar y enviar el siguiente mandato:",
+                "form-sponsor-line4"    :   "SEPA",
+                "form-sponsor-line5"    :   "A la dirección:"
             },
             "animals"  :   {
-                "icon"  :   "Animales",
-                "title" :   "Animales"
+                "icon"  :   "Apadrinar",
+                "title" :   "Apadrinar"
             },
             "sponsored"  :   {
                 "icon"  :   "Apadrinados",
@@ -150,23 +188,111 @@
                 "icon"  :   "APU",
                 "title" :   "Padrinos/madrinas APU"
             }
+        },
+        "heaven" :   {
+            "icon"  :   "Cielo",
+            "title" :   "Durmiendo con las estrellas",
+            "info"  :   {
+                "icon"  :   "Info",
+                "title" :   "Información",
+                "line1" :   "Una mención especial en este apartado a todos aquellos animales que se nos fueron, que nos atravesaron el corazón y que nunca podremos olvidar. Dedicado a todos ellos.",
+                "line2" :   "Para aquell@s compañer@s de viaje que se fueron y dejaron un gran vacío en nuestro corazón y en el de nuestra familia. También para aquell@s que con especial cariño murieron sin haberla encontrado o en trágicas circunstancias. Va dedicado a todos los animales del mundo y de todas las especies.",
+                "line3" :   "Si quieres que tu querida mascota duerma con las estrellas envíanos una foto y una breve frase o dedicatoria y la pondremos para que brille junto al resto de pequeñas estrellas que anidan allá en lo alto del hermoso cielo.",
+                "line4" :   "Para añadir una mascota o mas información:",
+                "line5" :   "En este espacio hemos querido rendirle tributo a aquellas mascotas que ya no están con nosotr@s.",
+                "line6" :   "No olvidaremos nunca a aquel/aquella compañer@ de juego, sus típicos ladridos, sus ronroneos, su relinchar o simplemente su mirada.",
+                "line7" :   "Dedicado además a todas aquellas personas que, a gritos o en silencio, lloraron por la partida de sus mascotas...",
+                "poem-title"    :   "No llores por mi...",
+                "poem" :   "Me has dado un hogar donde cobijarme,<br/>me has proporcionado alimento y sobre todo,<br/>me has dado tu amor y tu compañía.<br/>Lo último que me gustaría es verte sufrir por mi.<br/><br/>Ahora que no estoy contigo,<br/>no quiero verte triste.<br/>Deseo que cuando pienses en mi sonrías,<br/>pues así sabré que mi recuerdo te hace feliz.<br/><br/>Quiero que recuerdes los buenos momentos que compartíamos,<br/>nuestras muestras de cariño, nuestros juegos...<br/>y si alguna vez te defraudé, o me porte mal, perdóname...<br/><br/>Por favor, no tires mis juguetes, ni mi cama, ni mis cosas,<br/>porque en este mundo hay muchos otros colegas que viven en soledad, tristes y sin cariño...<br/>muchos que darían su vida por compartir la tuya.<br/><br/>No, no lo digas, no digas que no quieres tener mas animales...<br/>eso me hace pensar que el tiempo que estuve contigo no te hice feliz.<br/>Por favor, que mi muerte no sea en vano,<br/>que sirva para que otro tenga la suerte de poder vivir<br/>y conocer lo maravillosa que es tu amistad,<br/>que conozca la verdadera \"vida de perro\",<br/>que descubra el cariño.<br/><br/>No estés triste... <br/>Yo no lo estoy, <br/>porque se que guardas ese rinconcito especial para mi en tu corazón."
+            },
+            "animals"   :   {
+                "icon"  :   "Animales",
+                "title" :   "Cementerio Virtual para Mascotas"
+            }
+        },
+        "record"    :   {
+            "Parents"  :   "Padres/Madres",
+            "Sponsors"  :   "Padrinos/Madrinas",
+            "Code"  :   "Código",
+            "Name"  :   "Nombre",
+            "Status"    :   {
+                "title" :   "Estado",
+                "adopt" :   "Adoptar",
+                "adopted"   :   "Adoptado",
+                "heaven"    :   "Cielo"
+            },
+            "Sponsored"  :   {
+                "title" :   "Apadrinado",
+                "not-sponsored" :   "No",
+                "sponsored" :   "Sí",
+                "potentially-sponsor" :   "Potencial apadrinamiento"
+            },
+            "Type"  :   {
+                "title" :   "Tipo",
+                "dog" :   "Perr@",
+                "cat" :   "Gat@"
+            },
+            "Age"  :   {
+                "title" :   "Edad",                
+                "puppy" :   "Cachorr@",
+                "adult" :   "Adult@"
+            },
+            "Gender"  :   {
+                "title" :   "Género",                
+                "male" :   "Macho",
+                "female" :   "Hembra"
+            },
+            "Size"  :   {
+                "title" :   "Tamaño",
+                "xs" :   "Muy pequeñ@",
+                "s" :   "Pequeñ@",
+                "m" :   "Median@",
+                "l" :   "Grande",
+                "xl" :   "Muy grande"
+            },
+            "Breed"  :   {
+                "title" :   "Raza"
+            },
+            "Weight"  :   "Peso",
+            "Location"  :   "Localización",
+            "Birthdate" :   "Fecha nacimiento",
+            "Deathdate" :   "Fecha fallecimiento",
+            "Description"   :   "Descripción",
+            "Image" :   "Imagen",
+            "Image2"    :   "Imagen2",
+            "Person"    :   "Responsables",
+            "Video" :   "Vídeo",
+            "Video2" :   "Vídeo2"
+        }
+    },
+    "people"    :   {
+        "record"    :   {
+            "name"  :   "Nombre",
+            "surname"  :   "Apellidos",
+            "dni"  :   "DNI/NIE/CIF",
+            "birthdate"  :   "Fecha nacimiento",
+            "email" :   "Email",
+            "phone"  :   "Teléfono",
+            "address" :   "Dirección",
+            "name2"  :   "Nombre2",
+            "surname2"  :   "Apellidos2",
+            "dni2"  :   "DNI2/NIE2/CIF2",
+            "birthdate2"  :   "Fecha nacimiento2",
+            "email2" :   "Email2",
+            "phone2"  :   "Teléfono2",
+            "address2" :   "Dirección2",
+            "description"   :   "Descripción",
+            "animals"   :   "Animales"
         }
     },
     "user": {
         "title" : "Usuario",
-        "sections": {
-            "groups" : "Grupos",
-            "events" : "Eventos",
-            "profile" : "Perfil"
-        },
         "profile": {
-            "sections": {
-                "Information" : "Información",
-                "Password" : "Contraseña",
-                "Account" : "Cuenta"
-            },
+            "icon"  :   "Perfil",
+            "title"  :   "Perfil",
             "information": {
-                "description" : "Actualizar información",
+                "icon"  :   "info",                
+                "title" : "Actualizar información",
                 "name" : "Nombre",
                 "email" : "Email",
                 "email-not-verified" : "Tu dirección de email no está verificada.",
@@ -174,17 +300,21 @@
                 "email-sent" : "Un nuevo email de verificación ha sido enviado a tu dirección de email."
             },
             "settings": {
+                "icon"  :   "Config",
+                "title" :   "Configuración",
                 "description" : "Aquí puedes cambiar diferentes ajustes de tu cuenta",
                 "dark-mode" : "Modo oscuro"
             },
             "password": {
-                "description" : "Cambiar contraseña",
+                "icon"  :   "Contraseña",
+                "title" :   "Cambiar contraseña",                
                 "password" : "Contraseña",
                 "password-current" : "Contraseña actual",
                 "password-new" : "Contraseña nueva",
                 "password-confirm" : "Confirmar contraseña"
             },
             "account": {
+                "icon" : "Cuenta",
                 "title" : "Borrar cuenta",
                 "description" : "Una vez tu cuenta ha sido borrada, todos los datos y recursos son borrados permanentemente. Antes de borrar tu cuenta guarda los datos que necesites, por favor.",
                 "confirm" : "Borrar cuenta",
@@ -193,6 +323,34 @@
                 "cancel" : "Cancelar",
                 "delete" : "Borrar"
             }         
+        },
+        "animals"   :   {
+            "icon"  :   "Animales",
+            "title" :   "Animales",
+            "create"    :   "Crear",
+            "edit"  :   "Editar",
+            "borrar"  :   "Borrar",
+            "empty" :   "No hay animales",
+            "adopt" :   {
+                "icon"  :   "Adoptar",
+                "title" :   "Adoptar"
+            },
+            "adopted"   : {
+                "icon"  :   "Adoptados",
+                "title" :   "Adoptados"
+            },
+            "heaven"    :   {
+                "icon"  :   "Cielo",
+                "title" :   "Cielo"
+            }
+        },
+        "people"  :   {
+            "icon"  :   "Personas",
+            "title"  :   "Personas",
+            "create"    :   "Crear",
+            "edit"  :   "Editar",
+            "borrar"  :   "Borrar",
+            "empty" :   "No hay personas"
         },
         "email": {
             "title" : "Verificar email",
@@ -204,6 +362,7 @@
     },
     "login": {
         "title" : "Identificarse",
+        "description"   :   "Esta zona es para el personal del refugio, no para usuarios.",
         "title-forgot" : "Recordar contraseña",
         "login" : "Acceder",
         "login2" : "Loguearse",

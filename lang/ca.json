@@ -1,241 +1,404 @@
-{   
-    "trans": {      
-        "Back" : "Volver",
-        "Save" : "Guardar",
-        "Saved-Male" : "Guardado",
-        "Saved-Error" : "Error al guardar",
-        "Sent-Male" : "Enviado",
-        "Search" : "Buscar",
-        "Reset" : "Borrar",
-        "Policy" : "Política de privacidad",
-        "Terms" : "Términos de uso"
+{
+    "trans": {
+        "Back": "Tornar",
+        "Save": "Guardar",
+        "Saved": "Guardat",
+        "Saved-Error": "Error en guardar",
+        "Sent": "Enviat",
+        "Search": "Cercar",
+        "Reset": "Restablir",
+        "Policy": "Política de privacitat",
+        "Terms": "Condicions d'ús",
+        "Close": "Tancar",
+        "Yes": "Sí",
+        "No": "No",
+        "Person": "Persona",
+        "Create": "Crear",
+        "Edit": "Editar",
+        "Deleted": "Esborrat correctament",
+        "removeFilters": "Eliminar filtres",
+        "Images": "Imatges",
+        "newImage": "Nova imatge",
+        "currentImage": "Imatge actual",
+        "Remove": "Eliminar",
+        "Videos"    :   "Videos",
+        "Filter"    :   "Filtrar"
     },
-    "Title" : {
-        "Home" : "Inicio",
-        "Events" : "Eventos",
-        "Groups" : "Grupos",
-        "Contact" : "Contacto",
-        "User" : "Usuario",
-        "Login" : "Login"
+    "Title": {
+        "Home": "Inici",
+        "Animals": "Animals",
+        "News": "Notícies",
+        "Contact": "Contacte",
+        "User": "Usuari",
+        "Login": "Iniciar sessió"
     },
     "MenuBar": {
-        "Groups" : "Grupos",
-        "Events" : "Eventos",
-        "User" : "Usuario",
-        "Contact" : "Contacto"
+        "Home": "Inici",
+        "Animals": "Animals",
+        "News": "Notícies",
+        "Contact": "Contacte"
     },
-    "under-development" : "En desarrollo",
+    "under-development" : "En desenvolupament",
     "introduction": {
-        "title" : "Bienvenid@s",
-        "line1" : "Esta web se ha desarrollado pensando en ayudarte a encontrar gente afín para hacer planes o actividades.",
-        "line2" : "Su uso es similar (pero sin ánimo de lucro) al de:",
-        "line3" : "No hay publicidad molesta ni se obtiene dinero de la misma. Más bien es al revés porque se ha invertido tiempo y dinero en desarrollarla, contratar el hosting, pagar el dominio, etc.",
-        "line4" : "Simplemente se pretende poder hacer amistades para la gente que vivimos en la provincia de Girona.",
-        "line5" : "En el menú tienes la opción de buscar grupos o actividades que te puedan interesar. También puedes crear tus propios grupos o actividades si te registras.",
-        "line6" : "Cualquier sugerencia para mejorar el servicio es bien recibida. Escríbenos a: "
-    },
-    "groups": {
-        "title" : "Grupos",
-        "empty" : "No hay grupos",
-        "link" : "Abrir",
-        "edit" : "Editar",
-        "Created-Male" : "Creado",
-        "Create" : "Crear",
-        "Search" : "Buscar",
-        "types" : {
-            "all" : "Todos",
-            "whatsapp" : "Whatsapp",
-            "telegram" : "Telegram",
-            "discord" : "Discord"
+        "title" : "Benvinguts i benvingudes",
+        "colaboration" : {
+            "title" : "Col·labora",
+            "bizum": "Bizum",
+            "line1" : "Si vols fer una donació a la SPAX a través de **Bizum**, segueix les següents instruccions:",
+            "line2" : "Entra a l'app bancària del teu mòbil a **Bizum**, clica a **\"fer una donació\"**, **\"col·laborar en una causa solidària\"** o similar, segons la teva entitat bancària, i després l'aplicació et demanarà el nostre **\"codi de campanya\"** o **\"codi de l'ONG\"** o similar, també segons la teva entitat bancària.",
+            "line3" : "El nostre **codi** és:",
+            "line4" : "<h1 class='text-xl'>04318</h1>",
+            "line5" : "Moltes gràcies.",
+            "line6" : "**Nota important:** No facis la donació enviant el Bizum directament al nostre mòbil. D'aquesta manera no quedarà registrada com a donatiu i no podràs deduir-la a la renda.",
+            "bank": "Transferència bancària",
+            "line7" : "També pots fer una donació mitjançant **transferència bancària**.",
+            "line8" : "Aquí tens les dades bancàries per fer la teva donació:",
+            "line9" : "Caixa Popular<br><b>ES1031590004662253405720</b><br>BIC BCOEESMM159",
+            "line10": "Caixa Ontinyent<br><b>ES5820456008743000036569</b><br>BIC CECAESMM045",
+            "line11": "Gràcies",
+            "materials": "Donatius materials",
+            "line12": "Pots donar qualsevol tipus de material al refugi:",
+            "line13": "<ul><li>Material de construcció</li><li>Productes de neteja</li><li>Mantes</li><li>Material quirúrgic</li><li>Medicaments</li><li>Accessoris per a gossos</li><li>Productes desinfectants</li><li>Utensilios de neteja</li><li>Pissarra</li><li>Etc.</li></ul>",
+            "partner" :  "Sòcia",
+            "line14" : "La quota mínima mensual és de {{price_partner}}€.",
+            "line15" : "Per a jubilats i pensionistes és de {{price_retired}}€.",
+            "line16" : "Per a menors de 14 anys (sempre amb autorització dels seus representants legals) és de {{price_child}}€.",
+            "line17" : "Si vols fer-te sòcia, pots posar-te en contacte amb:",
+            "form-line1"    :   "Formulari",
+            "form-line2"    :   "Acte seguit després d'omplir el formulari, deus descarregar, omplir i enviar el següent mandat:",
+            "form-line3"    :   "SEPA",
+            "form-line4"    :   "A la direcció:",
+            "sponsorship" : "Apadrinament",
+            "line18" : "La quota mínima mensual és de {{price_sponsorship}}€.",
+            "line19" : "Poden col·laborar tant persones físiques com empreses.",
+            "form-sponsor-line1"    :   "Si vols apadrinar deus omplir el següent formulari:",
+            "form-sponsor-line2"    :   "Formulari",
+            "form-sponsor-line3"    :   "Acte seguit després d'omplir el formulari, deus descarregar, omplir i enviar el següent mandat:",
+            "form-sponsor-line4"    :   "SEPA",
+            "form-sponsor-line5"    :   "A la direcció:", 
+            "line20" : "Hi ha dos tipus d'apadrinament:",
+            "line21" : "<ul><li><b>Gossos del refugi</b><br>{{shelter}}</li><li><b>Gossos de APU</b><br>{{apu}}</li></ul>",
+            "shelter": "L'horari de visites de padrins/madrines és de 11:00h a 14:00h els dissabtes, avisant amb antelació. No està permès portar-los qualsevol tipus d'aliment o llaminadura per raons de seguretat i per evitar baralles entre ells/elles. Sempre que el padrí/madrina ho sol·liciti, se li donarà la informació deguda sobre l'estat del seu apadrinat/da. Si fos adoptat/da o qualsevol altra circumstància li seria comunicada immediatament, tant per coneixement del padrí/madrina com per oferir la possibilitat d'apadrinar/amadrinar un altre animal.",
+            "apu": "Adquisició i/o col·laboració en projectes o compra de material d'útils necessaris, puntuals o periòdics. Aquests projectes de construcció, reparació o adquisició de productes necessaris poden apadrinar-se de manera total o parcial. Es pot donar diners per a la compra o subministrar directament el material per a comprar-lo. Es demanarà permís en el seu cas perquè la persona o entitat que apadrinés aparegui en el nostre web com a padrí/madrina de l'objectiu aconseguit.",
+            "volunteering": "Voluntariat",
+            "line22": "Activitat totalment necessària en aquest tipus d'associacions on l'ajuda i col·laboració resulta bàsica i gairebé imprescindible.",
+            "line23": "És de vital importància, ja que les activitats estan basades en la cooperació solidària.",
+            "line24": "Si estàs interessat/da en col·laborar com a voluntari/a, pots posar-te en contacte en:",
+            "lottery": "Loteria",
+            "line25": "És una altra font d'ingressos per a l'associació.",
+            "line26": "Solem participar en aquest joc d'atzar a la Loteria Nacional de Nadal del 22 de desembre.",
+            "line27": "L'àmbit de venda és local però ho posarem sempre en coneixement de qui pugui estar interessat/da a col·laborar amb l'associació.",
+            "line28": "Per a qualsevol informació sobre aquest tema podeu adreçar-vos a:"
+        },
+        "social": {
+            "title": "Xarxes socials",
+            "whatsapp": "Whatsapp",
+            "facebook": "Facebook",
+            "instagram": "Instagram",
+            "twitter": "Twitter",
+            "youtube": "Youtube",
+            "blog": "Blog",
+            "soundcloud": "Soundcloud",
+            "ladridos": "Lladrucs i llepades"
+        },
+        "partners": {
+            "title": "Col·laboradors",
+            "companies": {
+                "title": "Entitats i empreses"
+            },
+            "friends": {
+                "title": "Webs amigues"
+            }
+        },
+        "info": {
+            "title": "Qui som?",
+            "paragraph1": "Associació sense ànim de lucre, legalment constituïda i inscrita en el Registre Autonòmic d'Associacions de València. Tots els seus càrrecs directius són gratuïts. La tasca desenvolupada per tots els seus membres és altruista i desinteressada.<br><br>La seva activitat principal es desenvolupa al Refugi per a gossos abandonats que té al municipi de Xàtiva. Disposa de totes les llicències i autoritzacions administratives, tant municipals com autonòmiques. Té la declaració de Nucli Zoològic des del 7 de maig de 2002 i és Entitat Col·laboradora de la Conselleria d'Agricultura, Pesca i Alimentació de la Generalitat Valenciana per resolució del 14 d'octubre de 1997.<br><br>Aquest Refugi es troba ubicat en uns terrenys de propietat gràcies a la primera donació de D. Roberto Cortes i posteriorment de D. Francisco Aguado, qui, aquest últim, va facilitar econòmicament l'adquisició d'un terreny adjacent, cosa que va afavorir la instal·lació i assentament definitiu de l'alberg.<br><br>Han estat molts els esforços tant personals com econòmics per adequar-lo mitjançant noves construccions, instal·lació elèctrica, abeuradors automàtics, espai lliure per a l'esbarjo, clínica veterinària per a l'assistència als animals allotjats, plantació d'arbres per a l'ombra, construcció de fosses sèptiques, desguassos, magatzem per a l'alimentació i pinsos, i molts projectes necessaris que encara queden per realitzar.<br><br>Situat en una zona altament inundable, en diverses ocasions ha propiciat la inundació d'una part del recinte. No obstant això, a poc a poc i gràcies a l'inestimable ajuda de les donacions puntuals i extraordinàries, s'han pogut garantir noves obres tendents a minimitzar l'impacte de les pluges i torrents perquè causin el menor dany possible.<br><br>El seu ÚNIC COMPROMÍS és la protecció i defensa dels animals en general i dels gossos en particular. NOMÉS ACULL GOSSOS. No acull gats per falta de recursos econòmics i humans per oferir-los una vida digna en captivitat, tenint escasses i saturades cases d'acollida que en cap cas solucionen el greu problema que pateixen aquests animals.<br><br>S'OPOSA I CONDEMNA qualsevol maltractament, agressió o injustícia envers ells. Vingui d'on vingui i de qui vingui. De qui ho aplaudeixi i de qui ho promogui. De qui ho justifiqui i de qui ho toleri i difongui. Una legislació laxa, insensible i permissiva en aquest sentit és, continua sent i serà la millor aliada perquè la brutalitat en aquest país sigui, desgraciadament, el nostre signe distintiu.<br><br>Només desitgem ADOPCIONS RESPONSABLES. Estem en contra de regalar animals per Nadal, aniversaris i dates assenyalades i estem molt cansats de la passivitat i indiferència dels poders públics davant les injustícies comeses contra els animals. També dels propietaris incapaços i capritxosos que abandonen els seus animals sense importar-los què els pugui passar i dels que, irresponsablement, ens llancen animals per les tanques del refugi o els deixen lligats a la seva sort. O animals casolans ancians que moriran de tristesa i de pena, i que a vegades no podrem fer res per evitar-ho.<br><br>No ha estat ni serà mai obstacle per a la permanència al nostre alberg, qualsevol animal tingui l'edat que tingui o estigui limitat físicament o funcionalment, mantenint una atenció especial pels animals grans abandonats, els no adaptats i els cadells.<br><br>Considerem la ESTERILITZACIÓ com l'únic mitjà per eradicar les ventrades no desitjades que omplen de mort i sang les gosseres municipals i les carreteres, i creiem en l'educació i la sensibilització sobre aquest drama silenciosament sagnant que es viu dia a dia en aquest país.<br><br>Confiem en el VOLUNTARIAT com a peça clau per al funcionament d'aquesta Societat i basem la supervivència econòmica de l'Associació en els socis, padrins, donacions de particulars, subvencions públiques, empreses i APU.<br><br>Als que ens ajuden, socis, padrins, particulars i empreses, els agraïm que continuïn facilitant-nos la tasca com fins ara i confiïn en tota la feina que hem realitzat durant tots aquests anys. Als que accedeixen per primera vegada, si no pots donar-los una oportunitat a aquells que tant ho desitgen i mereixen, almenys, amb la teva ajuda, que puguin viure una mica millor, gràcies.",
+            "paragraph2-title": "Una mica d'història",
+            "paragraph2": "La idea de crear una associació de defensa dels animals a Xàtiva va sorgir després de la reunió d'un grup de persones sensibilitzades amb el tema dels animals, amb moltes ganes i il·lusions de fer coses en aquest àmbit, ja que l'alternativa municipal al problema de l'animal abandonat era que després d'uns dies a la gossera municipal i si ningú el reclamava, com solia ser el més freqüent, l'animal era sacrificat.<br><br>La reunió esmentada anteriorment va tenir lloc a l'antiga 4a planta de la Casa de la Cultura al voltant del mes de febrer de 1985. Posteriorment, i amb data 5 de març del mateix any, es va constituir la \"Societat Protectora d'Animals i Plantes de Xàtiva\", legalitzant-se posteriorment el 10 d'abril del mateix any.<br><br>Com que no hi havia cap tipus d'infraestructura, una sòcia anomenada \"Rosarín\" va cedir el seu terreny, que era part de casa seva, per començar a acollir gossos abandonats des del primer moment del naixement d'aquesta societat.<br><br>Després va ser el soci Antonio Romero qui va cedir temporalment el seu xalet a Rotglà, el qual es va veure invadit i amb grans desperfectes a causa de la gran quantitat de gossos que s'hi van allotjar.<br><br>Finalment, gràcies al soci D. Roberto Cortés, l'associació va tenir un lloc propi i definitiu. Va ser l'any 1987 quan va donar els actuals terrenys i un donatiu (que no va ser l'últim) per començar les obres de les actuals instal·lacions, que es troben al \"Camí Senda de Múrcia\" a la cara Est del Puig.",
+            "paragraph2-footer": "Peu de foto: D. Roberto Cortés amb la seva dona durant la construcció de les instal·lacions del refugi del Puig.",
+            "paragraph3": "L'Associació, les sigles de la qual són SPAX, al llarg dels seus 37 anys de funcionament ha tingut com a Presidents: <br><br>Mercedes Hernández, Roberto Cortés (que va ser nomenat abans de morir \"president honorífic perpetu\"), alguna Junta Gestora, Pilar Baraza, Lucía i Mª Carmen Jachán Sánchez.<br><br>Mª Carmen Jachán Sánchez és sòcia-fundadora i, des del seu inici, fa ja 37 anys, sempre ha estat a la junta directiva com a secretària, portaveu i els últims 12 anys com a presidenta.<br><br>Va ser reconeguda el passat 16 de febrer de 2019 pel Cos de Policia Local de Xàtiva pel seu esperit solidari amb els animals i la seva col·laboració amb la Policia Local en la recollida d'animals perduts.<br><br>Ja l'any 1998 també es va reconèixer la seva llarga tasca en agraïment per tants anys de col·laboració, esforç i dedicació a aquesta Societat per part de tota la junta directiva i socis d'aquell any.<br><br>Durant aquests últims anys, amb la brillant gestió de Mª Carmen Jachán a la presidència, la SPAX es troba en una època daurada a nivell econòmic, de socis i padrins, i gaudeix d'un gran prestigi a Xàtiva i comarques dels voltants, sent una Protectora de referència a seguir. Totes les associacions de la ciutat i institucions mantenen una admiració envers la nostra SPAX i col·laboren al llarg de l'any moltes d'elles per recaptar fons amb diversos actes que organitzen.",
+            "poem-title"  :   "A vosotros",
+            "poem"  :   "A los que, sin rumbo, por las calles vagan.<br>A los que, entre rejas, malviven cautivos.<br>A los que están solos, viejos, desvalidos,<br>sin nadie que vele por su bienestar.<br><br>A vosotros dedico estos versos,<br>que salen del alma y que al aire van,<br>confiando al papel mis anhelos,<br>por si el aire los lleva hasta el cielo,<br>y el cielo se apiada de vuestra orfandad.<br><br>Compartir con vosotros quisiera<br>los juegos alegres, los largos paseos,<br>y las sobremesas de tarde estival,<br>y en las noches frías del oscuro invierno,<br>bajo el mismo techo, juntos descansar,<br>lejos de los golpes, del hambre y del miedo,<br>al calor del fuego, saciados, y en paz.<br><br>Pero sé que estoy pidiendo demasiado,<br>y que mi deseo no se cumplirá.<br>En el mundo hay tantos perros olvidados,<br>pidiendo caricias y un trozo de pan,<br>que, aunque de par en par abra los brazos,<br>de abrazar a todos no seré capaz.<br><br>Y los que se quedan fuera del regazo<br>son los que más pesan en el corazón,<br>poblando mis noches de sueños amargos,<br>tiñendo mis días de desolación.<br><br>Incluso en las horas buenas de la vida,<br>fugaces oasis de felicidad,<br>me invade de pronto la melancolía,<br>porque su mirada, clavada en la mía,<br>de mi pensamiento no logro apartar.<br><br>Su triste recuerdo empaña la alegría,<br>que sentir podría, si olvidar pudiera,<br>que en todo momento, en algún lugar,<br>un perro perdido y desorientado,<br>a su ingrato dueño todavía espera,<br>sin saber siquiera… que lo ha abandonado.",
+            "poem-footer": "Elena Negueroles"
         }
     },
-    "group": {
-        "edit": {
-            "title" : "Editar grupo",
-            "name" : "Nombre",
-            "description" : "Descripción",
-            "tag" : "Etiqueta",
-            "type" : "Tipo",
-            "link" : "Enlace"
+    "animals":   {
+        "title" :   "Animals",
+        "adopt" :   {
+            "icon"  :   "Adoptar",
+            "title" :   "Adoptar",
+            "info"  :   {
+                "icon"  :   "Info",
+                "title" :   "Informació",
+                "title-preadoptions"    :   "Pre-Adopció",
+                "line1" :   "Si estàs interessat/da en adoptar un gos o gat de la nostra associació, descarrega el següent formulari:",
+                "form"  :   "Formulari",
+                "line2" :   "Has d'omplir-lo i enviar-lo al següent correu electrònic:",
+                "title-protocol" :   "Protocol adopció",
+                "line3" :   "El/la adoptant pot contactar amb nosaltres per correu electrònic o telèfon:",
+                "line4" :   "Un cop realitzat el contacte, s'ha de completar el següent qüestionari:",
+                "line5" :   "La finalitat del qüestionari és assegurar l'èxit de l'adopció.",
+                "line6" :   "Quan es consideri que l'adopció és favorable i el/la adoptant s'hagi decidit per un animal en concret o hagi definit les característiques desitjades (edat, caràcter, mida,…), es concertarà una cita al refugi per conèixer l'animal.",
+                "line7" :   "Per formalitzar l'adopció, el/la adoptant, prèvia presentació del seu DNI/NIE o passaport en vigor (imprescindible ser major d'edat), signarà un contracte d'adopció amb l'Associació.",
+                "line8" :   "Tots els animals del nostre refugi es lliuren amb microxip, vacuna antiràbica i passaport europeu obligatoris a la Comunitat Valenciana (Decret 49/2005, de 4 de març del Consell de la Generalitat Valenciana sobre obligatorietat de xip, passaport i vacuna).",
+                "line9" :   "Aquest tràmit serà realitzat per un/a veterinari/ària col·legiat/da i assignat/da per aquesta Associació, amb independència de que posteriorment el/la propietari/ària de l'animal acudeixi a qualsevol altre/a veterinari/ària.",
+                "line10":   "El/la adoptant haurà d'abonar a aquesta Associació els costos veterinaris derivats del descrit anteriorment."
+            },
+            "animals"  :   {
+                "icon"  :   "Adoptar",
+                "title" :   "Adoptar"
+            },
+            "adopted"  :   {
+                "icon"  :   "Adoptats",
+                "title" :   "Adoptats"
+            }
         },
-        "edited" : "Grupo modificado",
-        "created" : "Grupo creado"
-    },
-    "events": {
-        "title" : "Eventos",
-        "empty" : "No hay eventos",
-        "link" : "Abrir",
-        "edit" : "Editar",
-        "Created-Male" : "Creado",
-        "Create" : "Crear",
-        "Date" : "Fecha",
-        "Location" : "Ubicación",
-        "Search" : "Buscar",
-        "types" : {
-            "all" : "Todos",
-            "whatsapp" : "Whatsapp",
-            "telegram" : "Telegram",
-            "discord" : "Discord"
+        "sponsor" :   {
+            "icon"  :   "Apadrinar",
+            "title" :   "Apadrinar",
+            "info"  :   {
+                "icon"  :   "Info",
+                "title" :   "Informació",
+                "title-details" :   "Detalls",
+                "line1" :   "Aquesta secció està dedicada tant a l'apadrinament/madrinatge dels nostres animals albergats com als particulars o empreses que, per la seva col·laboració o donació, han apadrinat/madrinat algunes necessitats del refugi i, amb això, que la vida que hi ha dins pugui millorar o, almenys, mantenir-se.",
+                "line2" :   "Pel que fa als animals aquí exposats, alguns es troben a l'apartat d'adopció, altres acaben d'arribar i altres, però, per les seves circumstàncies, edat, patologia, malalties cròniques, seqüeles físiques o traumes que arrosseguen, caràcter, inadaptació o característiques peculiars, són igualment adoptables però potser (i desgraciadament) amb menys possibilitats que la resta.",
+                "line3" :   "Mai ho entendrem per què, però és així. Hi ha animals que passen tota la seva vida al refugi i pensem que moriran de vells en ell. Els animals grans gairebé ningú els vol.",
+                "line4" :   "Per això, i per a que no ens oblidem de la seva existència, de que estan vius, de que necessiten el mateix afecte i atenció que la resta, t'oferim la possibilitat d'apadrinar-los si no els pots adoptar.",
+                "line5" :   "Si desitges informació sobre qualsevol d'ells, només has de demanar-la. Te l'enviem encantats, perquè normalment ningú no es recorda ni es fixa en ells.",
+                "line6" :   "Pel que fa als particulars i empreses que han col·laborat i col·laboren des de fa anys amb algunes de les necessitats del nostre refugi, i a aquells que ens puguin ajudar a partir d'ara, el nostre agraïment serà permanent.",
+                "line7" :   "Tant als padrins/madrines dels nostres animals com de les necessitats del refugi, només els podem dir una cosa que sentim i sentirem sempre molt profundament: <b>GRÀCIES</b>",
+                "title-steps"    :   "Pasos",                
+                "line8"    :   "La quota mínima mensual és de {{price_sponsorship}}€.",
+                "line9"    :   "Poden colaborar tant persones físiques com empreses.",
+                "form-sponsor-line1"    :   "Si vols apadrinar deus omplir el següent formulari:",
+                "form-sponsor-line2"    :   "Formulari",
+                "form-sponsor-line3"    :   "Acte seguit després d'omplir el formulari, deus descarregar, omplir i enviar el següent mandat:",
+                "form-sponsor-line4"    :   "SEPA",
+                "form-sponsor-line5"    :   "A la direcció:"
+            },
+            "animals"  :   {
+                "icon"  :   "Apadrinar",
+                "title" :   "Apadrinar"
+            },
+            "sponsored"  :   {
+                "icon"  :   "Apadrinats",
+                "title" :   "Apadrinats"
+            },
+            "apu"  :   {
+                "icon"  :   "APU",
+                "title" :   "Padrins/madrines APU"
+            }
+        },
+        "heaven" :   {
+            "icon"  :   "Cel",
+            "title" :   "Dormint amb les estrelles",
+            "info"  :   {
+                "icon"  :   "Info",
+                "title" :   "Informació",
+                "line1" :   "Una menció especial en aquest apartat a tots aquells animals que ens han deixat, que ens han tocat el cor i que mai podrem oblidar. Dedicat a tots ells.",
+                "line2" :   "Per aquells companys de viatge que es van anar i van deixar un gran buit en el nostre cor i en el de la nostra família. També per aquells que amb especial afecte van morir sense haver trobat llar o en tràgiques circumstàncies. Va dedicat a tots els animals del món i de totes les espècies.",
+                "line3" :   "Si vols que la teva mascota estimada dormi amb les estrelles, envia'ns una foto i una breu frase o dedicatòria i la posarem per a que brilli juntament amb la resta de petites estrelles que nien allà dalt al bell cel.",
+                "line4" :   "Per afegir una mascota o més informació:",
+                "line5" :   "En aquest espai hem volgut retre tribut a aquelles mascotes que ja no estan amb nosaltres.",
+                "line6" :   "Mai no oblidarem aquell company de jocs, els seus típics lladrucs, els seus miols, el seu relinchar o simplement la seva mirada.",
+                "line7" :   "Dedicat a més a totes aquelles persones que, a crits o en silenci, han plorat per la partida de les seves mascotes...",
+                "poem-title"    :   "No llores por mi...",
+                "poem" :   "Me has dado un hogar donde cobijarme,<br/>me has proporcionado alimento y sobre todo,<br/>me has dado tu amor y tu compañía.<br/>Lo último que me gustaría es verte sufrir por mi.<br/><br/>Ahora que no estoy contigo,<br/>no quiero verte triste.<br/>Deseo que cuando pienses en mi sonrías,<br/>pues así sabré que mi recuerdo te hace feliz.<br/><br/>Quiero que recuerdes los buenos momentos que compartíamos,<br/>nuestras muestras de cariño, nuestros juegos...<br/>y si alguna vez te defraudé, o me porte mal, perdóname...<br/><br/>Por favor, no tires mis juguetes, ni mi cama, ni mis cosas,<br/>porque en este mundo hay muchos otros colegas que viven en soledad, tristes y sin cariño...<br/>muchos que darían su vida por compartir la tuya.<br/><br/>No, no lo digas, no digas que no quieres tener mas animales...<br/>eso me hace pensar que el tiempo que estuve contigo no te hice feliz.<br/>Por favor, que mi muerte no sea en vano,<br/>que sirva para que otro tenga la suerte de poder vivir<br/>y conocer lo maravillosa que es tu amistad,<br/>que conozca la verdadera \"vida de perro\",<br/>que descubra el cariño.<br/><br/>No estés triste... <br/>Yo no lo estoy, <br/>porque se que guardas ese rinconcito especial para mi en tu corazón."
+            },
+            "animals"   :   {
+                "icon"  :   "Animals",
+                "title" :   "Cementiri Virtual per a Mascotes"
+            }
+        },
+        "record"    :   {
+            "Parents"  :   "Pares/Mares",
+            "Sponsors"  :   "Padrins/Madrines",
+            "Code"  :   "Codi",
+            "Name"  :   "Nom",
+            "Status"    :   {
+                "title" :   "Estat",
+                "adopt" :   "Adoptar",
+                "adopted"   :   "Adoptat",
+                "heaven"    :   "Cel"
+            },
+            "Sponsored"  :   {
+                "title" :   "Apadrinat",
+                "not-sponsored" :   "No",
+                "sponsored" :   "Sí",
+                "potentially-sponsor" :   "Potencial apadrinament"
+            },
+            "Type"  :   {
+                "title" :   "Tipus",
+                "dog" :   "Gos",
+                "cat" :   "Gat"
+            },
+            "Age"  :   {
+                "title" :   "Edat",                
+                "puppy" :   "Cadell",
+                "adult" :   "Adult"
+            },
+            "Gender"  :   {
+                "title" :   "Gènere",                
+                "male" :   "Mascle",
+                "female" :   "Femella"
+            },
+            "Size"  :   {
+                "title" :   "Mida",
+                "xs" :   "Molt petit",
+                "s" :   "Petit",
+                "m" :   "Mitjà",
+                "l" :   "Gran",
+                "xl" :   "Molt gran"
+            },
+            "Breed"  :   {
+                "title" :   "Raça"
+            },
+            "Weight"  :   "Pes",
+            "Location"  :   "Ubicació",
+            "Birthdate" :   "Data de naixement",
+            "Deathdate" :   "Data de defunció",
+            "Description"   :   "Descripció",
+            "Image" :   "Imatge",
+            "Image2"    :   "Imatge2",
+            "Person"    :   "Responsables",
+            "Video" :   "Video",
+            "Video2" :   "Video2"
         }
     },
-    "event": {
-        "edit": {
-            "title" : "Editar evento",
-            "name" : "Nombre",
-            "description" : "Descripción",
-            "tag" : "Etiqueta",
-            "type" : "Tipo",
-            "link" : "Enlace",
-            "date" : "Fecha",
-            "time" : "Hora",
-            "location" : "Ubicación"
-        },
-        "edited" : "Evento modificado",
-        "created" : "Evento creado"
+    "people"    :   {
+        "record"    :   {
+            "name"  :   "Nom",
+            "surname"  :   "Cognoms",
+            "dni"  :   "DNI/NIE/CIF",
+            "birthdate"  :   "Data de naixement",
+            "email" :   "Email",
+            "phone"  :   "Telèfon",
+            "address" :   "Direcció",
+            "name2"  :   "Nom2",
+            "surname2"  :   "Cognoms2",
+            "dni2"  :   "DNI2/NIE2/CIF2",
+            "birthdate2"  :   "Data de naixement2",
+            "email2" :   "Email2",
+            "phone2"  :   "Telèfon2",
+            "address2" :   "Direcció2",
+            "description"   :   "Descripció",
+            "animals"   :   "Animals"
+        }
     },
     "user": {
-        "title" : "Usuario",
-        "sections": {
-            "groups" : "Grupos",
-            "events" : "Eventos",
-            "profile" : "Perfil"
-        },
+        "title" : "Usuari",
         "profile": {
-            "sections": {
-                "Information" : "Información",
-                "Password" : "Contraseña",
-                "Account" : "Cuenta"
-            },
+            "icon"  :   "Perfil",
+            "title"  :   "Perfil",
             "information": {
-                "description" : "Actualizar información",
-                "name" : "Nombre",
+                "icon"  :   "info",                
+                "title" : "Actualitzar informació",
+                "name" : "Nom",
                 "email" : "Email",
-                "email-not-verified" : "Tu dirección de email no está verificada.",
-                "email-verify" : "Enviar email verificación",
-                "email-sent" : "Un nuevo email de verificación ha sido enviado a tu dirección de email."
+                "email-not-verified" : "La teva adreça de correu electrònic no està verificada.",
+                "email-verify" : "Enviar correu de verificació",
+                "email-sent" : "S'ha enviat un nou correu de verificació a la teva adreça de correu."
             },
             "settings": {
-                "description" : "Aquí puedes cambiar diferentes ajustes de tu cuenta",
-                "dark-mode" : "Modo oscuro"
+                "icon"  :   "Config",
+                "title" :   "Configuració",
+                "description" : "Aquí pots canviar diferents ajustos del teu compte",
+                "dark-mode" : "Mode fosc"
             },
             "password": {
-                "description" : "Cambiar contraseña",
-                "password" : "Contraseña",
-                "password-current" : "Contraseña actual",
-                "password-new" : "Contraseña nueva",
-                "password-confirm" : "Confirmar contraseña"
+                "icon"  :   "Contrasenya",
+                "title" :   "Canviar contrasenya",                
+                "password" : "Contrasenya",
+                "password-current" : "Contrasenya actual",
+                "password-new" : "Contrasenya nova",
+                "password-confirm" : "Confirmar contrasenya"
             },
             "account": {
-                "title" : "Borrar cuenta",
-                "description" : "Una vez tu cuenta ha sido borrada, todos los datos y recursos son borrados permanentemente. Antes de borrar tu cuenta guarda los datos que necesites, por favor.",
-                "delete" : "Borrar",
-                "confirm" : "Borrar cuenta",
-                "password-confirm" : "Por favor, introduce tu contraseña para borrar la cuenta permanentemente.",
-                "password" : "Contraseña",
-                "cancel" : "Cancelar",
-                "delete" : "Borrar"
+                "icon" : "Compte",
+                "title" : "Esborrar compte",
+                "description" : "Un cop el teu compte ha estat esborrat, totes les dades i recursos seran esborrats permanentment. Abans d'esborrar el teu compte, si us plau guarda les dades que necessitis.",
+                "confirm" : "Esborrar compte",
+                "password-confirm" : "Si us plau, introdueix la teva contrasenya per esborrar el compte permanentment.",
+                "password" : "Contrasenya",
+                "cancel" : "Cancel·lar",
+                "delete" : "Esborrar"
             }         
         },
+        "animals"   :   {
+            "icon"  :   "Animals",
+            "title" :   "Animals",
+            "create"    :   "Crear",
+            "edit"  :   "Editar",
+            "borrar"  :   "Esborrar",
+            "empty" :   "No hi ha animals",
+            "adopt" :   {
+                "icon"  :   "Adoptar",
+                "title" :   "Adoptar"
+            },
+            "adopted"   : {
+                "icon"  :   "Adoptats",
+                "title" :   "Adoptats"
+            },
+            "heaven"    :   {
+                "icon"  :   "Cel",
+                "title" :   "Cel"
+            }
+        },
+        "people"  :   {
+            "icon"  :   "Persones",
+            "title"  :   "Persones",
+            "create"    :   "Crear",
+            "edit"  :   "Editar",
+            "borrar"  :   "Esborrar",
+            "empty" :   "No hi ha persones"
+        },
         "email": {
-            "title" : "Verificar email",
-            "description" : "Debes verificar tu email para poder acceder a tu cuenta. Habrás recibido un enlace para validarlo. Si no lo has recibido, prueba a enviarte el email de verificación de nuevo, por favor.",
-            "verified" : "Email verificado",
-            "verification-link-sent" : "Email enviado",
+            "title" : "Verificar correu",
+            "description" : "Has de verificar el teu correu electrònic per accedir al teu compte. Hauràs rebut un enllaç per validar-lo. Si no l'has rebut, si us plau intenta enviar-te el correu de verificació de nou.",
+            "verified" : "Correu verificat",
+            "verification-link-sent" : "Correu enviat",
             "resend-link" : "Reenviar"
         }
     },
-    "tags": {
-        "names": {
-            "Friendship": "Amistad",
-            "Sports": "Deporte",
-            "Games": "",
-            "Love": "",
-            "Anime": "",
-            "Languages": "",
-            "Gambling": "",
-            "Art": "",
-            "Astronomy": "",
-            "Au Pairs": "",
-            "Dance": "",
-            "BDSM": "",
-            "Babies": "",
-            "Beauty": "",
-            "Sex": "",
-            "Camping": "",
-            "Religion": "",
-            "Celiacs": "",
-            "Science": "",
-            "Cinema": "",
-            "Coaching": "",
-            "Cooking": "",
-            "Colections": "",
-            "Comics": "",
-            "Travel": "",
-            "Accommodation": "",
-            "Buy/Sell": "",
-            "Music": "",
-            "Culture": "",
-            "Curses": "",
-            "Books": "",
-            "Economy": "",
-            "Jobs": "",
-            "Feminism": "",
-            "Philosophy": "",
-            "Flowers": "",
-            "Photography": "",
-            "Gastronomy": "",
-            "Gays": "",
-            "Gym": "",
-            "History": "",
-            "Horoscope": "",
-            "Humour": "",
-            "Computing": "",
-            "Real estate": "",
-            "Social networks": "",
-            "Gardening": "",
-            "Karaoke": "",
-            "Lesbians": "",
-            "Flirting": "",
-            "Mobiles": "",
-            "Magic": "",
-            "Manga": "",
-            "DIY": "",
-            "Marketing": "",
-            "Health": "",
-            "Fashion": "",
-            "Mountaineering": "",
-            "Motor": "",
-            "Business": "",
-            "Beach": "",
-            "Politics": "",
-            "Psicology": "",
-            "Recipes": "",
-            "Vegans": "",
-            "Vegetarians": ""
-        }
-    },
     "login": {
-        "title" : "Identificarse",
-        "title-forgot" : "Recordar contraseña",
-        "login" : "Acceder",
-        "login2" : "Loguearse",
-        "name" : "Nombre",
+        "title" : "Identificar-se",
+        "description"   :   "Aquesta zona és per al personal del refugi, no per a usuaris.",
+        "title-forgot" : "Recordar contrasenya",
+        "login" : "Accedir",
+        "login2" : "Iniciar sessió",
+        "name" : "Nom",
         "email" : "Email",
-        "password" : "Contraseña",
-        "password-confirm": "Confirmar contraseña",
-        "remember" : "Recuérdame",
-        "forgot" : "Recordar contraseña",
-        "forgot-sentence" : "Indica tu email para enviarte un enlace para poder resetear la contraseña",
+        "password" : "Contrasenya",
+        "password-confirm": "Confirmar contrasenya",
+        "remember" : "Recorda'm",
+        "forgot" : "Recordar contrasenya",
+        "forgot-sentence" : "Indica el teu correu electrònic per enviar-te un enllaç per poder restablir la contrasenya",
         "forgot-send" : "Enviar",
-        "reset" : "Resetear",
-        "register" : "Registrarse",
+        "reset" : "Restablir",
+        "register" : "Registrar-se",
         "google" : "Google"
     },
     "contact": {
         "title" : "Contactar",
-        "name" : "Nombre",
+        "name" : "Nom",
         "email" : "Email",
-        "message" : "Mensaje",
-        "send" : "Enviar"
+        "message" : "Missatge",
+        "send" : "Enviar",
+        "info"  :   {
+            "title1"  :   "Informació general i Refugi",
+            "title2"  :   "Col·laborar",
+            "title3"  :   "Adopcions",
+            "title4"  :   "Voluntariat",
+            "phone"  :   "Telèfon",
+            "shift-phone-title"  :   "Horari d'atenció telefònica",
+            "shift-phone-line1"  :   "Dilluns a divendres de 16:00h a 18:00h",
+            "shift-phone-line2"   :   "Dissabtes de 10:30h a 13:30h",
+            "shift-phone-footer1"  :   "Es prega respectar aquest horari.",
+            "shift-phone-footer2" :   "És atès per personal voluntari.",
+            "shift-live-title"  :   "Horari d'atenció al públic",
+            "shift-live-line1"  :   "Dilluns a divendres de 10:00h a 18:00h",
+            "shift-live-line2"  :   "Dissabtes de 10:30h a 13:30h",
+            "title5"    :   "Refugi atès els 365 dies de l'any"
+        }
     }
 }

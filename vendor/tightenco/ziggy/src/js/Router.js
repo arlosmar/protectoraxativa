@@ -196,6 +196,14 @@ export default class Router extends String {
         return { ...params, ...query };
     }
 
+    get routeParams() {
+        return this._unresolve().params;
+    }
+
+    get queryParams() {
+        return this._unresolve().query;
+    }
+
     /**
      * Check whether the given route exists.
      *
@@ -203,7 +211,7 @@ export default class Router extends String {
      * @return {Boolean}
      */
     has(name) {
-        return Object.keys(this._config.routes).includes(name);
+        return this._config.routes.hasOwnProperty(name);
     }
 
     /**

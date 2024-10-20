@@ -2,6 +2,19 @@
 
 use Illuminate\Support\Str;
 
+// get domain
+$url = url('/');
+
+// if localhost use sqlite
+$databaseConnection = 'mysql';
+if(str_contains($url,'localhost')){
+    $databaseConnection = 'sqlite';
+}
+else{
+    // if not use mysql
+    $databaseConnection = 'mysql';
+}
+
 return [
 
     /*
@@ -16,7 +29,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'sqlite'),
+    'default' => env('DB_CONNECTION',$databaseConnection),
 
     /*
     |--------------------------------------------------------------------------
@@ -34,7 +47,7 @@ return [
         'sqlite' => [
             'driver' => 'sqlite',
             'url' => env('DB_URL'),
-            'database' => env('DB_DATABASE', database_path('database.sqlite')),
+            'database' => env('DB_DATABASE_SQLITE', database_path('database.sqlite')),
             'prefix' => '',
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],

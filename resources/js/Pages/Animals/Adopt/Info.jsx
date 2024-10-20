@@ -1,5 +1,5 @@
 
-export default function Info({t,email_adoptions,social}){
+export default function Info({t,email_adoptions,social,forms}){
 
     return (    	
         <>
@@ -16,7 +16,7 @@ export default function Info({t,email_adoptions,social}){
             >                
             </div>
             <div>
-                <a href='/forms/form-adop.doc' target='_new'>
+                <a href={forms?.adoption} target='_new'>
                     {t('animals.adopt.info.form')}
                 </a>
             </div>
@@ -56,7 +56,7 @@ export default function Info({t,email_adoptions,social}){
             >                
             </div>
             <div>
-                <a href='/forms/form-adop.doc' target='_new'>
+                <a href={forms?.adoption} target='_new'>
                     {t('animals.adopt.info.form')}
                 </a>
             </div>

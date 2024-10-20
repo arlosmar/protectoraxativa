@@ -23,7 +23,8 @@ import Social from '@/Pages/Home/Social';
 import Partners from '@/Pages/Home/Partners';
 import Info from '@/Pages/Home/Info';
 
-export default function Home({user,language,section,email_colaboration,email_volunteering,social,partners,prices}){
+export default function Home({user,language,section,email_colaboration,email_volunteering,
+    social,partners,prices,forms}){
 
 	const { t, i18n } = useTranslation('global');
 
@@ -70,6 +71,7 @@ export default function Home({user,language,section,email_colaboration,email_vol
     		<h1 className="title">
     			{t('introduction.title')}
     		</h1>
+            {/*
 			<div className='text-center'>
 				<img
 					className='mx-auto'
@@ -78,6 +80,7 @@ export default function Home({user,language,section,email_colaboration,email_vol
 					id='logo-home'
 				/>
 			</div>
+            */}
 			<div className='mt-8'>
                 <Tabs 					
                     value={tab} 
@@ -98,6 +101,7 @@ export default function Home({user,language,section,email_colaboration,email_vol
                             email_colaboration={email_colaboration}
                             email_volunteering={email_volunteering}
                             prices={prices}
+                            forms={forms}
                         />
                     :						
 						tab === 'social' ?

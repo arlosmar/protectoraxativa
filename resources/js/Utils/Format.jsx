@@ -1,16 +1,237 @@
 import dayjs from 'dayjs/esm/index.js'
 import dayjsUTC from 'dayjs-plugin-utc';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
 
 export const importPlugins = () => {
     dayjs.extend(dayjsUTC);
     var timezonePlugin = require('dayjs/plugin/timezone');
     dayjs.extend(timezonePlugin);
+    var customParseFormat = require("dayjs/plugin/customParseFormat");
+    dayjs.extend(customParseFormat);
 }
 
 export const now = () => {
     return dayjs();
 }
 
+// check valid database date
+export const validDBdate = (date) => {
+
+    if(
+        !date || 
+        !dayjs(date).isValid() ||
+        date === '' || 
+        date === '0000-00-00' || 
+        date === '0000-00-00 00:00:00' ||
+        date === '0000-00-00T00:00:00.000000Z'
+    ){
+        return false;
+    }
+
+    return true;
+}
+
+// from database to format
+export const date = (date, hour = false, timezone = false) => {
+
+    importPlugins();
+
+    if(
+        !date || 
+        !dayjs(date).isValid() ||
+        date === '' || 
+        date === '0000-00-00' || 
+        date === '0000-00-00 00:00:00' ||
+        date === '0000-00-00T00:00:00.000000Z'
+    ){
+        return '';
+    }
+    
+    var dateUTC = dayjs.utc(date);
+   
+    var format = '';
+
+    // if only year YYYY
+    var dateRegex = /^\d\d\d\d$/;   
+    if(dateRegex.test(date)){
+        return date;
+    }
+    else{
+        // if year and month YYYY-MM
+        dateRegex = /^\d\d\d\d-\d\d$/;   
+        if(dateRegex.test(date)){
+            format = "MM/YYYY";
+        }
+        else{
+            format = "DD/MM/YYYY";
+        }
+    }
+
+    if(hour){
+        format = format+" HH:mm";
+    }
+
+    if(timezone){
+        var timezone = dayjs.tz.guess();
+        return dayjs(dateUTC).tz(timezone).format(format);
+    }
+    else{
+        return dayjs(dateUTC).format(format);
+    }
+}
+
+// from formatted to db
+export const date2db = (date) => {
+
+    importPlugins();
+
+    if(!date || !dayjs(date,"DD/MM/YYYY").isValid()){
+        return '';  
+    }
+
+    return dayjs(date,"DD/MM/YYYY").format('YYYY-MM-DD');
+}
+
+// format animals
+export const formatAnimals = (t,items) => {
+
+    var resultFormatted = [];
+
+    if(items && items.length > 0){
+                        
+        items.map((item,i) => {
+
+            var itemFormatted = formatAnimal(t,item);
+          
+            resultFormatted.push(itemFormatted);
+        });
+    }
+
+    return resultFormatted;
+}
+
+export const formatAnimal = (t,item) => {
+
+    var itemFormatted = {
+        id: item?.id,
+        code: item?.code ? item.code : item?.id,
+        name: item?.name,
+        status: item?.status?.name && item.status.name.length > 0 ? t('animals.record.Status.'+item.status.name) : '',
+        sponsor: item?.sponsor?.name && item.sponsor.name.length > 0 ? t('animals.record.Sponsored.'+item.sponsor.name) : '',        
+        type: item?.type?.name && item.type.name.length > 0 ? t('animals.record.Type.'+item.type.name) : '',
+        breed: item.breed?.description && item.breed?.description.length > 0 ? item.breed.description : '',
+        gender: item?.gender?.name && item.gender.name.length > 0 ? t('animals.record.Gender.'+item.gender.name) : '',
+        size: item?.size?.name && item.size.name.length > 0 ? t('animals.record.Size.'+item.size.name) : '',
+        age: item?.age?.name && item.age.name.length > 0 ? t('animals.record.Age.'+item.age.name) : '',
+        weight: item?.weight,
+        birthdate: date(item?.birthdate,false,false),
+        deathdate: date(item?.deathdate,false,false),
+        description: item?.description && item.description.length > 0 ? item.description : '',
+        location: item?.location && item.location.length > 0 ? item.location : '',
+        image: item?.image ? item.image : '',
+        image_file : null,
+        image2: item?.image2 ? item.image2 : '',
+        image2_file : null,        
+        video: item?.video ? item.video : '',    
+        video2: item?.video2 ? item.video2 : '',
+        person: item?.person ? item.person : null,
+        person_name: item?.person?.name2 && item.person.name2.length > 0 ? item?.person?.name+' '+item?.person?.surname+' / '+item?.person?.name2+' '+item?.person?.surname2 : item?.person?.name && item.person.name.length > 0 ? item?.person?.name+' '+item?.person?.surname : null,
+        // save the ids as well
+        status_id: item?.status_id,
+        sponsor_id: item?.sponsor_id,
+        type_id: item?.type_id,
+        breed_id: item?.breed_id,
+        gender_id: item?.gender_id,
+        size_id: item?.size_id,
+        age_id: item?.age_id,
+        person_id: item?.person_id
+    };
+  
+    return itemFormatted;
+}
+
+// format animals
+export const formatPeople = (t,items) => {
+
+    var resultFormatted = [];
+
+    if(items && items.length > 0){
+                        
+        items.map((item,i) => {
+
+            var itemFormatted = formatPerson(t,item);
+          
+            resultFormatted.push(itemFormatted);
+        });
+    }
+
+    return resultFormatted;
+}
+
+export const formatPerson = (t,item) => {
+
+    var itemFormatted = {
+        id: item?.id,
+        name: item?.name,
+        surname: item?.surname,
+        dni: item?.dni,
+        birthdate: date(item?.birthdate,false,false),
+        email: item?.email,
+        phone: item?.phone,
+        address: item?.address,
+        name2: item?.name2,
+        surname2: item?.surname2,
+        dni2: item?.dni2,
+        birthdate2: date(item?.birthdate2,false,false),
+        email2: item?.email2,
+        phone2: item?.phone2,
+        address2: item?.address2,
+        description: item?.description,
+        animals: item?.animals ? item.animals : null
+    };
+  
+    return itemFormatted;
+}
+
+
+export const videoFormat = (link,type = 'youtube') => {
+
+    //'https://www.youtube.com/watch?v=7fkQwAz-5go&a=3';
+    var resul = link;
+
+    if(link && link.length > 0){
+
+        if(type === 'youtube'){
+
+            var split = link.split('v=');
+
+            if(split.length > 1){
+
+                var string = split[1];
+                var split2 = string.split('&');
+
+                resul = split2[0];
+
+                return 'https://www.youtube.com/embed/'+resul;
+            }
+            else{
+                resul = split[0];
+                return resul;
+            }
+        }
+        else{
+            return resul;
+        }
+    }
+    else{
+        return resul;
+    }
+}
+
+////////////////////////////////////////
+// not used
+////////////////////////////////////////
+/*
 export const dateToDatePicker = (date) => { 
     return dayjs(date);
 }
@@ -80,56 +301,6 @@ export const offset = () => {
     return timezone;
 }
 
-export const date = (date, hour = true, timezone = true) => {
-
-    if(
-        !date || 
-        date === '' || 
-        date === '0000-00-00' || 
-        date === '0000-00-00 00:00:00' ||
-        date === '0000-00-00T00:00:00.000000Z'
-    ){
-        return '';
-    }
-
-    var format = "DD-MM-YYYY";
-    if(hour){
-        format = "DD-MM-YYYY HH:mm";
-    }
-
-    importPlugins();
-    
-    var dateUTC = dayjs.utc(date);
-
-    if(timezone){
-        var timezone = dayjs.tz.guess();
-        return dayjs(dateUTC).tz(timezone).format(format);
-    }
-    else{
-        return dayjs(dateUTC).format(format);
-    }
-
-    /*
-    const { t } = useTranslation('global')
-    const split = date.split('/')
-    const months = [
-        t("Calendar-January"),
-        t("Calendar-February"),
-        t("Calendar-March"),
-        t("Calendar-April"),
-        t("Calendar-May"),
-        t("Calendar-June"),
-        t("Calendar-July"),
-        t("Calendar-August"),
-        t("Calendar-September"),
-        t("Calendar-October"),
-        t("Calendar-November"),
-        t("Calendar-December")
-    ]
-    return `${split[0]} ${months[split[1] - 1].substring(0, 3)}`
-    */
-}
-
 export const dateDiary = (t,date, hour = false) => {
 
     if(!date || date === '' || date === '0000-00-00' || date === '0000-00-00 00:00:00'){
@@ -142,10 +313,9 @@ export const dateDiary = (t,date, hour = false) => {
     var formatHour = "HH:mm";
     var formatWeekday = 'dddd';
 
-    /*
-    var utc = require('dayjs/plugin/utc');
-    dayjs.extend(utc);
-    */
+    //var utc = require('dayjs/plugin/utc');
+    //dayjs.extend(utc);
+
     dayjs.extend(dayjsUTC);
 
     var dateUTC = dayjs.utc(date);
@@ -300,27 +470,6 @@ export const dateWeekday = (date) => {
     return dayjs(dateUTC).tz(timezone).format('dddd'); 
 }
 
-export const points = (points, symbol = false) => {
-
-    if(!points){
-        points = 0;
-    }
-    
-    var value = new Intl.NumberFormat('de-DE').format(points);
-
-    if(symbol){
-        /*
-        return (
-            //<>{value}<span class='text-highlighted font-bold'>n;</span></>
-        )
-        */
-        return value;
-    }
-    else{
-        return value;
-    }
-}
-
 export const price = (price, currency = true, decimals = 2) => {
 
     var result = 0;
@@ -367,89 +516,5 @@ export const link = (text) => {
     }
 
     return result;
-}
-
-// event utc, add offset
-/*
-export const eventAddOffset = (e) => {
-
-    var date = e?.date;
-    var date_utc = e?.date; 
-
-    var hour = null;
-    
-    if(e?.hour && e?.hour.length > 0){
-        var dateOffset = getDateWithHourWithOffset(e?.date+' '+e?.hour,e?.offset);
-        var split = dateOffset.split(' ');
-        date = split[0];
-        hour = split[1];
-    }
-
-    var hour_to = null;
-    if(
-        (e?.hour_to && e?.hour_to.length > 0) && 
-        (e?.date !== e?.date_to || e?.hour_to !== e?.hour)
-    ){
-        var dateToOffset = getDateWithHourWithOffset(e?.date_to+' '+e?.hour_to,e?.offset);
-        var split = dateToOffset.split(' ');
-        hour_to = split[1];
-    }
-
-    var format = {
-        date: date,
-        hour: hour,
-        hour_to: hour_to,
-        date_utc: e?.date,                
-        hour_utc: e?.hour,
-        date_to_utc: e?.date_to,
-        hour_to_utc: e?.hour_to,
-        event: e
-    };
-
-    return format;
-}
-
-export const calendar = (item,user,role) => {
-
-    var startTime = item?.date_utc;
-    var endHour = null;
-    if(item?.hour_utc && item?.hour_utc.length > 0){                                        
-        startTime = startTime+'T'+item.hour_utc;
-        endHour = item.hour_utc;
-    }  
-    else{
-        endHour = '23:59:59';
-        startTime = startTime+'T00:00:00';
-    }  
-    startTime = startTime+'+00:00';
-
-    var endTime = item?.date_to_utc;
-    if(item?.hour_to_utc && item?.hour_to_utc.length > 0){
-        endTime = endTime+'T'+item.hour_to_utc;
-    }
-    else{
-        endTime = endTime+'T'+endHour;
-    }
-    endTime = endTime+'+00:00';
-
-    var attendee = '';
-    if(role === 'requester'){
-        attendee = user?.requester?.name+' '+user?.requester?.surname+' <'+user?.email_notifications+'>'
-    }
-    else{
-        attendee = user?.doer?.name+' '+user?.doer?.surname+' <'+user?.email_notifications+'>'
-    }
-
-    var eventCalendar = {
-        title: item?.event?.title,
-        description: item?.event?.description,
-        startTime: startTime,
-        endTime: endTime,                                        
-        attendees: [
-            attendee
-        ]
-    }
-
-    return eventCalendar;
 }
 */

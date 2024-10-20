@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Size extends Model
 {
 
-    public function animals(): BelongsTo
+    public function animals(): HasMany
     {
         return $this->hasMany(Animal::class);
     }

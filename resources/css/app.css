@@ -13,6 +13,10 @@ body{
 	@apply mx-1 max-w-screen-xl mx-auto;
 }
 
+#versions{
+	@apply border border-neutral-800 rounded p-2 mt-4 text-center;
+}
+
 .lightmode{
 	@apply text-black;
 }
@@ -53,6 +57,11 @@ body{
 	@apply text-2xl font-bold text-center mb-8 border-b;
 }
 
+.title-user-list,.title-carousel{
+	@apply text-xl font-bold mb-4;
+	@apply flex items-center justify-center;
+}
+
 .subtitle-home{
 	@apply text-xl font-bold;
 }
@@ -75,7 +84,7 @@ a{
 
 #logo-home{
 	width: 100%;
-	max-width: 150px;
+	max-width: 100px;
 }
 
 .lightmode #logo-text{
@@ -110,11 +119,11 @@ a{
 	@apply bg-black;
 }
 
-.lightmode .MuiAppBar-root #language{
+.lightmode .MuiAppBar-root #language/*, .lightmode .MuiAppBar-root #login*/{
 	@apply text-black;	
 }
 
-.darkmode .MuiAppBar-root #language{
+.darkmode .MuiAppBar-root #language/*, .darkmode .MuiAppBar-root #login*/{
 	@apply text-white;	
 }
 
@@ -146,7 +155,7 @@ a{
    	/*@apply bg-pink text-white;*/
 }
 
-.group-name,.event-name{
+.animal-name,.person-name{
 	@apply font-bold ml-2;
 }
 
@@ -174,7 +183,7 @@ a{
 	touch-action: manipulation;
 }
 
-.group-link,.event-link,.login-button,.policy-link,.terms-link{
+.login-button,.policy-link,.terms-link{
 	@apply app-button app-background-color;
 }
 
@@ -182,15 +191,19 @@ a{
 	@apply app-button text-white bg-black;
 }
 
-.group-link-edit,.event-link-edit{
-	@apply app-button bg-red-500;
+.animal-link,.person-link{
+	@apply app-button app-background-color;
 }
 
-.group-search,.event-search{
+.animal-link-edit,.person-link-edit{
+	@apply app-button app-background-color;
+}
+
+.animal-search,.person-search{
 	@apply app-button bg-blue-500;
 }
 
-.group-search-box{
+.animal-search-box{
 	/*height: 350px;*/
 }
 
@@ -208,10 +221,10 @@ input,textarea{
 	@apply app-button bg-red-600;
 }
 
-.group-link:hover, .group-link:focus,
-.group-link-edit:hover, .group-link-edit:focus,
-.event-link:hover, .event-link:focus,
-.event-link-edit:hover, .event-link-edit:focus,
+.animal-link:hover, .animal-link:focus,
+.animal-link-edit:hover, .animal-link-edit:focus,
+.person-link:hover, .person-link:focus,
+.person-link-edit:hover, .person-link-edit:focus,
 .login-button:hover,.login-button:focus,
 .back-button:hover,.back-button:focus 
 {
@@ -245,7 +258,7 @@ input,textarea{
 }
 
 .app-input-readonly{
-	@apply bg-slate-100;
+	@apply bg-slate-100 !important;
 }
 
 .home-div-icon{
@@ -334,7 +347,7 @@ ul{
 }
 
 .partners-div, .apu-div{
-	@apply w-1/2 border border-neutral-800 rounded p-1;
+	@apply w-1/2 border border-neutral-800 rounded p-1 mb-2;
 }
 
 .partners-image, .apu-image{
@@ -345,4 +358,68 @@ ul{
 
 .paragraph-top-separation{
 	@apply mt-4;
+}
+
+.pagination-div{
+	list-style: none !important;
+	@apply py-2;
+}
+
+.pagination{
+	@apply flex justify-center w-full;
+}
+
+.hide-scroll::-webkit-scrollbar {
+	display: none; /* for Chrome, Safari and Opera */
+}
+
+.hide-scroll{
+ 	-ms-overflow-style: none;  /* IE and Edge */
+ 	scrollbar-width: none;  /* Firefox */
+}
+
+.animal-record-div,.person-record-div{
+	@apply border border-neutral-800 rounded p-1 text-center;
+}
+
+#animal-parents{
+	@apply text-center border border-neutral-800 rounded p-1;
+}
+
+.animal-record-title{
+	@apply font-bold;
+}
+
+.person-record-title{
+	@apply text-right font-bold;
+}
+
+.person-record-value{
+	@apply text-left;
+}
+
+#filter{
+	@apply app-text-color;	
+}
+
+.hiddenIcon{
+	@apply text-white !important;
+}
+
+.deleteIcon{
+	@apply text-red-600 !important;
+}
+
+.viewIcon, .editIcon, .searchIcon, .saveIcon{
+	@apply app-text-color !important;
+}
+
+.closeIcon{
+	@apply text-black !important;
+}
+
+.video{
+	width: 100%;
+	/*max-width: 450px;*/
+    height: 300px;
 }

@@ -11,14 +11,15 @@ import Toast from '@/Components/Toast';
 
 import GoogleIcon from '@mui/icons-material/Google';
 
-export default function Login({ status, canResetPassword }) {
-
+export default function Login({ status, canResetPassword, path }) {
+ 
     const { t } = useTranslation('global');
     
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
         password: '',
-        remember: false,
+        remember: false/*,
+        path: path && path.length > 0 ? path : ''*/
     });
 
     useEffect(() => {
@@ -144,6 +145,9 @@ export default function Login({ status, canResetPassword }) {
             <h1 className="title">
                 {t('login.title')}
             </h1>
+            <div className='text-center mb-2'>
+                {t('login.description')}
+            </div>
 
             <form onSubmit={submit}>
                 
@@ -210,7 +214,7 @@ export default function Login({ status, canResetPassword }) {
                     </button>
                 </div>
             </form>
-
+            {/*
             <div className="text-center mt-4">                   
                 <a className='google-button pb-1' href={route('google')}>
                     <GoogleIcon sx={{marginBottom: '3px'}}/> {t('login.google')}
@@ -222,7 +226,7 @@ export default function Login({ status, canResetPassword }) {
                     {t('login.register')}
                 </a>
             </div>
-
+            */}
         </main>
         </>
     );

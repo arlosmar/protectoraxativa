@@ -35,14 +35,8 @@ return new class extends Migration
                     'updated_at'    => $date
                 ],
                 [
-                    'name' => 'sponsor',
-                    'description' => 'To be sponsored',
-                    'created_at'    => $date,
-                    'updated_at'    => $date
-                ],
-                [
-                    'name' => 'sponsored',
-                    'description' => 'To be sponsored',
+                    'name' => 'heaven',
+                    'description' => 'Heaven',
                     'created_at'    => $date,
                     'updated_at'    => $date
                 ]

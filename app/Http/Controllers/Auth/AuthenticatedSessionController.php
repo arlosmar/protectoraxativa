@@ -16,6 +16,9 @@ use App\Models\{User};
 use Illuminate\Support\Facades\Date;
 use Laravel\Socialite\Facades\Socialite;
 
+// redirect to when going to /login and already logged in
+// /vendor/laravel/framework/src/Illuminate/Auth/Middleware/RedirectIfAuthenticated.php
+// protected function defaultRedirectUri(): string{ return route('user'); }
 class AuthenticatedSessionController extends Controller
 {
 
@@ -26,19 +29,21 @@ class AuthenticatedSessionController extends Controller
     /**
      * Display the login view.
      */
-    public function create(): Response
-    {
-        return Inertia::render('Auth/Login', [
-            'canResetPassword' => Route::has('password.request'),
-            'status' => session('status'),
-        ]);
+    public function create(Request $request): Response{
+
+        $canResetPassword = Route::has('password.request');
+        $status = session('status');
+
+        //$path = $request->get('path');
+
+        return Inertia::render('Auth/Login',compact('canResetPassword','status'/*,'path'*/));
     }
 
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
-    {
+    public function store(LoginRequest $request): RedirectResponse{
+
         $request->authenticate();
 
         $request->session()->regenerate();
@@ -49,7 +54,14 @@ class AuthenticatedSessionController extends Controller
         // save dark mode if on user settings
         $darkmode = setUserDarkMode();
 
-        //return redirect()->intended(route('dashboard', absolute: false));
+        // if coming from the login button on top
+        /*
+        if(isset($request->path) && !empty($request->path)){
+            return redirect($request->path);
+        }
+        */
+
+        //return redirect()->intended(route('dashboard', absolute: false));        
         return redirect()->intended(route('user', absolute: false));
     }
 

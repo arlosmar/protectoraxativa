@@ -8,24 +8,39 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Animal extends Model
 {
-    /*
-    use HasFactory;
-
+    
+    //use HasFactory;
+    
     protected $fillable = [
-        'user_id',
+        'code',
+        'status_id',                
+        'sponsor_id',                
+        'type_id',            
+        'age_id',                
+        'gender_id',                
+        'size_id',                
+        'breed_id',                
         'name',
+        'weight',
+        'birthdate',
+        'deathdate',
         'description',
         'location',
-        'date',
-        'tag_id',
-        'type_id',
-        'link'
+        'image',
+        'image2',
+        'video',
+        'video2',
+        'person_id'
     ];
-    */
 
     public function status(): BelongsTo
     {
         return $this->belongsTo(Status::class);
+    }
+
+    public function sponsor(): BelongsTo
+    {
+        return $this->belongsTo(Sponsor::class);
     }
 
     public function type(): BelongsTo
@@ -51,5 +66,10 @@ class Animal extends Model
     public function breed(): BelongsTo
     {
         return $this->belongsTo(Breed::class);
+    }
+
+    public function person(): BelongsTo
+    {
+        return $this->belongsTo(Person::class);
     }
 }

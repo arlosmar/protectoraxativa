@@ -12,13 +12,17 @@ import Info from '@/Pages/Animals/Adopt/Info';
 import Animals from '@/Pages/Animals/Adopt/Animals';
 import Adopted from '@/Pages/Animals/Adopt/Adopted';
 
-export default function Adopt({t,subsection,email_adoptions,social,animals,adopted,images_path}){
+export default function Adopt({t,subsection,setSubsection,animals,email_adoptions,
+    social,images_path,page,loading,options,forms}){
 
     const [ tab, setTab ] = useState(subsection ? subsection : "info");
 
     const handleTabChange = (event, newValue) => {
         
         setTab(newValue);
+        
+        // to inform the parent view and call by ajax to get animals
+        setSubsection(newValue);
 
         // change url on the browser
         var url = route("animals")+'/adopt/'+newValue;
@@ -60,20 +64,31 @@ export default function Adopt({t,subsection,email_adoptions,social,animals,adopt
             <div className='mt-4 pt-4'>
             {
                 tab === 'info' ?
-                    <Info t={t} email_adoptions={email_adoptions} social={social}/>
+                    <Info 
+                        t={t} 
+                        email_adoptions={email_adoptions} 
+                        social={social}
+                        forms={forms}
+                    />
                 :						
                     tab === 'animals' ?
                         <Animals 
                             t={t} 
                             animals={animals}
                             images_path={images_path}
+                            page={page}
+                            loading={loading}
+                            options={options}
                         />
                     :
                         tab === 'adopted' ?
                             <Adopted 
                                 t={t} 
-                                adopted={adopted}
+                                animals={animals}
                                 images_path={images_path}
+                                page={page}
+                                loading={loading}
+                                options={options}
                             />
                         :
                             ''

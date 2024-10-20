@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 
 import LanguageIcon from '@mui/icons-material/Language';
+import UserIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/PowerSettingsNew';
 
 import { setLanguage } from "@/Utils/Cookies";
@@ -46,6 +47,12 @@ const theme = createTheme({
                     props: { variant: "red" },
                     style: {
                         color: "red"
+                    }
+                },
+                {
+                    props: { variant: "orange" },
+                    style: {
+                        color: "orange"
                     }
                 }
             ]
@@ -119,6 +126,39 @@ export default function BarTop({user,t,from}){
         */  
     };
 
+    const login = () => {
+        
+        // not used because if you log in it goes to the user section
+        // read current url to go back again once logged in
+        /*
+        var path = window.location.pathname;
+
+        var parameter = '';
+
+        // if already on login, check if path parameter alreadh there
+        if(path && path.length > 0 && path !== '/'){
+
+            if(path === '/login'){ 
+                
+                const queryParameters = new URLSearchParams(window.location.search)
+
+                const prevPath = queryParameters.get("path");
+
+                if(prevPath && prevPath.length > 0){
+                    parameter = '?path='+encodeURI(prevPath);
+                }
+            }
+            else{
+                var encoded = encodeURI(path);
+                parameter = '?path='+encoded;
+            }
+        }
+
+        window.location = route('login')+parameter;
+        */
+        window.location = route('login');
+    };
+
     const logout = () => {
         window.location = route('logout.get');
     };
@@ -148,14 +188,32 @@ export default function BarTop({user,t,from}){
                 
                 <AppBar position="static" sx={{ /*bgcolor: darkmode ? "black" : "white",*/ width: '100%', borderRadius: '5px 5px 5px 5px', padding: '0px' }}>
                 
-                    <Toolbar sx={{ padding: '0px 5px 0px 5px' }}>           
+                    <Toolbar sx={
+                        {
+                            "@media (min-width: 0px)": { 
+                                padding: '5px 5px',
+                                minHeight : '0px'
+                            }
+                        }
+                    }>
+
+                        <IconButton variant={user && from === 'user' ? 'orange' : darkmode ? 'white' : 'black'} color="primary"  onClick={login} id='login'>
+                            <UserIcon/>                  
+                        </IconButton>   
+
+                        {
+                            user &&                                                        
+                            <IconButton variant="red" color="primary" onClick={logout} id='logout' sx={{marginLeft:'5px'}}>
+                                <LogoutIcon/>                  
+                            </IconButton>                            
+                        }        
                         
                         <Box sx={{ flexGrow: 1 }}/>
 
                         <a href='/'>
                             <Box
                                 component="img"
-                                sx={{height: 60}}
+                                sx={{height: 40}}
                                 alt=""
                                 src='/logo.png'
                                 id='logo'
@@ -170,16 +228,16 @@ export default function BarTop({user,t,from}){
                         */}
                         <Box sx={{ flexGrow: 1 }}/>
 
-                        <IconButton color="primary" onClick={changeLanguage} id='language'>
-                            <LanguageIcon/>                  
-                        </IconButton>                        
-
-                        {/*
+                        {
                             user &&                                                        
-                            <IconButton variant="red" color="primary" onClick={logout} id='logout' sx={{marginLeft:'5px'}}>
+                            <IconButton variant={darkmode ? 'black' : 'white'} color="primary" sx={{marginRight:'5px'}}>
                                 <LogoutIcon/>                  
                             </IconButton>                            
-                        */}
+                        }
+
+                        <IconButton color="primary" onClick={changeLanguage} id='language'>
+                            <LanguageIcon/>                  
+                        </IconButton>
 
                     </Toolbar>
                 

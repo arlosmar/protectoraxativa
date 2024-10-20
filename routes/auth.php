@@ -13,7 +13,7 @@ use App\Http\Controllers\Auth\{
     ProfileController
 };
 
-use App\Http\Controllers\{SettingsController};
+use App\Http\Controllers\{SettingsController,AnimalController,PersonController};
 use Illuminate\Support\Facades\Route;
 
 
@@ -39,11 +39,11 @@ Route::middleware('guest')->group(function () {
      
     Route::get('google/callback', [AuthenticatedSessionController::class, 'googleCallback']);
 
-    Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
+    //Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
 
-    Route::post('register', [RegisteredUserController::class, 'store']);
+    //Route::post('register', [RegisteredUserController::class, 'store']);
 
-    Route::get('user', [AuthenticatedSessionController::class, 'create'])->name('user');
+    //Route::get('user', [AuthenticatedSessionController::class, 'create'])->name('user');
 
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])->name('password.request');
 
@@ -56,13 +56,14 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware(['auth','verified'])->group(function () {
 
-    Route::get('/user', [ProfileController::class, 'user'])->name('user');
+    Route::get('/user/profile/{subsection?}', [ProfileController::class, 'userProfile'])->name('user.profile');
+    
+    Route::get('/user/animals/{subsection?}/{page?}', [ProfileController::class, 'userAnimals'])->name('user.animals');
+    
+    Route::get('/user/{section?}/{page?}', [ProfileController::class, 'userSections'])->name('user');
 
-    Route::get('/user/{section}/{subsection}', [ProfileController::class, 'user']);
-
-    Route::get('/user/groups', [ProfileController::class, 'user'])->defaults('section','groups')->name('user.groups');
-    Route::get('/user/events', [ProfileController::class, 'user'])->defaults('section','events')->name('user.events');
-    Route::get('/user/{section}', [ProfileController::class, 'user']);
+    // to can return after edit. have name for the route
+    Route::get('/user/people', [ProfileController::class, 'user'])->defaults('section','people')->name('user.people');
     
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     
@@ -71,13 +72,17 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-/*
-Route::middleware(['auth','verified'])->group(function () {
-    Route::get('/event/edit/{event}', [EventController::class, 'edit'])->name('event.edit');
-    Route::patch('/event/edit', [EventController::class, 'editSave'])->name('event.edit.save');
-    Route::get('/event/create', [EventController::class, 'create'])->name('event.create');
+Route::middleware(['auth','verified'])->group(function () {    
+    Route::post('/animal/edit/{animal?}', [AnimalController::class, 'edit'])->name('animal.edit');
+    Route::delete('/animal/delete/{animal?}', [AnimalController::class, 'delete'])->name('animal.delete');
 });
-*/
+
+Route::middleware(['auth','verified'])->group(function () {
+    Route::get('/peopleget', [PersonController::class, 'getList'])->name('people.get');
+    //Route::patch('/person/edit', [PersonController::class, 'edit'])->name('person.edit');
+    Route::patch('/person/edit/{person?}', [PersonController::class, 'edit'])->name('person.edit');
+    Route::delete('/person/delete/{person?}', [PersonController::class, 'delete'])->name('person.delete');
+});
 
 Route::middleware(['auth','verified'])->group(function () {
     

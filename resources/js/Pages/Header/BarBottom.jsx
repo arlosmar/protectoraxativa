@@ -82,7 +82,12 @@ export default function BarBottom({t,from}){
                 break;
         }
 
-        window.location.href = route(link) 
+        if(link === 'news'){            
+            window.open('https://protectoraxativa.blogspot.com','_blank');
+        }
+        else{
+            window.location.href = route(link);
+        }
     }
 
     /*
