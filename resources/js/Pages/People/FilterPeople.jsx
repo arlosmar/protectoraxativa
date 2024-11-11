@@ -4,9 +4,10 @@ import { useForm } from '@inertiajs/react';
 
 import FilterPeopleModal from '@/Modals/FilterPeopleModal';
 
-import { validDBdate } from "@/Utils/Format";
+import { filter } from "@/Utils/Filter";
 
-export default function FilterPeople({origin,t,originalItems,items,setItems,openSearch,setOpenSearch}){
+export default function FilterPeople({origin,t,originalItems,items,setItems,openSearch,setOpenSearch,
+filterUsed,setFilterUsed}){
 
     const fields = {
         'name'  :   'text',
@@ -20,6 +21,7 @@ export default function FilterPeople({origin,t,originalItems,items,setItems,open
         'birthdate2'  :   'date',
         'phone2'  :   'text',
         'description'   :   'text'*/
+        'other_people'  :   'text'
     };
 
     var nullValues = {};
@@ -34,179 +36,20 @@ export default function FilterPeople({origin,t,originalItems,items,setItems,open
         setData(nullValues);
     }
 
-    const handleInput = (e) => {
-        setData(e.target.name,e.target.value);
-    }
-
     const handleSubmit = (e) => {
+
+        setFilterUsed(true);
 
         e.preventDefault();
         
-        var itemsFiltered = originalItems;
-
-        itemsFiltered = originalItems.filter((item) => {
-
-            var result = true;
-            Object.keys(data).map((key,index) => {
-
-                var key2 = key+'2';
-                switch(fields[key]){                        
-
-                    case 'date':
-                        if(validDBdate(data[key])){ 
-
-                            if(validDBdate(item[key])){ 
-
-                                if(new Date(item[key]).getTime() !== new Date(data[key]).getTime()){
-                                    
-                                    if(validDBdate(item[key2])){ 
-
-                                        if(new Date(item[key2]).getTime() !== new Date(data[key]).getTime()){
-                                            result = false;
-                                            return;
-                                        }                                        
-                                    }
-                                    else{
-                                        result = false;
-                                        return;
-                                    }
-                                }                                
-                            }
-                            else{
-                                if(validDBdate(item[key2])){ 
-
-                                    if(new Date(item[key2]).getTime() !== new Date(data[key]).getTime()){
-                                        result = false;
-                                        return;
-                                    }                                        
-                                }
-                                else{
-                                    result = false;
-                                    return;
-                                }
-                            }                       
-                        }
-                        break;
-
-                    case 'integer':
-                        if(data[key] !== null){ 
-
-                            if(item[key] !== null){ 
-
-                                if(parseInt(item[key]) !== parseInt(data[key])){
-                                    
-                                    if(item[key2] !== null){ 
-
-                                        if(parseInt(item[key2]) !== parseInt(data[key])){
-                                            result = false;
-                                            return;
-                                        }                                        
-                                    }
-                                    else{
-                                        result = false;
-                                        return;
-                                    }
-                                }                                
-                            }
-                            else{
-                                if(item[key2] !== null){ 
-
-                                    if(parseInt(item[key2]) !== parseInt(data[key])){
-                                        result = false;
-                                        return;
-                                    }                                        
-                                }
-                                else{
-                                    result = false;
-                                    return;
-                                }
-                            }                       
-                        }
-                        break;
-
-                    case 'float':
-                        if(data[key] !== null){ 
-
-                            if(item[key] !== null){ 
-
-                                if(parseFloat(item[key]) !== parseFloat(data[key])){
-                                    
-                                    if(item[key2] !== null){ 
-
-                                        if(parseFloat(item[key2]) !== parseFloat(data[key])){
-                                            result = false;
-                                            return;
-                                        }                                        
-                                    }
-                                    else{
-                                        result = false;
-                                        return;
-                                    }
-                                }                                
-                            }
-                            else{
-                                if(item[key2] !== null){ 
-
-                                    if(parseFloat(item[key2]) !== parseFloat(data[key])){
-                                        result = false;
-                                        return;
-                                    }                                        
-                                }
-                                else{
-                                    result = false;
-                                    return;
-                                }
-                            }                       
-                        }
-                        break;
-
-                    case 'text':
-                    default:
-                        if(data[key] && data[key].length > 0){ 
-
-                            if(item[key] && item[key].length > 0){ 
-
-                                if(!item[key].toLowerCase().includes(data[key].toLowerCase())){
-                                    
-                                    if(item[key2] && item[key2].length > 0){ 
-
-                                        if(!item[key2].toLowerCase().includes(data[key].toLowerCase())){
-                                            result = false;
-                                            return;
-                                        }                                        
-                                    }
-                                    else{
-                                        result = false;
-                                        return;
-                                    }
-                                }                                
-                            }
-                            else{
-                                if(item[key2] && item[key2].length > 0){ 
-
-                                    if(!item[key2].toLowerCase().includes(data[key].toLowerCase())){
-                                        result = false;
-                                        return;
-                                    }                                        
-                                }
-                                else{
-                                    result = false;
-                                    return;
-                                }
-                            }                       
-                        }
-                        break;
-                }
-            });
-
-            return result;
-        });
+        var itemsFiltered = filter('people',originalItems,fields,data);
 
         setItems(itemsFiltered);
         setOpenSearch(false);
     };
 
-    const handleReset = (e) => {        
+    const handleReset = (e) => {  
+        setFilterUsed(false);
         resetFields();
         setItems(originalItems);
         setOpenSearch(false);
@@ -215,8 +58,7 @@ export default function FilterPeople({origin,t,originalItems,items,setItems,open
     return (
         <>  
         {
-            items && originalItems &&
-            (items.length !== originalItems.length) &&
+            filterUsed &&
             <div className='text-center mb-4'>
                 <a className='cursor-pointer' onClick={handleReset}>{t('trans.removeFilters')}</a>
             </div>

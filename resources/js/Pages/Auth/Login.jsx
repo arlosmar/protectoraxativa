@@ -2,8 +2,7 @@ import Header from '@/Pages/Header/Header';
 import { useEffect, useState } from 'react';
 import Input from '@/Components/Input';
 import { useForm } from '@inertiajs/react';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
+import Switch from '@/Components/Switch';
 
 import { useTranslation } from "react-i18next";
 
@@ -140,16 +139,17 @@ export default function Login({ status, canResetPassword, path }) {
             setOpen={setOpenToast}
             message={status}
         />
-        <Header t={t} from='login'/>
+        <Header t={t} from='user'/>
         <main>
-            <h1 className="title">
+            {/*
+            <h1 className="title">  
                 {t('login.title')}
-            </h1>
+            </h1>            
             <div className='text-center mb-2'>
                 {t('login.description')}
             </div>
-
-            <form onSubmit={submit}>
+            */}
+            <form onSubmit={submit} className='mt-8'>
                 
                 <div>
                     <Input
@@ -160,7 +160,9 @@ export default function Login({ status, canResetPassword, path }) {
                         autoComplete="email"                        
                         onChange={handleInput}                        
                         placeholder={t('login.email')}                        
-                        error={errors.email}
+                        error={errors.email}                        
+                        isFocused
+
                     />
                 </div>
 
@@ -188,17 +190,14 @@ export default function Login({ status, canResetPassword, path }) {
                     </label>
                 </div>
                 */}
-                <div className='block mt-4 ms-2'>
-                    <FormControlLabel 
-                        control={
-                            <Switch color="warning"/>
-                        } 
-                        label={t('login.remember')}                        
+                <div className='mt-4'>                  
+                    <Switch
+                        name="remember"                       
                         checked={checked}
                         onChange={handleRemember}
+                        label={t('login.remember')}
                     />
                 </div>
-
                 <div className="flex items-center justify-end mt-4">
                     {
                         canResetPassword &&
@@ -220,13 +219,13 @@ export default function Login({ status, canResetPassword, path }) {
                     <GoogleIcon sx={{marginBottom: '3px'}}/> {t('login.google')}
                 </a>
             </div>
-
+            */}
             <div className="text-center mt-8">                   
                 <a href={route('register')}>
                     {t('login.register')}
                 </a>
             </div>
-            */}
+            
         </main>
         </>
     );

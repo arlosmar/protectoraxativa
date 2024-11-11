@@ -2,7 +2,7 @@ import Header from '@/Pages/Header/Header';
 import { useState, useEffect } from 'react';
 import { useTranslation } from "react-i18next";
 
-import { makeStyles } from '@mui/styles';
+import { styleTabs } from '@/Utils/Styles';
 
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -17,9 +17,15 @@ import Heaven from '@/Pages/Animals/Heaven';
 
 import Toast from '@/Components/Toast';
 
-import { formatAnimals } from "@/Utils/Format";
+import { formatAnimals, datesDif, now } from "@/Utils/Format";
 
-export default function Animals({user,section,subsection,emails,social,apus,images_path,page,forms,prices}){
+import { useSwipeable } from 'react-swipeable';
+import Sticky from '@/Components/Sticky';
+
+export default function Animals({user,section,subsection,emails,social,baseUrl,imagesPaths,
+    page,forms,prices,guides,reloadAfterTime,itemsPerPage}){
+
+    const [ alreadyLoaded, setAlreadyLoaded ] = useState([]);
 
     const { t } = useTranslation('global');
     const [ animals, setAnimals ] = useState([]);
@@ -33,36 +39,34 @@ export default function Animals({user,section,subsection,emails,social,apus,imag
     const [ toastMsg, setToastMsg ] = useState('');
     const [ openToast, setOpenToast ] = useState(false);
 
+    // we use this because if not, when opening directly a page, if we change tab
+    // it keeps on that page
+    const [ pageInitial, setPageInitial ] = useState(page);
+
+    const { stickyRef, sticky, offset } = Sticky();
+
+    const { classes, sx, sxIcon } = styleTabs();
+
     const handleTabChange = (event, newValue) => {
-        
+
         setTab(newValue);
         setSubtab('');
+
+        // reset page in case it came by url
+        setPageInitial(1);
+
+        if(sticky){            
+            window.scrollTo({top: offset});
+        }
 
         // change url on the browser
         var url = route("animals")+'/'+newValue;
         window.history.pushState({path:url},'',url);
     };
 
-    const useStyles = makeStyles({
+    useEffect(() => {        
 
-        tabs: {
-            "& .MuiTabs-indicator": {
-                backgroundColor: "#FF8C00",
-                height: 3,
-            },
-            "& .MuiTab-root.Mui-selected": {
-                color: '#FF8C00'
-            }
-        }
-    });
-    const classes = useStyles();
-
-    const sx = {};
-
-    useEffect(() => {
-
-        setLoading(true);
-        setAnimals([]);
+        //setAnimals([]);
             
         // call by ajax to get animals
         if(
@@ -70,64 +74,106 @@ export default function Animals({user,section,subsection,emails,social,apus,imag
             subtab.length > 0 &&
             subtab !== 'info' &&
             subtab !== 'apu'
-        ){            
-            // axios.get to select
-            // axios.post to insert
-            // axios.put to update
-            // adios.delete to delete
-            axios.get(route('animals.get')+'?section='+tab+'&subsection='+subtab)
-            .then(function (response){            
-                
-                if(response.data.result){
-                    
-                    // success
-                    var result = JSON.parse(response.data.animals);                    
-                    
-                    // format animals
-                    var resultFormatted = formatAnimals(t,result);
-                    
-                    setAnimals(resultFormatted);
-                    setOptions(JSON.parse(response.data.options));
+        ){                    
+            if(
+                !alreadyLoaded[tab+'-'+subtab]?.date ||
+                (datesDif(alreadyLoaded[tab+'-'+subtab]?.date,now()) >= reloadAfterTime)
+            ){
 
-                    setLoading(false);
-                }
-                else{
-                    // error      
-                    setLoading(false);
-                    setToastMsg(response.data.error);
-                    setOpenToast(true);
-                }                
-            })
-            .catch(function (error){
-                setLoading(false);
-                setToastMsg(error);
-                setOpenToast(true);
-            });     
+                setLoading(true);            
 
-            // another way without axios
-            //put(route('language.update'));
-            
-            // another way with fetch
-            /*
-            fetch(route('language.update'), {
-                method: 'PUT',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    language: 'a'
+                // axios.get to select
+                // axios.post to insert
+                // axios.put to update
+                // adios.delete to delete
+                axios.get(route('animals.get')+'?section='+tab+'&subsection='+subtab)
+                .then(function (response){            
+                    
+                    if(response.data.result){
+                        
+                        // success
+                        var result = JSON.parse(response.data.animals);                    
+                        
+                        // format animals
+                        var resultFormatted = formatAnimals(t,result);
+                        
+                        setAnimals(resultFormatted);
+                        setOptions(JSON.parse(response.data.options));
+
+                        var newAlreadyLoaded = alreadyLoaded;                    
+                        newAlreadyLoaded[tab+'-'+subtab] = {
+                            date: now(),
+                            animals: resultFormatted
+                        };
+                        setAlreadyLoaded(newAlreadyLoaded);
+
+                        setLoading(false);
+                    }
+                    else{
+                        // error      
+                        setLoading(false);
+                        setToastMsg(response.data.error);
+                        setOpenToast(true);
+                    }                
                 })
-            })
-            .then(function (response) {
+                .catch(function (error){
+                    setLoading(false);
+                    setToastMsg(error);
+                    setOpenToast(true);
+                });     
+
+                // another way without axios
+                //put(route('language.update'));
                 
-            })
-            .catch(function (error) {
-                
-            });
-            */  
-        }
+                // another way with fetch
+                /*
+                fetch(route('language.update'), {
+                    method: 'PUT',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        language: 'a'
+                    })
+                })
+                .then(function (response) {
+                    
+                })
+                .catch(function (error) {
+                    
+                });
+                */  
+            }
+            else{
+                setAnimals(alreadyLoaded[tab+'-'+subtab]?.animals);
+            }
+        }        
     },[subtab])
+
+    const [ tabsArray , setTabsArray ] = useState(['adopt','sponsor','heaven']);
+    const [ tabsLength , setTabsLength ] = useState(3);
+    const [ posTab , setPosTab ] = useState(0);
+
+    const handleSwipe = (e,move) => {
+
+        var newPos = posTab+move;
+
+        if(newPos >= 0 && newPos < tabsLength){
+            setPosTab(newPos);
+            handleTabChange(e,tabsArray[newPos]);
+        }
+    }
+
+    // https://commerce.nearform.com/open-source/react-swipeable/
+    const handlers = useSwipeable({
+        onSwipedRight: (e) => handleSwipe(e,-1),
+        onSwipedLeft: (e) => handleSwipe(e,1),        
+        //onTouchEndOrOnMouseUp: (e) => handleSwipe("User Touched!", e),
+        swipeDuration: 500,
+        preventScrollOnSwipe: true,
+        trackMouse: true
+    });
 
     return (    	
         <>
@@ -137,65 +183,83 @@ export default function Animals({user,section,subsection,emails,social,apus,imag
             message={toastMsg}
         />
     	<Header user={user} t={t} from='animals'/>
-    	<main>
+    	<main {...handlers}>
+            {/*
             <h1 className="title">
     			{t('animals.title')}
     		</h1>
-            <div className='mt-4'>
-                <Tabs 					
+            */}
+            <div className='tabs-container'>
+                <Tabs 		
+                    id="tabs"
+                    ref={stickyRef} 
+                    className={`${classes.tabs} ${sticky && 'sticky'}`}
+                    sx={{zIndex:1}} 
                     value={tab} 
-                    onChange={handleTabChange}                     
-                    className={classes.tabs}
-                    centered
+                    onChange={handleTabChange}
+                    variant="scrollable"
                 >					
-                    <Tab icon={<AdoptIcon/>} value="adopt" sx={sx} iconPosition="top" label={t('animals.adopt.icon')}/>
-					<Tab icon={<SponsorIcon/>} value="sponsor" sx={sx} iconPosition="top" label={t('animals.sponsor.icon')}/>
-                    <Tab icon={<HeavenIcon/>} value="heaven" sx={sx} iconPosition="top" label={t('animals.heaven.icon')}/>
+                    <Tab icon={<AdoptIcon sx={sxIcon}/>} value="adopt" sx={sx} iconPosition="top" label={t('animals.adopt.icon')}/>
+					<Tab icon={<SponsorIcon sx={sxIcon}/>} value="sponsor" sx={sx} iconPosition="top" label={t('animals.sponsor.icon')}/>
+                    <Tab icon={<HeavenIcon sx={sxIcon}/>} value="heaven" sx={sx} iconPosition="top" label={t('animals.heaven.icon')}/>
                 </Tabs>
-                <div className='mt-4 pt-4'>
-                {				
+                <div className='content-container'>
+                {
                     tab === 'adopt' ?
                         <Adopt
+                            user={user}
                             subsection={subtab}
                             setSubsection={setSubtab}
                             t={t}
                             email_adoptions={emails?.email_adoptions}
                             social={social}                            
-                            images_path={images_path}
+                            imagesPaths={imagesPaths}
                             animals={animals}
-                            page={page}
+                            page={pageInitial}
+                            setPage={setPageInitial}
                             loading={loading}
                             options={options}
                             forms={forms}
+                            guides={guides}
+                            baseUrl={baseUrl}
+                            prices={prices}
+                            itemsPerPage={itemsPerPage}
                         />
                     :
                         tab === 'sponsor' ?
                             <Sponsor
+                                user={user}
                                 subsection={subtab}
                                 setSubsection={setSubtab}
                                 t={t}
-                                apus={apus}                                
-                                images_path={images_path}
+                                imagesPaths={imagesPaths}
                                 animals={animals}
-                                page={page}
+                                page={pageInitial}
+                                setPage={setPageInitial}
                                 loading={loading}
                                 options={options}
                                 email_colaboration={emails?.email_colaboration}
                                 forms={forms}
                                 prices={prices}
+                                baseUrl={baseUrl}
+                                itemsPerPage={itemsPerPage}
                             />
                         :
                             tab === 'heaven' ?
-                                <Heaven    
+                                <Heaven   
+                                    user={user} 
                                     subsection={subtab}  
                                     setSubsection={setSubtab}                              
                                     t={t}
-                                    images_path={images_path}
+                                    imagesPaths={imagesPaths}
                                     email_info={emails?.email_info}
-                                    animals={animals}
-                                    page={page}
+                                    animals={animals}                                    
+                                    page={pageInitial}
+                                    setPage={setPageInitial}
                                     loading={loading}
                                     options={options}
+                                    baseUrl={baseUrl}
+                                    itemsPerPage={itemsPerPage}
                                 />
                             :
                                 ''

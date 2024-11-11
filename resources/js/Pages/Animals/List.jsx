@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import CircularProgress from '@mui/material/CircularProgress';
 
 import Pagination from '@/Components/Pagination';
+import ItemsPerPage from '@/Components/ItemsPerPage';
 import { itemsPerPageList } from "@/Utils/Variables";
 
 import AnimalModal from "@/Modals/AnimalModal";
@@ -17,152 +18,29 @@ import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
-import { visuallyHidden } from '@mui/utils';
+
+import visuallyHidden from '@mui/utils/visuallyHidden';
+import Typography from '@mui/material/Typography';
 
 import FilterAnimals from '@/Pages/Animals/FilterAnimals';
 import { styled } from '@mui/material/styles';
 
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import IconButton from '@mui/material/IconButton';
-import FilterListIcon from '@mui/icons-material/FilterList';
-
 import { getParameter } from "@/Utils/Variables";
+import { date2db } from "@/Utils/Format";
+import { csv } from "@/Utils/Export";
 
-function descendingComparator(a, b, orderBy) {
+import { getComparator } from "@/Utils/Format";
 
-    var type = '';
-    var result = 0; // same
+import ButtonsActions from '@/Components/ButtonsActions';
 
-    const nums = ['code','weight'];
-    const dates = ['birthdate','deathdate'];
+import { useForm } from '@inertiajs/react';
 
-    var value1 = b[orderBy];
-    var value2 = a[orderBy];
+export default function List({t,origin,animals,setAnimals,baseUrl,
+    imagesPaths,loading,page,options,subsection,internal,setInternal}){
 
-    // code, weight
-    if(nums.includes(orderBy)){
-        type = 'numerical';
-    }
-    else{
-        // birhtdate, deathdate
-        if(dates.includes(orderBy)){
-            type = 'date';
-        }
-        else{
-            type = 'string';
-        }
-    }
+    const [ itemsPerPage, setItemsPerPage ] = useState(itemsPerPageList(origin));
 
-    // numbers
-    switch(type){
-
-        case 'numerical':
-
-            // if empty value, fill in with -1 to be the 1st
-            // we don't have negative numbers on the list, so no problem
-            var isNotValid1 = !value1 || value1 == '';
-            var isNotValid2 = !value2 || value2 == '';
-
-            if(isNotValid1){
-                value1 = -1;
-            }
-            
-            if(isNotValid2){
-                value2 = -1;
-            }
-
-            if(value1 < value2){
-                result = -1;
-            }
-            else{
-                if(value1 > value2){
-                    result = 1;
-                }
-                else{
-                    result = 0;
-                }
-            }
-        
-            break;
-        
-        case 'date':
-
-            var date1 = new Date(value1).getTime();
-            var date2 = new Date(value2).getTime();
-
-            var isNotValid1 = !date1;
-            var isNotValid2 = !date2;
-
-            if(isNotValid1){
-
-                if(isNotValid2){
-                    result = 0; // same
-                }
-                else{
-                    result = -1; // b < a 
-                }
-            }
-            else{
-                // b with value but a empty
-                if(isNotValid2){
-                    result = 1; // b > a 
-                }
-                else{
-                    if(date1 < date2){
-                        result = -1;
-                    }
-                    else{
-                        if(date1 > date2){
-                           result = 1;
-                        }
-                    }
-                }
-            }            
-            break;
-
-        case 'string':        
-
-            var isNotValid1 = !value1 || value1.length === 0;
-            var isNotValid2 = !value2 || value2.length === 0;
-
-            if(isNotValid1){
-
-                if(isNotValid2){
-                    result = 0; // same
-                }
-                else{
-                    result = -1; // b < a 
-                }
-            }
-            else{
-                // b with value but a empty
-                if(isNotValid2){
-                    result = 1; // b > a 
-                }
-                else{
-                    // 1st < 2nd => -1
-                    // 1st > 2nd => 1
-                    // otherwise 0
-                    var compare = value1.localeCompare(value2);            
-                    result = compare;
-                }
-            }
-            break;
-    }
-
-    return result;
-}
-
-
-function getComparator(order, orderBy) {
-    
-    return order === 'desc' ? 
-        (a, b) => descendingComparator(a, b, orderBy)
-    : 
-        (a, b) => -descendingComparator(a, b, orderBy);
-}
-
-export default function List({t,origin,animals,images_path,loading,page,options,subsection}){
+    const [ filterUsed, setFilterUsed ] = useState(false);
 
     const [ filteredAnimals, setFilteredAnimals ] = useState(animals);
 
@@ -180,15 +58,15 @@ export default function List({t,origin,animals,images_path,loading,page,options,
     const [ animalEditItem, setAnimalEditItem ] = useState(null);
 
     const [ order, setOrder ] = useState('asc');
-    const [ orderBy, setOrderBy ] = useState('code');
+    const [ orderBy, setOrderBy ] = useState('name');
 
     // check if concrete item by parameter. it is the id of the element
-    const parameter = parseInt(getParameter('view'));
+    const [ parameter, setParameter ] = useState(parseInt(getParameter('view')));
 
     var parameterPos = false;
     if(parameter && filteredAnimals && filteredAnimals.length > 0){
 
-        parameterPos = filteredAnimals.sort(getComparator(order, orderBy)).findIndex(item => item?.id === parameter);
+        parameterPos = filteredAnimals.sort(getComparator(order, orderBy, origin)).findIndex(item => item?.id === parameter);
 
         // add 1 because pos 0 means element 1
         if(parameterPos !== -1){
@@ -199,7 +77,6 @@ export default function List({t,origin,animals,images_path,loading,page,options,
         }
     }
 
-    const itemsPerPage = itemsPerPageList();
     const [ length, setLength ] = useState(filteredAnimals && filteredAnimals.length ? filteredAnimals.length : 0);
     const [ pages, setPages ] = useState(Math.ceil(length/itemsPerPage));
 
@@ -207,7 +84,11 @@ export default function List({t,origin,animals,images_path,loading,page,options,
 
     // check if initial page on the url we are not out of the limits
     const [ from, setFrom ] = useState((pageCurrent-1)*itemsPerPage);
-    const [ to, setTo ] = useState(Math.min((pageCurrent*itemsPerPage)-1,length-1));
+    
+    // not necessary to make the min because slice doesn't fail if out of array
+    // and like this when adding element it appers on the list
+    const [ to, setTo ] = useState((pageCurrent*itemsPerPage)-1);
+    //const [ to, setTo ] = useState(Math.min((pageCurrent*itemsPerPage)-1/*,length-1));
 
     const setValues = (list) => {
 
@@ -220,7 +101,7 @@ export default function List({t,origin,animals,images_path,loading,page,options,
         parameterPos = false;
         if(parameter && filteredAnimals && filteredAnimals.length > 0){
             
-            var itemsArray = filteredAnimals.sort(getComparator(order, orderBy));
+            var itemsArray = filteredAnimals.sort(getComparator(order, orderBy, origin));
             parameterPos = itemsArray.findIndex(item => item?.id === parameter);
             // add 1 because pos 0 means element 1
             if(parameterPos !== -1){
@@ -228,8 +109,11 @@ export default function List({t,origin,animals,images_path,loading,page,options,
                 handleInfo(itemsArray[parameterPos-1],parameterPos-1); 
             }
             else{
-                parameterPos = false; // we can use 0
+                parameterPos = false; // we can use 0 instead of false
             }
+
+            // remove parameter to avoid doing this every time we change a page or items per page
+            setParameter(null);
         }    
 
         setPageCurrent(parameterPos ? Math.min(Math.ceil(parameterPos/itemsPerPage),newPages) : page ? Math.min(page,newPages) : 1);
@@ -242,15 +126,35 @@ export default function List({t,origin,animals,images_path,loading,page,options,
 
     // when loading animals each time when clicking the tab
     useEffect(() => {
-        setFilteredAnimals(animals);        
-        // not necessary because it calls the useEffect above
-        //setValues(animals);
+
+        // check the change is not because of adding/editing/removing items
+        if(!internal){
+            setFilteredAnimals(animals); 
+            // not necessary because it calls the useEffect above
+            //setValues(animals);
+        }
     },[animals]);    
 
     useEffect(() => {
         setFrom((pageCurrent-1)*itemsPerPage);
-        setTo(Math.min((pageCurrent*itemsPerPage)-1,length-1));
+        
+        // not necessary to make the min because slice doesn't fail if out of array
+        // and like this when adding element it appers on the list
+        setTo((pageCurrent*itemsPerPage)-1);
+        //setTo(Math.min((pageCurrent*itemsPerPage)-1/*,length-1));
     },[pageCurrent]);
+
+    useEffect(() => {
+        // go back to page 1
+        setPageCurrent(1);
+
+        setFrom(0);        
+        setTo(itemsPerPage-1);
+
+        // recalculate number of pages
+        var newPages = Math.ceil(length/itemsPerPage);
+        setPages(newPages);
+    },[itemsPerPage]);
 
     const handleInfo = (elem,pos) => {
         setAnimalItem(elem);
@@ -258,20 +162,21 @@ export default function List({t,origin,animals,images_path,loading,page,options,
         setShowAnimal(true);
     };
 
-    const columns = [
+    const columns = [        
         {id:'code',align:'left',text:t('animals.record.Code')},
-        {id:'name',align:'right',text:t('animals.record.Name')},
-        {id:'status',align:'right',text:t('animals.record.Status.title')},
-        {id:'sponsor',align:'right',text:t('animals.record.Sponsored.title')},
-        {id:'type',align:'right',text:t('animals.record.Type.title')},
-        {id:'breed',align:'right',text:t('animals.record.Breed.title')},
-        {id:'gender',align:'right',text:t('animals.record.Gender.title')},
-        {id:'size',align:'right',text:t('animals.record.Size.title')},
-        {id:'weight',align:'right',text:t('animals.record.Weight')+' (Kg)'},
-        {id:'age',align:'right',text:t('animals.record.Age.title')},
-        {id:'birthdate',align:'right',text:t('animals.record.Birthdate')},
-        {id:'deathdate',align:'right',text:t('animals.record.Deathdate')}
-    ];
+        {id:'name',align:'left',text:t('animals.record.Name')},
+        {id:'status',align:'left',text:t('animals.record.Status.title')},
+        {id:'sponsor',align:'left',text:t('animals.record.Sponsored.title')},
+        {id:'type',align:'left',text:t('animals.record.Type.title')},
+        {id:'breed',align:'left',text:t('animals.record.Breed.title')},
+        {id:'gender',align:'left',text:t('animals.record.Gender.title')},
+        {id:'size',align:'left',text:t('animals.record.Size.title')},
+        {id:'weight',align:'left',text:t('animals.record.Weight')+' (Kg)'},
+        {id:'age',align:'left',text:t('animals.record.Age.title')},
+        {id:'birthdate',align:'left',text:t('animals.record.Birthdate')},
+        {id:'deathdate',align:'left',text:t('animals.record.Deathdate')},
+        {id:'updated_at',align:'left',text:t('animals.record.Updated')}
+    ];    
 
     const handleRequestSort = (property) => {
 
@@ -313,46 +218,109 @@ export default function List({t,origin,animals,images_path,loading,page,options,
 
     const StyledTableRow = styled(TableRow)(({ theme }) => ({
         '&:nth-of-type(odd)': {
-            backgroundColor: theme.palette.action.hover,
+            backgroundColor: theme.palette.action.hover,//'#FFDEAD'
         },
         // hide last border
         '&:last-child td, &:last-child th': {
             border: 0,
         },
+        '&:hover' : {
+            backgroundColor: '#FFDEAD !important'
+        }
     }));
 
+    const { data, setData, reset } = useForm();
+
+    const resetFields = (e) => {        
+        reset();
+    }
+
     const handleCreate = (e) => { 
+        resetFields();
         setAnimalEditItem(null);   
         setPosition(null); 
         setShowEditAnimal(true);   
+    } 
+    
+    const handleExport = (e) => {
+
+        if(filteredAnimals && filteredAnimals.length > 0){
+
+            //foto,edad,tamaño,raza,fecha entrada,adopción,fecha esterilización,defunción];
+            const headerCols = [                       
+                {id:'code',text:t('animals.record.Code')},
+                {id:'name',text:t('animals.record.Name')},
+                {id:'status',text:t('animals.record.Status.title')},
+                {id:'sponsor',text:t('animals.record.Sponsored.title')},
+                {id:'type',text:t('animals.record.Type.title')},
+                {id:'breed',text:t('animals.record.Breed.title')},
+                {id:'gender',text:t('animals.record.Gender.title')},
+                {id:'size',text:t('animals.record.Size.title')},
+                {id:'weight',text:t('animals.record.Weight')+' (Kg)'},
+                {id:'age',text:t('animals.record.Age.title')},
+                {id:'birthdate_year',text:t('animals.record.Birthdate')},
+                {id:'deathdate_year',text:t('animals.record.Deathdate')},
+                {id:'updated_at',text:t('animals.record.Updated')},                
+                {id:'image',text:t('animals.record.Image')},
+                {id:'image2',text:t('animals.record.Image2')},
+                {id:'video',text:t('animals.record.Video')},
+                {id:'video2',text:t('animals.record.Video2')}
+            ];  
+
+            if(origin === 'user-animals' || origin === 'user-people'){
+                headerCols.push({id:'vaccines',text:t('animals.record.vaccines')});
+                headerCols.push({id:'treatment',text:t('animals.record.treatment')});
+                headerCols.push({id:'castrated',text:t('animals.record.castrated')});
+                headerCols.push({id:'date_entry',text:t('animals.record.date_entry')});
+                headerCols.push({id:'date_exit',text:t('animals.record.date_exit')});
+                headerCols.push({id:'date_entry2',text:t('animals.record.date_entry2')});
+                headerCols.push({id:'date_exit2',text:t('animals.record.date_exit2')});
+                headerCols.push({id:'person_name',text:t('animals.record.Person')});
+            }
+
+            csv('animals',t,t('user.animals.'+subsection+'.title'),baseUrl,imagesPaths,
+                headerCols,filteredAnimals);
+        }
     }
 
 	return (
         <>
-        <h1 className='title-user-list'>            
-            <IconButton onClick={handleCreate} id='filter'>
-                <AddCircleIcon sx={{ fontSize: '50px' }}/>
-            </IconButton>
-            <Box sx={{ flexGrow: 1 }}/>
-            {t('user.animals.'+subsection+'.title')}
+        {
+            (
+                subsection === 'adopt' ||
+                subsection === 'adopted' ||
+                subsection === 'heaven' ||
+                subsection === 'hidden'
+            )
+            &&            
+            <>
+            <h1 className='title-user-list'>            
+                {t('user.animals.'+subsection+'.title')}
+                {
+                    !loading && filteredAnimals?.length > 0 && ' ('+filteredAnimals?.length+')'                
+                }
+            </h1>
             {
-                !loading && filteredAnimals?.length > 0 && ' ('+filteredAnimals?.length+')'                
-            }            
-            <Box sx={{ flexGrow: 1 }}/>
-            <IconButton onClick={handleOpenSearch} id='filter'>
-                <FilterListIcon sx={{ fontSize: '50px' }}/>
-            </IconButton>
-        </h1>
+                !loading &&
+                <ButtonsActions
+                    origin={origin}
+                    handleCreate={handleCreate}
+                    handleExport={handleExport}
+                    handleOpenSearch={handleOpenSearch}
+                />
+            }
+            </>
+        }
         {
             loading ?
-                <div className='text-center'>
+                <div className='loading'>
                     <CircularProgress sx={{color:"#FF8C00"}}/>
                 </div>
             :
                 <div className='mt-4'>
                     <AnimalEditModal   
-                        origin={origin}                     
-                        t={t}        
+                        t={t}      
+                        origin={origin}  
                         show={showEditAnimal}
                         setShow={setShowEditAnimal}  
                         items={filteredAnimals}               
@@ -362,17 +330,26 @@ export default function List({t,origin,animals,images_path,loading,page,options,
                         position={position}
                         options={options}
                         subsection={subsection}
-                        images_path={images_path}
+                        imagesPaths={imagesPaths}
+                        animals={animals}
+                        setAnimals={setAnimals}
+                        filterUsed={filterUsed}
+                        setInternal={setInternal}
+                        data={data}
+                        setData={setData}
                     />
                     <FilterAnimals
                         origin={origin}
-                        t={t}                                
+                        t={t}
                         openSearch={openSearch}                    
                         setOpenSearch={setOpenSearch}
                         originalItems={animals}
                         items={filteredAnimals}
                         setItems={setFilteredAnimals}
                         options={options}
+                        filterUsed={filterUsed}
+                        setFilterUsed={setFilterUsed}
+                        subsection={subsection}
                     />
                     {
                         filteredAnimals && filteredAnimals.length > 0 ?
@@ -384,12 +361,23 @@ export default function List({t,origin,animals,images_path,loading,page,options,
                                 show={showAnimal}
                                 setShow={setShowAnimal}      
                                 animal={animalItem}
-                                images_path={images_path}
+                                imagesPaths={imagesPaths}
                                 setAnimalEditItem={setAnimalEditItem}
                                 setShowEditAnimal={setShowEditAnimal}
                                 items={filteredAnimals}               
                                 setItems={setFilteredAnimals}
-                            />                         
+                                animals={animals}                              
+                                setAnimals={setAnimals}
+                                filterUsed={filterUsed}
+                                setInternal={setInternal}                                
+                                setData={setData}
+                            />    
+                            <ItemsPerPage
+                                origin={origin}
+                                t={t}
+                                itemsPerPage={itemsPerPage}
+                                setItemsPerPage={setItemsPerPage}                                
+                            />
                             <Pagination      
                                 origin={origin}                                
                                 pages={pages}
@@ -433,7 +421,7 @@ export default function List({t,origin,animals,images_path,loading,page,options,
                                     </TableHead>
                                     <TableBody>
                                         {                                            
-                                            filteredAnimals.sort(getComparator(order, orderBy)).slice(from,to+1).map((item,i) => (
+                                            filteredAnimals.sort(getComparator(order, orderBy, origin)).slice(from,to+1).map((item,i) => (
                                                 <StyledTableRow
                                                     hover
                                                     onClick={(event) => handleInfo(item,from+i)}
@@ -442,7 +430,7 @@ export default function List({t,origin,animals,images_path,loading,page,options,
                                                     {
                                                         columns && columns.length > 0 && columns.map((column,i) => (
                                                             <StyledTableCell align={column?.align}>
-                                                                {item[column?.id]}
+                                                                <Typography noWrap sx={{fontSize: '14px'}}>{item[column?.id]}</Typography>
                                                             </StyledTableCell>                                                            
                                                         ))
                                                     }
@@ -458,7 +446,13 @@ export default function List({t,origin,animals,images_path,loading,page,options,
                                 pageCurrent={pageCurrent}
                                 setPageCurrent={setPageCurrent}
                                 subsection={subsection}
-                            />                            
+                            />   
+                            <ItemsPerPage
+                                origin={origin}
+                                t={t}
+                                itemsPerPage={itemsPerPage}
+                                setItemsPerPage={setItemsPerPage}                                
+                            />
                             </>
                         :
                             <div className='text-center'>

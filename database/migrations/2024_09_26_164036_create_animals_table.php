@@ -17,7 +17,9 @@ return new class extends Migration
 
             $table->integer('code')->nullable();
 
-            // to adopt, adopted, heaven
+            $table->boolean('hidden')->default(0);
+
+            // to adopt, adopted
             $table->unsignedTinyInteger('status_id')->nullable();
             $table->foreign('status_id')->references('id')->on('statuses')->onDelete('set null');
 
@@ -48,16 +50,35 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->float('weight', precision: 2)->nullable();
 
-            $table->date('birthdate')->nullable();
-            $table->date('deathdate')->nullable();
-            $table->text('description')->nullable();
+            $table->dateTime('birthdate')->nullable();
+
+            $table->boolean('dead')->default(0);
+            $table->dateTime('deathdate')->nullable();
+            
             $table->string('location')->nullable();
 
             $table->string('image')->nullable();
             $table->string('image2')->nullable();
+            $table->string('image_sponsored')->nullable();
+
+            $table->string('video')->nullable();
+            $table->string('video2')->nullable();
+
+            $table->text('vaccines')->nullable();
+            $table->text('treatment')->nullable();
+
+            $table->boolean('castrated')->default(0);
+
+            $table->dateTime('date_entry')->nullable();
+            $table->dateTime('date_exit')->nullable();
+            $table->dateTime('date_entry2')->nullable();
+            $table->dateTime('date_exit2')->nullable();
 
             $table->unsignedBigInteger('person_id')->nullable();
             $table->foreign('person_id')->references('id')->on('people')->onDelete('set null');
+
+            $table->text('internal')->nullable();
+            $table->text('description')->nullable();
 
             $table->timestamps();
         });

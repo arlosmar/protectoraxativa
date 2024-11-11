@@ -1,5 +1,5 @@
 import Header from '@/Pages/Header/Header';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Input from '@/Components/Input';
 import { useForm } from '@inertiajs/react';
 import Toast from '@/Components/Toast';
@@ -9,6 +9,8 @@ import { useTranslation } from "react-i18next";
 import Grid from '@mui/material/Grid2';
 
 export default function Contact({user,status,email,emails,social}) {
+
+    const myRef = useRef(null);
 
     const { t } = useTranslation('global');
     
@@ -30,9 +32,27 @@ export default function Contact({user,status,email,emails,social}) {
     const [ openToast, setOpenToast ] = useState(recentlySuccessful || errors.error ? true : false);
 
     useEffect(() => {
-        if(recentlySuccessful || errors.error){
+
+        if(
+            recentlySuccessful || 
+            (errors?.error && errors.error.length > 0)
+        ){
             setOpenToast(true);
         }
+
+        if(recentlySuccessful){
+            setData({...data, 'name' : '', 'email' : '', 'message' : ''});
+        }
+
+        // scroll to form
+        if(Object.keys(errors).length > 0){
+            //myRef.current.scrollIntoView();
+            const element = document.getElementById('name');            
+            if(element){    
+                element.scrollIntoView({behavior: 'smooth'});
+            }
+        }
+
     }, [recentlySuccessful,errors]);
 
     return (
@@ -41,14 +61,16 @@ export default function Contact({user,status,email,emails,social}) {
             open={openToast}
             setOpen={setOpenToast}
             message={recentlySuccessful ? t('trans.Sent-Male') : null}
-            error={errors.error}
+            error={errors?.error}
         />
         <Header user={user} t={t} from='contact'/>
         <main>
+            {/*
             <h1 className="title">
                 {t('contact.title')}
             </h1>
-            <Grid container spacing={0} className=''>
+            */}
+            <Grid container spacing={0} className='pt-8'>
                 <Grid size={{ xs: 12, md: 5 }} className='mb-8 text-center'>
                     <h1 className='subtitle-home'>
                         {t('contact.info.title1')}
@@ -71,6 +93,9 @@ export default function Contact({user,status,email,emails,social}) {
                     <h1 className='subtitle-home paragraph-top-separation'>
                         {t('contact.info.title3')}
                     </h1>
+                    <div>
+                        {t('contact.info.shift-adoptions')}
+                    </div>
                     <a href={'mailto:'+emails.adoptions} target='_new'>
                         {emails.adoptions}
                     </a>
@@ -95,8 +120,7 @@ export default function Contact({user,status,email,emails,social}) {
                         {t('contact.info.shift-live-title')}
                     </h1>
                     <div>
-                        {t('contact.info.shift-live-line1')}<br/>
-                        {t('contact.info.shift-live-line2')}
+                        {t('contact.info.shift-live-line1')}
                     </div>
                     <div className='paragraph-top-separation'>
                         {t('contact.info.title5')}
@@ -106,6 +130,7 @@ export default function Contact({user,status,email,emails,social}) {
                     <form onSubmit={submit}>
                         <div>
                             <Input
+                                ref={myRef}
                                 id="name"
                                 name="name"
                                 type="text"
@@ -128,6 +153,7 @@ export default function Contact({user,status,email,emails,social}) {
                                 onChange={handleInput}                        
                                 placeholder={t('contact.email')}                        
                                 error={errors.email}
+                                required
                             />
                         </div>
 
@@ -143,6 +169,7 @@ export default function Contact({user,status,email,emails,social}) {
                                 error={errors.message}
                                 multiline
                                 rows={6}
+                                required
                             />                   
                         </div>
 

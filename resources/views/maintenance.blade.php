@@ -1,5 +1,5 @@
 <!doctype html>
-<title>En manteniment</title>
+<title>Maintenance</title>
 <style>
   body { text-align: center; padding: 150px; }
   h1 { font-size: 50px; }
@@ -11,5 +11,5 @@
 </style>
 
 <article>
-    <h1>En manteniment...</h1>
+    <h1>Maintenance mode</h1>
 </article>

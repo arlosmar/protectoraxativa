@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->timestamps();
         });
-
+        /*
         $date = gmdate('Y-m-d H:i:s');
 
         DB::table('breeds')->insert(
@@ -72,6 +72,7 @@ return new class extends Migration
                 ]
             ]
         );
+        */
     }
 
     /**

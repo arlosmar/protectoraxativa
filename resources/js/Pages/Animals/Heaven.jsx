@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { makeStyles } from '@mui/styles';
+
+import { styleSubTabs } from '@/Utils/Styles';
 
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -8,9 +9,10 @@ import InfoIcon from '@mui/icons-material/Info';
 import AnimalsIcon from '@mui/icons-material/Pets';
 
 import Info from '@/Pages/Animals/Heaven/Info';
-import Animals from '@/Pages/Animals/Heaven/Animals';
+import CarouselAnimals from '@/Pages/Animals/CarouselAnimals';
 
-export default function Heaven({t,subsection,setSubsection,animals,images_path,email_info,page,options}){
+export default function Heaven({user,t,subsection,setSubsection,animals,
+    baseUrl,imagesPaths,email_info,page,setPage,options,itemsPerPage}){
 
     const [ tab, setTab ] = useState(subsection ? subsection : "info");
 
@@ -21,54 +23,51 @@ export default function Heaven({t,subsection,setSubsection,animals,images_path,e
         // to inform the parent view and call by ajax to get animals
         setSubsection(newValue);
 
+        // reset page in case it came by url
+        setPage(1);
+
         // change url on the browser
         var url = route("animals")+'/heaven/'+newValue;
         window.history.pushState({path:url},'',url);
     };
 
-    const useStyles = makeStyles({
-
-        tabs: {
-            "& .MuiTabs-indicator": {
-                backgroundColor: "#FF8C00",
-                height: 3,
-            },
-            "& .MuiTab-root.Mui-selected": {
-                color: '#FF8C00'
-            }
-        }
-    });
-    const classes = useStyles();
-
-    const sx = {};
+   const { classes, sx, sxIcon } = styleSubTabs();
 
     return (        
         <>
+        {/*
         <h1 className='title-home'>
             {t('animals.heaven.title')}
         </h1>
-        <div className='mt-4'>
-            <Tabs                   
+        */}
+        <div className='subtabs-container'>
+            <Tabs
                 value={tab} 
                 onChange={handleTabChange}                     
                 className={classes.tabs}
-                centered
+                variant="scrollable"
             >
-                <Tab icon={<InfoIcon/>} value="info" sx={sx} iconPosition="top" label={t('animals.heaven.info.icon')}/>
-                <Tab icon={<AnimalsIcon/>} value="animals" sx={sx} iconPosition="top" label={t('animals.heaven.animals.icon')}/>                
+                <Tab icon={<InfoIcon sx={sxIcon}/>} value="info" sx={sx} iconPosition="top" label={t('animals.heaven.info.icon')}/>
+                <Tab icon={<AnimalsIcon sx={sxIcon}/>} value="animals" sx={sx} iconPosition="top" label={t('animals.heaven.animals.icon')}/>                
             </Tabs>
-            <div className='mt-4 pt-4'>
+            <div className='subcontent-container'>
             {
                 tab === 'info' ?
                     <Info t={t} email_info={email_info}/>
                 :                       
                     tab === 'animals' ?
-                        <Animals 
+                        <CarouselAnimals 
+                            user={user}
+                            origin='heaven'
+                            title={t('animals.heaven.animals.title')}
                             t={t} 
                             animals={animals}
-                            images_path={images_path}
+                            imagePath={imagesPaths?.animals_external}
+                            imagesPaths={imagesPaths}
                             page={page}
                             options={options}
+                            baseUrl={baseUrl}
+                            itemsPerPage={itemsPerPage}
                         />
                     :                       
                         ''

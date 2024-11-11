@@ -15,15 +15,13 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { I18nextProvider } from 'react-i18next';
 import i18n from './i18n';
 
+// request notification permissions
+import { requestPermission } from '@/Utils/Notifications';
+requestPermission();
+
 // apply dark mode
-import { getDarkMode } from "@/Utils/Cookies";
-const darkmode = getDarkMode();
-if(darkmode){
-    document.body.classList.add('darkmode');
-}
-else{
-    document.body.classList.add('lightmode');
-}
+import { applyDarkMode } from "@/Utils/Cookies";
+const darkmode = applyDarkMode();
 
 const appName = import.meta.env.VITE_APP_NAME || '';
 
@@ -35,12 +33,12 @@ createInertiaApp({
         const root = createRoot(el);
 
         root.render(
-            <I18nextProvider i18n={i18n}>
-                <App {...props} />
+            <I18nextProvider i18n={i18n}>                
+                <App {...props}/>                
             </I18nextProvider>
         );
     },
     progress: {
-        color: '#4B5563',
+        color: '#FF8C00',
     },
 });

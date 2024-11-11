@@ -56,6 +56,8 @@ class SimpleMessage
      */
     public $actionText;
 
+    public $troubleLink;
+
     /**
      * The action URL.
      *
@@ -204,6 +206,13 @@ class SimpleMessage
         return $this;
     }
 
+    public function troubleLink($text)
+    {
+        $this->troubleLink = $text;
+
+        return $this;
+    }
+
     /**
      * Add a line of text to the notification.
      *
@@ -286,6 +295,7 @@ class SimpleMessage
             'outroLines' => $this->outroLines,
             'actionText' => $this->actionText,
             'actionUrl' => $this->actionUrl,
+            'troubleLink' => $this->troubleLink,
             'displayableActionUrl' => str_replace(['mailto:', 'tel:'], '', $this->actionUrl ?? ''),
         ];
     }

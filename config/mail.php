@@ -129,5 +129,9 @@ return [
     'info' => [
         'address' => env('MAIL_FROM_ADDRESS_INFO', ''),
         'name' => env('MAIL_FROM_NAME_INFO', ''),
-    ]
+    ],
+    'contact' => [
+        'address' => env('MAIL_FROM_ADDRESS_COLABORATION', ''),
+        'name' => env('MAIL_FROM_NAME_COLABORATION', ''),
+    ],
 ];

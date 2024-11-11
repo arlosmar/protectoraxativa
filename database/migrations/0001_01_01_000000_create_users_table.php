@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->boolean('admin')->default(0);
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -20,6 +21,10 @@ return new class extends Migration
             $table->rememberToken();
             $table->string('language')->nullable();
             $table->string('settings')->nullable();
+
+            $table->unsignedBigInteger('person_id')->nullable();
+            $table->foreign('person_id')->references('id')->on('people')->onDelete('set null');
+            
             $table->timestamps();
         });
 
@@ -27,6 +32,7 @@ return new class extends Migration
         
         DB::table('users')->insert(
             [
+                'admin' => 1,
                 'name' => 'Admin',
                 'email' => 'admin@protectoraxativa.org',                
                 'password' => '$2y$12$U33xS7NDAFm.PPF0OvCyweZB.gayyWzsuvbSjgYqBxVgvZ6zFhQZC',

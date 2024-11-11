@@ -22,7 +22,22 @@
         "currentImage": "Imatge actual",
         "Remove": "Eliminar",
         "Videos"    :   "Videos",
-        "Filter"    :   "Filtrar"
+        "Filter"    :   "Filtrar",
+        "Delete"    :   "Esborrar",
+        "DeleteConfirm" :   "Segur que vols esborrar?",
+        "Share" :   "Compartir",
+        "Copy"  :   "Copiar",
+        "Copied"    :   "Copiat",
+        "Export"    :   "Exportar",
+        "Link"  :   "Enllaç",
+        "Form"  :   "Formulari",
+        "Field-Empty" :   "Camp vuit",
+        "All-Male-Singular"  :   "Tot",
+        "Update"    :   "Actualitzar"
+    },
+    "Cookies" : {
+        "button-accept" : "Acceptar",
+        "message" : "Esta web utilitza les cookies mínimes necessàries per a funcionar. No es recopila informació de cap tipus."
     },
     "Title": {
         "Home": "Inici",
@@ -36,7 +51,8 @@
         "Home": "Inici",
         "Animals": "Animals",
         "News": "Notícies",
-        "Contact": "Contacte"
+        "Contact": "Contacte",
+        "User"  :   "Usuari"
     },
     "under-development" : "En desenvolupament",
     "introduction": {
@@ -88,7 +104,13 @@
             "line25": "És una altra font d'ingressos per a l'associació.",
             "line26": "Solem participar en aquest joc d'atzar a la Loteria Nacional de Nadal del 22 de desembre.",
             "line27": "L'àmbit de venda és local però ho posarem sempre en coneixement de qui pugui estar interessat/da a col·laborar amb l'associació.",
-            "line28": "Per a qualsevol informació sobre aquest tema podeu adreçar-vos a:"
+            "line28": "Per a qualsevol informació sobre aquest tema podeu adreçar-vos a:",
+            "hosting": "Cases d'acollida",
+            "line29": "Busquem cases d'acollida per a alguns animals, i alguns d'ells són casos especials. Aquests \"animals especials\" poden ser gossos o gats que no s'integren bé en la vida del refugi (majoritàriament per haver viscut abans en la calidesa d'una llar), que tenen problemes d'alimentació o que viure en una gàbia els crea estrès. També poden ser animals molt grans, amb problemes físics o que necessiten medicació especial. A vegades busquem casa d'acollida per als que ja han estat operats, ja que necessiten un període curt de temps per poder recuperar-se. Hi ha moltes raons més per les quals un animal pot necessitar una casa d'acollida.",
+            "line30": "Si estàs interessat a fer de casa d'acollida, posa't en contacte amb nosaltres. Nosaltres ens fem càrrec de les despeses veterinàries dels animals acollits. Aquests han de viure a casa amb la família que els acull i ser tractats com un més de la família. Haurien de disposar de prou temps per ocupar-se de l'animal i estar disposats a estimar-lo molt mentre duri l'acollida.",
+            "line31": "Per acollir un animal, envia'ns un WhatsApp al:",
+            "line32"    :   "A més a més has d'omplir el següent formulari:",
+            "line33": "Aquí tens les clàusules per a una casa d'acollida:"
         },
         "social": {
             "title": "Xarxes socials",
@@ -99,7 +121,8 @@
             "youtube": "Youtube",
             "blog": "Blog",
             "soundcloud": "Soundcloud",
-            "ladridos": "Lladrucs i llepades"
+            "ladridos": "Lladrucs i llepades",
+            "tiktok"    :   "TikTok"
         },
         "partners": {
             "title": "Col·laboradors",
@@ -108,18 +131,41 @@
             },
             "friends": {
                 "title": "Webs amigues"
+            },
+            "apu"  :   {
+                "title"  :   "APU"
+            },
+            "subsidized"    :   {
+                "title" :   "Entitats subvencionadores",
+                "line1" :   "Aquestes entitats subvencionen parcialment la protectora."
             }
         },
-        "info": {
-            "title": "Qui som?",
-            "paragraph1": "Associació sense ànim de lucre, legalment constituïda i inscrita en el Registre Autonòmic d'Associacions de València. Tots els seus càrrecs directius són gratuïts. La tasca desenvolupada per tots els seus membres és altruista i desinteressada.<br><br>La seva activitat principal es desenvolupa al Refugi per a gossos abandonats que té al municipi de Xàtiva. Disposa de totes les llicències i autoritzacions administratives, tant municipals com autonòmiques. Té la declaració de Nucli Zoològic des del 7 de maig de 2002 i és Entitat Col·laboradora de la Conselleria d'Agricultura, Pesca i Alimentació de la Generalitat Valenciana per resolució del 14 d'octubre de 1997.<br><br>Aquest Refugi es troba ubicat en uns terrenys de propietat gràcies a la primera donació de D. Roberto Cortes i posteriorment de D. Francisco Aguado, qui, aquest últim, va facilitar econòmicament l'adquisició d'un terreny adjacent, cosa que va afavorir la instal·lació i assentament definitiu de l'alberg.<br><br>Han estat molts els esforços tant personals com econòmics per adequar-lo mitjançant noves construccions, instal·lació elèctrica, abeuradors automàtics, espai lliure per a l'esbarjo, clínica veterinària per a l'assistència als animals allotjats, plantació d'arbres per a l'ombra, construcció de fosses sèptiques, desguassos, magatzem per a l'alimentació i pinsos, i molts projectes necessaris que encara queden per realitzar.<br><br>Situat en una zona altament inundable, en diverses ocasions ha propiciat la inundació d'una part del recinte. No obstant això, a poc a poc i gràcies a l'inestimable ajuda de les donacions puntuals i extraordinàries, s'han pogut garantir noves obres tendents a minimitzar l'impacte de les pluges i torrents perquè causin el menor dany possible.<br><br>El seu ÚNIC COMPROMÍS és la protecció i defensa dels animals en general i dels gossos en particular. NOMÉS ACULL GOSSOS. No acull gats per falta de recursos econòmics i humans per oferir-los una vida digna en captivitat, tenint escasses i saturades cases d'acollida que en cap cas solucionen el greu problema que pateixen aquests animals.<br><br>S'OPOSA I CONDEMNA qualsevol maltractament, agressió o injustícia envers ells. Vingui d'on vingui i de qui vingui. De qui ho aplaudeixi i de qui ho promogui. De qui ho justifiqui i de qui ho toleri i difongui. Una legislació laxa, insensible i permissiva en aquest sentit és, continua sent i serà la millor aliada perquè la brutalitat en aquest país sigui, desgraciadament, el nostre signe distintiu.<br><br>Només desitgem ADOPCIONS RESPONSABLES. Estem en contra de regalar animals per Nadal, aniversaris i dates assenyalades i estem molt cansats de la passivitat i indiferència dels poders públics davant les injustícies comeses contra els animals. També dels propietaris incapaços i capritxosos que abandonen els seus animals sense importar-los què els pugui passar i dels que, irresponsablement, ens llancen animals per les tanques del refugi o els deixen lligats a la seva sort. O animals casolans ancians que moriran de tristesa i de pena, i que a vegades no podrem fer res per evitar-ho.<br><br>No ha estat ni serà mai obstacle per a la permanència al nostre alberg, qualsevol animal tingui l'edat que tingui o estigui limitat físicament o funcionalment, mantenint una atenció especial pels animals grans abandonats, els no adaptats i els cadells.<br><br>Considerem la ESTERILITZACIÓ com l'únic mitjà per eradicar les ventrades no desitjades que omplen de mort i sang les gosseres municipals i les carreteres, i creiem en l'educació i la sensibilització sobre aquest drama silenciosament sagnant que es viu dia a dia en aquest país.<br><br>Confiem en el VOLUNTARIAT com a peça clau per al funcionament d'aquesta Societat i basem la supervivència econòmica de l'Associació en els socis, padrins, donacions de particulars, subvencions públiques, empreses i APU.<br><br>Als que ens ajuden, socis, padrins, particulars i empreses, els agraïm que continuïn facilitant-nos la tasca com fins ara i confiïn en tota la feina que hem realitzat durant tots aquests anys. Als que accedeixen per primera vegada, si no pots donar-los una oportunitat a aquells que tant ho desitgen i mereixen, almenys, amb la teva ajuda, que puguin viure una mica millor, gràcies.",
-            "paragraph2-title": "Una mica d'història",
-            "paragraph2": "La idea de crear una associació de defensa dels animals a Xàtiva va sorgir després de la reunió d'un grup de persones sensibilitzades amb el tema dels animals, amb moltes ganes i il·lusions de fer coses en aquest àmbit, ja que l'alternativa municipal al problema de l'animal abandonat era que després d'uns dies a la gossera municipal i si ningú el reclamava, com solia ser el més freqüent, l'animal era sacrificat.<br><br>La reunió esmentada anteriorment va tenir lloc a l'antiga 4a planta de la Casa de la Cultura al voltant del mes de febrer de 1985. Posteriorment, i amb data 5 de març del mateix any, es va constituir la \"Societat Protectora d'Animals i Plantes de Xàtiva\", legalitzant-se posteriorment el 10 d'abril del mateix any.<br><br>Com que no hi havia cap tipus d'infraestructura, una sòcia anomenada \"Rosarín\" va cedir el seu terreny, que era part de casa seva, per començar a acollir gossos abandonats des del primer moment del naixement d'aquesta societat.<br><br>Després va ser el soci Antonio Romero qui va cedir temporalment el seu xalet a Rotglà, el qual es va veure invadit i amb grans desperfectes a causa de la gran quantitat de gossos que s'hi van allotjar.<br><br>Finalment, gràcies al soci D. Roberto Cortés, l'associació va tenir un lloc propi i definitiu. Va ser l'any 1987 quan va donar els actuals terrenys i un donatiu (que no va ser l'últim) per començar les obres de les actuals instal·lacions, que es troben al \"Camí Senda de Múrcia\" a la cara Est del Puig.",
-            "paragraph2-footer": "Peu de foto: D. Roberto Cortés amb la seva dona durant la construcció de les instal·lacions del refugi del Puig.",
-            "paragraph3": "L'Associació, les sigles de la qual són SPAX, al llarg dels seus 37 anys de funcionament ha tingut com a Presidents: <br><br>Mercedes Hernández, Roberto Cortés (que va ser nomenat abans de morir \"president honorífic perpetu\"), alguna Junta Gestora, Pilar Baraza, Lucía i Mª Carmen Jachán Sánchez.<br><br>Mª Carmen Jachán Sánchez és sòcia-fundadora i, des del seu inici, fa ja 37 anys, sempre ha estat a la junta directiva com a secretària, portaveu i els últims 12 anys com a presidenta.<br><br>Va ser reconeguda el passat 16 de febrer de 2019 pel Cos de Policia Local de Xàtiva pel seu esperit solidari amb els animals i la seva col·laboració amb la Policia Local en la recollida d'animals perduts.<br><br>Ja l'any 1998 també es va reconèixer la seva llarga tasca en agraïment per tants anys de col·laboració, esforç i dedicació a aquesta Societat per part de tota la junta directiva i socis d'aquell any.<br><br>Durant aquests últims anys, amb la brillant gestió de Mª Carmen Jachán a la presidència, la SPAX es troba en una època daurada a nivell econòmic, de socis i padrins, i gaudeix d'un gran prestigi a Xàtiva i comarques dels voltants, sent una Protectora de referència a seguir. Totes les associacions de la ciutat i institucions mantenen una admiració envers la nostra SPAX i col·laboren al llarg de l'any moltes d'elles per recaptar fons amb diversos actes que organitzen.",
-            "poem-title"  :   "A vosotros",
-            "poem"  :   "A los que, sin rumbo, por las calles vagan.<br>A los que, entre rejas, malviven cautivos.<br>A los que están solos, viejos, desvalidos,<br>sin nadie que vele por su bienestar.<br><br>A vosotros dedico estos versos,<br>que salen del alma y que al aire van,<br>confiando al papel mis anhelos,<br>por si el aire los lleva hasta el cielo,<br>y el cielo se apiada de vuestra orfandad.<br><br>Compartir con vosotros quisiera<br>los juegos alegres, los largos paseos,<br>y las sobremesas de tarde estival,<br>y en las noches frías del oscuro invierno,<br>bajo el mismo techo, juntos descansar,<br>lejos de los golpes, del hambre y del miedo,<br>al calor del fuego, saciados, y en paz.<br><br>Pero sé que estoy pidiendo demasiado,<br>y que mi deseo no se cumplirá.<br>En el mundo hay tantos perros olvidados,<br>pidiendo caricias y un trozo de pan,<br>que, aunque de par en par abra los brazos,<br>de abrazar a todos no seré capaz.<br><br>Y los que se quedan fuera del regazo<br>son los que más pesan en el corazón,<br>poblando mis noches de sueños amargos,<br>tiñendo mis días de desolación.<br><br>Incluso en las horas buenas de la vida,<br>fugaces oasis de felicidad,<br>me invade de pronto la melancolía,<br>porque su mirada, clavada en la mía,<br>de mi pensamiento no logro apartar.<br><br>Su triste recuerdo empaña la alegría,<br>que sentir podría, si olvidar pudiera,<br>que en todo momento, en algún lugar,<br>un perro perdido y desorientado,<br>a su ingrato dueño todavía espera,<br>sin saber siquiera… que lo ha abandonado.",
-            "poem-footer": "Elena Negueroles"
+        "info" : {
+            "title" : "Qui som?",
+            "paragraph1" : "Associació sense ànim de lucre, legalment constituïda i inscrita al Registre Autonòmic d'Associacions de València. Tots els seus càrrecs directius són gratuïts. La tasca desenvolupada per tots els seus membres és altruista i desinteressada.<br/><br/>La seva major activitat es desenvolupa al Refugi per a gossos abandonats que té al municipi de Xàtiva. Té totes les llicències i autoritzacions administratives, tant municipals com autonòmiques. Posseïx la declaració de Nucli Zoològic número V-207 des del 7 de maig de 2002 i és Entitat Col·laboradora de la Conselleria d'Agricultura, Pesca i Alimentació de la Generalitat Valenciana per resolució de data 14 d'octubre de 1997.<br/><br/>Aquest Refugi es troba ubicat en uns terrenys propietat gràcies a la primera donació de D. Roberto Cortes i posteriorment de D. Francisco Aguado, qui, aquest últim, va facilitar econòmicament l'adquisició d'un terreny adjacent que va propiciar la instal·lació i assentament definitiu de l'alberg.<br/><br/>Han estat molts els esforços tant personals com econòmics per acondicionar-lo mitjançant noves construccions, instal·lació d'instal·lació elèctrica, bevedors automàtics, espai lliure per a l'esbarjo, clínica veterinària per a l'assistència dels animals acollits, plantació d'arbres per a ombra, construcció de fosses sèptiques, desguassos, magatzem per a l'alimentació i pinso i molts projectes necessaris que encara queden per realitzar.<br/><br/>Situat en una zona altament inundable, ha provocat en diverses ocasions la inundació d'una part del recinte, si bé, a poc a poc, gràcies a l'ajuda inestimable de donacions puntuals i extraordinàries, s'ha pogut garantir noves obres tendents a què l'impacte de les pluges i torrents causin el menor dany possible.<br/><br/>El seu ÚNIC COMPROMÍS és la protecció i defensa dels animals en general i dels gossos en particular. NOMÉS ACULL GOSSOS. No alberga gats al mancar de recursos econòmics i humans per oferir-los una vida digna en captivitat, disposant de poques i saturades cases d'acollida que en cap cas pal·liïn el gravíssim problema que pateixen aquests animals.<br/><br/>S'OPOSA I CONDENA qualsevol maltractament, agressió o injustícia envers ells. Vingui d'on vingui i de qui vingui. De qui ho aplaudeixi i de qui ho promogui. De qui ho justifiqui i de qui ho tolere i difongui. Una legislació tova, insensible i permissiva en aquest sentit és, continua sent i serà la millor aliada perquè la brutalitat en aquest país, sigui desgraciadament, el nostre signe distintiu.<br/><br/>Només desitgem ADOPCIONS RESPONSABLES. Som contraris a regalar animals per Nadal, aniversaris i dates assenyalades i molt cansats de la passivitat i indiferència dels poders públics respecte a les injustícies que es comenten contra els animals. També dels propietaris incapaços i capritxosos que abandonen els seus animals sense importar-los res del que els pugui passar i d'aquells que, irresponsablement, ens llancen animals per les reixes del refugi o els deixen lligats a la seva sort. O animals domèstics ancians que moriran de tristesa i de pena i, de vegades, no podrem fer res per impedir-ho.<br/><br/>Mai ha estat ni serà obstacle per a la permanència al nostre alberg, qualsevol animal tingui l'edat que tingui o estigui limitat física o funcionalment, mantenint especial atenció pels animals grans abandonats, els no adaptats i els cadells.<br/><br/>Considerem l'ESTERILITZACIÓ com l'únic mitjà per eradicar les camades indesitjades que omplen de mort i sang les gosseres municipals i les carreteres, i creiem en l'educació i sensibilització sobre aquest drama silenciosament sagnant que es viu dia a dia en aquest país.<br/><br/>Confiem en el VOLUNTARIAT com a peça clau per al funcionament d'aquesta Societat i basem la supervivència econòmica de l'Associació en els socis, padrins, donacions de particulars, subvencions públiques, empreses i APU.<br/><br/>Als qui ens ajuden, socis, padrins, particulars i empreses, els agraïm que continuïn facilitant-nos la tasca com fins ara i confiïn en tota la feina que hem realitzat durant tots aquests anys. Als qui accedeixen per primera vegada, si no pots donar-los una oportunitat als que tant ho desitgen i ho mereixen, almenys que, amb la teva ajuda, puguin viure una mica millor, gràcies.",
+            "paragraph2-title" : "Una mica d'història",
+            "paragraph2" : "La idea de crear una associació de defensa dels animals a Xàtiva va sorgir després de la reunió d'un grup de persones sensibilitzades amb el tema dels animals, amb moltes ganes i il·lusions de fer coses en aquest àmbit, ja que l'alternativa municipal al problema de l'animal abandonat era que, després d'uns dies a la gossera municipal, si ningú el reclamava (com solia ser el més freqüent), l'animal era sacrificat.<br/><br/>La reunió que es menciona anteriorment va tenir lloc a l'antiga 4a planta de la Casa de la Cultura cap al mes de febrer de 1985; posteriorment, amb data del 5 de març del mateix any, es va constituir la Societat Protectora d'Animals i Plantes de Xàtiva, legalitzant-se posteriorment el 10 d'abril del mateix any.<br/><br/>Com que no hi havia cap tipus d'infraestructura, una sòcia anomenada \"Rosarín\" va cedir el seu terreny, que era part de la seva pròpia casa, per començar a acollir gossos abandonats ja des del primer moment del naixement d'aquesta societat.<br/><br/>Després va ser el soci Antonio Romero qui va cedir també temporalment el seu xalet a Rotglà, envaït i amb grans desperfectes deguts a la gran quantitat de gossos que s'hi van allotjar.<br/><br/>Finalment, gràcies al soci D. Roberto Cortés, l'associació va tenir un lloc propi i definitiu. Va ser l'any 1987 quan va donar els <b>actuals terrenys</b> i un donatiu (que no va ser l'últim) per començar les obres de les actuals instal·lacions.",
+            "paragraph2-footer" : "Peu de foto: D. <b>Roberto Cortés</b> amb la seva dona en la construcció de les instal·lacions del refugi del Puig.",
+            "paragraph3" : "L'Associació, amb les sigles SPAX, al llarg dels seus anys de funcionament ha tingut a la Presidència a: Mercedes Hernández, Roberto Cortés (que va ser nomenat abans de morir \"<b>president honorífic perpetu</b>\") alguna Junta Gestora, Pilar Baraza, Lucía Liva, Mª Carmen Jachán i Noemi Engo. Actualment, el càrrec de President està representat per Jordi Ruiz.<br/><br/>Totes les accions i millores d'aquesta associació no haurien estat possibles sense l'ajuda de totes les persones voluntàries, els nostres dos treballadors (Salva i Eric) i membres de les Juntes Directives que han passat per aquesta associació, que amb la seva feina i lluita constants han aportat el seu gra de sorra a la nostra causa.",
+            "poem-title" : "A vosaltres",
+            "poem" : "A aquells que, sense rumb, per les carrers vaguen.<br>A aquells que, entre reixes, malviuen captius.<br>A aquells que estan sols, vells, desvalguts,<br>sense ningú que vetlli pel seu benestar.<br><br>A vosaltres dedico aquests versos,<br>que surten de l'ànima i que a l'aire van,<br>confiant al paper els meus desitjos,<br>per si l'aire els porta fins al cel,<br>i el cel s'apiada de la vostra orfandat.<br><br>Compartir amb vosaltres voldria<br>els jocs alegres, les llargues passejades,<br>i les sobretaules de tarda estival,<br>i en les nits fredes de l'hivern fosc,<br>sota el mateix sostre, junts descansar,<br>lluny dels cops, de la fam i de la por,<br>a la calor del foc, saciats, i en pau.<br><br>Però sé que estic demanant massa,<br>i que el meu desig no es complirà.<br>Al món hi ha tants gossos oblidats,<br>demanant carícies i un tros de pa,<br>que, encara que obri els braços de bat a bat,<br>no podré abraçar a tots.<br><br>I aquells que es queden fora del meu si<br>són els que més pesen al cor,<br>omplint les meves nits de somnis amargs,<br>tacant els meus dies de desolació.<br><br>Fins i tot en les bones hores de la vida,<br>fugissers oasis de felicitat,<br>m'invaeix de sobte la malenconia,<br>perquè la seva mirada, clavada a la meva,<br>no aconsegueixo apartar del meu pensament.<br><br>El seu trist record enterboleix l'alegria,<br>que sentir podria, si pogués oblidar,<br>que en tot moment, en algun lloc,<br>un gos perdut i desorientat,<br>al seu desagraït amo encara espera,<br>sense saber ni tan sols... que l'ha abandonat.",
+            "poem-footer" : "Elena Negueroles"
+        }
+
+    },
+    "news"    :   {
+        "title" : "Notícies",
+        "empty" :   "No hi ha notícies",
+        "load-more" :   "Carregar més",
+        "record"    :   {
+            "user"  :   "Usuari/a",
+            "user_name"  :   "Usuari/a",
+            "name"  :   "Usuari/a",
+            "date"  :   "Data",
+            "hidden"  :   "Ocult",
+            "title"  :   "Títol",
+            "description"   :   "Descripció",
+            "image" :   "Imatge"
         }
     },
     "animals":   {
@@ -134,15 +180,17 @@
                 "line1" :   "Si estàs interessat/da en adoptar un gos o gat de la nostra associació, descarrega el següent formulari:",
                 "form"  :   "Formulari",
                 "line2" :   "Has d'omplir-lo i enviar-lo al següent correu electrònic:",
-                "title-protocol" :   "Protocol adopció",
-                "line3" :   "El/la adoptant pot contactar amb nosaltres per correu electrònic o telèfon:",
-                "line4" :   "Un cop realitzat el contacte, s'ha de completar el següent qüestionari:",
-                "line5" :   "La finalitat del qüestionari és assegurar l'èxit de l'adopció.",
-                "line6" :   "Quan es consideri que l'adopció és favorable i el/la adoptant s'hagi decidit per un animal en concret o hagi definit les característiques desitjades (edat, caràcter, mida,…), es concertarà una cita al refugi per conèixer l'animal.",
-                "line7" :   "Per formalitzar l'adopció, el/la adoptant, prèvia presentació del seu DNI/NIE o passaport en vigor (imprescindible ser major d'edat), signarà un contracte d'adopció amb l'Associació.",
-                "line8" :   "Tots els animals del nostre refugi es lliuren amb microxip, vacuna antiràbica i passaport europeu obligatoris a la Comunitat Valenciana (Decret 49/2005, de 4 de març del Consell de la Generalitat Valenciana sobre obligatorietat de xip, passaport i vacuna).",
-                "line9" :   "Aquest tràmit serà realitzat per un/a veterinari/ària col·legiat/da i assignat/da per aquesta Associació, amb independència de que posteriorment el/la propietari/ària de l'animal acudeixi a qualsevol altre/a veterinari/ària.",
-                "line10":   "El/la adoptant haurà d'abonar a aquesta Associació els costos veterinaris derivats del descrit anteriorment."
+                "title-protocol": "VOLDS ADOPTAR UN DELS NOSTRES PELUTS?",
+                "line3": "Abans de fer qualsevol tràmit, has de ser conscient de si realment podràs cuidar de l'animal i oferir-li una vida digna durant tots els anys de la seva vida. Un animal necessita cures bàsiques com alimentació, passejos, socialització, cures veterinàries, higiene, exercici...",
+                "line4": "És per això que des de la SPAX apostem per les adopcions responsables. Els animals adoptats normalment necessiten un període d'adaptació d'entre 1 i 3 mesos, i sempre busquem trobar una llar que els ofereixi una vida digna, ja que ja han patit l'abandonament una vegada.",
+                "line5": "Per adoptar, primer has d'accedir a l'apartat on apareixen tots els nostres animals per poder triar qui serà l'afortunat que compartirà amb tu la resta de la seva vida. Un cop hagis decidit l'afortunat, pots contactar amb nosaltres enviant-nos un correu electrònic a <a href='mailto:{{email_adoptions}}' target='_blank'>{{email_adoptions}}</a> indicant-nos el nom de l'animal. FES AQUEST PAS NOMÉS SI ESTÀS COMPLETAMENT DECIDIT A CUIDAR D'ELL PER SEMPRE I SER COMPRENSIU DURANT EL PERÍODE D'ADAPTACIÓ A CASA TEVA! Si no, no malgastem el nostre temps.",
+                "line6": "Un cop rebut el correu, ens posarem en contacte amb tu per enviar-te un qüestionari que hauràs de respondre per conèixer-te millor i així assessorar-te segons les característiques de l'animal. SI US PLAU, MANTÉ LA MENT OBERTA I DEIXA'T ASSESSORAR PER NOSALTRES. També rebràs les indicacions del nostre protocol d'adopció i informació important per millorar la seva adaptació o consells en cas de gossos amb necessitats especials. També pots accedir al nostre qüestionari entrant en el següent enllaç:",
+                "line7": "Tots els animals es lliuren amb microxip, vacuna antiràbica i Versican DHPPi, i les respectives desparasitacions internes i externes, així com esterilitzats. En el moment de l'adopció, se't lliurarà el passaport europeu, la seva fitxa veterinària, i se t'informarà de l'estat de salut de l'animal abans de l'adopció.",
+                "line8": "SPAX informa els adoptants que hauran de fer un donatiu econòmic de {{price_donative}} a l'associació com a ajuda per cobrir les despeses veterinàries. LES ADOPCIONS SÓN GRATUÏTES.",
+                "line9": "En el moment de l'adopció, signaràs un contracte que garantirà que l'animal estarà ben atès i amb les cures necessàries per a una tinença responsable. Per a això, hauràs de facilitar-nos el DNI original per fer-ne una còpia.",
+                "line10": "És IMPORTANT recalcar que el donatiu en el moment de l'adopció ens ajuda a afrontar els costos veterinaris ocasionats per l'animal, ja que es lliura amb tots els requisits que exigeix la nova Llei de Protecció Animal, de manera que la protectora pot seguir ajudant altres animals. Tots els diners recaptats es destinen íntegrament a cobrir les despeses veterinàries i d'alimentació dels animals custodiats.",
+                "line11": "Gairebé ens oblidem: per poder portar-te el teu animal, hauràs de portar el seu arnès i una corretja. Si l'arnès és de seguretat, molt millor, perquè el nou membre de la teva família encara no et coneix i no sap que li canviaràs la vida.",
+                "line12": "A continuació, et deixem unes guies amb consells importants a l'hora d'adoptar un pelut."
             },
             "animals"  :   {
                 "icon"  :   "Adoptar",
@@ -207,7 +255,7 @@
             },
             "animals"   :   {
                 "icon"  :   "Animals",
-                "title" :   "Cementiri Virtual per a Mascotes"
+                "title" :   "Cementiri Virtual"
             }
         },
         "record"    :   {
@@ -219,7 +267,8 @@
                 "title" :   "Estat",
                 "adopt" :   "Adoptar",
                 "adopted"   :   "Adoptat",
-                "heaven"    :   "Cel"
+                "heaven"    :   "Cel",
+                "hidden"    :   "Ocult"
             },
             "Sponsored"  :   {
                 "title" :   "Apadrinat",
@@ -256,13 +305,26 @@
             "Weight"  :   "Pes",
             "Location"  :   "Ubicació",
             "Birthdate" :   "Data de naixement",
+            "Dead"  :   "Mort",
+            "Hidden"    :   "Ocult",
             "Deathdate" :   "Data de defunció",
             "Description"   :   "Descripció",
             "Image" :   "Imatge",
             "Image2"    :   "Imatge2",
+            "Image-Sponsored"   :   "Imatge apadrinat",
             "Person"    :   "Responsables",
             "Video" :   "Video",
-            "Video2" :   "Video2"
+            "Video2" :   "Video2",
+            "Updated"   :   "Actualitzat",
+            "Internal-Info" :   "Informació interna",
+            "vaccines"  :   "Vacunes",
+            "treatment"  :   "Tractament",
+            "castrated"  :   "Castrat",
+            "date_entry"  :   "Data entrada",
+            "date_exit"  :   "Data eixida",
+            "date_entry2"  :   "Data entrada2",
+            "date_exit2"  :   "Data eixida2",
+            "internal"  :   "Notes internes"
         }
     },
     "people"    :   {
@@ -281,12 +343,20 @@
             "email2" :   "Email2",
             "phone2"  :   "Telèfon2",
             "address2" :   "Direcció2",
+            "others"  :   "Altres",
+            "other_people"  :   "Altres",
             "description"   :   "Descripció",
-            "animals"   :   "Animals"
+            "animals"   :   "Animals",
+            "users" :   "Usuaris"
         }
     },
     "user": {
         "title" : "Usuari",
+        "news": {
+            "icon"  :   "Notícies",
+            "title"  :   "Notícies",
+            "empty" :   "No hi ha notícies"
+        },
         "profile": {
             "icon"  :   "Perfil",
             "title"  :   "Perfil",
@@ -298,6 +368,10 @@
                 "email-not-verified" : "La teva adreça de correu electrònic no està verificada.",
                 "email-verify" : "Enviar correu de verificació",
                 "email-sent" : "S'ha enviat un nou correu de verificació a la teva adreça de correu."
+            },
+            "animals": {
+                "icon"  :   "Animals",
+                "title" :   "Animals"                
             },
             "settings": {
                 "icon"  :   "Config",
@@ -321,7 +395,8 @@
                 "password-confirm" : "Si us plau, introdueix la teva contrasenya per esborrar el compte permanentment.",
                 "password" : "Contrasenya",
                 "cancel" : "Cancel·lar",
-                "delete" : "Esborrar"
+                "delete" : "Esborrar",
+                "deleted" : "Compte borrat"
             }         
         },
         "animals"   :   {
@@ -342,6 +417,10 @@
             "heaven"    :   {
                 "icon"  :   "Cel",
                 "title" :   "Cel"
+            },
+            "hidden"    :   {
+                "icon"  :   "Ocults",
+                "title" :   "Ocults"
             }
         },
         "people"  :   {
@@ -365,7 +444,7 @@
         "description"   :   "Aquesta zona és per al personal del refugi, no per a usuaris.",
         "title-forgot" : "Recordar contrasenya",
         "login" : "Accedir",
-        "login2" : "Iniciar sessió",
+        "login2" : "Login",
         "name" : "Nom",
         "email" : "Email",
         "password" : "Contrasenya",
@@ -386,8 +465,9 @@
         "send" : "Enviar",
         "info"  :   {
             "title1"  :   "Informació general i Refugi",
-            "title2"  :   "Col·laborar",
+            "title2"  :   "Col·laborar socis/sòcies i padrins/madrines",
             "title3"  :   "Adopcions",
+            "shift-adoptions" : "Dilluns a divendres de 17:00h a 21:00h",
             "title4"  :   "Voluntariat",
             "phone"  :   "Telèfon",
             "shift-phone-title"  :   "Horari d'atenció telefònica",
@@ -395,10 +475,14 @@
             "shift-phone-line2"   :   "Dissabtes de 10:30h a 13:30h",
             "shift-phone-footer1"  :   "Es prega respectar aquest horari.",
             "shift-phone-footer2" :   "És atès per personal voluntari.",
-            "shift-live-title"  :   "Horari d'atenció al públic",
-            "shift-live-line1"  :   "Dilluns a divendres de 10:00h a 18:00h",
-            "shift-live-line2"  :   "Dissabtes de 10:30h a 13:30h",
+            "shift-live-title"  :   "Horari d'atenció al públic",            
+            "shift-live-line1"  :   "Dissabtes de 09:30h a 13:30h",
             "title5"    :   "Refugi atès els 365 dies de l'any"
         }
+    },
+    "share" :   {
+        "title" :   "Compartir",
+        "title-native"  :   "SPAX - protectoraxativa",
+        "text"  :   "Mira aquest animalet"
     }
 }

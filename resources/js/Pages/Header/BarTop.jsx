@@ -6,8 +6,10 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 
 import LanguageIcon from '@mui/icons-material/Language';
-import UserIcon from '@mui/icons-material/Person';
+import ContactIcon from '@mui/icons-material/Email';
+//import ContactIcon from '@mui/icons-material/MailOutline';
 import LogoutIcon from '@mui/icons-material/PowerSettingsNew';
+//import UserIcon from '@mui/icons-material/Person';
 
 import { setLanguage } from "@/Utils/Cookies";
 import { languages } from "@/Utils/Variables";
@@ -126,6 +128,7 @@ export default function BarTop({user,t,from}){
         */  
     };
 
+    /*
     const login = () => {
         
         // not used because if you log in it goes to the user section
@@ -156,11 +159,16 @@ export default function BarTop({user,t,from}){
 
         window.location = route('login')+parameter;
         */
+    /*
         window.location = route('login');
     };
-
+    */
     const logout = () => {
         window.location = route('logout.get');
+    };
+
+    const contact = () => {
+        window.location = route('contact');
     };
 
     const trigger = useScrollTrigger({
@@ -175,8 +183,22 @@ export default function BarTop({user,t,from}){
 
     //variant={darkmode ? "white" : "black"}
 
-    return (
-        <div className='mx-1 mt-1'>
+    const sxAppBar = { 
+        /*bgcolor: darkmode ? "black" : "white", 
+        width: '100%',*/ 
+        borderRadius: '5px 5px 5px 5px', 
+        padding: '0px' 
+    };
+
+    const sxToolbar = {
+        "@media (min-width: 0px)": { 
+            padding: '5px 5px',
+            minHeight : '0px'
+        }
+    };
+
+    return (        
+        <div className=''>
             <LanguageModal           
                 show={showLanguage}
                 setShow={setShowLanguage}
@@ -186,39 +208,44 @@ export default function BarTop({user,t,from}){
             />
             <ThemeProvider theme={theme}>
                 
-                <AppBar position="static" sx={{ /*bgcolor: darkmode ? "black" : "white",*/ width: '100%', borderRadius: '5px 5px 5px 5px', padding: '0px' }}>
+                <AppBar 
+                    id='bartop' 
+                    position="static" 
+                    sx={sxAppBar}
+                >
                 
-                    <Toolbar sx={
-                        {
-                            "@media (min-width: 0px)": { 
-                                padding: '5px 5px',
-                                minHeight : '0px'
-                            }
-                        }
-                    }>
+                    <Toolbar sx={sxToolbar}>                        
 
-                        <IconButton variant={user && from === 'user' ? 'orange' : darkmode ? 'white' : 'black'} color="primary"  onClick={login} id='login'>
-                            <UserIcon/>                  
-                        </IconButton>   
+                        <IconButton color="primary" onClick={changeLanguage} id='language'>
+                            <LanguageIcon/>                  
+                        </IconButton>
 
-                        {
+                        {/*
                             user &&                                                        
-                            <IconButton variant="red" color="primary" onClick={logout} id='logout' sx={{marginLeft:'5px'}}>
+                            <IconButton variant={darkmode ? 'black' : 'white'} color="primary" sx={{marginRight:'5px'}}>
                                 <LogoutIcon/>                  
                             </IconButton>                            
-                        }        
+                        */}
                         
                         <Box sx={{ flexGrow: 1 }}/>
 
-                        <a href='/'>
-                            <Box
-                                component="img"
-                                sx={{height: 40}}
-                                alt=""
-                                src='/logo.png'
-                                id='logo'
-                            />                            
-                        </a>
+                        {
+                            (user && from === 'user')?
+                                <IconButton variant="red" color="primary" onClick={logout} id='logout' sx={{marginLeft:'5px'}}>
+                                    <LogoutIcon/>                  
+                                </IconButton>                                                   
+                            :
+                            <a href='/'>
+                                <Box
+                                    component="img"
+                                    sx={{height: 40}}
+                                    alt=""
+                                    src='/storage/logo.png'
+                                    id='logo'
+                                />                            
+                            </a>
+                        }
+
                         {/*
                         <Box sx={{ flexGrow: 1 }}/>
 
@@ -228,15 +255,23 @@ export default function BarTop({user,t,from}){
                         */}
                         <Box sx={{ flexGrow: 1 }}/>
 
-                        {
+                        {/*
                             user &&                                                        
-                            <IconButton variant={darkmode ? 'black' : 'white'} color="primary" sx={{marginRight:'5px'}}>
+                            <IconButton variant="red" color="primary" onClick={logout} id='logout' sx={{marginLeft:'5px'}}>
                                 <LogoutIcon/>                  
                             </IconButton>                            
-                        }
-
-                        <IconButton color="primary" onClick={changeLanguage} id='language'>
-                            <LanguageIcon/>                  
+                        */} 
+                        {/*
+                        <IconButton variant={user && from === 'user' ? 'orange' : darkmode ? 'white' : 'black'} color="primary"  onClick={login} id='login'>
+                            <UserIcon/>                  
+                        </IconButton>
+                        */}
+                        <IconButton           
+                            id={from === 'contact' ? 'contact-selected' : 'contact'}                  
+                            color="primary" 
+                            onClick={contact}                             
+                        >
+                            <ContactIcon/>                  
                         </IconButton>
 
                     </Toolbar>
@@ -248,7 +283,7 @@ export default function BarTop({user,t,from}){
                 <Box
                     onClick={handleTop}
                     role="presentation"
-                    sx={{ position: 'fixed', bottom: 80, right: 16 }}
+                    sx={{ position: 'fixed', bottom: 80, right: 16, zIndex: 1 }}
                 >
                     <Fab size="small" sx={{color:'#FF8C00',bgcolor:'white'}}>
                         <KeyboardArrowUpIcon/>

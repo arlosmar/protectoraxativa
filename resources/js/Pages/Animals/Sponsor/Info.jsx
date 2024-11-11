@@ -2,11 +2,13 @@ export default function Info({t,email_colaboration,forms,prices}){
 
     return (
         <>
+        {/*
         <h1 className='title-subsection'>
             {t('animals.sponsor.info.title')}
         </h1>
+        */}
         <div className='home-div-box'>
-            <h1 className='subtitle-home'>
+            <h1 className='subtitle-home text-center'>
                 {t('animals.sponsor.info.title-details')}
             </h1>
             <div 
@@ -46,7 +48,7 @@ export default function Info({t,email_colaboration,forms,prices}){
             </div>
         </div>
         <div className='home-div-box mt-8 mb-8'>
-            <h1 className='subtitle-home'>
+            <h1 className='subtitle-home text-center'>
                 {t('animals.sponsor.info.title-steps')}
             </h1>
             <div 

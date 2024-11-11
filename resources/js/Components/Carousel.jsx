@@ -1,9 +1,4 @@
 import { useState, useEffect } from 'react';
-import { date } from "@/Utils/Format"; 
-// date()
-
-// import * as format from "@/Utils/Format";
-// format.date()
 import Grid from '@mui/material/Grid2';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
@@ -12,16 +7,16 @@ import ImageListItemBar from '@mui/material/ImageListItemBar';
 
 import Pagination from '@/Components/Pagination';
 
-import IconButton from '@mui/material/IconButton';
-import InfoIcon from '@mui/icons-material/Info';
+//import IconButton from '@mui/material/IconButton';
+//import InfoIcon from '@mui/icons-material/Info';
 
 import AnimalModal from "@/Modals/AnimalModal";
 
-import { itemsPerPageCarousel } from "@/Utils/Variables";
-
 import { getParameter } from "@/Utils/Variables";
 
-export default function Carousel({t,origin,images_path,animals,page}){
+import { peopleNames, yearsFormatted } from "@/Utils/Format"; 
+
+export default function Carousel({user,t,origin,imagePath,imagesPaths,animals,page,itemsPerPage}){
 
     if(animals && animals.length > 0){
       
@@ -45,7 +40,6 @@ export default function Carousel({t,origin,images_path,animals,page}){
             }
         }
 
-        const itemsPerPage = itemsPerPageCarousel();
         const length = animals && animals.length ? animals.length : 0;    
         const pages = Math.ceil(length/itemsPerPage);
         const [ pageCurrent, setPageCurrent ] = useState(parameterPos ? Math.min(Math.ceil(parameterPos/itemsPerPage),pages) : page ? Math.min(page,pages) : 1);
@@ -72,15 +66,24 @@ export default function Carousel({t,origin,images_path,animals,page}){
             }
         },[]);
 
+        const sxListItemBar = {
+            "& .MuiImageListItemBar-titleWrap": { 
+                padding: '5px 10px',
+                textAlign: 'center'
+            } 
+        };
+
         return (
             <>             
             <AnimalModal
+                user={user}
                 origin={origin}         
                 t={t}
                 show={showAnimal}
                 setShow={setShowAnimal}      
-                animal={animalItem}  
-                images_path={images_path}        
+                animal={animalItem} 
+                imagePath={imagePath} 
+                imagesPaths={imagesPaths}        
             />
             <Pagination      
                 origin={origin}
@@ -99,69 +102,43 @@ export default function Carousel({t,origin,images_path,animals,page}){
                         var imageClassname = '';
 
                         if(origin && origin === 'heaven'){
+                            subtitle = yearsFormatted(item?.birthdate_year,item?.deathdate_year);                
+                        }
+                        else{
+                            if(origin && origin === 'sponsored'){                        
 
-                            if(item?.birthdate || item?.deathdate){
+                                subtitle = peopleNames(item?.person);
 
-                                if(item?.birthdate){
-                                    subtitle = date(item?.birthdate,false,false);                                    
-                                }
-                                else{
-                                    subtitle = '?';
-                                }
-
-                                if(item?.deathdate){
-                                    subtitle = subtitle + ' - ' + date(item?.deathdate,false,false);                                    
-                                }
-                                else{
-                                    subtitle = subtitle + ' - ?';
+                                if(subtitle.length === 0){
+                                    subtitle = '-';
                                 }
                             }
                         }
-                        else{                        
 
-                            var peopleArray = [];
-
-                            if(item?.person?.name && item?.person?.name.length > 0){
-                                
-                                var person1 = item?.person?.name;
-
-                                if(item?.person?.surname && item?.person?.surname.length > 0){
-                                   person1 = person1 + ' ' + item?.person?.surname;
-                                }
-
-                                peopleArray.push(person1);
-                            }
-
-                            if(item?.person?.name2 && item?.person?.name2.length > 0){
-                                
-                                var person2 = item?.person?.name2;
-
-                                if(item?.person?.surname2 && item?.person?.surname2.length > 0){
-                                   person2 = person2 + ' ' + item?.person?.surname2;
-                                }
-
-                                peopleArray.push(person2);
-                            }
-
-                            subtitle = peopleArray.join(' / ');
+                        var imgPath = '/images/animalgeneric.jpeg';
+                        if(item?.image && item?.image.length > 0){
+                            imgPath = imagePath+item?.image;
                         }
 
                         return (
                             <Grid size={{ xs: 6, sm: 4, md: 3 }}>
                                 <ImageListItem 
-                                    key={images_path+item?.image}
+                                    key={imgPath}
                                     onClick={() => handleInfo(item)}
-                                    className='cursor-pointer'
+                                    className='cursor-pointer'                                    
                                 >
                                     <img
-                                        srcSet={`${images_path+item?.image}`}
-                                        src={`${images_path+item?.image}`}
+                                        srcSet={imgPath}
+                                        src={imgPath}
                                         alt={item?.name}
                                         loading="lazy"
+                                        className='carousel-image'
                                     />
                                     <ImageListItemBar 
+                                        sx={sxListItemBar}
                                         title={item?.name}
                                         subtitle={subtitle}
+                                        /*
                                         actionIcon={
                                             <IconButton
                                                 sx={{ color: 'rgba(255, 255, 255, 0.54)' }}                                            
@@ -170,6 +147,7 @@ export default function Carousel({t,origin,images_path,animals,page}){
                                                 <InfoIcon />
                                             </IconButton>
                                         }
+                                        */
                                     />
                                 </ImageListItem>
                             </Grid>

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -18,11 +19,13 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<int, string>
      */
     protected $fillable = [
+        'admin',
         'name',
         'email',
         'password',
         'language',
-        'settings'
+        'settings',
+        'person_id'
     ];
 
     /**
@@ -46,5 +49,23 @@ class User extends Authenticatable implements MustVerifyEmail
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    // get firebase fcm token
+    /*
+    public function routeNotificationForFcm()
+    {
+        return $this->fcm_token;        
+    }
+    */
+
+    public function news(): HasMany
+    {
+        return $this->hasMany(News::class);
+    }
+
+    public function person(): BelongsTo
+    {
+        return $this->belongsTo(Person::class);
     }
 }

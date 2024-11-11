@@ -67,7 +67,14 @@ class RedirectIfAuthenticated
         
         return '/';
         */
-        return route('user');
+        $user = auth()->user();
+
+        if(isset($user->admin) && !empty($user->admin)){
+            return route('admin');
+        }
+        else{            
+            return route('intranet');
+        }
     }
 
     /**

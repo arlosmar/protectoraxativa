@@ -1,26 +1,12 @@
 import Modal from '@mui/material/Modal';
 import CloseIcon from '@mui/icons-material/Close';
 import Box from '@mui/material/Box';
-import { getDarkMode } from "@/Utils/Cookies";
+
+import { modalStyle } from '@/Utils/Styles';
 
 export default function LanguageModal({show,setShow,language,languages,handleLanguage}){
 
-    const darkmode = getDarkMode();
-
-    const style = {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: '80%',
-        maxWidth: 400,
-        bgcolor: darkmode ? "black" : "background.paper",
-        border: darkmode ? "1px solid #fff" : "1px solid #000",
-        borderRadius: '5px',
-        boxShadow: 24,
-        p: 4,
-        m: 1
-    };
+    const style = modalStyle();
 
     const handleClose = () => {
         setShow(false)

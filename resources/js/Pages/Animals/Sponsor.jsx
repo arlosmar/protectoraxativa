@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { makeStyles } from '@mui/styles';
+
+import { styleSubTabs } from '@/Utils/Styles';
 
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -10,14 +11,14 @@ import SponsoredIcon from '@mui/icons-material/InsertEmoticon';
 import ApuIcon from '@mui/icons-material/Handshake';
 
 import Info from '@/Pages/Animals/Sponsor/Info';
-import Animals from '@/Pages/Animals/Sponsor/Animals';
-import Sponsored from '@/Pages/Animals/Sponsor/Sponsored';
-import Apu from '@/Pages/Animals/Sponsor/Apu';
+import CarouselAnimals from '@/Pages/Animals/CarouselAnimals';
 
-export default function Sponsor({t,subsection,setSubsection,apus,animals,sponsored,
-    images_path,page,options,email_colaboration,forms,prices}){
+export default function Sponsor({user,t,subsection,setSubsection,animals,sponsored,
+    baseUrl,imagesPaths,page,setPage,options,email_colaboration,forms,prices,itemsPerPage}){
 
     const [ tab, setTab ] = useState(subsection ? subsection : "info");
+
+    const { classes, sx, sxIcon } = styleSubTabs();
 
     const handleTabChange = (event, newValue) => {
         
@@ -26,45 +27,33 @@ export default function Sponsor({t,subsection,setSubsection,apus,animals,sponsor
         // to inform the parent view and call by ajax to get animals
         setSubsection(newValue);
 
+        // reset page in case it came by url
+        setPage(1);
+
         // change url on the browser
         var url = route("animals")+'/sponsor/'+newValue;
         window.history.pushState({path:url},'',url);
     };
 
-    const useStyles = makeStyles({
-
-        tabs: {
-            "& .MuiTabs-indicator": {
-                backgroundColor: "#FF8C00",
-                height: 3,
-            },
-            "& .MuiTab-root.Mui-selected": {
-                color: '#FF8C00'
-            }
-        }
-    });
-    const classes = useStyles();
-
-    const sx = {minWidth: "fit-content", flex: 1 };
-
     return (    	
         <>
+        {/*
         <h1 className='title-home'>
             {t('animals.sponsor.title')}
         </h1>
-        <div className='mt-4'>
+        */}
+        <div className='subtabs-container'>
             <Tabs 					
                 value={tab} 
                 onChange={handleTabChange}                     
                 className={classes.tabs}
                 variant="scrollable"
             >
-                <Tab icon={<InfoIcon/>} value="info" sx={sx} iconPosition="top" label={t('animals.sponsor.info.icon')}/>
-                <Tab icon={<AnimalsIcon/>} value="animals" sx={sx} iconPosition="top" label={t('animals.sponsor.animals.icon')}/>
-                <Tab icon={<SponsoredIcon/>} value="sponsored" sx={sx} iconPosition="top" label={t('animals.sponsor.sponsored.icon')}/>
-                <Tab icon={<ApuIcon/>} value="apu" sx={sx} iconPosition="top" label={t('animals.sponsor.apu.icon')}/>
+                <Tab icon={<InfoIcon sx={sxIcon}/>} value="info" sx={sx} iconPosition="top" label={t('animals.sponsor.info.icon')}/>
+                <Tab icon={<AnimalsIcon sx={sxIcon}/>} value="animals" sx={sx} iconPosition="top" label={t('animals.sponsor.animals.icon')}/>
+                <Tab icon={<SponsoredIcon sx={sxIcon}/>} value="sponsored" sx={sx} iconPosition="top" label={t('animals.sponsor.sponsored.icon')}/>                
             </Tabs>
-            <div className='mt-4 pt-4'>
+            <div className='subcontent-container'>
             {
                 tab === 'info' ?
                     <Info 
@@ -75,27 +64,36 @@ export default function Sponsor({t,subsection,setSubsection,apus,animals,sponsor
                     />
                 :						
                     tab === 'animals' ?
-                        <Animals 
+                        <CarouselAnimals
+                            user={user}
+                            origin='sponsor' 
+                            title={t('animals.sponsor.animals.title')}
                             t={t} 
                             animals={animals}
-                            images_path={images_path}
+                            imagePath={imagesPaths?.animals}
+                            imagesPaths={imagesPaths}
                             page={page}
                             options={options}
+                            baseUrl={baseUrl}
+                            itemsPerPage={itemsPerPage}
                         />
                     :
                         tab === 'sponsored' ?
-                            <Sponsored 
+                            <CarouselAnimals 
+                                user={user}
+                                origin='sponsored'
+                                title={t('animals.sponsor.sponsored.title')}
                                 t={t} 
                                 animals={animals}
-                                images_path={images_path}
+                                imagePath={imagesPaths?.animals}
+                                imagesPaths={imagesPaths}
                                 page={page}
                                 options={options}
+                                baseUrl={baseUrl}
+                                itemsPerPage={itemsPerPage}
                             />
-                        :
-                            tab === 'apu' ?
-                                <Apu t={t} apus={apus}/>
-                            :
-                                ''
+                        :                           
+                            ''
             }
             </div>
         </div>

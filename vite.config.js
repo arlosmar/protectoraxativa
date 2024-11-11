@@ -13,6 +13,6 @@ export default defineConfig({
         }),
         react(),
         commonjs(),
-        compression({deleteOriginFile: true}) // it deletes the origina css and js files
+        compression({/*include: [/\.(js)$/, /\.(css)$/],*/deleteOriginalAssets: false}) // it deletes the original css and js files
     ],
 });

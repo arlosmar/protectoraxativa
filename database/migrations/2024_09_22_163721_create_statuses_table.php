@@ -33,12 +33,6 @@ return new class extends Migration
                     'description' => 'Adopted',
                     'created_at'    => $date,
                     'updated_at'    => $date
-                ],
-                [
-                    'name' => 'heaven',
-                    'description' => 'Heaven',
-                    'created_at'    => $date,
-                    'updated_at'    => $date
                 ]
             ]
         );

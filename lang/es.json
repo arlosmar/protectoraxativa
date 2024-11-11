@@ -22,7 +22,22 @@
         "currentImage"  :   "Imagen actual",
         "Remove"    :   "Quitar",
         "Videos"    :   "Vídeos",
-        "Filter"    :   "Filtrar"
+        "Filter"    :   "Filtrar",
+        "Delete"    :   "Borrar",
+        "DeleteConfirm" :   "¿Seguro que quieres borrar?",
+        "Share" :   "Compartir",
+        "Copy"  :   "Copiar",
+        "Copied"    :   "Copiado",
+        "Export"    :   "Exportar",
+        "Link"  :   "Enlace",
+        "Form"  :   "Formulario",
+        "Field-Empty" :   "Campo vacío",
+        "All-Male-Singular"  :   "Todo",
+        "Update"    :   "Actualizar"
+    },
+    "Cookies" : {
+        "button-accept" : "Aceptar",
+        "message" : "Esta web usa las cookies mínimas necesarias para funcionar. No se recopila información de ningún tipo."
     },
     "Title" : {
         "Home" : "Inicio",
@@ -36,7 +51,8 @@
         "Home" : "Inicio",
         "Animals" : "Animales",
         "News" : "Noticias",
-        "Contact" : "Contacto"
+        "Contact" : "Contacto",
+        "User"  :   "Usuario"
     },
     "under-development" : "En desarrollo",
     "introduction": {
@@ -88,7 +104,13 @@
             "line25"    :   "Es otra fuente de ingreso para la asociación.",
             "line26"    :   "Solemos participar en este juego de azar en la Lotería Nacional de Navidad del 22 de Diciembre.",
             "line27"    :   "El ámbito de venta es local pero lo pondremos siempre en conocimiento de quienes puedan estar interesad@s en colaborar con la asociación.",
-            "line28"    :   "Para cualquier información sobre este tema podéis dirigiros a:"
+            "line28"    :   "Para cualquier información sobre este tema podéis dirigiros a:",
+            "hosting"   :   "Casas acogida",
+            "line29"    :   "Buscamos casas de acogida para algunos animales, algunos de ellos son especiales. Estos \"animales especiales\", pueden ser perros o gatos que no se integran en la vida del refugio (mayormente por la vida anterior en el calor de un hogar), que tienen problemas de alimentación o que el vivir en un box les crea estrés. También pueden ser animales muy mayores, con problemas físicos o que necesitan medicación especial. A veces buscamos casa de acogida para los que ya han sido operados, por lo que necesitan un corto periodo de tiempo para poder recuperarse. Hay muchísimas razones más por las que un animal puede necesitar una casa de acogida.",
+            "line30"    :   "Si está interesado en hacer de casa de acogida, póngase en contacto con nosotros. Nosotros nos ocupamos de los gastos veterinarios de los animales acogidos. Éstos han de vivir en casa con la familia que los acoja y ser tratados como uno más de la familia. Deberían disponer del tiempo suficiente para ocuparse del animal y estar dispuestos a quererle mucho el tiempo en que permanezcan acogidos.",
+            "line31"    :   "Para acoger un animal, mándanos un whatsApp al:",
+            "line32"    :   "Además debes rellenar el siguiente formulario:",
+            "line33"    :   "Aquí tienes las claúsulas para una casa de acogida:"
         },
         "social"    :   {
             "title" :   "Redes sociales",
@@ -99,7 +121,8 @@
             "youtube" :   "Youtube",
             "blog" :   "Blog",
             "soundcloud" :   "Soundcloud",
-            "ladridos" :   "Ladridos y lametones"
+            "ladridos" :   "Ladridos y lametones",
+            "tiktok"    :   "TikTok"
         },
         "partners"  :   {
             "title"  :   "Colaboradores",
@@ -108,18 +131,40 @@
             },
             "friends"  :   {
                 "title"  :   "Webs amigas"
+            },
+            "apu"  :   {
+                "title"  :   "APU"
+            },
+            "subsidized"    :   {
+                "title" :   "Entidades subvencionadoras",
+                "line1" :   "Estas entidades subvencionan parcialmente la protectora."
             }
         },
         "info"  :   {
             "title" :   "¿Quiénes somos?",
-            "paragraph1"  :   "Asociación sin ánimo de lucro, legalmente constituida e inscrita en el Registro Autonómico de Asociaciones de Valencia. Todos sus cargos directivos son gratuitos. La labor desempeñada por todos sus miembros, es altruista y desinteresada.<br><br>Su mayor actividad es desarrollada en el Refugio para perros abandonados que posee en el municipio de Xàtiva. Tiene todas las licencias y autorizaciones administrativas, tanto municipales como autonómicas. Posee la declaración de Núcleo Zoológico desde el 7 de mayo de 2002 y es Entidad Colaboradora de la Consellería de Agricultura, Pesca y Alimentación de la Generalitat Valenciana por resolución de fecha el 14 de octubre de 1997.<br><br>Dicho Refugio se encuentra ubicado en unos terrenos en propiedad gracias a la primera donación de D, Roberto Cortes y posteriormente de D. Francisco Aguado quien, este último, facilitó económicamente la adquisición de un terreno colindante lo que propició la instalación y asentamiento definitivo del albergue.<br><br>Han sido muchos los esfuerzos tanto personales como económicos por acondicionarlo mediante nuevas construcciones, instalación de instalación eléctrica, bebederos automáticos, espacio libre para esparcimiento, clínica veterinaria para asistencia a los animales albergados, plantación de árboles para sombra, construcción de fosas sépticas, desagües, almacén para la alimentación y pienso y muchos proyectos necesarios que aún quedan por realizar.<br><br>Situado en zona altamente inundable, ha propiciado en varias ocasiones la inundación de una parte del recinto si bien, poco a poco a poco y gracias a la inestimable ayuda de las donaciones puntuales y extraordinarias se han podido garantizar nuevas obras tendentes a que el impacto de las lluvias y torrentes cause el menor daño posible.<br><br>Su ÚNICO COMPROMISO es la protección y defensa de los animales en general y de perros en particular. SOLO ACOGE PERROS. No alberga gatos al carecer de recursos económicos y humanos como para ofrecerles una vida digna en cautividad, disponiendo de escasas y saturadas casas de acogida que en ningún caso palian el gravísimo problema que sufren estos animales.<br><br>SE OPONE Y CONDENA cualquier maltrato, agresión o injusticia hacia ellos. Venga de donde venga y de quien venga. De quien lo aplauda y de quien lo promueva. De quien lo justifique y de quien lo tolere y difunda. Una legislación blanda, insensible y permisiva en este sentido es, continua siendo y será la mejor aliada para que la brutalidad en este país, sea desgraciadamente, nuestro signo distintivo.<br><br>Sólo deseamos ADOPCIONES RESPONSABLES. Somos contrarios a regalar animalesen Navidad, cumpleaños y fechas señaladas y muy cansados de la pasividad e indiferencia de los poderes públicos respecto a las injusticias que se comenten contra los animales. También de los propietarios incapaces y caprichosos que abandonan a sus animales sin importarles nada de lo que les pueda ocurrir y de aquellos que, irresponsablemente, nos arrojan animales por las verjas del refugio o los dejan atados a su suerte. O animales caseros ancianos que morirán de tristeza y de penay a veces, no podremos hacer nada por impedirlo.<br><br>Nunca ha sido ni será obstáculo para la permanencia en nuestro albergue, cualquier animal tenga la edad que tenga o esté limitado física o funcionalmente, manteniendo especial atención por los animales mayores abandonados, los no adaptados y los cachorros.<br><br>Consideramos la ESTERILIZACION como único medio para erradicar las camadas indeseadas que llenan de muerte y sangre las perreras municipales y las carreteras y creemos en la educación y sensibilización sobre este drama silenciosamente sangrante que se vive día a día en este país.<br><br>Confiamos en el VOLUNTARIADO como pieza clave para el funcionamiento de esta Sociedad y basamos la supervivencia económica de la Asociación en los socios, padrinos, donaciones de particulares, subvenciones públicas, empresas y APU .<br><br>A los que nos ayudan, socios, padrinos, particulares y empresas, les agradecemos continúen facilitándonos la labor como hasta ahora y confiando en todo el trabajo que hemos realizado durante todos estos años. A los que acceden por primera vez, si no puedes darles una oportunidad a los que tanto lo desean y merecen por lo menos que, con tu ayuda, puedan vivir un poco mejor, gracias. ",
+            "paragraph1"  :   "Asociación sin ánimo de lucro, legalmente constituida e inscrita en el Registro Autonómico de Asociaciones de Valencia. Todos sus cargos directivos son gratuitos. La labor desempeñada por todos sus miembros, es altruista y desinteresada.<br/><br/>Su mayor actividad es desarrollada en el Refugio para perros abandonados que posee en el municipio de Xàtiva. Tiene todas las licencias y autorizaciones administrativas, tanto municipales como autonómicas. Posee la declaración de Núcleo Zoológico número V-207 desde el 7 de mayo de 2002 y es Entidad Colaboradora de la Consellería de Agricultura, Pesca y Alimentación de la Generalitat Valenciana por resolución de fecha el 14 de octubre de 1997.<br/><br/>Dicho Refugio se encuentra ubicado en unos terrenos en propiedad gracias a la primera donación de D, Roberto Cortes y posteriormente de D. Francisco Aguado quien, este último, facilitó económicamente la adquisición de un terreno colindante lo que propició la instalación y asentamiento definitivo del albergue.<br/><br/>Han sido muchos los esfuerzos tanto personales como económicos por acondicionarlo mediante nuevas construcciones, instalación de instalación eléctrica, bebederos automáticos, espacio libre para esparcimiento, clínica veterinaria para asistencia a los animales albergados, plantación de árboles para sombra, construcción de fosas sépticas, desagües, almacén para la alimentación y pienso y muchos proyectos necesarios que aún quedan por realizar.<br/><br/>Situado en zona altamente inundable, ha propiciado en varias ocasiones la inundación de una parte del recinto si bien, poco a poco a poco y gracias a la inestimable ayuda de las donaciones puntuales y extraordinarias se ha podido garantizar nuevas obras tendentes a que el impacto de las lluvias y torrentes cause el menor daño posible.<br/><br/>Su ÚNICO COMPROMISO es la protección y defensa de los animales en general y de perros en particular. SOLO ACOGE PERROS. No alberga gatos al carecer de recursos económicos y humanos como para ofrecerles una vida digna en cautividad, disponiendo de escasas y saturadas casas de acogida que en ningún caso palian el gravísimo problema que sufren estos animales.<br/><br/>SE OPONE Y CONDENA cualquier maltrato, agresión o injusticia hacia ellos. Venga de donde venga y de quien venga. De quien lo aplauda y de quien lo promueva. De quien lo justifique y de quien lo tolere y difunda. Una legislación blanda, insensible y permisiva en este sentido es, continua siendo y será la mejor aliada para que la brutalidad en este país, sea desgraciadamente, nuestro signo distintivo.<br/><br/>Sólo deseamos ADOPCIONES RESPONSABLES. Somos contrarios a regalar animales en Navidad, cumpleaños y fechas señaladas y muy cansados de la pasividad e indiferencia de los poderes públicos respecto a las injusticias que se comenten contra los animales. También de los propietarios incapaces y caprichosos que abandonan a sus animales sin importarles nada de lo que les pueda ocurrir y de aquellos que, irresponsablemente, nos arrojan animales por las verjas del refugio o los dejan atados a su suerte. O animales caseros ancianos que morirán de tristeza y de pena y, a veces, no podremos hacer nada por impedirlo.<br/><br/>Nunca ha sido ni será obstáculo para la permanencia en nuestro albergue, cualquier animal tenga la edad que tenga o esté limitado física o funcionalmente, manteniendo especial atención por los animales mayores abandonados, los no adaptados y los cachorros.<br/><br/>Consideramos la ESTERILIZACION como único medio para erradicar las camadas indeseadas que llenan de muerte y sangre las perreras municipales y las carreteras y creemos en la educación y sensibilización sobre este drama silenciosamente sangrante que se vive día a día en este país.<br/><br/>Confiamos en el VOLUNTARIADO como pieza clave para el funcionamiento de esta Sociedad y basamos la supervivencia económica de la Asociación en los socios, padrinos, donaciones de particulares, subvenciones públicas, empresas y APU .<br/><br/>A los que nos ayudan, socios, padrinos, particulares y empresas, les agradecemos continúen facilitándonos la labor como hasta ahora y confiando en todo el trabajo que hemos realizado durante todos estos años. A los que acceden por primera vez, si no puedes darles una oportunidad a los que tanto lo desean y merecen por lo menos que, con tu ayuda, puedan vivir un poco mejor, gracias.",
             "paragraph2-title"  :  "Un poco de historia",
-            "paragraph2"  :   "La idea de crear una asociación de defensa de los animales en Xàtiva surgió tras la reunión de un grupo de personas sensibilizadas con el tema de los animales, con muchas ganas e ilusiones de realizar cosas en este ámbito, pues la alternativa municipal al problema del animal abandonado era  que tras unos días en la perrera municipal y si no lo reclamaba nadie como solía ser lo más frecuente, el animal era sacrificado. <br><br>La reunión que se menciona anteriormente tuvo lugar en la antigua 4ª planta de la Casa de la Cultura sobre el mes de febrero de 1985, posteriormente y con fecha 5 de marzo del mismo año se constituía : \"La Sociedad Protectora de Animales y plantas de Xàtiva\", legalizándose posteriormente el 10 de abril del mismo año.<br><br>Como que no había ningún tipo de infraestructura , una socia llamada \"Rosarín\", cedió su terreno, que era parte de su propia casa para comenzar a acoger perros abandonados, ya desde el primer momento del nacimiento de esta sociedad.<br><br>Después fue el socio Antonio Romero quién cedió también temporalmente su chalet en Rotglà, invadido y con grandes desperfectos debidos a la gran cantidad de perros que allí se alojaron.<br><br>Por último y gracias al socio D. Roberto Cortés la asociación tuvo un lugar propio y definitivo. Fue en el año 1987 cuando donó los actuales terrenos y un donativo (que no fue el último) para comenzar las obras de las actuales instalaciones, que se encuentran en el \"Camí Senda de Murcia\" en la cara Este del Puig",
-            "paragraph2-footer" :   "Pie de foto: D. Roberto Cortés con su mujer en la construcción de las instalaciones del refugio del Puig.",
-            "paragraph3"  :   "La Asociación  cuyas siglas son SPAX , a lo largo de sus 37 años de funcionamiento ha tenido en la Presidencia a : <br><br>Mercedes Hernández, Roberto Cortés ( que fue nombrado antes de morir \"presidente honorífico perpetuo\") alguna Junta Gestora, Pilar Baraza, Lucía y a Mª Carmen Jachán Sánchez.<br><br> Mª Carmen Jachán Sánchez es Socia-fundadora y desde su inicio hace ya 37 años siempre ha estado en la junta directiva como secretaria, portavoz y  los últimos  12 años como presidenta.<br><br>Fue reconocida el pasado 16 de febrero de 2019 por el Cuerpo de Policía Local de Xàtiva por su espíritu solidario con los animales y su colaboración con la Policía Local en la recogida de animales extraviados.<br><br>Ya en el año 1998 fue también reconocida su larga labor en agradecimiento por tantos años de colaboración, esfuerzo y dedicación a la esta Sociedad por parte de toda la junta directiva y socios de aquel año.<br><br>Durante estos últimos años con la brillante gestión de Mª Carmen Jachán en la presidencia, la SPAX se encuentra en una época dorada a nivel económico y de socios y padrinos; además  goza de un gran prestigio en Xàtiva y comarcas de los alrededores siendo una Protectora  referente a seguir. Todas las asociaciones de la ciudad e instituciones mantienen una admiración hacia nuestra SPAX y colaboran a lo largo del año muchas de ellas para recaudar fondos con diversos actos que organizan.",
+            "paragraph2"  :   "La idea de crear una asociación de defensa de los animales en Xàtiva surgió tras la reunión de un grupo de personas sensibilizadas con el tema de los animales, con muchas ganas e ilusiones de realizar cosas en este ámbito, pues la alternativa municipal al problema del animal abandonado era que tras unos días en la perrera municipal y si no lo reclamaba nadie como solía ser lo más frecuente, el animal era sacrificado.<br/><br/>La reunión que se menciona anteriormente tuvo lugar en la antigua 4ª planta de la Casa de la Cultura sobre el mes de febrero de 1985, posteriormente y con fecha 5 de marzo del mismo año se constituía: La Sociedad Protectora de Animales y plantas de Xàtiva, legalizándose posteriormente el 10 de abril del mismo año.<br/><br/>Como que no había ningún tipo de infraestructura, una socia llamada \"Rosarín\", cedió su terreno, que era parte de su propia casa para comenzar a acoger perros abandonados, ya desde el primer momento del nacimiento de esta sociedad.<br/><br/>Después fue el socio Antonio Romero quién cedió también temporalmente su chalet en Rotglà, invadido y con grandes desperfectos debidos a la gran cantidad de perros que allí se alojaron.<br/><br/>Por último y gracias al socio D. Roberto Cortés la asociación tuvo un lugar propio y definitivo. Fue en el año 1987 cuando donó los <b>actuales terrenos</b> y un donativo (que no fue el último) para comenzar las obras de las actuales instalaciones.",
+            "paragraph2-footer" :   "Pie de foto: D. <b>Roberto Cortés</b> con su mujer en la construcción de las instalaciones del refugio del Puig.",
+            "paragraph3"  :   "La Asociación  cuyas siglas son SPAX, a lo largo de sus años de funcionamiento ha tenido en la Presidencia a :<br/>Mercedes Hernández, Roberto Cortés ( que fue nombrado antes de morir \"<b>presidente honorífico perpetuo</b>\") alguna Junta Gestora, Pilar Baraza, Lucía Liva, Mª Carmen Jachán y Noemi Engo. En la actualidad el cargo de Presidente está representado por Jordi Ruiz.<br/><br/>Todas las acciones y mejoras de esta asociación no habrían sido posibles sin la ayuda de todas las personas voluntarias, nuestros dos trabajadores (Salva y Eric) y miembros de las Juntas Directivas que han pasado por esta asociación, que con su trabajo y lucha constantes han aportado su granito de arena a nuestra causa.",
             "poem-title"  :   "A vosotros",
             "poem"  :   "A los que, sin rumbo, por las calles vagan.<br>A los que, entre rejas, malviven cautivos.<br>A los que están solos, viejos, desvalidos,<br>sin nadie que vele por su bienestar.<br><br>A vosotros dedico estos versos,<br>que salen del alma y que al aire van,<br>confiando al papel mis anhelos,<br>por si el aire los lleva hasta el cielo,<br>y el cielo se apiada de vuestra orfandad.<br><br>Compartir con vosotros quisiera<br>los juegos alegres, los largos paseos,<br>y las sobremesas de tarde estival,<br>y en las noches frías del oscuro invierno,<br>bajo el mismo techo, juntos descansar,<br>lejos de los golpes, del hambre y del miedo,<br>al calor del fuego, saciados, y en paz.<br><br>Pero sé que estoy pidiendo demasiado,<br>y que mi deseo no se cumplirá.<br>En el mundo hay tantos perros olvidados,<br>pidiendo caricias y un trozo de pan,<br>que, aunque de par en par abra los brazos,<br>de abrazar a todos no seré capaz.<br><br>Y los que se quedan fuera del regazo<br>son los que más pesan en el corazón,<br>poblando mis noches de sueños amargos,<br>tiñendo mis días de desolación.<br><br>Incluso en las horas buenas de la vida,<br>fugaces oasis de felicidad,<br>me invade de pronto la melancolía,<br>porque su mirada, clavada en la mía,<br>de mi pensamiento no logro apartar.<br><br>Su triste recuerdo empaña la alegría,<br>que sentir podría, si olvidar pudiera,<br>que en todo momento, en algún lugar,<br>un perro perdido y desorientado,<br>a su ingrato dueño todavía espera,<br>sin saber siquiera… que lo ha abandonado.",
             "poem-footer"   : "Elena Negueroles"
+        }
+    },
+    "news"    :   {
+        "title" : "Noticias",
+        "empty" :   "No hay noticias",
+        "load-more" :   "Cargar más",
+        "record"    :   {
+            "user"  :   "Usuari@",
+            "user_name"  :   "Usuari@",
+            "name"  :   "Usuari@",
+            "date"  :   "Fecha",
+            "hidden"  :   "Oculto",
+            "title"  :   "Título",
+            "description"   :   "Descripción",
+            "image" :   "Imagen"
         }
     },
     "animals":   {
@@ -134,15 +179,17 @@
                 "line1" :   "Si estás interesad@ en adoptar un perr@ o gat@ de nuestra asociación descarga el siguiente formulario:",
                 "form"  :   "Formulario",
                 "line2" :   "Tienes que rellenarlo y mandarlo al siguiente email:",
-                "title-protocol" :   "Protocolo adopción",
-                "line3" :   "El/la adoptante puede contactar con nosotr@s mediante email o teléfono:",
-                "line4" :   "Una vez realizado el contacto, se debe cumplimentar el siguiente cuestionario:",
-                "line5" :   "La finalidad del cuestionario es la de asegurar el éxito de la adopción.",
-                "line6" :   "Una vez se considere que la adopción es favorable y el/la adoptante se haya decidido por un animal en concreto o haya definido las características deseadas (edad, carácter, tamaño,…), se concertará una cita en el refugio para conocer al animal.",
-                "line7" :   "Para formalizar la adopción el/la adoptante, previa presentación de su DNI/NIE o pasaporte en vigor (imprescindible ser mayor de edad), firmará un contrato de adopción con la Asociación.",
-                "line8" :   "Todos los animales de nuestro refugio se entregan con microchip, vacuna antirrábica y pasaporte europeo obligatorios en la Comunidad Valenciana (Decreto 49/2005, de 4 de marzo del Consell de la Generalitat Valenciana sobre obligatoriedad de chip, pasaporte y vacuna).",
-                "line9" :   "Este trámite será realizado por un/a veterinari@ colegiad@ y asignad@ por esta Asociación, con independencia de que con posterioridad el/la propietari@ del animal acuda a cualquier otr@ veterinari@.",
-                "line10":   "El/la adoptante deberá abonar a esta Asociación los costes veterinarios derivados de lo descrito anteriormente."
+                "title-protocol" :  "¿QUIERES ADOPTAR A UNO DE NUESTROS PELUDITOS?",
+                "line3" :   "Antes de realizar cualquier trámite, debes ser consciente de si realmente vas a poder cuidar del animal y ofrecerle una vida digna durante todos los años de su vida. Un animal necesita cuidados básicos como alimentación, paseos, socializarse, cuidados veterinarios, higiene, ejercicio…",
+                "line4" :   "Es por ello que desde la SPAX apostamos por las adopciones responsables. Los animales adoptados normalmente necesitan un período de adaptación aproximadamente de entre 1 a 3 meses y siempre buscamos encontrar un hogar en el que les brinden una vida digna, pues ya han sufrido el abandono una vez.",
+                "line5" :   "Para adoptar, primero debes acceder al apartado en donde aparecen todos nuestros animales para poder elegir quien será el afortunado para compartir contigo el resto de su vida. Una vez hayas decidido al afortunado, puedes contactar con nosotros mandándonos un correo electrónico a <a href='mailto:{{email_adoptions}}' target='_blank'>{{email_adoptions}}</a> indicándonos el nombre del animal. ¡HAZ ESTE PASO SOLO SI ESTÁS COMPLETAMENTE DECIDIDO A CUIDAR DE ÉL PARA SIEMPRE Y SER COMPRENSIVO DURANTE EL PERÍODO DE ADAPTACIÓN A TU HOGAR! Si no, no malgastemos nuestro tiempo.",
+                "line6" :   "Una vez recibido el correo, nos pondremos en contacto contigo para mandarte un cuestionario que debes cumplimentar para poder conocerte mejor y así asesorarte mejor según las características del animal. POR FAVOR, MANTEN TU MENTE ABIERTA Y DÉJATE ASESORAR POR NOSOTROS. También recibirás las indicaciones de nuestro protocolo de adopción e información importante para mejorar su adaptación o consejos en el caso de perros con necesidades especiales. También puedes acceder a nuestro cuestionario entrado en el siguiente enlace:",
+                "line7" :   "Todos los animales son entregados con microchip, vacuna antirrábica y Versican DHPPi y las respectivas desparasitaciones internas y externas, así como esterilizados. En el momento de la adopción, se te hará entrega del pasaporte europeo, su ficha veterinaria y se te informará del estado de salud del animal antes de su adopción.",
+                "line8" :   "Spax informa a los adoptantes que deberán hacer un donativo económico de {{price_donative}} a la asociación en concepto de ayuda para cubrir los gastos veterinarios. LAS ADOPCIONES SON GRATUITAS.",
+                "line9" :   "En el momento de la adopción, firmarás un contrato que garantizará que el animal va a estar bien atendido y con los cuidados necesarios para una tenencia responsable. Para ello, deberás facilitarnos el DNI original para poder hacer copia.",
+                "line10":   "Es IMPORTANTE recalcar que el donativo en el momento de la adopción para ayudarnos a hacer frente a los costes veterinarios ocasionados por el animal ya que este se entrega con todos los requisitos que exige la nueva Ley de Protección Animal, así la protectora puede seguir ayudando a otros animales. Todo el dinero recaudado se destina íntegramente a cubrir los gastos veterinarios y de alimentación de los animales custodiados.",
+                "line11"    :   "Casi se nos olvida, para poder llevarte a tu animal, deberás traer su arnés y una correa. Si el arnés es de seguridad, mucho mejor porque el nuevo miembro de tu familia aun no te conoce y no sabe que vas a cambiar su vida.",                
+                "line12"    :   "A continuación, te dejamos unas guías con consejos importantes a la hora de adoptar un peludito."                
             },
             "animals"  :   {
                 "icon"  :   "Adoptar",
@@ -207,7 +254,7 @@
             },
             "animals"   :   {
                 "icon"  :   "Animales",
-                "title" :   "Cementerio Virtual para Mascotas"
+                "title" :   "Cementerio Virtual"
             }
         },
         "record"    :   {
@@ -219,7 +266,8 @@
                 "title" :   "Estado",
                 "adopt" :   "Adoptar",
                 "adopted"   :   "Adoptado",
-                "heaven"    :   "Cielo"
+                "heaven"    :   "Cielo",
+                "hidden" :   "Oculto"
             },
             "Sponsored"  :   {
                 "title" :   "Apadrinado",
@@ -256,13 +304,26 @@
             "Weight"  :   "Peso",
             "Location"  :   "Localización",
             "Birthdate" :   "Fecha nacimiento",
+            "Dead"  :   "Fallecido",
+            "Hidden"    :   "Oculto",
             "Deathdate" :   "Fecha fallecimiento",
             "Description"   :   "Descripción",
             "Image" :   "Imagen",
             "Image2"    :   "Imagen2",
+            "Image-Sponsored"   :   "Imagen apadrinad@",
             "Person"    :   "Responsables",
             "Video" :   "Vídeo",
-            "Video2" :   "Vídeo2"
+            "Video2" :   "Vídeo2",
+            "Updated"   :   "Actualizado",
+            "Internal-Info" :   "Información interna",
+            "vaccines"  :   "Vacunas",
+            "treatment"  :   "Tratamiento",
+            "castrated"  :   "Castrad@",
+            "date_entry"  :   "Fecha entrada",
+            "date_exit"  :   "Fecha salida",
+            "date_entry2"  :   "Fecha entrada2",
+            "date_exit2"  :   "Fecha salida2",
+            "internal"  :   "Notas internas"
         }
     },
     "people"    :   {
@@ -281,12 +342,20 @@
             "email2" :   "Email2",
             "phone2"  :   "Teléfono2",
             "address2" :   "Dirección2",
+            "others"  :   "Otr@s",
+            "other_people"  :   "Otr@s",
             "description"   :   "Descripción",
-            "animals"   :   "Animales"
+            "animals"   :   "Animales",
+            "users" :   "Usuarios"
         }
     },
     "user": {
         "title" : "Usuario",
+        "news": {
+            "icon"  :   "Noticias",
+            "title"  :   "Noticias",
+            "empty" :   "No hay noticias"
+        },
         "profile": {
             "icon"  :   "Perfil",
             "title"  :   "Perfil",
@@ -298,6 +367,10 @@
                 "email-not-verified" : "Tu dirección de email no está verificada.",
                 "email-verify" : "Enviar email verificación",
                 "email-sent" : "Un nuevo email de verificación ha sido enviado a tu dirección de email."
+            },
+            "animals": {
+                "icon"  :   "Animales",
+                "title" :   "Animales"                
             },
             "settings": {
                 "icon"  :   "Config",
@@ -321,7 +394,8 @@
                 "password-confirm" : "Por favor, introduce tu contraseña para borrar la cuenta permanentemente.",
                 "password" : "Contraseña",
                 "cancel" : "Cancelar",
-                "delete" : "Borrar"
+                "delete" : "Borrar",
+                "deleted" : "Cuenta borrada"
             }         
         },
         "animals"   :   {
@@ -342,6 +416,10 @@
             "heaven"    :   {
                 "icon"  :   "Cielo",
                 "title" :   "Cielo"
+            },
+            "hidden"    :   {
+                "icon"  :   "Ocultos",
+                "title" :   "Ocultos"
             }
         },
         "people"  :   {
@@ -365,7 +443,7 @@
         "description"   :   "Esta zona es para el personal del refugio, no para usuarios.",
         "title-forgot" : "Recordar contraseña",
         "login" : "Acceder",
-        "login2" : "Loguearse",
+        "login2" : "Login",
         "name" : "Nombre",
         "email" : "Email",
         "password" : "Contraseña",
@@ -386,8 +464,9 @@
         "send" : "Enviar",
         "info"  :   {
             "title1"  :   "Información general y Refugio",
-            "title2"  :   "Colaborar",
+            "title2"  :   "Colaborar soci@s y padrinos/madrinas",
             "title3"  :   "Adopciones",
+            "shift-adoptions" : "Lunes a viernes de 17:00h a 21:00h",
             "title4"  :   "Voluntariado",
             "phone"  :   "Teléfono",
             "shift-phone-title"  :   "Horario de atención telefónica",
@@ -396,9 +475,14 @@
             "shift-phone-footer1"  :   "Se ruega respeten este horario.",
             "shift-phone-footer2" :   "Está atendido por personal voluntario.",
             "shift-live-title"  :   "Horario de atención al público",
-            "shift-live-line1"  :   "Lunes a viernes de 10:00h a 18:00h",
-            "shift-live-line2"  :   "Sábados de 10:30h a 13:30h",
+            "shift-live-line1"  :   "Sábados de 09:30h a 13:30h",            
             "title5"    :   "Refugio atendido los 365 días del año"
         }
+    },
+    "share" :   {
+        "title" :   "Compartir",
+        "title-native"  :   "SPAX - protectoraxativa",
+        "title-email"  :   "SPAX - protectoraxativa",
+        "text"  :   "Mira este animalito"
     }
 }

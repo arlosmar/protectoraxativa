@@ -9,21 +9,38 @@ export default function Toast({open,setOpen,message,error}) {
     };
 
 	return (
-        <Snackbar
-            anchorOrigin={{ vertical: 'top', horizontal : 'center'}}
-            open={open}
-            onClose={handleClose}
-            key='top center'
-            autoHideDuration={3000}
-        >
-        	<Alert
-			    onClose={handleClose}
-			    severity={message && message.length > 0 ? "success" : "error"}
-			    variant="filled"
-			    sx={{ width: '100%' }}
-			  >
-		    	{message && message.length > 0 ? message : error}
-		  	</Alert>
-		</Snackbar>
+		<>
+		{
+			(
+				(message && message.length > 0) ||
+				(error && error.length > 0)
+			)
+			&&
+	        <Snackbar
+	            anchorOrigin={{ vertical: 'top', horizontal : 'center'}}
+	            open={open}
+	            onClose={handleClose}
+	            key='top center'
+	            autoHideDuration={3000}
+	        >
+	        	<Alert
+				    onClose={handleClose}
+				    severity={message && message.length > 0 ? "success" : "error"}
+				    variant="filled"
+				    sx={{ width: '100%' }}
+				  >
+			    	{
+			    		message && message.length > 0 ? 
+			    			message 
+			    		:
+			    			error && error.length > 0 ? 
+			    				error
+			    			:
+			    				''
+			    	}
+			  	</Alert>
+			</Snackbar>
+		}
+		</>
 	)
 }

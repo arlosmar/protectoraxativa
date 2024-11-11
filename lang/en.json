@@ -22,7 +22,22 @@
         "currentImage"  :   "Current image",
         "Remove"    :   "Remove",
         "Videos"    :   "Videos",
-        "Filter"    :   "Filter"
+        "Filter"    :   "Filter",
+        "Delete"    :   "Delete",
+        "DeleteConfirm" :   "Are you sure you want to delete?",
+        "Share" :   "Share",
+        "Copy"  :   "Copy",
+        "Copied"    :   "Copied",
+        "Export"    :   "Export",
+        "Link"  :   "Link",
+        "Form"  :   "Form",
+        "Field-Empty" :   "Empty field",
+        "All-Male-Singular"  :   "All",
+        "Update"    :   "Update"
+    },
+    "Cookies" : {
+        "button-accept" : "Accept",
+        "message" : "This web uses the minimum necessary cookies to work. We do not collect information of any type."
     },
     "Title" : {
         "Home" : "Home",
@@ -36,7 +51,8 @@
         "Home" : "Home",
         "Animals" : "Animals",
         "News" : "News",
-        "Contact" : "Contact"
+        "Contact" : "Contact",
+        "User"  :   "User"
     },
     "under-development" : "In development",
     "introduction": {
@@ -88,7 +104,13 @@
             "line25"    :   "This is another source of income for the association.",
             "line26"    :   "We usually participate in this game of chance in the National Christmas Lottery on December 22.",
             "line27"    :   "The sales area is local, but we will always make it known to those who may be interested in collaborating with the association.",
-            "line28"    :   "For any information on this topic, you can contact us at:"
+            "line28"    :   "For any information on this topic, you can contact us at:",
+            "hosting": "Foster Homes",
+            "line29": "We are looking for foster homes for some animals, and some of them are special cases. These \"special animals\" may include dogs or cats that do not adapt well to life in the shelter (often due to previously living in the warmth of a home), those with dietary issues, or those who experience stress from living in a kennel. They may also be very elderly animals, animals with physical issues, or those requiring special medication. Sometimes, we seek foster homes for animals that have undergone surgery and need a short recovery period. There are many more reasons why an animal might need a foster home.",
+            "line30": "If you are interested in fostering, please contact us. We cover the veterinary expenses for foster animals. These animals must live in the home with the family that fosters them and be treated as a family member. The foster family should have enough time to care for the animal and be willing to show them love during their stay.",
+            "line31": "To foster an animal, send us a WhatsApp message at:",
+            "line32"    :   "Moreover you must fill in the following form:",
+            "line33": "Here are the terms for a foster home:"
         },
         "social"    :   {
             "title" :   "Social media",
@@ -99,7 +121,8 @@
             "youtube" :   "Youtube",
             "blog" :   "Blog",
             "soundcloud" :   "Soundcloud",
-            "ladridos" :   "Barks and licks"
+            "ladridos" :   "Barks and licks",
+            "tiktok"    :   "TikTok"
         },
         "partners"  :   {
             "title"  :   "Collaborators",
@@ -108,18 +131,40 @@
             },
             "friends"  :   {
                 "title"  :   "Friendly websites"
+            },
+            "apu"  :   {
+                "title"  :   "APU"
+            },
+            "subsidized"    :   {
+                "title" :   "Subsidizer entities",
+                "line1" :   "These entities partially subsidize the Shelter."
             }
         },
         "info": {
-            "title": "Who are we?",
-            "paragraph1": "Non-profit association, legally constituted and registered in the Autonomous Register of Associations of Valencia. All its managerial positions are unpaid. The work performed by all its members is altruistic and selfless.<br><br>Its main activity takes place at the Shelter for abandoned dogs located in the municipality of Xàtiva. It has all the necessary licenses and administrative authorizations, both municipal and regional. It has held the status of Zoological Core since May 7, 2002, and has been a Collaborative Entity of the Ministry of Agriculture, Fisheries, and Food of the Valencian Government since the resolution dated October 14, 1997.<br><br>This Shelter is situated on a property thanks to the first donation from Mr. Roberto Cortes and later from Mr. Francisco Aguado, who facilitated the financial acquisition of an adjoining plot, which enabled the installation and final establishment of the shelter.<br><br>Many personal and financial efforts have been made to improve it through new constructions, electrical installations, automatic drinkers, open spaces for recreation, a veterinary clinic to assist the housed animals, planting trees for shade, building septic tanks, drainage systems, storage for food and feed, and many other necessary projects that are still to be completed.<br><br>Located in a highly flood-prone area, it has led to flooding in part of the premises several times; however, gradually and thanks to the invaluable help of timely and extraordinary donations, new works have been guaranteed to minimize the impact of rains and torrents as much as possible.<br><br>Its ONLY COMMITMENT is to the protection and defense of animals in general and dogs in particular. IT ONLY HOUSES DOGS. It does not house cats due to a lack of economic and human resources to provide them with a dignified life in captivity, having few and overcrowded foster homes that in no way alleviate the serious problem these animals face.<br><br>IT OPPOSES AND CONDEMNS any mistreatment, aggression, or injustice towards them. Regardless of where it comes from or who it comes from. From those who applaud it and those who promote it. From those who justify it and those who tolerate and spread it. A lenient, insensitive, and permissive legislation in this regard is, has always been, and will be the best ally for the brutality in this country to sadly be our distinctive mark.<br><br>We only desire RESPONSIBLE ADOPTIONS. We oppose giving away animals at Christmas, birthdays, and special dates, and we are very tired of the passivity and indifference of public authorities regarding the injustices committed against animals. Also, from incapable and capricious owners who abandon their animals without caring what might happen to them and those who irresponsibly throw animals over the fences of the shelter or leave them tied to their fate. Or elderly household animals that will die of sadness and pain, and sometimes we will be unable to do anything to prevent it.<br><br>No animal, regardless of age or physical or functional limitations, has ever been or will be an obstacle to staying at our shelter, with special attention given to abandoned older animals, the unadapted, and the puppies.<br><br>We consider STERILIZATION as the only means to eradicate unwanted litters that fill municipal shelters and roads with death and blood, and we believe in education and awareness of this silently bleeding drama that unfolds day by day in this country.<br><br>We trust VOLUNTEERING as a key element for the functioning of this Society, and we base the economic survival of the Association on members, sponsors, donations from individuals, public subsidies, companies, and APU.<br><br>To those who help us, members, sponsors, individuals, and companies, we thank you for continuing to facilitate our work as you have until now and for trusting in all the work we have done over the years. To those accessing for the first time, if you cannot give an opportunity to those who desire it so much and deserve it, at least with your help, they may live a little better. Thank you.",
-            "paragraph2-title": "A little history",
-            "paragraph2": "The idea of creating an animal defense association in Xàtiva arose after a meeting of a group of people sensitized to animal issues, eager and enthusiastic about doing things in this area, as the municipal alternative to the problem of abandoned animals was that after a few days in the municipal shelter, and if no one claimed them, which was usually the most frequent occurrence, the animal would be sacrificed.<br><br>The aforementioned meeting took place on the former 4th floor of the Casa de la Cultura around February 1985, and later, on March 5 of the same year, \"The Protective Society of Animals and Plants of Xàtiva\" was established, being legalized on April 10 of the same year.<br><br>As there was no infrastructure, a member named \"Rosarín\" donated her land, which was part of her own house, to start taking in abandoned dogs from the very beginning of the society's birth.<br><br>Later, member Antonio Romero also temporarily donated his chalet in Rotglà, which was overcrowded and in great disrepair due to the large number of dogs housed there.<br><br>Finally, thanks to member Mr. Roberto Cortés, the association had its own and definitive place. In 1987, he donated the current lands and a donation (which was not the last) to begin the construction of the current facilities, which are located on \"Camí Senda de Murcia\" on the eastern side of the Puig.",
-            "paragraph2-footer": "Caption: Mr. Roberto Cortés with his wife during the construction of the facilities at the Puig shelter.",
-            "paragraph3": "The Association, whose acronym is SPAX, has had the following presidents throughout its 37 years of operation: <br><br>Mercedes Hernández, Roberto Cortés (who was named honorary president for life before his death), some Management Boards, Pilar Baraza, Lucía, and Mª Carmen Jachán Sánchez.<br><br>Mª Carmen Jachán Sánchez is a founding member and has always been on the board since its inception 37 years ago, serving as secretary, spokesperson, and for the last 12 years as president.<br><br>She was recognized on February 16, 2019, by the Xàtiva Local Police for her solidarity spirit with animals and her collaboration with the Local Police in the collection of lost animals.<br><br>In 1998, her long-standing work was also recognized in appreciation for many years of collaboration, effort, and dedication to this Society by all the board members and members of that year.<br><br>In recent years, under Mª Carmen Jachán's brilliant management as president, SPAX has entered a golden age in terms of finances, members, and sponsors; it also enjoys great prestige in Xàtiva and surrounding areas, being a reference shelter to follow. All associations in the city and institutions maintain admiration for our SPAX and many collaborate throughout the year to raise funds through various events they organize.",
-            "poem-title"  :   "A vosotros",
-            "poem"  :   "A los que, sin rumbo, por las calles vagan.<br>A los que, entre rejas, malviven cautivos.<br>A los que están solos, viejos, desvalidos,<br>sin nadie que vele por su bienestar.<br><br>A vosotros dedico estos versos,<br>que salen del alma y que al aire van,<br>confiando al papel mis anhelos,<br>por si el aire los lleva hasta el cielo,<br>y el cielo se apiada de vuestra orfandad.<br><br>Compartir con vosotros quisiera<br>los juegos alegres, los largos paseos,<br>y las sobremesas de tarde estival,<br>y en las noches frías del oscuro invierno,<br>bajo el mismo techo, juntos descansar,<br>lejos de los golpes, del hambre y del miedo,<br>al calor del fuego, saciados, y en paz.<br><br>Pero sé que estoy pidiendo demasiado,<br>y que mi deseo no se cumplirá.<br>En el mundo hay tantos perros olvidados,<br>pidiendo caricias y un trozo de pan,<br>que, aunque de par en par abra los brazos,<br>de abrazar a todos no seré capaz.<br><br>Y los que se quedan fuera del regazo<br>son los que más pesan en el corazón,<br>poblando mis noches de sueños amargos,<br>tiñendo mis días de desolación.<br><br>Incluso en las horas buenas de la vida,<br>fugaces oasis de felicidad,<br>me invade de pronto la melancolía,<br>porque su mirada, clavada en la mía,<br>de mi pensamiento no logro apartar.<br><br>Su triste recuerdo empaña la alegría,<br>que sentir podría, si olvidar pudiera,<br>que en todo momento, en algún lugar,<br>un perro perdido y desorientado,<br>a su ingrato dueño todavía espera,<br>sin saber siquiera… que lo ha abandonado.",
-            "poem-footer"   : "Elena Negueroles"
+            "title": "Who Are We?",
+            "paragraph1": "Non-profit association, legally constituted and registered in the Autonomous Registry of Associations of Valencia. All board positions are unpaid. The work carried out by all its members is altruistic and voluntary.<br/><br/>Most of its activity is developed in the Shelter for abandoned dogs located in the municipality of Xàtiva. It holds all the necessary licenses and administrative authorizations, both municipal and regional. It has been recognized as a Zoological Center number V-207 since May 7, 2002, and is a Collaborating Entity of the Ministry of Agriculture, Fishing, and Food of the Generalitat Valenciana by resolution dated October 14, 1997.<br/><br/>This Shelter is located on its own land thanks to the first donation from Mr. Roberto Cortes, and later from Mr. Francisco Aguado, who financially facilitated the acquisition of an adjoining plot, allowing the installation and permanent establishment of the shelter.<br/><br/>Many personal and financial efforts have gone into conditioning it with new constructions, electrical installations, automatic drinkers, open areas for recreation, a veterinary clinic for the animals' care, tree planting for shade, construction of septic tanks, drainage, storage for food and feed, and many necessary projects still to be carried out.<br/><br/>Situated in a highly flood-prone area, part of the premises has been flooded on several occasions; however, thanks to the invaluable help of timely and extraordinary donations, new works have gradually been carried out to reduce the damage caused by rains and floods as much as possible.<br/><br/>Its ONLY COMMITMENT is the protection and defense of animals in general and dogs in particular. IT ONLY TAKES IN DOGS. It does not house cats due to a lack of economic and human resources necessary to provide them with a dignified life in captivity, as the few foster homes available are already full and do not address the severe problem these animals face.<br/><br/>IT OPPOSES AND CONDEMNS any mistreatment, aggression, or injustice towards animals, no matter where or from whom it comes. From those who applaud it to those who promote it. From those who justify it to those who tolerate and spread it. A soft, insensitive, and permissive legislation on this issue is, continues to be, and will be the greatest ally to the brutality in this country, sadly making it our distinguishing mark.<br/><br/>We only wish for RESPONSIBLE ADOPTIONS. We are against giving animals as gifts for Christmas, birthdays, and other special dates, and we are very tired of the public authorities' indifference to the injustices committed against animals. Also, of irresponsible, whimsical owners who abandon their animals without caring about their fate, and of those who, irresponsibly, throw animals over the refuge’s fences or leave them tied up to their fate. Or elderly house pets who will die from sorrow, and sometimes we cannot do anything to prevent it.<br/><br/>Any animal, regardless of age or physical or functional limitations, is always welcome in our shelter, with special attention given to abandoned elderly animals, unadapted ones, and puppies.<br/><br/>We consider STERILIZATION as the only means to eradicate unwanted litters, which fill municipal shelters and roads with death and blood, and we believe in education and awareness about this silent, bloody tragedy happening every day in this country.<br/><br/>We rely on VOLUNTEERS as the key to this Society’s operations and base the Association's economic survival on members, sponsors, individual donations, public subsidies, companies, and APU.<br/><br/>To those who help us — members, sponsors, individuals, and companies — we are grateful for continuing to support our work as they have until now and trusting all the work we have done over the years. To those who are here for the first time, if you cannot give an opportunity to those who so desire and deserve it, at least, with your help, they can live a little better, thank you.",
+            "paragraph2-title": "A Bit of History",
+            "paragraph2": "The idea of creating an animal welfare association in Xàtiva came up after a meeting of a group of people sensitized to the issue of animal welfare, eager and excited to take action in this field, as the municipal alternative to abandoned animals was that after a few days in the municipal pound, if no one claimed them (as was often the case), the animal would be euthanized.<br/><br/>The aforementioned meeting took place on the fourth floor of the former Casa de la Cultura around February 1985. Later, on March 5 of the same year, the Society for the Protection of Animals and Plants of Xàtiva was established, and it was legalized on April 10 of the same year.<br/><br/>Since there was no infrastructure, a member named \"Rosarín\" donated her land, which was part of her home, to begin sheltering abandoned dogs from the very first moment this society was founded.<br/><br/>Later, member Antonio Romero temporarily offered his chalet in Rotglà, which suffered from damages due to the large number of dogs housed there.<br/><br/>Finally, thanks to Mr. Roberto Cortés, the association secured a permanent location. In 1987, he donated the <b>current land</b> and a donation (which was not his last) to begin construction of the current facilities.",
+            "paragraph2-footer": "Caption: Mr. <b>Roberto Cortés</b> with his wife during the construction of the Puig shelter facilities.",
+            "paragraph3": "The Association, known by the acronym SPAX, has had the following presidents throughout its history: Mercedes Hernández, Roberto Cortés (who was posthumously named \"<b>perpetual honorary president</b>\"), various Management Committees, Pilar Baraza, Lucía Liva, Mª Carmen Jachán, and Noemi Engo. Currently, the President is Jordi Ruiz.<br/><br/>All the actions and improvements of this association would not have been possible without the help of all the volunteers, our two employees (Salva and Eric), and the members of the Board of Directors who have been part of this association, and with their constant work and dedication, they have contributed to our cause.",
+            "poem-title": "To You",
+            "poem": "To those who, aimlessly, wander the streets.<br>To those who live caged, merely surviving.<br>To those who are alone, old, vulnerable,<br>with no one to look out for their well-being.<br><br>I dedicate these verses to you,<br>that come from the heart and float into the air,<br>entrusting to paper my desires,<br>hoping the wind carries them to the sky,<br>and that heaven takes pity on your loneliness.<br><br>I would like to share with you<br>joyful games, long walks,<br>and summer evening gatherings,<br>and on cold nights of the dark winter,<br>to rest under the same roof,<br>away from blows, hunger, and fear,<br>by the warmth of the fire, satisfied, and in peace.<br><br>But I know I am asking for too much,<br>and that my wish will not come true.<br>There are so many forgotten dogs in the world,<br>seeking caresses and a piece of bread,<br>that, even if I open my arms wide,<br>I will not be able to embrace them all.<br><br>And those left outside my embrace<br>weigh the most on my heart,<br>filling my nights with bitter dreams,<br>staining my days with desolation.<br><br>Even in the good moments of life,<br>fleeting oases of happiness,<br>suddenly, melancholy seizes me,<br>for their gaze, fixed upon mine,<br>I cannot keep out of my thoughts.<br><br>Their sad memory clouds the joy,<br>that I might feel, if I could forget,<br>that at every moment, somewhere,<br>a lost and disoriented dog,<br>still waits for its ungrateful owner,<br>not even knowing... it has been abandoned.",
+            "poem-footer": "Elena Negueroles"
+        }
+    },
+    "news"    :   {
+        "title" : "News",
+        "empty" :   "No news",
+        "load-more" :   "Load more",
+        "record"    :   {
+            "user"  :   "User",
+            "user_name"  :   "User",
+            "name"  :   "User",
+            "date"  :   "Date",
+            "hidden"  :   "Hidden",
+            "title"  :   "Title",
+            "description"   :   "Description",
+            "image" :   "Image"
         }
     },
     "animals": {
@@ -134,15 +179,17 @@
                 "line1": "If you are interested in adopting a dog or cat from our association, please download the following form:",
                 "form": "Form",
                 "line2": "You need to fill it out and send it to the following email:",
-                "title-protocol": "Adoption Protocol",
-                "line3": "The adopter can contact us via email or phone:",
-                "line4": "Once contact is made, the following questionnaire must be completed:",
-                "line5": "The purpose of the questionnaire is to ensure the success of the adoption.",
-                "line6": "Once it is considered that the adoption is favorable and the adopter has decided on a specific animal or has defined the desired characteristics (age, character, size,…), an appointment will be scheduled at the shelter to meet the animal.",
-                "line7": "To formalize the adoption, the adopter, upon presenting their DNI/NIE or valid passport (must be over 18), will sign an adoption contract with the Association.",
-                "line8": "All animals in our shelter are given with a microchip, rabies vaccine, and mandatory European passport in the Valencian Community (Decree 49/2005, of March 4, from the Council of the Generalitat Valenciana on the obligation of chip, passport, and vaccine).",
-                "line9": "This procedure will be carried out by a registered veterinarian assigned by this Association, regardless of whether the animal's owner later visits any other veterinarian.",
-                "line10": "The adopter must pay this Association the veterinary costs incurred as described above."
+                "title-protocol": "DO YOU WANT TO ADOPT ONE OF OUR FURRY FRIENDS?",
+                "line3": "Before beginning any procedures, you need to be sure that you can truly care for the animal and provide a dignified life throughout all its years. An animal requires basic care such as food, walks, socialization, veterinary care, hygiene, exercise...",
+                "line4": "That’s why at SPAX we encourage responsible adoptions. Adopted animals typically need an adaptation period of about 1 to 3 months, and we always aim to find a home that will offer them a dignified life, as they have already suffered abandonment once.",
+                "line5": "To adopt, you first need to access the section where all our animals appear to choose the lucky one who will share the rest of their life with you. Once you have decided on the lucky one, you can contact us by sending an email to <a href='mailto:{{email_adoptions}}' target='_blank'>{{email_adoptions}}</a> with the animal's name. ONLY TAKE THIS STEP IF YOU ARE FULLY COMMITTED TO CARING FOR THEM FOREVER AND ARE PATIENT THROUGH THE ADJUSTMENT PERIOD TO YOUR HOME! Otherwise, let’s not waste our time.",
+                "line6": "Once we receive your email, we will contact you to send a questionnaire that you’ll need to fill out so we can get to know you better and provide guidance based on the animal’s characteristics. PLEASE KEEP AN OPEN MIND AND LET US ADVISE YOU. You will also receive instructions on our adoption protocol and important information to ease their adaptation or specific advice in the case of dogs with special needs. You can also access our questionnaire by clicking the following link:",
+                "line7": "All animals are provided with a microchip, rabies vaccination, Versican DHPPi, and internal and external deworming, and they are spayed/neutered. At the time of adoption, you will receive a European passport, their veterinary record, and information on the animal’s health status prior to adoption.",
+                "line8": "SPAX informs adopters that they must make a financial donation of {{price_donative}} to the association to help cover veterinary expenses. ADOPTIONS ARE FREE OF CHARGE.",
+                "line9": "At the time of adoption, you will sign a contract that guarantees the animal will be well cared for and provided with the necessary care for responsible ownership. To do this, you will need to provide your original ID to make a copy.",
+                "line10": "It is IMPORTANT to emphasize that the donation at the time of adoption helps us cover the veterinary costs incurred by the animal, as they are handed over with all the requirements mandated by the new Animal Protection Law, enabling the shelter to continue helping other animals. All funds collected are entirely used to cover the veterinary and food expenses of the animals under our care.",
+                "line11": "Almost forgot – to take your animal home, you’ll need to bring a harness and a leash. If the harness is secure, even better, as the new family member doesn’t yet know you and doesn’t realize you’re going to change their life.",
+                "line12": "Below, we’ve included guides with important advice for adopting a furry friend."
             },
             "animals": {
                 "icon": "Adopt",
@@ -207,7 +254,7 @@
             },
             "animals": {
                 "icon": "Animals",
-                "title": "Virtual Pet Cemetery"
+                "title": "Virtual Cemetery"
             }
         },
         "record": {
@@ -219,7 +266,8 @@
                 "title": "Status",
                 "adopt": "Adopt",
                 "adopted": "Adopted",
-                "heaven": "Heaven"
+                "heaven": "Heaven",
+                "hidden"    :   "Hidden"
             },
             "Sponsored": {
                 "title": "Sponsored",
@@ -256,13 +304,26 @@
             "Weight": "Weight",
             "Location": "Location",
             "Birthdate": "Date of birth",
+            "Dead"  :   "Dead",
+            "Hidden"    :   "Hidden",
             "Deathdate": "Date of death",
             "Description": "Description",
             "Image": "Image",
             "Image2": "Image2",
+            "Image-Sponsored"   :   "Image sponsored",
             "Person": "Responsible persons",
             "Video" :   "Video",
-            "Video2" :   "Video2"
+            "Video2" :   "Video2",
+            "Updated"   :   "Updated",
+            "Internal-Info" :   "Internal information",
+            "vaccines"  :   "Vaccines",
+            "treatment"  :   "Treatment",
+            "castrated"  :   "Castrated",
+            "date_entry"  :   "Entry date",
+            "date_exit"  :   "Exit date",
+            "date_entry2"  :   "Entry date2",
+            "date_exit2"  :   "Exit date2",
+            "internal"  :   "Internal notes"
         }
     },
     "people": {
@@ -281,12 +342,20 @@
             "email2" :   "Email2",
             "phone2": "Phone2",
             "address2" :   "Address2",
+            "others"  :   "Others",
+            "other_people"  :   "Others",
             "description": "Description",
-            "animals": "Animals"
+            "animals": "Animals",
+            "users" :   "Users"
         }
     },
     "user": {
         "title": "User",
+        "news": {
+            "icon"  :   "News",
+            "title"  :   "News",
+            "empty" :   "No news"
+        },
         "profile": {
             "icon": "Profile",
             "title": "Profile",
@@ -298,6 +367,10 @@
                 "email-not-verified": "Your email address is not verified.",
                 "email-verify": "Send verification email",
                 "email-sent": "A new verification email has been sent to your email address."
+            },
+            "animals": {
+                "icon"  :   "Animals",
+                "title" :   "Animals"                
             },
             "settings": {
                 "icon": "Config",
@@ -321,7 +394,8 @@
                 "password-confirm": "Please enter your password to permanently delete the account.",
                 "password": "Password",
                 "cancel": "Cancel",
-                "delete": "Delete"
+                "delete": "Delete",
+                "deleted" : "Account deleted"
             }
         },
         "animals": {
@@ -342,6 +416,10 @@
             "heaven": {
                 "icon": "Heaven",
                 "title": "Heaven"
+            },
+            "hidden"    :   {
+                "icon"  :   "Hidden",
+                "title" :   "Hidden"
             }
         },
         "people": {
@@ -386,19 +464,24 @@
         "send": "Send",
         "info": {
             "title1": "General Information and Shelter",
-            "title2": "Collaborate",
+            "title2": "Collaborate partners and sponsors",
             "title3": "Adoptions",
+            "shift-adoptions" : "Monday to Friday from 05:00PM to 09:00PM",
             "title4": "Volunteering",
             "phone": "Phone",
             "shift-phone-title": "Phone Service Hours",
-            "shift-phone-line1": "Monday to Friday from 4:00 PM to 6:00 PM",
-            "shift-phone-line2": "Saturdays from 10:30 AM to 1:30 PM",
+            "shift-phone-line1": "Monday to Friday from 04:00PM to 06:00PM",
+            "shift-phone-line2": "Saturdays from 10:30 AM to 01:30PM",
             "shift-phone-footer1": "Please respect these hours.",
             "shift-phone-footer2": "It is attended by volunteer staff.",
             "shift-live-title": "Public Service Hours",
-            "shift-live-line1": "Monday to Friday from 10:00 AM to 6:00 PM",
-            "shift-live-line2": "Saturdays from 10:30 AM to 1:30 PM",
+            "shift-live-line1": "Saturdays from 09:30AM to 01:30PM",
             "title5": "Shelter attended 365 days a year"
         }
+    },
+    "share" :   {
+        "title" :   "Share",
+        "title-native"  :   "SPAX - protectoraxativa",
+        "text"  :   "Have a look at this animal"
     }
 }

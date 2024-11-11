@@ -12,57 +12,60 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Hash;
+use App\Models\{Status,Sponsor,Type,Age,Gender,Size,Breed,Person};
+use DB;
 
-class ProfileController extends Controller
-{
+class ProfileController extends Controller{
 
     public function __construct(){
         parent::__construct();   
     }
 
-    public function userProfile(Request $request,$subsection = null){
-        return $this->user($request,'profile',$subsection);
-    }
-
-    public function userAnimals(Request $request,$subsection = null,$page=1){
-        return $this->user($request,'animals',$subsection,$page);
-    }
-
-    public function userSections(Request $request,$section = null,$page=1){
-        return $this->user($request,$section,null,$page);
-    }
-
-    public function user(Request $request,$section = null,$subsection = null,$page = 1){
+    public function intranet(Request $request,$section = null,$subsection = null){
 
         $user = auth()->user();
 
-        if(
-            !isset($page) || 
-            empty($page) ||
-            !is_numeric($page) || 
-            $page < 1
-        ){
+        if(!isset($user->admin) || empty($user->admin)){
+
+            $status = session('status');
+
+            $msg = '';
+            if(isset($request->msg) && !empty($request->msg)){
+                $msg = $request->msg;
+            }
+
+            // get user person and animals
+            $user->load('person','person.animals');
+
+            // get foreign keys tables
+            $options = [                
+                'status_id' => Status::all()->select('id','name'),
+                'sponsor_id' => Sponsor::all()->select('id','name'),
+                'type_id' => Type::all()->select('id','name'),
+                'age_id' => Age::all()->select('id','name'),
+                'gender_id' => Gender::all()->select('id','name'),
+                'size_id' => Size::all()->select('id','name'),
+                'breed_id' => Breed::select('id',DB::raw('description as name'))->get(),
+                'person_id' => Person::all()
+            ];
+
+            $imagesPaths = config('paths.images');
+            $baseUrl = URL::to('/');
+            $itemsPerPage = config('variables.animalsPerPage');
             $page = 1;
+
+            return Inertia::render('Intranet/Intranet',compact('user','section','subsection','msg','status','options','imagesPaths','baseUrl','itemsPerPage','page'));
         }
-
-        // not used because we don't allow access to user section if not verified
-        //$mustVerifyEmail = $request->user() instanceof MustVerifyEmail;
-
-        $status = session('status');
-
-        $msg = '';
-        if(isset($request->msg) && !empty($request->msg)){
-            $msg = $request->msg;
+        else{
+            // in case admin goes to the intranet url, redirect
+            return Redirect::route('admin');
         }
-
-        $images_path = env('PATH_ANIMALS', '');
-        
-        return Inertia::render('User/User',compact('user','section','subsection','status','msg','images_path','page'));
     }
 
-    /**
-     * Display the user's profile form.
-     */
+    // Display the user's profile form.
     public function edit(Request $request): Response
     {
         /*
@@ -72,7 +75,7 @@ class ProfileController extends Controller
             'status' => session('status'),
         ]);
         */
-        return $this->user($request,'profile');
+        return $this->intranet($request,'account');
     }
 
     /**
@@ -91,24 +94,24 @@ class ProfileController extends Controller
         return Redirect::route('profile.edit');
     }
 
-    /**
-     * Delete the user's account.
-     */
-    public function destroy(Request $request): RedirectResponse
-    {
+    // Delete the user's account
+    public function destroy(Request $request): RedirectResponse{
+
+        $user = auth()->user();
+        
         $request->validate([
             'password' => ['required', 'current_password'],
-        ]);
-
-        $user = $request->user();
+        ]);      
 
         Auth::logout();
 
-        $user->delete();
-
+        //$user->delete();
+        
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return Redirect::to('/');
+        //return Redirect::to('/');  
+        // trans('user.account.deleted')
+        return Redirect::to('?msg=user.profile.account.deleted');
     }
 }

@@ -78,7 +78,13 @@ return [
         public_path('images') => storage_path('app/images'),
 
         // this creates link from public/forms => storage/app/forms
-        public_path('forms') => storage_path('app/forms')
+        public_path('forms') => storage_path('app/forms'),
+
+        // this creates link from public/css => storage/app/forms
+        public_path('css') => storage_path('app/css'),
+
+        // this creates link from public/guides => storage/app/guides
+        public_path('guides') => storage_path('app/guides')
     ],
 
 ];

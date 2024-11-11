@@ -188,6 +188,10 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'message'   => 'missatge',
+        'name'  => 'nom',
+        'email'  => 'email',
+    ],
 
 ];

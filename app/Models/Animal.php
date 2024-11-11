@@ -13,6 +13,7 @@ class Animal extends Model
     
     protected $fillable = [
         'code',
+        'hidden',
         'status_id',                
         'sponsor_id',                
         'type_id',            
@@ -23,14 +24,24 @@ class Animal extends Model
         'name',
         'weight',
         'birthdate',
-        'deathdate',
-        'description',
+        'dead',
+        'deathdate',        
         'location',
         'image',
         'image2',
+        'image_sponsored',
         'video',
         'video2',
-        'person_id'
+        'vaccines',
+        'treatment',
+        'castrated',
+        'date_entry',
+        'date_exit',
+        'date_entry2',
+        'date_exit2',
+        'person_id',
+        'internal',
+        'description'
     ];
 
     public function status(): BelongsTo

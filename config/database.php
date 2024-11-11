@@ -3,18 +3,28 @@
 use Illuminate\Support\Str;
 
 // get domain
-$url = url('/');
+// to avoid error with php artisan serve
+$url = PHP_SAPI === 'cli' ? false : url('/');
 
-// if localhost use sqlite
-$databaseConnection = 'mysql';
-if(str_contains($url,'localhost')){
-    $databaseConnection = 'sqlite';
+if(isset($url) && !empty($url)){
+    
+    // if localhost use sqlite
+    $databaseConnection = 'mysql';
+    if(str_contains($url,'localhost') || str_contains($url,'192.168')){
+        $databaseConnection = 'sqlite';
+    }
+    else{
+        // if not use mysql
+        $databaseConnection = 'mysql';
+    }
 }
 else{
-    // if not use mysql
-    $databaseConnection = 'mysql';
-}
+    // for migration/reverb online
+    //$databaseConnection = 'mysql';
 
+    // for migration/reverb localhost
+    $databaseConnection = 'sqlite';
+}
 return [
 
     /*

@@ -15,20 +15,23 @@ import Box from '@mui/material/Box';
 import HomeIcon from '@mui/icons-material/Home';
 import AnimalsIcon from '@mui/icons-material/Pets';
 import NewsIcon from '@mui/icons-material/Newspaper';
-import ContactIcon from '@mui/icons-material/Email';
+import UserIcon from '@mui/icons-material/Person';
+//import ContactIcon from '@mui/icons-material/Email';
 
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+//import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 //https://mui.com/material-ui/material-icons/
 
+/*
 const darkTheme = createTheme({
     palette: {
         mode: 'dark',
         primary: {
-            main: '#1976d2',
+            //main: '#1976d2',             
         },
     },
 });
+*/
 
 export default function BarBottom({t,from}){
 
@@ -49,6 +52,10 @@ export default function BarBottom({t,from}){
 
         case 'contact':
             highlighted = 'contact';
+            break;
+
+        case 'user':
+            highlighted = 'user';
             break;
     }
 
@@ -80,14 +87,18 @@ export default function BarBottom({t,from}){
             case 'contact':
                 link = 'contact';
                 break;
+
+            case 'user':
+                link = 'login';
+                break;
         }
 
-        if(link === 'news'){            
+        /*if(link === 'news'){            
             window.open('https://protectoraxativa.blogspot.com','_blank');
         }
-        else{
+        else{*/
             window.location.href = route(link);
-        }
+        //}
     }
 
     /*
@@ -140,67 +151,92 @@ export default function BarBottom({t,from}){
         </ThemeProvider>
     */}
 
-    const sxSelected = {         
+    const sxNavigation = {         
         "& .Mui-selected, .Mui-selected > svg": {
           color: "#FF8C00"
+        },
+        backgroundColor: '#000000',
+        // height: { xs: '80px', md: '56px' }
+        "@media screen and (orientation: portrait)": {
+            height: '60px'
         }
     };
 
-    const sxIcon = { 
+    const sxNavigationAction = { 
         color: 'white'
     };
 
+    const sxIcon = {
+        "@media screen and (orientation: portrait)": {
+            fontSize: 'xx-large'
+        },
+        "@media screen and (orientation: landscape)": {
+            fontSize: 'x-large'
+        }
+    }
+
+    //<ThemeProvider theme={darkTheme}>
+
     return (
-        <ThemeProvider theme={darkTheme}>
-            <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 1  }} elevation={3}>
+        <Paper 
+            sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 1  }} 
+            elevation={3}
+        >
 
-                <BottomNavigation
-                    showLabels
-                    value={value}
-                    onChange={clickIcon} 
-                    sx={sxSelected}               
-                >      
-                    <Box sx={{ flexGrow: 1 }}/>
+            <BottomNavigation
+                showLabels
+                value={value}
+                onChange={clickIcon} 
+                sx={sxNavigation}               
+            >      
+                <Box sx={{ flexGrow: 1 }}/>
 
-                    <BottomNavigationAction
-                        label={t('MenuBar.Home')}
-                        icon={<HomeIcon/>}                    
-                        value='home'
-                        sx={sxIcon}
-                    />
+                <BottomNavigationAction
+                    label={t('MenuBar.Home')}
+                    icon={<HomeIcon sx={sxIcon}/>}
+                    value='home'
+                    sx={sxNavigationAction}
+                />
 
-                    <Box sx={{ flexGrow: 1 }}/>
+                <Box sx={{ flexGrow: 1 }}/>
 
-                    <BottomNavigationAction
-                        label={t('MenuBar.Animals')}
-                        icon={<AnimalsIcon/>}                    
-                        value='animals'
-                        sx={sxIcon}
-                    />
+                <BottomNavigationAction
+                    label={t('MenuBar.Animals')}
+                    icon={<AnimalsIcon sx={sxIcon}/>}
+                    value='animals'
+                    sx={sxNavigationAction}
+                />
 
-                    <Box sx={{ flexGrow: 1 }}/>
+                <Box sx={{ flexGrow: 1 }}/>
 
-                    <BottomNavigationAction
-                        label={t('MenuBar.News')}
-                        icon={<NewsIcon/>}                    
-                        value='news'
-                        sx={sxIcon}
-                    />
+                <BottomNavigationAction
+                    label={t('MenuBar.News')}
+                    icon={<NewsIcon sx={sxIcon}/>}
+                    value='news'
+                    sx={sxNavigationAction}
+                />
 
-                    <Box sx={{ flexGrow: 1 }}/>
+                <Box sx={{ flexGrow: 1 }}/>
 
-                    <BottomNavigationAction
-                        label={t('MenuBar.Contact')}
-                        icon={<ContactIcon/>}                    
-                        value='contact'
-                        sx={sxIcon}
-                    />
+                <BottomNavigationAction
+                    label={t('MenuBar.User')}
+                    icon={<UserIcon sx={sxIcon}/>}
+                    value='user'
+                    sx={sxNavigationAction}
+                />
+                {/*
+                <BottomNavigationAction
+                    label={t('MenuBar.Contact')}
+                    icon={<ContactIcon sx={sxIcon}/>}
+                    value='contact'
+                    sx={sxNavigationAction}
+                />
+                */}
 
-                    <Box sx={{ flexGrow: 1 }}/>
+                <Box sx={{ flexGrow: 1 }}/>
 
-                </BottomNavigation>
+            </BottomNavigation>
 
-            </Paper>
-        </ThemeProvider>
+        </Paper>
     );
 }

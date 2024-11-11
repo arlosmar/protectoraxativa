@@ -7,7 +7,11 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ContactSendRequest;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
+use App\Mail\Contact;
+
+// https://laravel.com/docs/11.x/mail
 class ContactController extends Controller{
 
     public function __construct(){     
@@ -37,11 +41,33 @@ class ContactController extends Controller{
     public function contactSend(ContactSendRequest $request){
 
         $values = $request->validated();
-        
-        throw ValidationException::withMessages([
-            'error' => ['a']
-        ]);
-    
+
+        if(
+            isset($values['email']) && !empty($values['email']) &&
+            isset($values['message']) && !empty($values['message'])
+        ){
+            //$to = config('mail.contact.address');
+            $to = [
+                [
+                    'email' => config('mail.contact.address'), 
+                    'name' => config('mail.contact.name')
+                ]
+            ];
+            
+            try{
+                Mail::to($to)->send(new Contact($values));            
+            }
+            catch(\Exception $e){
+                throw ValidationException::withMessages([
+                    'error' => [trans('mail.contact.error')]
+                ]);
+            }
+        }
+        else{
+            throw ValidationException::withMessages([
+                'error' => [trans('mail.contact.error')]
+            ]);
+        }
         
         return back();
     }

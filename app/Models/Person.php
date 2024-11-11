@@ -25,11 +25,19 @@ class Person extends Model
         'email2',
         'phone2',
         'address2',
+        'other_people',        
+        'file',
+        'file2',
         'description'
     ];
 
     public function animals(): HasMany
     {
         return $this->hasMany(Animal::class);
+    }
+
+    public function users(): HasMany
+    {
+        return $this->hasMany(User::class);
     }
 }

@@ -1,3 +1,4 @@
+//import { useTranslation } from "react-i18next";
 import Grid from '@mui/material/Grid2';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
@@ -5,14 +6,23 @@ import HandshakeIcon from '@mui/icons-material/Handshake';
 import PetsIcon from '@mui/icons-material/Pets';
 import ChairIcon from '@mui/icons-material/Chair';
 import CasinoIcon from '@mui/icons-material/Casino';
+import HomeIcon from '@mui/icons-material/Home';
 
-export default function Colaboration({t,email_colaboration,email_volunteering,prices,forms}){
+export default function Colaboration({t,email_colaboration,email_volunteering,prices,forms,social,guides}){
+
+    //const { i18n } = useTranslation('global');
+
+    // guides are only in spanish
+    //const lang = i18n.language;
+    const lang = 'es';
 
     return (    	
         <>
+        {/*
         <h1 className='title-home'>
             {t('introduction.colaboration.title')}
         </h1>
+        */}
         <Grid container spacing={0} className='home-div-box'>
             <Grid size={{ xs: 12, md: 2 }} className='home-div-icon'>
                 <img
@@ -23,7 +33,7 @@ export default function Colaboration({t,email_colaboration,email_volunteering,pr
                 />
             </Grid>
             <Grid size={{ xs: 12, md: 10 }}>
-                <h1 className='subtitle-home'>
+                <h1 className='subtitle-colaboration'>
                     {t('introduction.colaboration.bizum')}
                 </h1>
                 <div 
@@ -63,7 +73,7 @@ export default function Colaboration({t,email_colaboration,email_volunteering,pr
                 <AccountBalanceIcon className="home-icon"/>
             </Grid>
             <Grid size={{ xs: 12, md: 10 }}>             
-                <h1 className='subtitle-home'>
+                <h1 className='subtitle-colaboration'>
                     {t('introduction.colaboration.bank')}
                 </h1>
                 <div 
@@ -98,7 +108,7 @@ export default function Colaboration({t,email_colaboration,email_volunteering,pr
                 <ChairIcon className="home-icon"/>
             </Grid>
             <Grid size={{ xs: 12, md: 10 }}>
-                <h1 className='subtitle-home'>
+                <h1 className='subtitle-colaboration'>
                     {t('introduction.colaboration.materials')}
                 </h1>
                 <div 
@@ -118,7 +128,7 @@ export default function Colaboration({t,email_colaboration,email_volunteering,pr
                 <HandshakeIcon className="home-icon"/>
             </Grid>
             <Grid size={{ xs: 12, md: 10 }}>
-                <h1 className='subtitle-home'>
+                <h1 className='subtitle-colaboration'>
                     {t('introduction.colaboration.partner')}
                 </h1>
                 <div 
@@ -173,7 +183,7 @@ export default function Colaboration({t,email_colaboration,email_volunteering,pr
                 <PetsIcon className="home-icon"/>
             </Grid>
             <Grid size={{ xs: 12, md: 10 }}>
-                <h1 className='subtitle-home'>
+                <h1 className='subtitle-colaboration'>
                     {t('introduction.colaboration.sponsorship')}
                 </h1>
                 <div 
@@ -236,7 +246,7 @@ export default function Colaboration({t,email_colaboration,email_volunteering,pr
                 <VolunteerActivismIcon className="home-icon"/>
             </Grid>
             <Grid size={{ xs: 12, md: 10 }}>
-                <h1 className='subtitle-home'>
+                <h1 className='subtitle-colaboration'>
                     {t('introduction.colaboration.volunteering')}
                 </h1>
                 <div 
@@ -263,10 +273,60 @@ export default function Colaboration({t,email_colaboration,email_volunteering,pr
         </Grid>
         <Grid container spacing={0} className='home-div-box'>
             <Grid size={{ xs: 12, md: 2 }} className='home-div-icon'>
+                <HomeIcon className="home-icon"/>
+            </Grid>
+            <Grid size={{ xs: 12, md: 10 }}>
+                <h1 className='subtitle-colaboration'>
+                    {t('introduction.colaboration.hosting')}
+                </h1>
+                <div 
+                    className='paragraph-top-separation'   
+                    dangerouslySetInnerHTML={{__html: t('introduction.colaboration.line29')}}
+                >                
+                </div>
+                <div
+                    className='paragraph-top-separation'
+                    dangerouslySetInnerHTML={{__html: t('introduction.colaboration.line30')}}
+                >                
+                </div>
+                <div
+                    className='paragraph-top-separation'
+                    dangerouslySetInnerHTML={{__html: t('introduction.colaboration.line31')}}
+                >                
+                </div>                
+                <div>
+                    <a href={'https://wa.me/'+social?.whatsapp} target='_blank'>
+                        {social?.whatsapp_noprefix}
+                    </a>
+                </div>
+                <div
+                    className='paragraph-top-separation'
+                    dangerouslySetInnerHTML={{__html: t('introduction.colaboration.line32')}}
+                >                
+                </div>     
+                <div>
+                    <a href={forms?.hosting} target='_blank'>
+                        {t('trans.Form')}
+                    </a>
+                </div>
+                <div
+                    className='paragraph-top-separation'
+                    dangerouslySetInnerHTML={{__html: t('introduction.colaboration.line33')}}
+                >                
+                </div>     
+                <div>
+                    <a href={guides?.hosting[lang]} target='_blank'>
+                        {t('trans.Link')}
+                    </a>
+                </div>
+            </Grid>
+        </Grid>
+        <Grid container spacing={0} className='home-div-box'>
+            <Grid size={{ xs: 12, md: 2 }} className='home-div-icon'>
                 <CasinoIcon className="home-icon"/>
             </Grid>
             <Grid size={{ xs: 12, md: 10 }}>
-                <h1 className='subtitle-home'>
+                <h1 className='subtitle-colaboration'>
                     {t('introduction.colaboration.lottery')}
                 </h1>
                 <div 

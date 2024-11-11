@@ -1,3 +1,5 @@
+import { getCookie, setCookie } from '@/Utils/Cookies';
+
 export const languages = () => {
 
     const languages = [
@@ -9,14 +11,44 @@ export const languages = () => {
     return languages;
 }
 
-// for carousel
-export const itemsPerPageCarousel = () => {
-    return 20;
+// for list
+export const itemsPerPageListOptions = (origin) => {
+
+    var options = [20,50,100];
+
+    switch(origin){
+        
+        case 'user-animals':
+        case 'user-people':
+        case 'user-news':
+            options = [20,50,100];
+            break;
+    }
+
+    return options;
 }
 
-// for list
-export const itemsPerPageList = () => {
-    return 20;
+export const itemsPerPageList = (origin) => {
+
+    var defaultItems = 20;
+    var itemsPerPageList = defaultItems;
+    
+    switch(origin){
+        
+        case 'user-animals':
+        case 'user-people':
+        case 'user-news':
+            defaultItems = 20;            
+            break;
+    }
+
+    var itemsPerPageList = getCookie('itemsPerPageList-'+origin);
+    if(!itemsPerPageList){
+        itemsPerPageList = defaultItems;
+        setCookie('itemsPerPageList-'+origin,itemsPerPageList);
+    }
+
+    return itemsPerPageList;
 }
 
 // get paramater

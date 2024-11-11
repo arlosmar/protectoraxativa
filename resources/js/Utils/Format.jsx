@@ -14,6 +14,18 @@ export const now = () => {
     return dayjs();
 }
 
+export const datesDif = (date1,date2,unit='seconds') => {
+
+    if(dayjs(date1).isValid() && dayjs(date2).isValid()){
+        const date1js = dayjs(date1);
+        const date2js = dayjs(date2);
+        return date2js.diff(date1js,unit);
+    }
+    else{
+        return false;
+    }
+}
+
 // check valid database date
 export const validDBdate = (date) => {
 
@@ -31,7 +43,95 @@ export const validDBdate = (date) => {
     return true;
 }
 
+// get year
+export const dateYear = (date) => {
+
+    importPlugins();
+
+    var result = '';
+
+    if(
+        !date || 
+        (
+            !dayjs(date,"YYYY-MM-DD HH:mm:ss").isValid() &&
+            !dayjs(date,"YYYY-MM-DD").isValid() &&
+            !dayjs(date,"DD/MM/YYYY HH:mm:ss").isValid() &&
+            !dayjs(date,"DD/MM/YYYY").isValid() &&
+            !dayjs(date,"DD-MM-YYYY HH:mm:ss").isValid() &&
+            !dayjs(date,"DD-MM-YYYY").isValid()
+        )
+    ){
+        result = '';
+    }
+    else{
+        if(
+            dayjs(date,"YYYY-MM-DD HH:mm:ss").isValid() ||
+            dayjs(date,"YYYY-MM-DD").isValid()
+        ){
+            var split = date.split('-');
+            result = split[0];
+        }
+        else{
+            if(
+                dayjs(date,"DD/MM/YYYY HH:mm:ss").isValid() ||
+                dayjs(date,"DD/MM/YYYY").isValid()
+            ){
+                var split = date.split('/');
+                var string = split[2];
+                var split2 = string.split(' ');
+                result = split2[0];
+            }
+            else{
+                var split = date.split('-');
+                var string = split[2];
+                var split2 = string.split(' ');
+                result = split2[0];
+            }
+        }
+    }
+
+    return result;
+}
+
+// get string with birthdate year / deathdate year
+export const yearsFormatted = (year1,year2) => {
+
+    var result = '';
+
+    if(
+        (year1 && year1.length > 0) ||
+        (year2 && year2.length > 0)
+    ){
+
+        if(year1 && year1.length > 0){
+            result = year1;
+        }
+        else{
+            result = '?';
+        }
+
+        if(year2 && year2.length > 0){
+            result = result + ' - ' + year2;
+        }
+        else{
+            result = result + ' - ?';
+        }
+    }
+    else{
+        result = '-';
+    }
+
+    return result;
+}
+
 // from database to format
+//import { date } from "@/Utils/Format"; 
+// date()
+
+// import * as format from "@/Utils/Format";
+// format.date()
+
+// db date to date
 export const date = (date, hour = false, timezone = false) => {
 
     importPlugins();
@@ -80,16 +180,120 @@ export const date = (date, hour = false, timezone = false) => {
     }
 }
 
-// from formatted to db
-export const date2db = (date) => {
+// db date utc
+export const dateWithOffsetToDbDate = (date, formatInitial = 'DD/MM/YYYY HH:mm:ss') => {
 
     importPlugins();
 
-    if(!date || !dayjs(date,"DD/MM/YYYY").isValid()){
+    if(
+        !date || 
+        !dayjs(date).isValid() ||
+        date === ''
+    ){
+        return '';
+    }
+    
+    var timezone = dayjs.tz.guess();
+    
+    var dateFormatted = dayjs(date,formatInitial);
+    var result = dayjs.tz(dateFormatted,timezone).utc().format('YYYY-MM-DD HH:mm:ss')//.toDate();
+    
+    return result;
+}
+
+// db date => remove offset => db date utc
+export const dbDateWithOffsetToDbDate = (date) => {
+    return dateWithOffsetToDbDate(date,'YYYY-MM-DD HH:mm:ss');
+}
+
+// input date => remove offset => db date utc
+// 2024-12-01T12:00
+export const inputDateWithOffsetToDbDate = (date) => {
+    return dateWithOffsetToDbDate(date,'YYYY-MM-DDTHH:mm');
+}
+
+// from formatted to db
+export const date2db = (date, hour = false, timezone = false) => {
+
+    importPlugins();
+
+    if(!date){
+        return '';
+    }
+
+    var formatFinal = 'YYYY-MM-DD';
+    var formatInitial = 'DD-MM-YYYY';
+    if(hour){
+        formatFinal = formatFinal+' HH:mm';
+        formatInitial = formatInitial+' HH:mm';
+    }
+
+    if(!dayjs(date,formatInitial).isValid()){
         return '';  
     }
 
-    return dayjs(date,"DD/MM/YYYY").format('YYYY-MM-DD');
+    return dayjs(date,formatInitial).format(formatFinal);
+}
+
+// date1 < date2 => -1, date1 = date2 => 0, date1 > date2 => 1
+export const compareDates = (date1,date2,format = 'YYYY-MM-DD',format2 = null) => {
+
+    var result = 0;
+
+    importPlugins();
+
+    var date1js = null;
+    var date2js = null;
+
+    var isNotValid1 = false;
+    var isNotValid2 = false;
+    if(!date1 || !dayjs(date1,format)){
+        isNotValid1 = true;
+    }
+    else{
+        date1js = dayjs(date1,format);
+    }
+
+    var formatSecondDate = format2 ? format2 : format;
+
+    if(!date2 || !dayjs(date2,formatSecondDate)){
+        isNotValid2 = true;
+    }
+    else{
+        date2js = dayjs(date2,formatSecondDate);
+    }
+
+    if(isNotValid1){
+
+        if(isNotValid2){
+            result = 0; // same
+        }
+        else{
+            result = -1; // b < a 
+        }
+    }
+    else{
+        // b with value but a empty
+        if(isNotValid2){
+            result = 1; // b > a 
+        }
+        else{
+           
+            if(date1js.isBefore(date2js)){
+                result = -1;
+            }
+            else{
+                if(date1js.isAfter(date2js)){
+                    result = 1;
+                }
+                else {
+                    result = 0;
+                }
+            }
+        }
+    }  
+
+    return result;
 }
 
 // format animals
@@ -114,8 +318,10 @@ export const formatAnimal = (t,item) => {
 
     var itemFormatted = {
         id: item?.id,
-        code: item?.code ? item.code : item?.id,
-        name: item?.name,
+        updated_at: date(item?.updated_at,false,false),
+        code: item?.code ? item.code : null,
+        hidden: item?.hidden ? item.hidden : 0,
+        name: item?.name ? item.name : '',
         status: item?.status?.name && item.status.name.length > 0 ? t('animals.record.Status.'+item.status.name) : '',
         sponsor: item?.sponsor?.name && item.sponsor.name.length > 0 ? t('animals.record.Sponsored.'+item.sponsor.name) : '',        
         type: item?.type?.name && item.type.name.length > 0 ? t('animals.record.Type.'+item.type.name) : '',
@@ -125,17 +331,23 @@ export const formatAnimal = (t,item) => {
         age: item?.age?.name && item.age.name.length > 0 ? t('animals.record.Age.'+item.age.name) : '',
         weight: item?.weight,
         birthdate: date(item?.birthdate,false,false),
+        birthdate_year: dateYear(item?.birthdate),
+        dead: item?.dead ? item.dead : 0,
         deathdate: date(item?.deathdate,false,false),
+        deathdate_year: dateYear(item?.deathdate),
+        internal: item?.internal && item.internal.length > 0 ? item.internal : '',
         description: item?.description && item.description.length > 0 ? item.description : '',
         location: item?.location && item.location.length > 0 ? item.location : '',
         image: item?.image ? item.image : '',
         image_file : null,
         image2: item?.image2 ? item.image2 : '',
-        image2_file : null,        
+        image2_file : null,   
+        image_sponsored: item?.image_sponsored ? item.image_sponsored : '',
+        image_sponsored_file : null,     
         video: item?.video ? item.video : '',    
         video2: item?.video2 ? item.video2 : '',
         person: item?.person ? item.person : null,
-        person_name: item?.person?.name2 && item.person.name2.length > 0 ? item?.person?.name+' '+item?.person?.surname+' / '+item?.person?.name2+' '+item?.person?.surname2 : item?.person?.name && item.person.name.length > 0 ? item?.person?.name+' '+item?.person?.surname : null,
+        person_name: peopleNames(item?.person),
         // save the ids as well
         status_id: item?.status_id,
         sponsor_id: item?.sponsor_id,
@@ -144,13 +356,20 @@ export const formatAnimal = (t,item) => {
         gender_id: item?.gender_id,
         size_id: item?.size_id,
         age_id: item?.age_id,
-        person_id: item?.person_id
+        person_id: item?.person_id,
+        vaccines: item?.vaccines ? item.vaccines : '',
+        treatment: item?.treatment ? item.treatment : '',
+        castrated: item?.castrated ? item.castrated : 0,
+        date_entry: date(item?.date_entry,false,false),
+        date_exit: date(item?.date_exit,false,false),
+        date_entry2: date(item?.date_entry2,false,false),
+        date_exit2: date(item?.date_exit2,false,false)
     };
   
     return itemFormatted;
 }
 
-// format animals
+// format people
 export const formatPeople = (t,items) => {
 
     var resultFormatted = [];
@@ -186,8 +405,70 @@ export const formatPerson = (t,item) => {
         email2: item?.email2,
         phone2: item?.phone2,
         address2: item?.address2,
+        other_people: item?.other_people,
         description: item?.description,
-        animals: item?.animals ? item.animals : null
+        animals: item?.animals ? item.animals : null,
+        animals_names: animalsNames(item?.animals),
+        users: item?.users ? item.users : null,
+        users_items: usersItems(item?.users)/*,
+        users_names: usersNames(item?.users)*/
+    };
+  
+    return itemFormatted;
+}
+
+export const formatPeopleOptions = (options) => {
+
+    var optionsFormatted = [];
+
+    if(options?.users && options.users.length > 0){
+
+        options.users.map((user,index) => {
+                                
+            var element = {
+                value : user?.id,
+                label : userName(user)
+            };                      
+
+            optionsFormatted.push(element);
+        });
+    }
+        
+    return optionsFormatted;
+}
+
+// format news
+export const formatNews = (t,items) => {
+
+    var resultFormatted = [];
+
+    if(items && items.length > 0){
+                        
+        items.map((item,i) => {
+
+            var itemFormatted = formatNew(t,item);
+          
+            resultFormatted.push(itemFormatted);
+        });
+    }
+
+    return resultFormatted;
+}
+
+export const formatNew = (t,item) => {
+
+    var itemFormatted = {
+        id: item?.id,        
+        title: item?.title,
+        description: item?.description,
+        //description_short: item?.description && item?.description.length > 30 ? item?.description.substring(0,27)+'...' : item?.description,
+        image: item?.image,
+        image_file : null,
+        date: date(item?.date,true,true),
+        hidden: item?.hidden ? item.hidden : 0,
+        user: item?.user ? item.user : null,
+        user_name: item?.user?.name,
+        user_id: item?.user_id
     };
   
     return itemFormatted;
@@ -226,6 +507,290 @@ export const videoFormat = (link,type = 'youtube') => {
     else{
         return resul;
     }
+}
+
+// format people names
+export const peopleNames = (person, other = false) => {
+
+    var names = '';
+
+    var surname = person?.surname && person?.surname.length > 0 ? person.surname : '';
+    var surname2 = person?.surname2 && person?.surname2.length > 0 ? person.surname2 : '';
+
+    if(person?.name && person.name.length > 0){
+
+        if(person?.name2 && person.name2.length > 0){
+            names = person?.name+' '+surname+' / '+person?.name2+' '+surname2;
+        }
+        else{
+            names = person?.name+' '+surname;
+        }
+    }
+    else{
+        
+        if(person?.name2 && person.name2.length > 0){ 
+            names = person?.name2+' '+surname2;
+        }
+        else{
+            names = '';
+        } 
+    }
+
+    // other people
+    if(other && person?.other_people && person.other_people.length > 0){
+        names = names+' / '+person.other_people;
+    }
+
+    return names;
+}
+
+// format animals names
+export const animalsNames = (animals) => {
+
+    var names = [];
+
+    if(animals && animals.length > 0){
+        animals.map((animal,index) => {
+            names.push('['+animal?.code+']'+(animal?.name ? ' '+animal.name : ''));
+        });
+    }
+
+    return names.join(' / ');
+}
+
+export const usersItems = (users) => {
+
+    var items = [];
+
+    if(users && users.length > 0){
+        users.map((user,index) => {
+            items.push({
+                value: user?.id,
+                label: userName(user)
+            });
+        });
+    }
+
+    return items;
+}
+
+// format users names
+export const userName = (user) => {
+
+    var name = '';
+
+    if(user){        
+        name = user?.email+(user?.name ? ' ('+user.name+')' : '');        
+    }
+
+    return name;
+}
+
+export const usersNames = (users) => {
+
+    var names = [];
+
+    if(users && users.length > 0){
+        users.map((user,index) => {
+            names.push(userName(user));
+        });
+    }
+
+    return names.join(' / ');
+}
+
+// to compare values and order tables
+export const descendingComparator = (a, b, orderBy, origin) => {
+
+    var type = '';
+    var result = 0; // same
+
+    var nums = [];
+    var datesSpanishSlash = []; // DD/MM/YYYY
+    var datesSpanishDash = []; // DD-MM-YYYY
+    var dates = []; // YYYY-MM-DD
+    var booleans = [];
+    switch(origin){
+
+        case 'user-news':
+            nums = ['hidden'];
+            datesSpanishSlash = ['date'];
+            booleans = ['hidden'];
+            break;
+
+        case 'user-animals':
+            nums = ['code','size'];
+            datesSpanishSlash = ['birthdate','deathdate','updated_at'];
+            break;
+
+        case 'user-people':            
+            datesSpanishSlash = ['birthdate','birthdate2'];
+            break;
+    }
+
+    var value1 = b[orderBy];
+    var value2 = a[orderBy];
+
+    if(nums.includes(orderBy)){
+        type = 'numerical';
+    }
+    else{        
+        if(datesSpanishSlash.includes(orderBy)){
+            type = 'dateSpanishSlash';
+        }
+        else{
+            if(dates.includes(orderBy)){
+                type = 'date';
+            }
+            else{
+                if(datesSpanishDash.includes(orderBy)){
+                    type = 'dateSpanishDash';
+                }
+                else{
+                    if(booleans.includes(orderBy)){
+                        type = 'boolean';
+                    }
+                    else{
+                        type = 'string';
+                    }
+                }
+            }
+        }
+    }
+
+    switch(type){
+
+        case 'boolean':
+            var value1bool = 1;
+            if(!value1 || value1 === null || value1 === false){
+                value1bool = 0;
+            }
+
+            var value2bool = 1;
+            if(!value2 || value2 === null || value2 === false){
+                value2bool = 0;
+            }
+
+            if(value1 < value2){
+                result = -1;
+            }
+            else{
+                if(value1 > value2){
+                    result = 1;
+                }
+                else{
+                    result = 0;
+                }
+            }
+            break;
+
+        case 'numerical':
+
+            // if empty value, fill in with -1 to be the 1st
+            // we don't have negative numbers on the list, so no problem
+            var isNotValid1 = !value1 || value1 == '';
+            var isNotValid2 = !value2 || value2 == '';
+
+            if(isNotValid1){
+                value1 = -1;
+            }
+            
+            if(isNotValid2){
+                value2 = -1;
+            }
+
+            if(value1 < value2){
+                result = -1;
+            }
+            else{
+                if(value1 > value2){
+                    result = 1;
+                }
+                else{
+                    result = 0;
+                }
+            }
+        
+            break;
+        
+        case 'date':
+        case 'dateSpanishSlash':
+        case 'dateSpanishDash':
+
+            var format = 'YYYY-MM-DD';
+
+            switch(type){
+
+                case 'dateSpanishSlash':
+
+                    var split = value1.split(' ');
+
+                    // with hour
+                    format = 'DD/MM/YYYY';
+                    if(split.length > 1){
+                        format = format+ ' hh:mm:ss';
+                    }
+                    break;
+
+                case 'dateSpanishDash':
+
+                    var split = value1.split(' ');
+
+                    // with hour
+                    format = 'DD-MM-YYYY';
+                    if(split.length > 1){
+                        format = format+ ' hh:mm:ss';
+                    }                  
+                    break;
+                /*
+                case 'date':
+                default:
+                    break;
+                */
+            }          
+
+            result = compareDates(value1,value2,format);  
+            break;
+
+        case 'string':        
+
+            var isNotValid1 = !value1 || value1.length === 0;
+            var isNotValid2 = !value2 || value2.length === 0;
+
+            if(isNotValid1){
+
+                if(isNotValid2){
+                    result = 0; // same
+                }
+                else{
+                    result = -1; // b < a 
+                }
+            }
+            else{
+                // b with value but a empty
+                if(isNotValid2){
+                    result = 1; // b > a 
+                }
+                else{
+                    // 1st < 2nd => -1
+                    // 1st > 2nd => 1
+                    // otherwise 0
+                    var compare = value1.localeCompare(value2);            
+                    result = compare;
+                }
+            }
+            break;
+    }
+
+    return result;
+}
+
+export const getComparator = (order, orderBy, origin) => {
+    
+    return order === 'desc' ? 
+        (a, b) => descendingComparator(a, b, orderBy, origin)
+    : 
+        (a, b) => -descendingComparator(a, b, orderBy, origin);
 }
 
 ////////////////////////////////////////

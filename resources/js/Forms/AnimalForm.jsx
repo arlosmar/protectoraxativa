@@ -1,19 +1,26 @@
 import Input from '@/Components/Input';
 import InputSelect from '@/Components/InputSelect';
+import InputRichText from '@/Components/InputRichText';
+import Switch from '@/Components/Switch';
 import { useState, useEffect } from 'react';
-import { videoFormat } from "@/Utils/Format"; 
+import { videoFormat, peopleNames } from "@/Utils/Format"; 
 
 export default function AnimalForm({origin,t,data,setData,options,edit,filter,
-	images_path,handleSubmit}){
+	imagePath,handleSubmit,subsection}){
 
 	const [ optionsFormatted, setOptionsFormatted ] = useState([]);
 	const [ preview, setPreview ] = useState(null);
 	const [ preview2, setPreview2 ] = useState(null);
+	const [ previewSponsored, setPreviewSponsored ] = useState(null);
 
 	const handleKeyDown = (event) => {
 		if (event.key === 'Enter') {
 			handleSubmit(event);
 		}
+	}
+
+	const handleInputRichText = (name,content) => {		
+		setData(name,content);
 	}
 
 	const handleInput = (e) => {
@@ -38,8 +45,23 @@ export default function AnimalForm({origin,t,data,setData,options,edit,filter,
 				setPreview2(objectUrl);
 				break;
 
+			case 'image_sponsored':
+				var value_file = e.target.files[0];
+				setData('image_sponsored_file',value_file);
+
+				var objectUrl = URL.createObjectURL(value_file);
+				setPreviewSponsored(objectUrl);
+				break;
+
+			case 'hidden':
+			case 'dead':
+			case 'castrated':
+				var value = e.target.checked ? 1 : 0;
+				setData(name,value);
+				break;
+
 			default:
-        		var value = e.target.value;
+        		var value = e.target.value;        		
         		setData(name,value);
         		break;
         }
@@ -184,6 +206,12 @@ export default function AnimalForm({origin,t,data,setData,options,edit,filter,
 				setData('image2_file',null);
 				setPreview2(null);
 			}
+			else{
+				if(name === 'image_sponsored'){			
+					setData('image_sponsored_file',null);
+					setPreviewSponsored(null);
+				}
+			}
 		}
 
 		document.getElementsByName(field)[0].value = null;
@@ -199,6 +227,11 @@ export default function AnimalForm({origin,t,data,setData,options,edit,filter,
 		else{
 			if(name === 'image2'){			
 				setData('image2',null);				
+			}
+			else{
+				if(name === 'image_sponsored'){			
+					setData('image_sponsored',null);				
+				}
 			}
 		}
     }
@@ -260,8 +293,7 @@ export default function AnimalForm({origin,t,data,setData,options,edit,filter,
             						break;
 
             					case 'person_id':            						
-            						trans = value?.name2 && value.name2.length > 0 ? value?.name+' '+value?.surname+
-            						' / '+value?.name2+' '+value?.surname2 : value?.name && value.name.length > 0 ? value?.name+' '+value?.surname : null;
+            						trans = peopleNames(value);
         							break;
         					}        					
 	        				
@@ -285,11 +317,11 @@ export default function AnimalForm({origin,t,data,setData,options,edit,filter,
         	
         setOptionsFormatted(optsFormatted);
         setInputValues(optsInputs);       
-    }, [options/*,data*/]);
+    }, [options,data]);
 
 	return (
 
-		<form>
+		<form onSubmit={handleSubmit}>
 
 			{/*
 				buttonsTop &&
@@ -313,20 +345,49 @@ export default function AnimalForm({origin,t,data,setData,options,edit,filter,
 	        */}
 
             <div className="">
-                
-                <div className=''>
-	                <Input	                    
-	                    name="code"
-	                    type="integer"
-	                    value={data?.code}                        
-	                    autoComplete="code"                        
-	                    onChange={handleInput}                        
-	                    placeholder={t('animals.record.Code')}                        
-	                    error=''
-	                    isFocused
-	                    handleKeyDown={filter ? handleKeyDown : ''}
-                    />
-	            </div>
+            	{
+	            	(
+	            		!filter ||
+	            		(origin && origin === 'user-animals' && subsection && subsection === 'heaven')
+	            	) &&
+	            	<div className=''>            		
+		                <Switch
+		                    name="hidden"	                    
+		                    checked={data?.hidden}
+		                    onChange={handleInput}
+		                    label={t('animals.record.Hidden')}
+	                    />
+		            </div>
+		        }
+                {
+                	edit ?
+		                <div className='mt-2'>
+			                <Input	                    
+			                    name="code"
+			                    type="integer"
+			                    value={data?.code}	                    
+			                    placeholder={t('animals.record.Code')}                        	                    
+			                    readOnly
+		                    />
+			            </div>
+			        :
+			        	filter ? 
+			        		<div className=''>
+				                <Input	                    
+				                    name="code"
+				                    type="integer"
+				                    value={data?.code}	                    
+				                    placeholder={t('animals.record.Code')}                        	                    
+				                    autoComplete="code"
+				                    onChange={handleInput}
+				                    error=''
+	                    			handleKeyDown={handleKeyDown}
+	                    			isFocused
+				                />
+				            </div>
+				        :
+				        	''   
+	        	}
 
 	            <div className='mt-2'>
 	            {
@@ -340,24 +401,27 @@ export default function AnimalForm({origin,t,data,setData,options,edit,filter,
                         options={optionsFormatted?.status_id}
                         placeholder={t('animals.record.Status.title')}
                         error=''
-                        autoComplete                   
+                        autoComplete      
                     />
                 }
 	            </div>
 
-	            <div className='mt-2'>
-	            	<InputSelect                        
-                        name="sponsor_id"                        
-                        value={valueSponsor}
-                        onChange={(e,value) => handleValue('sponsor_id',value)}
-                        inputValue={inputValues?.sponsor_id}
-                        onInputChange={(e,value) => handleInputValue('sponsor_id',value)}
-                        options={optionsFormatted?.sponsor_id}
-                        placeholder={t('animals.record.Sponsored.title')}
-                        error=''
-                        autoComplete                        
-                    />
-	            </div>
+	            {
+	            	!filter &&
+		            <div className='mt-2'>
+		            	<InputSelect                        
+	                        name="sponsor_id"                        
+	                        value={valueSponsor}
+	                        onChange={(e,value) => handleValue('sponsor_id',value)}
+	                        inputValue={inputValues?.sponsor_id}
+	                        onInputChange={(e,value) => handleInputValue('sponsor_id',value)}
+	                        options={optionsFormatted?.sponsor_id}
+	                        placeholder={t('animals.record.Sponsored.title')}
+	                        error=''
+	                        autoComplete                        
+	                    />
+		            </div>
+		        }
 
 	            <div className='mt-2'>
 	            	<InputSelect                        
@@ -438,7 +502,8 @@ export default function AnimalForm({origin,t,data,setData,options,edit,filter,
 	                    onChange={handleInput}                        
 	                    placeholder={t('animals.record.Name')}                        
 	                    error=''
-	                    handleKeyDown={filter ? handleKeyDown : ''}                    
+	                    handleKeyDown={filter ? handleKeyDown : null} 
+	                    isFocused={!filter}                   
                     />
 	            </div>
 
@@ -451,7 +516,7 @@ export default function AnimalForm({origin,t,data,setData,options,edit,filter,
 	                    onChange={handleInput}                        
 	                    placeholder={t('animals.record.Weight')}                        
 	                    error=''   
-	                    handleKeyDown={filter ? handleKeyDown : ''}                 
+	                    handleKeyDown={filter ? handleKeyDown : null}                 
                     />
 	            </div>
 
@@ -464,37 +529,58 @@ export default function AnimalForm({origin,t,data,setData,options,edit,filter,
 	                    onChange={handleInput}                        
 	                    placeholder={t('animals.record.Birthdate')}                        
 	                    error=''
-	                    handleKeyDown={filter ? handleKeyDown : ''}
+	                    handleKeyDown={filter ? handleKeyDown : null}
                     />
 	            </div>
 
-	            <div className='mt-2'>
-	                <Input	                    
-	                    name="deathdate"
-	                    type="date"
-	                    value={data?.deathdate}                        
-	                    autoComplete="deathdate"                        
-	                    onChange={handleInput}                        
-	                    placeholder={t('animals.record.Deathdate')}                        
-	                    error=''
-	                    handleKeyDown={filter ? handleKeyDown : ''}
-
-                    />
-	            </div>
 	            {
 	            	!filter &&
-		            <div className='mt-2'>
-		                <Input		                    
-		                    name="description"
-		                    type="text"
-		                    multiline
-		                    rows={5}
-		                    value={data?.description}                        
-		                    autoComplete="description"                        
-		                    onChange={handleInput}                        
-		                    placeholder={t('animals.record.Description')}                        
-		                    error=''		                    
+		            <div className='mt-2'>            		
+		                <Switch
+		                    name="dead"	                    
+		                    checked={data?.dead}
+		                    onChange={handleInput}
+		                    label={t('animals.record.Dead')}
 	                    />
+		            </div>
+		        }
+
+	            {
+	            	(
+	            		(!filter && data?.dead) ||
+	            		(
+	            			filter && 	            			
+	            			(
+	            				(origin && origin === 'heaven') ||
+	            				(origin && origin === 'user-animals' && subsection && subsection === 'heaven')
+	            			)
+	            		)
+	            	) ?
+			            <div className='mt-2'>
+			                <Input	                    
+			                    name="deathdate"
+			                    type="date"
+			                    value={data?.deathdate}                        
+			                    autoComplete="deathdate"                        
+			                    onChange={handleInput}                        
+			                    placeholder={t('animals.record.Deathdate')}                        
+			                    error=''
+			                    handleKeyDown={filter ? handleKeyDown : null}
+
+		                    />
+			            </div>
+			        :
+			        	''
+		        }
+		        {
+	            	!filter &&
+		            <div className='mt-2'>
+		            	<InputRichText
+		            		name='description'
+		            		value={data?.description}
+		            		placeholder={t('animals.record.description')}
+		            		onChange={(content) => handleInputRichText('description',content)}
+		            	/>		                
 		            </div>
 		        }
 
@@ -507,23 +593,26 @@ export default function AnimalForm({origin,t,data,setData,options,edit,filter,
 	                    onChange={handleInput}                        
 	                    placeholder={t('animals.record.Location')}
 	                    error=''
-	                    handleKeyDown={filter ? handleKeyDown : ''}
+	                    handleKeyDown={filter ? handleKeyDown : null}
                     />
 	            </div>
 
-	            <div className='mt-2'>
-	            	<InputSelect                        
-                        name="person_id"                        
-                        value={valuePerson}
-                        onChange={(e,value) => handleValue('person_id',value)}
-                        inputValue={inputValues?.person_id}
-                        onInputChange={(e,value) => handleInputValue('person_id',value)}
-                        options={optionsFormatted?.person_id}
-                        placeholder={t('animals.record.Person')}
-                        error=''
-                        autoComplete                        
-                    />
-	            </div>
+	            {
+	            	(origin === 'user-animals' || origin === 'user-people') &&
+		            <div className='mt-2'>
+		            	<InputSelect                        
+	                        name="person_id"                        
+	                        value={valuePerson}
+	                        onChange={(e,value) => handleValue('person_id',value)}
+	                        inputValue={inputValues?.person_id}
+	                        onInputChange={(e,value) => handleInputValue('person_id',value)}
+	                        options={optionsFormatted?.person_id}
+	                        placeholder={t('animals.record.Person')}
+	                        error=''
+	                        autoComplete                        
+	                    />
+		            </div>
+		        }
 	            {
 	            	!filter &&
 	            	<h1 className='border-b mt-4 text-center'>{t('trans.Images')}</h1>
@@ -561,7 +650,7 @@ export default function AnimalForm({origin,t,data,setData,options,edit,filter,
 	                    					</a>)
 	                    				</span>
 	                    				<br/>
-	                    				<img src={images_path+data.image} className="mx-auto rounded w-50 mt-2"/>
+	                    				<img src={imagePath+data.image} className="mx-auto rounded w-50 mt-2"/>
 	                    			</div>
 	                    		:
 	                    			''
@@ -601,7 +690,47 @@ export default function AnimalForm({origin,t,data,setData,options,edit,filter,
 	                    					</a>)
 	                    				</span>
 	                    				<br/>
-	                    				<img src={images_path+data.image2} className="mx-auto rounded w-50 mt-2"/>
+	                    				<img src={imagePath+data.image2} className="mx-auto rounded w-50 mt-2"/>
+	                    			</div>
+	                    		:
+	                    			''
+	                    }
+		            </div>
+		        }
+
+		        {
+	            	!filter &&
+		            <div className='mt-2'>
+		                <Input		                    
+		                    name="image_sponsored"
+		                    type="file"
+		                    autoComplete="image_sponsored"
+		                    onChange={handleInput}		                    
+		                    handleFileRemove={handleFileRemove}
+		                    placeholder={t('animals.record.Image-Sponsored')}
+		                    error=''
+		                    accept="image/*"
+	                    />
+	                    {
+	                    	previewSponsored && previewSponsored.length > 0 ?
+	                    		<div className='text-center mt-2'>
+	                    			<span className='text-sm font-bold'>{t('trans.newImage')}</span><br/>
+	                    			<img src={previewSponsored} className="mx-auto rounded w-50 mt-2"/>
+	                    		</div>
+	                    	:
+	                    		data?.image_sponsored && data.image_sponsored.length > 0 ?
+	                    			<div className='text-center mt-2'>
+	                    				<span className='text-sm font-bold'>
+	                    					{t('trans.currentImage')} (<a 
+	                    						name='image_sponsored'
+	                    						className='cursor-pointer'
+	                    						onClick={handleImageRemove}
+	                    					>
+	                    						{t('trans.Remove')}
+	                    					</a>)
+	                    				</span>
+	                    				<br/>
+	                    				<img src={imagePath+data.image_sponsored} className="mx-auto rounded w-50 mt-2"/>
 	                    			</div>
 	                    		:
 	                    			''
@@ -666,6 +795,89 @@ export default function AnimalForm({origin,t,data,setData,options,edit,filter,
 			                </div>
 	                    }
 		            </div>
+	            }
+
+	            {
+	            	!filter &&
+	            	<>
+	            	<h1 id='internal-info-title'>{t('animals.record.Internal-Info')}</h1>
+	            	<div className='mt-2'>
+		                <Switch
+		                    name="castrated"	                    
+		                    checked={data?.castrated}
+		                    onChange={handleInput}
+		                    label={t('animals.record.castrated')}
+	                    />
+		            </div>
+	            	<div className='mt-2'>
+		            	<InputRichText
+		            		name='vaccines'
+		            		value={data?.vaccines}
+		            		placeholder={t('animals.record.vaccines')}
+		            		onChange={(content) => handleInputRichText('vaccines',content)}
+		            	/>		                
+		            </div>
+		            <div className='mt-2'>
+		            	<InputRichText
+		            		name='treatment'
+		            		value={data?.treatment}
+		            		placeholder={t('animals.record.treatment')}
+		            		onChange={(content) => handleInputRichText('treatment',content)}
+		            	/>		                
+		            </div>
+		            <div className='mt-2'>
+		                <Input	                    
+		                    name="date_entry"
+		                    type="date"
+		                    value={data?.date_entry}                        
+		                    autoComplete="date_entry"                        
+		                    onChange={handleInput}                        
+		                    placeholder={t('animals.record.date_entry')}                        
+		                    error=''		                    
+	                    />
+		            </div>
+		            <div className='mt-2'>
+		                <Input	                    
+		                    name="date_exit"
+		                    type="date"
+		                    value={data?.date_exit}                        
+		                    autoComplete="date_exit"                        
+		                    onChange={handleInput}                        
+		                    placeholder={t('animals.record.date_exit')}                        
+		                    error=''		                    
+	                    />
+		            </div>
+		            <div className='mt-2'>
+		                <Input	                    
+		                    name="date_entry2"
+		                    type="date"
+		                    value={data?.date_entry2}                        
+		                    autoComplete="date_entry2"                        
+		                    onChange={handleInput}                        
+		                    placeholder={t('animals.record.date_entry2')}                        
+		                    error=''		                    
+	                    />
+		            </div>
+		            <div className='mt-2'>
+		                <Input	                    
+		                    name="date_exit2"
+		                    type="date"
+		                    value={data?.date_exit2}                        
+		                    autoComplete="date_exit2"                        
+		                    onChange={handleInput}                        
+		                    placeholder={t('animals.record.date_exit2')}                        
+		                    error=''		                    
+	                    />
+		            </div>
+	            	<div className='mt-2'>
+		            	<InputRichText
+		            		name='internal'
+		            		value={data?.internal}
+		            		placeholder={t('animals.record.internal')}
+		            		onChange={(content) => handleInputRichText('internal',content)}
+		            	/>		                
+		            </div>		        
+	            	</>
 	            }
 
             </div>

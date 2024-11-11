@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import Grid from '@mui/material/Grid2';
-import { date } from "@/Utils/Format"; 
+import { date, peopleNames } from "@/Utils/Format"; 
 import AnimalModal from "@/Modals/AnimalModal";
 
-export default function Card({t,origin,person,images_path}){
+export default function Card({t,origin,person,imagePath,imagesPaths}){
 
     const [ showAnimal, setShowAnimal ] = useState(false);
     const [ animalItem, setAnimalItem ] = useState(null);
@@ -37,23 +37,12 @@ export default function Card({t,origin,person,images_path}){
             t={t}
             show={showAnimal}
             setShow={setShowAnimal}      
-            animal={animalItem}  
-            images_path={images_path}
+            animal={animalItem}      
+            imagesPaths={imagesPaths}
         />
-        {  
-            person?.name && person.name.length > 0 &&
-            <div className='title'>
-                {
-                    person?.name2 && person.name2.length > 0 ? 
-                        person?.name+' '+person?.surname+' / '+person?.name2+' '+person?.surname2 
-                    : 
-                        person?.name && person.name.length > 0 ? 
-                            person?.name+' '+person?.surname 
-                        : 
-                            null
-                }
-            </div>
-        }
+        <div className='title'>
+            {peopleNames(person)}            
+        </div>
         <Grid container spacing={2} className='person-record-div mb-2'> 
             {
                 columns && columns.length > 0 && columns.map((column,i) => (
@@ -62,7 +51,7 @@ export default function Card({t,origin,person,images_path}){
                         column?.id === 'name2' &&
                         <Grid size={{ xs: 12 }} className='border-t'></Grid>
                     }
-                    <Grid size={{ xs: 12, md: 6 }}>
+                    <Grid size={{ xs: 12, sm: 6 }}>
                         <span className='person-record-title'>{column?.text}:</span>
                         <br/>
                         {
@@ -84,7 +73,15 @@ export default function Card({t,origin,person,images_path}){
                     </Grid>                                                            
                     </>
                 ))
-            }       
+            }
+            {
+                person?.other_people && person.other_people.length > 0 &&
+                <Grid size={{ xs: 12 }} className='border-t pt-2'>
+                    <span className='person-record-title'>{t('people.record.others')}:</span>
+                    <br/>
+                    {person.other_people}
+                </Grid>       
+            }
             {
             person?.description && person.description.length > 0 &&
                 <Grid size={{ xs: 12 }} className='border-t pt-2'>
@@ -96,35 +93,54 @@ export default function Card({t,origin,person,images_path}){
                 </Grid>
             }                                                     
         </Grid>
-
-        <div className='mb-4' id='animal-parents'>
-            <span className='animal-record-title'>
-                {t('people.record.animals')}:
-            </span>
-            <br/>
-            {
-                person?.animals && person.animals.length > 0 &&
-                person.animals.map((item,i) => (   
-                    <>                    
-                    <a 
-                        className='cursor-pointer'
-                        onClick={() => handleInfo(item)}
-                    >
-                        {
-                            item?.name && item.name.length > 0 ? 
-                                item.name
-                            :
-                                item?.code ?
-                                    item.code
+        {
+            origin === 'user-people' &&
+            <div className='mb-4' id='animal-parents'>
+                <span className='animal-record-title'>
+                    {t('people.record.animals')}:
+                </span>
+                <br/>
+                {
+                    person?.animals && person.animals.length > 0 &&
+                    person.animals.map((item,i) => (   
+                        <>                    
+                        <a 
+                            className='cursor-pointer'
+                            onClick={() => handleInfo(item)}
+                        >
+                            {
+                                item?.name && item.name.length > 0 ? 
+                                    item.name
                                 :
-                                    item?.id
-                        }
-                    </a>
-                    <br/>
-                    </>
-                ))
-            }
-        </div>
+                                    item?.code ?
+                                        item.code
+                                    :
+                                        item?.id
+                            }
+                        </a>
+                        <br/>
+                        </>
+                    ))
+                }
+            </div>
+        }
+
+        {
+            person?.users_items && person.users_items.length > 0 &&
+            <div className='mb-4' id='animal-parents'>
+                <span className='animal-record-title'>
+                    {t('people.record.users')}:
+                </span>                
+                {                    
+                    person.users_items.map((item,i) => (   
+                        <>
+                        <br/>
+                        {item.label}
+                        </>
+                    ))
+                }
+            </div>
+        }
         </>
     )
 }

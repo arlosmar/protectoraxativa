@@ -1,13 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
-import { getDarkMode } from "@/Utils/Cookies";
-import { useForm } from '@inertiajs/react';
 
 import Input from '@/Components/Input';
 import AnimalForm from '@/Forms/AnimalForm';
 
-import { date, date2db } from "@/Utils/Format";
+import { date } from "@/Utils/Format";
 
 import Toast from '@/Components/Toast'; 
 
@@ -15,105 +13,12 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import SaveIcon from '@mui/icons-material/Save';
 
-export default function AnimalEditModal({origin,t,show,setShow,items,setItems,
-    item,setItem,position,options,subsection,images_path}){
+import { modalStyle } from '@/Utils/Styles';
 
-    const { data, setData, reset } = useForm(/*{
-        'code' : item ? item?.code : null,
-        'status_id' : item ? item?.status_id : null,
-        'status'    : item ? item?.status : null,
-        'sponsor_id' : item ? item?.sponsor_id : null,
-        'sponsor'    : item ? item?.sponsor : null,
-        'type_id' : item ? item?.type_id : null,
-        'type'    : item ? item?.type : null,
-        'age_id' : item ? item?.age_id : null,
-        'age'    : item ? item?.age : null,
-        'gender_id' : item ? item?.gender_id : null,
-        'gender'    : item ? item?.gender : null,
-        'size_id' : item ? item?.size_id : null,
-        'size'    : item ? item?.size : null,
-        'breed_id' : item ? item?.breed_id : null,
-        'breed'    : item ? item?.breed : null,
-        'name' : item ? item?.name : null,
-        'weight' : item ? item?.weight : null,
-        'birthdate' : item ? date2db(item?.birthdate) : null,
-        'deathdate' : item ? date2db(item?.deathdate) : null,
-        'description' : item ? item?.description : null,
-        'location' : item ? item?.location : null,
-        'image' : item ? item?.image : null,
-        'image_file' : null,
-        'image2' : item ? item?.image2 : null,
-        'image2_file' : null,
-        'person_id' : item ? item?.person_id : null,
-        'person'    : item ? item?.person : null,
-        'person_name' : item ? item?.person_name : null
-    }*/);
+export default function AnimalEditModal({t,origin,show,setShow,items,setItems,item,setItem,position,
+    options,subsection,imagesPaths,animals,setAnimals,filterUsed,setInternal,data,setData}){
 
-    useEffect(() => {
-        //setData('name', item ? item?.name : '');        
-        setData({...data, 
-            'code' : item ? item?.code : null,
-            'status_id' : item ? item?.status_id : null,
-            'status'    : item ? item?.status : null,
-            'sponsor_id' : item ? item?.sponsor_id : null,
-            'sponsor'    : item ? item?.sponsor : null,
-            'type_id' : item ? item?.type_id : null,
-            'type'    : item ? item?.type : null,
-            'age_id' : item ? item?.age_id : null,
-            'age'    : item ? item?.age : null,
-            'gender_id' : item ? item?.gender_id : null,
-            'gender'    : item ? item?.gender : null,
-            'size_id' : item ? item?.size_id : null,
-            'size'    : item ? item?.size : null,
-            'breed_id' : item ? item?.breed_id : null,
-            'breed'    : item ? item?.breed : null,
-            'name' : item ? item?.name : null,
-            'weight' : item ? item?.weight : null,
-            'birthdate' : item ? date2db(item?.birthdate) : null,
-            'deathdate' : item ? date2db(item?.deathdate) : null,
-            'description' : item ? item?.description : null,
-            'location' : item ? item?.location : null,
-            'image' : item ? item?.image : null,
-            'image_file' : null,
-            'image2' : item ? item?.image2 : null,
-            'image2_file' : null,
-            'video' : item ? item?.video : null,
-            'video2' : item ? item?.video2 : null,
-            'person_id' : item ? item?.person_id : null,
-            'person'    : item ? item?.person : null,
-            'person_name' : item ? item?.person_name : null
-        });
-    },[item]);
-
-    const darkmode = getDarkMode();
-
-    const style = {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: '98%',
-        maxWidth: 600,
-        maxHeight: '99%',
-        bgcolor: darkmode ? "black" : "background.paper",
-        border: darkmode ? "1px solid #fff" : "1px solid #000",
-        borderRadius: '5px',
-        boxShadow: 24,
-        px: 1,
-        pt: 1,
-        pb: 0,
-        //m: 1,
-        m: 0,
-        // to have scroll
-        /*
-        display: "flex",
-        flexDirection: "column",
-        //height: 700,
-        //overflow: "hidden",
-        overflowY: "auto",
-        // justifyContent="flex-end" # DO NOT USE THIS WITH 'scroll'
-        */
-    };
+    const style = modalStyle();
 
     const sxIcon = {
         fontSize: '35px'
@@ -147,12 +52,17 @@ export default function AnimalEditModal({origin,t,show,setShow,items,setItems,
         axios.post(route('animal.edit',[item?.id]),{data,id: item?.id ? item.id : null},config)
         .then(function (response){            
             
-            if(response.data.result){
+            if(response.data.result){                
                 
                 // update array to show directly on the list or info modal
                 const newItem = data;
-                newItem['birthdate'] = date(newItem['birthdate']);
-                newItem['deathdate'] = date(newItem['deathdate']);
+                newItem['updated_at'] = date(response.data.updated_at,false,false);
+                newItem['birthdate'] = date(newItem['birthdate'],false,false);
+                newItem['deathdate'] = date(newItem['deathdate'],false,false);
+                newItem['date_entry'] = date(newItem['date_entry'],false,false);
+                newItem['date_exit'] = date(newItem['date_exit'],false,false);
+                newItem['date_entry2'] = date(newItem['date_entry2'],false,false);
+                newItem['date_exit2'] = date(newItem['date_exit2'],false,false);
 
                 if(response.data?.images?.image){
                     newItem['image'] = response.data.images.image;
@@ -164,32 +74,89 @@ export default function AnimalEditModal({origin,t,show,setShow,items,setItems,
                     data['image2'] = newItem['image2'];
                 }
 
+                if(response.data?.images?.image_sponsored){
+                    newItem['image_sponsored'] = response.data.images.image_sponsored;
+                    data['image_sponsored'] = newItem['image_sponsored'];
+                }
+
                 // to see the updated info on the list
                 // only if the status is the same as the subsection we are
                 // if it is not the same, remove from list
                 var sameStatus = false;
 
-                if(
-                    (newItem?.status_id === 1 && subsection === 'adopt') ||
-                    (newItem?.status_id === 2 && subsection === 'adopted') ||
-                    (newItem?.status_id === 3 && subsection === 'heaven')
-                ){
-                    sameStatus = true;
+                // if dead it goes in heaven even if hidden
+                if(newItem?.dead === 1){
+                    if(subsection === 'heaven'){
+                        sameStatus = true;
+                    }
+                }                
+                else{
+                    // dead null or false
+                    if(newItem?.hidden === 1){
+                        if(subsection === 'hidden'){
+                            sameStatus = true;
+                        }
+                    }
+                    else{
+                        // hidden null or false
+                        // dead null or false
+                        if(                            
+                            (
+                                (
+                                    !newItem?.status_id ||
+                                    newItem?.status_id === ''  ||
+                                    newItem?.status_id === 1
+                                ) && 
+                                subsection === 'adopt'
+                            ) ||
+                            (newItem?.status_id === 2 && subsection === 'adopted')
+                        ){
+                            sameStatus = true;
+                        }
+                    }
                 }
 
-                // edit
+                // edit                
                 if(item){
 
                     if(sameStatus){
+
                         newItem['id'] = item?.id;                    
-                        const editedItems = items;            
-                        editedItems[position] = newItem; 
-                        setItems(editedItems);            
+                        const editedItems = items;
+                        editedItems[position] = newItem;
+                        setItems(editedItems); 
+
+                        setInternal(true);
+
+                        // add to original items 
+                        // if not using filters, position of the element is the same                    
+                        if(filterUsed){
+                            const findElementIndex = animals.findIndex((animal) => animal?.id === item?.id);
+                            const newAnimals = animals;            
+                            newAnimals[findElementIndex] = newItem; 
+                            setAnimals(newAnimals);   
+                        }
+                        else{                           
+                            setAnimals(editedItems);
+                        }
                     }
                     else{
                         // remove element from list
                         const removeElement = items.filter((item, index) => index !== position);
                         setItems(removeElement);
+
+                        // if filter applied it disappears from the list but when clicking remove filter
+                        // it appears again. so we need to update original items
+                        setInternal(true);
+
+                        // if not using filters, the list is the same                  
+                        if(filterUsed){
+                            const removeElementOriginal = animals.filter((animal) => animal?.id !== item?.id);
+                            setAnimals(removeElementOriginal);   
+                        }
+                        else{                    
+                            setAnimals(removeElement);
+                        }   
                     }
                     
                     // to see the updated info on the info modal
@@ -202,9 +169,19 @@ export default function AnimalEditModal({origin,t,show,setShow,items,setItems,
                     // to see the updated info on the list
                     // only if the status is the same as the subsection we are         
                     if(sameStatus){
+
+                        // add to the filtered items even if it doesn't pass the filters
+                        // because it would be strange not to be there when you create it
+                        // it not we should check if it passes the filters
+                        newItem['id'] = response.data.id;
+                        newItem['code'] = response.data.code;                        
                         setItems([...items,newItem]);
+
+                        // add to original items
+                        setInternal(true);
+                        setAnimals([...animals,newItem]);
                     }
-                    else{
+                    else{                        
                         // do not add element to array
                     }
                 }
@@ -238,18 +215,25 @@ export default function AnimalEditModal({origin,t,show,setShow,items,setItems,
         <Modal open={show} onClose={handleClose}>
 
             <Box sx={style} className='flex flex-col'>              
-                <div className='flex flex-col overflow-y-auto hide-scroll'>
+                
+                <div className='modal-div'>
                     <h1 className='title-user-list'>
                         {item ? t('trans.Save') : t('trans.Create')}
                     </h1>
-                    <AnimalForm
-                        origin={origin}
+                    <AnimalForm                        
                         t={t}
+                        origin={origin}
                         data={data}
                         setData={setData}                        
                         options={options}
                         edit={item ? true : false}
-                        images_path={images_path}
+                        imagePath={                
+                            item && item?.dead && (!item?.hidden || item?.hidden === null) ? 
+                                imagesPaths?.animals_external
+                            :
+                                imagesPaths?.animals
+                        }
+                        handleSubmit={handleSubmit}
                     />
                 </div>
 

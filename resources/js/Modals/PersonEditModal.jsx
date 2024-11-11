@@ -1,13 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
-import { getDarkMode } from "@/Utils/Cookies";
 import { useForm } from '@inertiajs/react';
 
 import Input from '@/Components/Input';
 import PersonForm from '@/Forms/PersonForm';
 
-import { date, date2db } from "@/Utils/Format";
+import { date } from "@/Utils/Format";
 
 import Toast from '@/Components/Toast'; 
 
@@ -15,67 +14,12 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import SaveIcon from '@mui/icons-material/Save';
 
-export default function PersonEditModal({t,show,setShow,items,setItems,item,setItem,position}){
+import { modalStyle } from '@/Utils/Styles';
 
-    const { data, setData, reset } = useForm(/*{
-        'name' : item ? item?.name : null,
-        'surname' : item ? item?.surname : null,
-        'dni'    : item ? item?.dni : null,
-        'birthdate' : item ? date2db(item?.birthdate) : null,        
-        'email' : item ? item?.email : null,
-        'phone' : item ? item?.phone : null,
-        'address' : item ? item?.address : null,
-        'name2' : item ? item?.name2 : null,
-        'surname2' : item ? item?.surname2 : null,
-        'dni2'    : item ? item?.dni2 : null,
-        'birthdate2' : item ? date2db(item?.birthdate2) : null,        
-        'email2' : item ? item?.email2 : null,
-        'phone2' : item ? item?.phone2 : null,
-        'address2' : item ? item?.address2 : null,
-        'description' : item ? item?.description : null,
-        'animals'   : item ? item?.animals : null
-    }*/);
+export default function PersonEditModal({t,show,setShow,items,setItems,item,setItem,position,people,
+    setPeople,filterUsed,setInternal,options,data,setData}){
 
-    useEffect(() => {
-        setData({...data, 
-            'name' : item ? item?.name : null,
-            'surname' : item ? item?.surname : null,
-            'dni'    : item ? item?.dni : null,
-            'birthdate' : item ? date2db(item?.birthdate) : null,        
-            'email' : item ? item?.email : null,
-            'phone' : item ? item?.phone : null,
-            'address' : item ? item?.address : null,
-            'name2' : item ? item?.name2 : null,
-            'surname2' : item ? item?.surname2 : null,
-            'dni2'    : item ? item?.dni2 : null,
-            'birthdate2' : item ? date2db(item?.birthdate2) : null,        
-            'email2' : item ? item?.email2 : null,
-            'phone2' : item ? item?.phone2 : null,
-            'address2' : item ? item?.address2 : null,
-            'description' : item ? item?.description : null,
-            'animals'   : item ? item?.animals : null
-        });
-    },[item]);
-
-    const darkmode = getDarkMode();
-
-    const style = {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: '98%',
-        maxWidth: 600,
-        maxHeight: '99%',
-        bgcolor: darkmode ? "black" : "background.paper",
-        border: darkmode ? "1px solid #fff" : "1px solid #000",
-        borderRadius: '5px',
-        boxShadow: 24,
-        px: 1,
-        pt: 1,
-        pb: 0,
-        m: 0
-    };
+    const style = modalStyle();
 
     const sxIcon = {
         fontSize: '35px'
@@ -93,26 +37,52 @@ export default function PersonEditModal({t,show,setShow,items,setItems,item,setI
         .then(function (response){            
             
             if(response.data.result){
+
+                setInternal(true);
                 
                 // update array to show directly on the list or info modal
                 const newItem = data;
-                newItem['birthdate'] = date(newItem['birthdate']);
-                newItem['birthdate2'] = date(newItem['birthdate2']);
+                newItem['birthdate'] = date(newItem['birthdate'],false,false);
+                newItem['birthdate2'] = date(newItem['birthdate2'],false,false);
+                newItem['users_items'] = newItem['users_ids'];
 
                 // edit
                 if(item){
                     
+                    // add to the filtered items even if it doesn't pass the filters
+                    // because it would be strange not to be there when you edit it
+                    // it not we should check if it passes the filters
                     newItem['id'] = item?.id;                    
                     const editedItems = items;            
                     editedItems[position] = newItem; 
-                    setItems(editedItems);             
-                    
+                    setItems(editedItems);          
+
+                    // add to original items 
+                    // if not using filters, position of the element is the same                    
+                    if(filterUsed){
+                        const findElementIndex = people.findIndex((person) => person?.id === item?.id);
+                        const newPeople = people;            
+                        newPeople[findElementIndex] = newItem; 
+                        setPeople(newPeople);   
+                    }
+                    else{
+                        setPeople(editedItems);
+                    }
+                        
                     // to see the updated info on the info modal
                     setItem(data);
                 }
                 else{
-                    // create            
-                    setItems([...items,newItem]);
+                    // create      
+
+                    // add to the filtered items even if it doesn't pass the filters
+                    // because it would be strange not to be there when you create it
+                    // it not we should check if it passes the filters
+                    newItem['id'] = response.data.id;                     
+                    setItems([...items,newItem]);    
+
+                    // add to original items
+                    setPeople([...people,newItem]);      
                 }
 
                 setShow(false);
@@ -144,7 +114,8 @@ export default function PersonEditModal({t,show,setShow,items,setItems,item,setI
         <Modal open={show} onClose={handleClose}>
 
             <Box sx={style} className='flex flex-col'>
-                <div className='flex flex-col overflow-y-auto hide-scroll'>
+                
+                <div className='modal-div'>
                     <h1 className='title-user-list'>
                         {item ? t('trans.Save') : t('trans.Create')}
                     </h1>
@@ -154,6 +125,7 @@ export default function PersonEditModal({t,show,setShow,items,setItems,item,setI
                         setData={setData}                        
                         edit={item ? true : false}
                         handleSubmit={handleSubmit}
+                        options={options}                        
                     />
                 </div>
 

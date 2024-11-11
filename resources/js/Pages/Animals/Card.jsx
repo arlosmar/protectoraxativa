@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import Grid from '@mui/material/Grid2';
-import { date, videoFormat } from "@/Utils/Format"; 
+import { date, videoFormat, yearsFormatted } from "@/Utils/Format"; 
 import PersonModal from "@/Modals/PersonModal";
 
-export default function Card({t,origin,animal,images_path}){
+export default function Card({t,origin,animal,imagePath,imagesPaths}){
 
     const [ showPerson, setShowPerson ] = useState(false);
     const [ personItem, setPersonItem ] = useState(null);
@@ -26,8 +26,20 @@ export default function Card({t,origin,animal,images_path}){
         {id:'weight',text:t('animals.record.Weight')+' (Kg)'},
         {id:'age',text:t('animals.record.Age.title')},
         {id:'birthdate',text:t('animals.record.Birthdate')},
-        {id:'deathdate',text:t('animals.record.Deathdate')}
+        {id:'deathdate',text:t('animals.record.Deathdate'),show:'heaven'}
     ];
+
+    const columnsInternal = [
+        {id:'vaccines',text:t('animals.record.vaccines')},
+        {id:'treatment',text:t('animals.record.treatment')},
+        {id:'castrated',text:t('animals.record.castrated')},
+        {id:'date_entry',text:t('animals.record.date_entry')},
+        {id:'date_exit',text:t('animals.record.date_exit')},
+        {id:'date_entry2',text:t('animals.record.date_entry2')},
+        {id:'date_exit2',text:t('animals.record.date_exit2')}        
+    ];
+
+    const potentiallySponsoredTitle = t('animals.record.Sponsored.potentially-sponsor');
 
     return (
         <>
@@ -39,7 +51,7 @@ export default function Card({t,origin,animal,images_path}){
                     show={showPerson}
                     setShow={setShowPerson}      
                     person={personItem}  
-                    images_path={images_path}        
+                    imagesPaths={imagesPaths}
                 />
             }
             {  
@@ -62,35 +74,34 @@ export default function Card({t,origin,animal,images_path}){
                             {animal?.location}
                         </div>
                     }
-                    {
-                        (animal?.birthdate || animal?.deathdate) &&                   
-                        <div className=''>
-                            {
-                                animal?.birthdate ?
-                                    animal.birthdate
-                                :
-                                    '?'
-                            }
-                            {
-                                animal?.deathdate ?
-                                    ' - ' + animal.deathdate
-                                :
-                                    ' - ?'
-                            }
-                        </div>                    
-                    }
+                    <div className=''>
+                        {yearsFormatted(animal?.birthdate_year,animal?.deathdate_year)}
+                    </div>                                        
                 </div>
             }
             {  
                 animal?.image && animal.image.length > 0 &&
                 <div className='mb-4'>
-                    <img src={images_path+animal.image} className="mx-auto rounded"/>
+                    <a href={imagePath+animal.image} target='_blank'>
+                        <img src={imagePath+animal.image} className="mx-auto rounded"/>
+                    </a>
                 </div>
             }
             {  
                 animal?.image2 && animal.image2.length > 0 &&
                 <div className='mb-4'>
-                    <img src={images_path+animal.image2} className="mx-auto rounded"/>
+                    <a href={imagePath+animal.image2} target='_blank'>
+                        <img src={imagePath+animal.image2} className="mx-auto rounded"/>
+                    </a>
+                </div>
+            }
+            {  
+                (origin === 'user-animals' || origin === 'user-people' || origin === 'sponsored' || origin === 'intranet-sponsored') &&
+                animal?.image_sponsored && animal.image_sponsored.length > 0 &&
+                <div className='mb-4'>
+                    <a href={imagePath+animal.image_sponsored} target='_blank'>
+                        <img src={imagePath+animal.image_sponsored} className="mx-auto rounded"/>
+                    </a>
                 </div>
             }
             {  
@@ -117,27 +128,98 @@ export default function Card({t,origin,animal,images_path}){
                     />
                 </div>
             }
-            <Grid container spacing={2} className='animal-record-div mb-2'> 
-                {
-                    columns && columns.length > 0 && columns.map((column,i) => (
-                        <Grid size={{ xs: 12, md: 6 }} className=''>
-                            <span className='animal-record-title'>{column?.text}:</span>
-                            <br/>
-                            {animal[column?.id] ? animal[column?.id] : <br/>}                            
-                        </Grid>                                                            
-                    ))
-                }     
-                {
-                    animal?.description && animal.description.length > 0 &&
-                    <Grid size={{ xs: 12 }} className='border-t pt-2'>
-                        <div 
-                            className='text-center'
-                            dangerouslySetInnerHTML={{__html: animal.description}}
-                        >                
-                        </div>                           
-                    </Grid>  
-                }                                                      
-            </Grid>
+            {
+                (
+                    !origin || 
+                    (origin === 'heaven' && animal?.description && animal.description.length > 0) ||
+                    (origin !== 'heaven' && origin !== 'sponsored')
+                ) &&
+                <Grid container spacing={2} className='animal-record-div mb-2'> 
+                    {
+                        origin !== 'heaven' &&
+                        columns && columns.length > 0 && columns.map((column,i) => (                        
+                            (  
+                                (
+                                    origin && 
+                                    (
+                                        origin === 'user-animals' || 
+                                        origin === 'user-people'
+                                    )
+                                ) ||
+                                !column?.show || 
+                                column.show === origin                                
+                            ) &&
+                            <Grid size={{ xs: 12, sm: 6 }} className=''>
+                                <span className='animal-record-title'>{column?.text}:</span>
+                                <br/>
+                                {
+                                    animal[column?.id] ? 
+
+                                        // if sponsored column and not on the user
+                                        // show potentially sponsored => no
+                                        (
+                                            origin !== 'user-animals' &&
+                                            origin !== 'user-people' &&
+                                            column?.id === 'sponsor' && 
+                                            animal[column?.id] === potentiallySponsoredTitle
+                                        ) ?
+                                            'No'
+                                        :
+                                            animal[column?.id] 
+                                    : 
+                                        <br/>
+                                }
+                            </Grid>
+                        ))
+                    }     
+                    {
+                        animal?.description && animal.description.length > 0 &&
+                        <Grid size={{ xs: 12 }} className={`${origin !== 'heaven' ? 'border-t' : ''} pt-2'`}>
+                            <div 
+                                className='text-center'
+                                dangerouslySetInnerHTML={{__html: animal.description}}
+                            >                
+                            </div>                           
+                        </Grid>  
+                    }                                                      
+                </Grid>
+            }
+            {
+                (origin === 'user-animals' || origin === 'user-people') &&
+                (
+                    (columnsInternal && columnsInternal.length > 0) ||
+                    (animal?.internal && animal.internal.length > 0)
+                ) &&
+                <>
+                <h1 id='internal-info-title'>{t('animals.record.Internal-Info')}</h1>
+                <Grid container spacing={2} className='animal-record-div mb-2'>                     
+                    {                        
+                        columnsInternal.map((column,i) => (
+                            <Grid size={{ xs: 12, sm: 6 }} className=''>
+                                <span className='animal-record-title'>{column?.text}:</span>
+                                <br/>
+                                {
+                                    animal[column?.id] ?
+                                        animal[column?.id]
+                                    : 
+                                        <br/>
+                                }
+                            </Grid>
+                        ))
+                    }     
+                    {
+                        animal?.internal && animal.internal.length > 0 &&
+                        <Grid size={{ xs: 12 }} className='border-t pt-2'>
+                            <div 
+                                className='text-center'
+                                dangerouslySetInnerHTML={{__html: animal.internal}}
+                            >                
+                            </div>                           
+                        </Grid>  
+                    }                                                      
+                </Grid>
+                </>
+            }
             {  
                 origin &&
                 (                           

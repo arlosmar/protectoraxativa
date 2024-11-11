@@ -33,10 +33,10 @@ export default function VerifyEmail({ user, status }) {
         />
         <Header user={user} t={t} from='user'/>
         <main>
-            <h1 className="title">
+            <h1 className="title mt-4">
                 {t('user.email.title')}
             </h1>            
-            <div>
+            <div className='text-center'>
                 {t('user.email.description')}
             </div>
 

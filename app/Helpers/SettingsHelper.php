@@ -65,6 +65,9 @@ function setUserDarkMode(){
         if(!empty($settings['darkmode'])){
             setDarkModeCookie(true);
         }
+        else{
+            setDarkModeCookie(false);
+        }
 
         return $settings['darkmode'];
     }

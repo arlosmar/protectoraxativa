@@ -1,3 +1,5 @@
+// https://inertiajs.com/title-and-meta
+
 import { Head } from '@inertiajs/react';
 
 export default function Title({t,from}){
@@ -31,7 +33,20 @@ export default function Title({t,from}){
 			break;
 	}
 
+	// <Head title={title} description='armando'/>
+	/*
+	<meta name="description" content={title}/>
+	<meta property="og:description" content={title}/>	        
+	<meta property="og:url" content="{{config('app.url', '')}}"/>
+    <meta property="og:image" content="{{url('storage/favicon.ico')}}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="{{str_replace('_', '-', app()->getLocale())}}"/>
+	*/
+
 	return (
-		<Head title={title}/>
+		<Head>
+		 	<title>{title}</title>
+	        <meta property="og:title" content={title}/>	        
+		</Head>
 	)
 }
