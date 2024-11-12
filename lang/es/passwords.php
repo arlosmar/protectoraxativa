@@ -15,7 +15,7 @@ return [
 
     'reset' => 'Se ha restablecido su contraseña.',
     'sent' => 'Le hemos enviado el enlace de restablecimiento de contraseña por correo electrónico.',
-    'throttled' => 'Por favor, espere antes de volver a intentarlo.',
+    'throttled' => 'Por favor, espere antes de volver a intentarlo (mínimo '.config('auth.passwords.'.config('auth.defaults.passwords').'.throttle').' segundos).',
     'token' => 'Este token de restablecimiento de contraseña no es válido.',
     'user' => 'No podemos encontrar un usuario con esa dirección de correo electrónico.',
 

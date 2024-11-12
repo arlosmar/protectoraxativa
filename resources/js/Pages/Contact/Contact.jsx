@@ -75,20 +75,26 @@ export default function Contact({user,status,email,emails,social}) {
                     <h1 className='subtitle-home'>
                         {t('contact.info.title1')}
                     </h1>
-                    <a href={'mailto:'+emails.info} target='_new'>
-                        {emails.info}
+                    <a href={'mailto:'+emails?.info} target='_blank'>
+                        {emails?.info}
                     </a>
                     <h1 className='subtitle-home paragraph-top-separation'>
                         {t('contact.info.phone')}
                     </h1>
-                    <a href={'tel:'+social.phone} target='_new'>
-                        {social.phone}
+                    <a href={'tel:'+social?.phone} target='_blank'>
+                        {social?.phone}
+                    </a>
+                    <h1 className='subtitle-home paragraph-top-separation'>
+                        {t('contact.info.whatsapp')}
+                    </h1>
+                    <a href={'https://wa.me/'+social?.whatsapp} target='_blank'>
+                        {social?.phone}
                     </a>
                     <h1 className='subtitle-home paragraph-top-separation'>
                         {t('contact.info.title2')}
                     </h1>
-                    <a href={'mailto:'+emails.colaboration} target='_new'>
-                        {emails.colaboration}
+                    <a href={'mailto:'+emails?.colaboration} target='_blank'>
+                        {emails?.colaboration}
                     </a>
                     <h1 className='subtitle-home paragraph-top-separation'>
                         {t('contact.info.title3')}
@@ -96,14 +102,14 @@ export default function Contact({user,status,email,emails,social}) {
                     <div>
                         {t('contact.info.shift-adoptions')}
                     </div>
-                    <a href={'mailto:'+emails.adoptions} target='_new'>
-                        {emails.adoptions}
+                    <a href={'mailto:'+emails?.adoptions} target='_blank'>
+                        {emails?.adoptions}
                     </a>
                     <h1 className='subtitle-home paragraph-top-separation'>
                         {t('contact.info.title4')}
                     </h1>
-                    <a href={'mailto:'+emails.volunteering} target='_new'>
-                        {emails.volunteering}
+                    <a href={'mailto:'+emails?.volunteering} target='_blank'>
+                        {emails?.volunteering}
                     </a>
                     <h1 className='subtitle-home paragraph-top-separation'>
                         {t('contact.info.shift-phone-title')}

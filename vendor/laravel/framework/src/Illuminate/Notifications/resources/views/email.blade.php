@@ -49,13 +49,7 @@
 @if (! empty($troubleLink))
 {{ $troubleLink }}
 @else
-@lang(
-    "If you're having trouble clicking the \":actionText\" button, copy and paste the URL below\n".
-    'into your web browser:',
-    [
-        'actionText' => $actionText,
-    ]
-) 
+@lang(mail.generic.troubleLink,['actionText' => $actionText]) 
 @endif
 <br/>
 <span class="break-all">[{{ $displayableActionUrl }}]({{ $actionUrl }})</span>

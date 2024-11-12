@@ -39,13 +39,15 @@ export default function ForgotPassword({ status }) {
             setOpen={setOpenToast}
             message={status}
         />
-        <Header t={t} from='login'/>
+        <Header t={t} from='user'/>
         <main>
+            {/*
             <h1 className="title">
                 {t('login.title-forgot')}
             </h1>
+            */}
         
-            <div className='mb-4'>
+            <div className='my-4 text-center'>
                 {t('login.forgot-sentence')}
             </div>  
 

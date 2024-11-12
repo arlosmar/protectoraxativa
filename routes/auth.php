@@ -38,7 +38,7 @@ Route::middleware('guest')->group(function () {
     */
     Route::get('google', [AuthenticatedSessionController::class, 'google'])->name('google');
      
-    Route::get('google/callback', [AuthenticatedSessionController::class, 'googleCallback']);
+    Route::get('callback/{type}', [AuthenticatedSessionController::class, 'loginCallback']);
 
     Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
 

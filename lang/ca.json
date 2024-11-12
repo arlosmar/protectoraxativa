@@ -33,7 +33,7 @@
         "Form"  :   "Formulari",
         "Field-Empty" :   "Camp vuit",
         "All-Male-Singular"  :   "Tot",
-        "Update"    :   "Actualitzar"
+        "Update"    :   "Actualitzar"        
     },
     "Cookies" : {
         "button-accept" : "Acceptar",
@@ -470,6 +470,7 @@
             "shift-adoptions" : "Dilluns a divendres de 17:00h a 21:00h",
             "title4"  :   "Voluntariat",
             "phone"  :   "Telèfon",
+            "whatsapp": "Whatsapp",
             "shift-phone-title"  :   "Horari d'atenció telefònica",
             "shift-phone-line1"  :   "Dilluns a divendres de 16:00h a 18:00h",
             "shift-phone-line2"   :   "Dissabtes de 10:30h a 13:30h",

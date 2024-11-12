@@ -88,6 +88,7 @@ class VerifyEmail extends Notification
             ->line(trans('mail.verify.sentence1'))
             ->action(trans('mail.verify.button'), $url)
             ->line(trans('mail.verify.sentence2'))
+            ->salutation(trans('mail.verify.salutation'))
             ->troubleLink(trans('mail.verify.troubleLink',['actionText' => trans('mail.verify.button')]));
 
         return $mailMessage;

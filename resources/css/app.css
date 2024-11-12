@@ -589,12 +589,28 @@ ul{
 	@apply pt-4;
 }
 
-.lightmode .partners-div, .lightmode .apu-div{
-	@apply w-1/2 border rounded p-1 mb-2 border-black;
+.partners-div-generic-even{
+	@apply border rounded p-1 sm:mb-2 mb-0;
 }
 
-.darkmode .partners-div, .darmode .apu-div{
-	@apply w-1/2 border rounded p-1 mb-2 border-app-darkmode;
+.partners-div-generic-odd{
+	@apply border rounded p-1 mb-2;
+}
+
+.lightmode .partners-div-even, .lightmode .apu-div{
+	@apply partners-div-generic-even border-app-lightmode;
+}
+
+.lightmode .partners-div-odd, .lightmode .apu-div{
+	@apply partners-div-generic-odd border-app-lightmode;
+}
+
+.darkmode .partners-div-even, .darkmode .apu-div{
+	@apply partners-div-generic-even border-app-darkmode;
+}
+
+.darkmode .partners-div-odd, .darkmode .apu-div{
+	@apply partners-div-generic-odd border-app-darkmode;
 }
 
 .partners-title{

@@ -33,9 +33,9 @@ export default function ResetPassword({ token, email }) {
 
     return (
         <>
-        <Header t={t} from='login'/>
+        <Header t={t} from='user'/>
         <main>
-            <h1 className="title">
+            <h1 className="title mt-4">
                 {t('login.title-forgot')}
             </h1>
 

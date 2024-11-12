@@ -101,13 +101,13 @@ export default function Register() {
                     </button>
                 </div>
             </form>
-            {/*
-            <div className="text-center mt-4">                   
-                <a className='google-button pb-1' href={route('google')}>
-                    <GoogleIcon sx={{marginBottom: '3px'}}/> {t('login.google')}
+            
+            <div className="flex justify-center items-center mt-4">                   
+                <a className='google-button' href={route('google')}>
+                    <GoogleIcon/> {t('login.google')}
                 </a>
             </div>
-            */}
+            
             <div className="text-center mt-8">                   
                 <a href={route('login')}>
                     {t('login.login2')}

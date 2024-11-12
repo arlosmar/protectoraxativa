@@ -15,7 +15,7 @@ return [
 
     'reset' => 'S\'ha restablert la contrasenya.',
     'sent' => 'Hem enviat l\'enllaç de reestabliment de contrasenya al vostre correu electrònic.',
-    'throttled' => 'Si us plau, espereu abans de tornar-ho a intentar.',
+    'throttled' => 'Si us plau, espereu abans de tornar-ho a intentar (mínim '.config('auth.passwords.'.config('auth.defaults.passwords').'.throttle').' segons).',
     'token' => 'Aquest token de reestabliment de contrasenya no és vàlid.',
     'user' => 'No podem trobar un usuari amb aquesta adreça de correu electrònic.',
 

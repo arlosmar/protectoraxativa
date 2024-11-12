@@ -25,6 +25,7 @@ else{
     // for migration/reverb localhost
     $databaseConnection = 'sqlite';
 }
+
 return [
 
     /*

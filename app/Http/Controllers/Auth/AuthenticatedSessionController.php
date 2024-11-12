@@ -83,10 +83,22 @@ class AuthenticatedSessionController extends Controller
     public function google(): RedirectResponse
     {
         //return Socialite::driver('google')->scopes(['read:user', 'public_repo'])->with(['hd' => 'example.com'])->redirect();
+
+        // send info to recover it later
         $info = [
         ];
 
         return Socialite::driver('google')->with($info)->redirect();
+    }
+
+    public function loginCallback(Request $request, $type){
+
+        switch($type){
+            
+            case 'google':
+                return $this->googleCallback($request);
+                break;
+        }
     }
 
     public function googleCallback(Request $request): RedirectResponse{
@@ -145,7 +157,7 @@ class AuthenticatedSessionController extends Controller
         $user->getAvatar();
         */
 
-        // if loggging in and not there, register
+        // if trying to log in and not there, register
         $found = User::where('email',$user->email)->first();
 
         $now = Date::now();
@@ -153,6 +165,7 @@ class AuthenticatedSessionController extends Controller
         // register
         if(!isset($found) || empty($found)){
             
+            // create and auto verify
             $found = User::create([
                 'name' => $user->getName(),
                 'email' => $user->getEmail(),
@@ -160,8 +173,10 @@ class AuthenticatedSessionController extends Controller
             ]);
         }
         else{
-            // save email_verified_at
-            $found->update(['email_verified_at',$now]);
+            // check if not verified and auto verify
+            if(!isset($found->email_verified_at) || empty($found->email_verified_at)){
+                $found->update(['email_verified_at',$now]);   
+            }            
         }
      
         Auth::login($found);
