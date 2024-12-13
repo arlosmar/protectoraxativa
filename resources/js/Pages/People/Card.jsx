@@ -51,7 +51,7 @@ export default function Card({t,origin,person,imagePath,imagesPaths}){
                         column?.id === 'name2' &&
                         <Grid size={{ xs: 12 }} className='border-t'></Grid>
                     }
-                    <Grid size={{ xs: 12, sm: 6 }}>
+                    <Grid size={{ xs: 6, sm: 6 }}>
                         <span className='person-record-title'>{column?.text}:</span>
                         <br/>
                         {

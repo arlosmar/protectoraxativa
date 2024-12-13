@@ -1,5 +1,7 @@
 <?php
 
+// app/Http/Middleware/Maintenance.php
 return [
-    'ip' => '79.116.131.155'
+    'status'    => env('APP_MAINTENANCE',false),
+    'ips' => env('APP_MAINTENANCE_ALLOWED_IPS','')
 ];

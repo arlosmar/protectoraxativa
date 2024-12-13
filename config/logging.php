@@ -7,6 +7,19 @@ use Monolog\Processor\PsrLogMessageProcessor;
 use Monolog\Handler\FilterHandler;
 use Monolog\Handler\TelegramBotHandler;
 
+// exceptions
+// vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php
+// method render
+/*
+if($e instanceof NotFoundHttpException){
+            return redirect('/');
+        }
+*/
+
+// filter messages from laravel to telegram
+// vendor/monolog/monolog/src/Monolog/Handler/TelegramBotHandler.php
+// from the write method it goes to SettingsHelper.php => sendTelegramFromBotHandler
+// if from react => logTelegram on Controller.php
 return [
 
     /*
@@ -134,8 +147,7 @@ return [
             'handler' => FilterHandler::class,
             'level' => 'critical',//env('LOG_LEVEL', 'debug'),
             'with' => [
-                'handler' => new TelegramBotHandler($apiKey = env('TELEGRAM_API_KEY'), $channel = env('TELEGRAM_CHANNEL'))
-
+                'handler' => new TelegramBotHandler($apiKey = env('TELEGRAM_API_KEY',''), $channel = env('TELEGRAM_CHANNEL',''))
             ]
         ]
 

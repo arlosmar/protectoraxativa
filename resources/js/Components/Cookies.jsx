@@ -36,7 +36,7 @@ export default function Cookies({t}){
             containerClasses="alert alert-warning col-lg-12"
             */
         >
-            {t('Cookies.message')}
+            {t('Cookies.message')}<a href={route('cookies')}>{t('Cookies.here')}</a>.
         </CookieConsent>
     )
 }

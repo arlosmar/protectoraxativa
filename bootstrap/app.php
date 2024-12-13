@@ -6,9 +6,13 @@ use Illuminate\Foundation\Configuration\Middleware;
 use App\Http\Middleware\Maintenance;
 use Illuminate\Http\Request;
 
+// to change the message: unauthorized for the api
+use Illuminate\Auth\AuthenticationException;
+
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
+        api: __DIR__.'/../routes/api.php',
         commands: __DIR__.'/../routes/console.php',
         channels: __DIR__.'/../routes/channels.php',
         health: '/up',
@@ -42,5 +46,27 @@ return Application::configure(basePath: dirname(__DIR__))
         */
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
-    })->create();
+        // https://laravel.com/docs/11.x/errors#custom-http-error-pages
+        //echo response()->view('errors.Exception', []);
+        //die;
+
+        // to change the message: unauthorized for the api
+        /*
+        $exceptions->render(function (AuthenticationException $e, Request $request) {
+            //$response['statusCode'] = 403;
+            //$response['message'] = 'Unauthorized';
+            //return response()->json(['error' => true, 'content' => 'YOUR MESSAGE']);
+
+            $language = null;
+            if(isset($request->language) && !empty($request->language)){
+                $language = $request->language;
+            }
+
+            return apiResponse(false,'Unauthorized',[],$language);
+        });
+        */
+    })
+    ->booted(function (Application $app) {
+        // to do things before initialization        
+    })
+    ->create();

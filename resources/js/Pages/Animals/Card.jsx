@@ -42,7 +42,45 @@ export default function Card({t,origin,animal,imagePath,imagesPaths}){
     const potentiallySponsoredTitle = t('animals.record.Sponsored.potentially-sponsor');
 
     return (
-        <>
+        origin === 'adopted' ?
+            <>
+            {  
+                animal?.name && animal.name.length > 0 &&
+                <div className='title'>
+                    {animal?.name}
+                </div>
+            }
+            {    
+                (                  
+                    (animal?.image_sponsored && animal.image_sponsored.length > 0) ||
+                    (animal?.image && animal.image.length > 0) ||
+                    (animal?.image2 && animal.image2.length > 0)
+                ) &&
+                <div className='mb-4'>
+                    <a href={
+                        animal.image_sponsored && animal.image_sponsored.length > 0 ?
+                            imagePath+animal.image_sponsored
+                        :
+                            animal.image && animal.image.length > 0 ?
+                                imagePath+animal.image
+                            :
+                                imagePath+animal.image2
+                    } target='_blank'>
+                        <img src={
+                            animal.image_sponsored && animal.image_sponsored.length > 0 ?
+                                imagePath+animal.image_sponsored
+                            :
+                                animal.image && animal.image.length > 0 ?
+                                    imagePath+animal.image
+                                :
+                                    imagePath+animal.image2
+                        } className="mx-auto rounded"/>
+                    </a>
+                </div>
+            }
+            </>
+        :
+            <>
             {
                 origin === 'user-animals' &&
                 <PersonModal  
@@ -96,9 +134,17 @@ export default function Card({t,origin,animal,imagePath,imagesPaths}){
                 </div>
             }
             {  
-                (origin === 'user-animals' || origin === 'user-people' || origin === 'sponsored' || origin === 'intranet-sponsored') &&
+                (
+                    origin === 'user-animals' || origin === 'user-people' || 
+                    origin === 'sponsored' || origin === 'intranet-sponsored' ||
+                    origin === 'intranet-adopted' || origin === 'intranet-sponsored'
+                ) &&
                 animal?.image_sponsored && animal.image_sponsored.length > 0 &&
-                <div className='mb-4'>
+                <div className='mb-4 text-center'>
+                    {
+                        (origin === 'user-animals' || origin === 'user-people') &&
+                        <span className='animal-record-title'>{t('animals.record.Image-Sponsored')}</span>
+                    }
                     <a href={imagePath+animal.image_sponsored} target='_blank'>
                         <img src={imagePath+animal.image_sponsored} className="mx-auto rounded"/>
                     </a>
@@ -149,7 +195,7 @@ export default function Card({t,origin,animal,imagePath,imagesPaths}){
                                 !column?.show || 
                                 column.show === origin                                
                             ) &&
-                            <Grid size={{ xs: 12, sm: 6 }} className=''>
+                            <Grid size={{ xs: 6, sm: 6 }} className=''>
                                 <span className='animal-record-title'>{column?.text}:</span>
                                 <br/>
                                 {
@@ -176,7 +222,7 @@ export default function Card({t,origin,animal,imagePath,imagesPaths}){
                         animal?.description && animal.description.length > 0 &&
                         <Grid size={{ xs: 12 }} className={`${origin !== 'heaven' ? 'border-t' : ''} pt-2'`}>
                             <div 
-                                className='text-center'
+                                className='text-center pt-2'
                                 dangerouslySetInnerHTML={{__html: animal.description}}
                             >                
                             </div>                           
@@ -195,7 +241,7 @@ export default function Card({t,origin,animal,imagePath,imagesPaths}){
                 <Grid container spacing={2} className='animal-record-div mb-2'>                     
                     {                        
                         columnsInternal.map((column,i) => (
-                            <Grid size={{ xs: 12, sm: 6 }} className=''>
+                            <Grid size={{ xs: 6, sm: 6 }} className=''>
                                 <span className='animal-record-title'>{column?.text}:</span>
                                 <br/>
                                 {
@@ -254,6 +300,6 @@ export default function Card({t,origin,animal,imagePath,imagesPaths}){
                     }
                 </div>                        
             }
-        </>
+            </>
     )
 }

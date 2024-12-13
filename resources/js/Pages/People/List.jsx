@@ -1,13 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 
+import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import Pagination from '@/Components/Pagination';
 import ItemsPerPage from '@/Components/ItemsPerPage';
 import { itemsPerPageList } from "@/Utils/Variables";
 
-import PersonModal from "@/Modals/PersonModal";
-import PersonEditModal from "@/Modals/PersonEditModal";
+//import PersonModal from "@/Modals/PersonModal";
+//import PersonEditModal from "@/Modals/PersonEditModal";
+//import FilterPeople from '@/Pages/People/FilterPeople';
+const PersonModal = lazy(() => import("@/Modals/PersonModal"));
+const PersonEditModal = lazy(() => import("@/Modals/PersonEditModal"));
+const FilterPeople = lazy(() => import("@/Pages/People/FilterPeople"));
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -22,7 +27,6 @@ import Box from '@mui/material/Box';
 import visuallyHidden from '@mui/utils/visuallyHidden';
 import Typography from '@mui/material/Typography';
 
-import FilterPeople from '@/Pages/People/FilterPeople';
 import { styled } from '@mui/material/styles';
 
 import { getParameter } from "@/Utils/Variables";
@@ -273,6 +277,12 @@ export default function List({t,origin,people,setPeople,imagesPaths,
         }
     }
 
+    /*
+    <div className='loading mt-8'>
+        <CircularProgress sx={{color:"#FF8C00"}}/>
+    </div>
+    */
+
     return (
         <>
         <h1 className='title-user-list'>            
@@ -292,60 +302,77 @@ export default function List({t,origin,people,setPeople,imagesPaths,
         }
         {
             loading ?
-                <div className='text-center'>
-                    <CircularProgress sx={{color:"#FF8C00"}}/>
-                </div>
+                <Backdrop
+                    sx={(theme) => ({ color: '#FF8C00', zIndex: theme.zIndex.drawer + 1 })}
+                    open={loading}            
+                >
+                    <CircularProgress color="warning"/>
+                </Backdrop>
             :
                 <div className='mt-4'>
-                    <PersonEditModal                        
-                        t={t}        
-                        show={showEditPerson}
-                        setShow={setShowEditPerson}  
-                        items={filteredPeople}               
-                        setItems={setFilteredPeople}
-                        item={personEditItem}
-                        setItem={setPersonItem}
-                        position={position}
-                        people={people}
-                        setPeople={setPeople}
-                        filterUsed={filterUsed}
-                        setInternal={setInternal}
-                        options={options}
-                        data={data}
-                        setData={setData}
-                    />
-                    <FilterPeople
-                        origin={origin}
-                        t={t}                        
-                        openSearch={openSearch}
-                        setOpenSearch={setOpenSearch}
-                        originalItems={people}
-                        items={filteredPeople}
-                        setItems={setFilteredPeople} 
-                        filterUsed={filterUsed}
-                        setFilterUsed={setFilterUsed}                       
-                    />
+                    {
+                        showEditPerson &&
+                        <Suspense>
+                        <PersonEditModal                        
+                            t={t}        
+                            show={showEditPerson}
+                            setShow={setShowEditPerson}  
+                            items={filteredPeople}               
+                            setItems={setFilteredPeople}
+                            item={personEditItem}
+                            setItem={setPersonItem}
+                            position={position}
+                            people={people}
+                            setPeople={setPeople}
+                            filterUsed={filterUsed}
+                            setInternal={setInternal}
+                            options={options}
+                            data={data}
+                            setData={setData}
+                        />
+                        </Suspense>                        
+                    }
+                    {
+                        openSearch &&
+                        <Suspense>
+                        <FilterPeople
+                            origin={origin}
+                            t={t}                        
+                            openSearch={openSearch}
+                            setOpenSearch={setOpenSearch}
+                            originalItems={people}
+                            items={filteredPeople}
+                            setItems={setFilteredPeople} 
+                            filterUsed={filterUsed}
+                            setFilterUsed={setFilterUsed}                       
+                        />
+                        </Suspense>
+                    }
                     {
                         filteredPeople && filteredPeople.length > 0 ?
-
                             <>
-                            <PersonModal
-                                origin={origin}
-                                t={t}
-                                show={showPerson}
-                                setShow={setShowPerson}      
-                                person={personItem}  
-                                imagesPaths={imagesPaths}                                  
-                                setPersonEditItem={setPersonEditItem}
-                                setShowEditPerson={setShowEditPerson}   
-                                items={filteredPeople}               
-                                setItems={setFilteredPeople}  
-                                people={people}                              
-                                setPeople={setPeople}
-                                filterUsed={filterUsed}
-                                setInternal={setInternal}                                
-                                setData={setData}
-                            />     
+                            {
+                                showPerson &&
+                                <Suspense>
+                                <PersonModal
+                                    origin={origin}
+                                    t={t}
+                                    show={showPerson}
+                                    setShow={setShowPerson}      
+                                    person={personItem}  
+                                    imagesPaths={imagesPaths}                                  
+                                    setPersonEditItem={setPersonEditItem}
+                                    setShowEditPerson={setShowEditPerson}   
+                                    items={filteredPeople}               
+                                    setItems={setFilteredPeople}  
+                                    people={people}                              
+                                    setPeople={setPeople}
+                                    filterUsed={filterUsed}
+                                    setInternal={setInternal}                                
+                                    setData={setData}
+                                />     
+                                </Suspense>
+                            }
                             <ItemsPerPage
                                 origin={origin}
                                 t={t}

@@ -3,9 +3,9 @@ import { useForm } from '@inertiajs/react';
 import Toast from '@/Components/Toast';
 import { useState, useEffect } from 'react';
 
-export default function Info({t,user,status}) {
+export default function Info({t,user,status,emails,social}) {
 
-    const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
+    const { data, setData, post/*patch*/, errors, processing, recentlySuccessful } = useForm({
         name: user.name,
         email: user.email,
     });
@@ -18,7 +18,10 @@ export default function Info({t,user,status}) {
         if(user && user?.admin){
             path = 'admin.update';
         }
-        patch(route(path));
+        
+        // patch not working on the server
+        //patch(route(path));
+        post(route(path));
     };
 
     const handleInput = (e) => {
@@ -33,6 +36,24 @@ export default function Info({t,user,status}) {
         }
     }, [recentlySuccessful]);
 
+    const columns = [
+        {id:'name',text:t('people.record.name'),type:'text'},
+        {id:'surname',text:t('people.record.surname'),type:'text'},
+        {id:'dni',text:t('people.record.dni'),type:'text'},
+        {id:'birthdate',text:t('people.record.birthdate'),type:'text'},
+        {id:'email',text:t('people.record.email'),type:'email'},
+        {id:'phone',text:t('people.record.phone'),type:'phone'},
+        {id:'address',text:t('people.record.address'),type:'text'},
+        {id:'name2',text:t('people.record.name2'),type:'text'},
+        {id:'surname2',text:t('people.record.surname2'),type:'text'},
+        {id:'dni2',text:t('people.record.dni2'),type:'text'},
+        {id:'birthdate2',text:t('people.record.birthdate2'),type:'text'},
+        {id:'email2',text:t('people.record.email2'),type:'email'},
+        {id:'phone2',text:t('people.record.phone2'),type:'phone'},
+        {id:'address2',text:t('people.record.address2'),type:'text'},
+        {id:'other_people',text:t('people.record.others'),type:'text'}
+    ];
+
     return (
         <>
         <Toast 
@@ -40,13 +61,13 @@ export default function Info({t,user,status}) {
             setOpen={setOpenToast}
             message={t('trans.Saved-Male')}
         />
-        <div className='box'>
-            
+        <div className='account-div-box'>
+            {/*
             <h1 className='title-subsection'>
                 {t('user.profile.information.title')}
             </h1>
-            
-            <form onSubmit={submit}>
+            */}
+            <form onSubmit={submit} className='mt-4'>
 
                 <div className="mb-4">
                     <Input
@@ -68,8 +89,7 @@ export default function Info({t,user,status}) {
                         name="name"
                         type="text"
                         value={data.name}                        
-                        autoComplete="name"
-                        isFocused={true}
+                        autoComplete="name"                        
                         onChange={handleInput}                        
                         placeholder={t('user.profile.information.name')}                        
                         error={errors.name}
@@ -83,6 +103,50 @@ export default function Info({t,user,status}) {
                 </div>                
             </form>
         </div>
+        {
+            user?.person && columns && columns.length > 0 &&
+            <div className='account-div-box mt-4'>            
+                <h1 className='title-subsection'>
+                    {t('user.profile.information.personal-data')}
+                </h1>
+                <div className=''>
+                    {
+                        columns.map((field,index) => (
+                            <div className="mb-4">
+                                <Input                            
+                                    type="text"
+                                    value={user.person[field?.id]}                                                                
+                                    placeholder={field?.text}
+                                    shrink
+                                    readOnly
+                                />
+                            </div>
+                        ))
+                    }
+                </div>
+                <div className='text-center'>
+                    {t('user.profile.information.update-personal-data')}<br/>
+                    <h1 className='subtitle-home mt-4'>
+                        {t('contact.info.email')}
+                    </h1>
+                    <a href={'mailto:'+emails?.info} target='_blank'>
+                        {emails?.info}
+                    </a>
+                    <h1 className='subtitle-home paragraph-top-separation'>
+                        {t('contact.info.phone')}
+                    </h1>
+                    <a href={'tel:'+social?.phone} target='_blank'>
+                        {social?.phone}
+                    </a>
+                    <h1 className='subtitle-home paragraph-top-separation'>
+                        {t('contact.info.whatsapp')}
+                    </h1>
+                    <a href={'https://wa.me/'+social?.whatsapp} target='_blank'>
+                        {social?.phone}
+                    </a>
+                </div>
+            </div>
+        }
         </>
     );
 }

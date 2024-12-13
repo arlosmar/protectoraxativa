@@ -31,7 +31,7 @@ export default function Heaven({user,t,subsection,setSubsection,animals,
         window.history.pushState({path:url},'',url);
     };
 
-   const { classes, sx, sxIcon } = styleSubTabs();
+   const { sxSubTabs, sx, sxIcon } = styleSubTabs();
 
     return (        
         <>
@@ -42,9 +42,9 @@ export default function Heaven({user,t,subsection,setSubsection,animals,
         */}
         <div className='subtabs-container'>
             <Tabs
-                value={tab} 
-                onChange={handleTabChange}                     
-                className={classes.tabs}
+                value={tab}
+                sx={sxSubTabs} 
+                onChange={handleTabChange}                                     
                 variant="scrollable"
             >
                 <Tab icon={<InfoIcon sx={sxIcon}/>} value="info" sx={sx} iconPosition="top" label={t('animals.heaven.info.icon')}/>

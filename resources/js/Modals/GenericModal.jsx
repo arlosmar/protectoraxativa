@@ -1,28 +1,33 @@
+import { modalStyle } from '@/Utils/Styles';
+import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
 
-export default function GenericModal({close,show,setShow,text}){
+export default function GenericModal({show,setShow,text}){
+
+    const { sx, sxIcon, sxIconClose } = modalStyle();
 
     const handleClose = () => {
         setShow(false)
     }
 
     return (
-        <div className={`${show?'':'hidden'} w-full h-[100vh] bg-transparent absolute top-0 left-0 backdrop-blur-sm z-50 full-screen`}>
-            <div id="popup-modal" tabIndex="-1" className={`modal`} aria-hidden="true">
-                {
-                    close &&
-                    <div className={`w-full flex justify-end`}>
-                        <button type="button" className="inline-flex items-center"
-                            data-modal-toggle="popup-modal"
-                            onClick={handleClose}>
-                            <CloseIcon/>
-                        </button>
-                    </div>
-                }                  
-                <div className="text-center mt-4">
+        <Modal open={show} onClose={handleClose}>
+
+            <Box sx={style} className='flex flex-col'>              
+                
+                <div className='modal-div'>
                     {text}
                 </div>
-            </div>
-        </div>
+
+                <div className={`w-full flex items-center justify-end border-t py-1`}>
+                    <IconButton onClick={handleClose} className='closeIcon'>
+                        <CloseIcon sx={sxIconClose}/>
+                    </IconButton>                         
+                </div>
+            </Box>
+        
+        </Modal>
     );
 }

@@ -35,7 +35,9 @@ export default function Input({
     maxLength,
     handleKeyDown,
     handleFileRemove,
-    accept
+    accept,
+    shrink,
+    capture
 }){
 
     const darkmode = getDarkMode();
@@ -106,7 +108,7 @@ export default function Input({
     };
     */
 
-    if(type === 'date' || type === 'datetime-local'){
+    if(shrink || type === 'date' || type === 'datetime-local'){
         inputLabelProperties.shrink = true;
     }
 
@@ -237,12 +239,13 @@ export default function Input({
 
                     <FormControl variant="outlined" fullWidth>
                         <InputLabel 
-                            htmlFor="outlined-adornment-password"
                             sx={sxInputLabel} 
+                            {...(shrink ? {shrink:true} : {})} // shrink={true}
                         >
                             {placeholder}
                         </InputLabel>
                         <OutlinedInput   
+                            {...(shrink ? {notched:true} : {})}
                             sx={sx}                            
                             inputRef={input}
                             id={id}
@@ -257,7 +260,7 @@ export default function Input({
                             value={value}                                                       
                             error={error && error.length > 0 ?true:false}
                             helperText={error && error.length > 0 ? error : ''}
-                            inputProps={inputProperties}
+                            inputProps={inputProperties}                            
                             onChange={onChange}
                             fullWidth
                             onKeyDown={handleKeyDown}
@@ -283,10 +286,7 @@ export default function Input({
                 :               
                     type === 'copy' ?
                         <FormControl variant="outlined" fullWidth>
-                            <InputLabel 
-                                htmlFor="outlined-adornment-password"
-                                sx={sxInputLabel}
-                            >
+                            <InputLabel sx={sxInputLabel}>
                                 {placeholder}
                             </InputLabel>
                             <OutlinedInput     
@@ -333,6 +333,7 @@ export default function Input({
                                 id={id}
                                 name={name}
                                 type={type}
+                                capture={capture}
                                 autoComplete={autoComplete}
                                 InputLabelProps={inputLabelProperties}
                                 //placeholder={placeholder}
@@ -385,7 +386,7 @@ export default function Input({
                             :
                                 <TextField 
                                     sx={sx}
-                                    variant="outlined"
+                                    variant="outlined"                                    
                                     inputRef={input}
                                     id={id}
                                     name={name}

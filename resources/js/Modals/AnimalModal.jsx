@@ -20,6 +20,7 @@ import ShareModal from '@/Modals/ShareModal';
 
 import { modalStyle } from '@/Utils/Styles';
 import { date2db } from "@/Utils/Format";
+import { shareGetAnimalLink } from "@/Utils/Sharing";
 
 export default function AnimalModal({user,origin,t,show,setShow,imagePath,imagesPaths,
     animal,setAnimalEditItem,setShowEditAnimal,items,setItems,
@@ -28,11 +29,7 @@ export default function AnimalModal({user,origin,t,show,setShow,imagePath,images
     const [ link , setLink ] = useState('');
     const [ adminLink , setAdminLink ] = useState('');
 
-    const style = modalStyle();
-
-    const sxIcon = {
-        fontSize: '35px'
-    };
+    const { sx, sxIcon, sxIconClose } = modalStyle();
 
     const handleClose = () => {
         setShow(false)
@@ -101,128 +98,12 @@ export default function AnimalModal({user,origin,t,show,setShow,imagePath,images
 
     const getShareLink = () => {
 
-        var tag = '';
-        var subtag = '';
-        var tagAdmin = '';
+        const { link, linkAdmin } = shareGetAnimalLink(origin,animal);
 
-        // if coming from user
-        if(origin === 'user-animals' || origin === 'user-people'){
-
-            /*
-            share external link because maybe you want to share with general public
-            if(animal?.hidden){
-                tag = 'hidden';
-            }
-            else{
-                if(animal?.dead){
-                    tag = 'heaven';
-                }
-                else{
-
-                    switch(animal?.status_id){
-
-                        case 2: // adopted            
-                            tag = 'adopted';
-                            break;
-
-                        case 1: //'adopt'
-                            tag = 'adopt';
-                            break;
-                    }
-                }
-            }
-
-            setLink(route('admin.animals',[tag])+'?view='+animal?.id);
-            */
-
-            if(animal?.dead){
-                // private link
-                if(animal?.hidden){
-                    tag = 'heaven';
-                    setLink(route('admin.animals',[tag])+'?view='+animal?.id);
-                }
-                else{
-                    // public link
-                    tag = 'heaven';
-                    subtag = 'animals';
-                    setLink(route('animals',[tag,subtag])+'?view='+animal?.id);
-                }
-            }            
-            else{
-                // if hidden, internal link
-                if(animal?.hidden){
-                    tag = 'hidden';
-                    setLink(route('admin.animals',[tag])+'?view='+animal?.id);
-                }
-                else{
-
-                    switch(animal?.status_id){
-
-                        case 2: // adopted    
-                            // internal link        
-                            tag = 'adopted';
-                            setLink(route('admin.animals',[tag])+'?view='+animal?.id);
-                            break;
-
-                        case 1: //'adopt'
-                        default:
-
-                            // potentially sponsor
-                            if(animal?.sponsor_id === 3){
-                                tag = 'sponsor';
-                                subtag = 'animals';
-                                setLink(route('animals',[tag,subtag])+'?view='+animal?.id);
-                            }
-                            else{
-                                // sponsored
-                                if(animal?.sponsor_id === 2){
-                                    tag = 'sponsor';
-                                    subtag = 'sponsored';
-                                    setLink(route('animals',[tag,subtag])+'?view='+animal?.id);
-                                }
-                                else{
-                                    // sponsor_id 1 is not sponsored but you not see publicly
-                                    // internal link in adopt section
-                                    tag = 'adopt';
-                                    setLink(route('admin.animals',[tag])+'?view='+animal?.id);
-                                }
-                            }
-                            break;
-                    }
-                }
-            }
-        }
-        else{
-           
-            switch(origin){
-
-                case 'adopt':           
-                    tag = 'adopt';
-                    subtag = 'animals';
-                    tagAdmin = 'adopt';                    
-                    break;
-
-                case 'sponsor':           
-                    tag = 'sponsor';
-                    subtag = 'animals';
-                    tagAdmin = 'adopt';
-                    break;
-
-                case 'sponsored':           
-                    tag = 'sponsor';
-                    subtag = 'sponsored';
-                    tagAdmin = 'adopt';
-                    break;
-
-                case 'heaven':           
-                    tag = 'heaven';
-                    subtag = 'animals';
-                    tagAdmin = 'heaven';
-                    break;
-            }
-            
-            setLink(route('animals',[tag,subtag])+'?view='+animal?.id);
-            setAdminLink(route('admin.animals',[tagAdmin])+'?view='+animal?.id);
+        setLink(link);
+        
+        if(linkAdmin && linkAdmin.length > 0){
+            setAdminLink(linkAdmin);
         }
     }
 
@@ -233,18 +114,59 @@ export default function AnimalModal({user,origin,t,show,setShow,imagePath,images
     const handleShare = async () => {
 
         // if native mobile share        
-        if(navigator?.share) {
+        if(navigator?.share || window?.AndroidHandler?.share){
             
             try{
+
+                var imagePathShare = imagePath ?
+                    imagePath
+                    :               
+                        animal && animal?.dead && (!animal?.hidden || animal?.hidden === null) ? 
+                            imagesPaths?.animals_external
+                        :
+                            imagesPaths?.animals;
+
+                var imageSharing = animal.image_sponsored && animal.image_sponsored.length > 0 ?
+                            imagePathShare+animal.image_sponsored
+                        :
+                            animal.image && animal.image.length > 0 ?
+                                imagePathShare+animal.image
+                            :
+                                imagePathShare+animal.image2;
+
                 const shareData = {
                     title: t('share.title-native'),
                     //text: t('trans.text'),
                     url: link
                 };
+
+                if(imageSharing && imageSharing.length > 0){
+                    shareData.image = window.location.protocol+'//'+window.location.host+imageSharing;
+                }
+                /*
                 await navigator.share(shareData);
                 onSuccess?.();
+                */
+
+                // to can use android webview
+                if(window?.AndroidHandler?.share){                    
+                    window.AndroidHandler.share(JSON.stringify(shareData));                    
+                }
+                else {                
+                    if(shareData.image && shareData.image.length > 0){
+                        var split = shareData.image.split('/');   
+                        var imageName = split.slice(-1);                     
+                        let blob = await fetch(shareData.image).then(r => r.blob());
+                        shareData.files = [
+                            new File([blob],imageName, {
+                                type: blob.type,
+                            })
+                        ];
+                    }
+                    await navigator.share(shareData);
+                }
             }
-            catch(err){           
+            catch(err){
                 //onError?.(err);
                 // if user cancels the sharing it goes here as well                
             }
@@ -359,7 +281,7 @@ export default function AnimalModal({user,origin,t,show,setShow,imagePath,images
             open={show}
             onClose={handleClose}
         >
-            <Box sx={style} className='flex flex-col'>
+            <Box sx={sx} className='flex flex-col'>
                 {/*
                 <div className={`w-full flex items-center border-b`}>
                     <div className='w-full'>
@@ -435,7 +357,7 @@ export default function AnimalModal({user,origin,t,show,setShow,imagePath,images
                                 </>
                             }
                             <IconButton onClick={handleClose} className='closeIcon'>
-                                <CloseIcon sx={sxIcon}/>
+                                <CloseIcon sx={sxIconClose}/>
                             </IconButton>                         
                         </div>
                     :
@@ -450,7 +372,7 @@ export default function AnimalModal({user,origin,t,show,setShow,imagePath,images
                                 </IconButton> 
                             }
                             <IconButton onClick={handleClose} className='closeIcon'>
-                                <CloseIcon sx={sxIcon}/>
+                                <CloseIcon sx={sxIconClose}/>
                             </IconButton>                         
                         </div>
                 }

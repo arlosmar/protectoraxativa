@@ -12,11 +12,7 @@ import { modalStyle } from '@/Utils/Styles';
 
 export default function FilterAnimalsModal({origin,t,show,setShow,data,setData,options,handleSubmit,subsection}){
 
-    const style = modalStyle();
-
-    const sxIcon = {
-        fontSize: '35px'
-    };
+    const { sx, sxIcon, sxIconClose } = modalStyle();
 
     const handleClose = () => {
         setShow(false)
@@ -25,7 +21,7 @@ export default function FilterAnimalsModal({origin,t,show,setShow,data,setData,o
     return (
         <Modal open={show} onClose={handleClose}>
 
-            <Box sx={style} className='flex flex-col'>              
+            <Box sx={sx} className='flex flex-col'>              
                 
                 <div className='modal-div'>
                     <h1 className='title-user-list'>
@@ -48,7 +44,7 @@ export default function FilterAnimalsModal({origin,t,show,setShow,data,setData,o
                         <SearchIcon sx={sxIcon}/>
                     </IconButton> 
                     <IconButton onClick={handleClose} className='closeIcon'>
-                        <CloseIcon sx={sxIcon}/>
+                        <CloseIcon sx={sxIconClose}/>
                     </IconButton>                         
                 </div>
             </Box>

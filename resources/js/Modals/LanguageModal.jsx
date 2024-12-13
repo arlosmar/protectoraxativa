@@ -1,12 +1,10 @@
 import Modal from '@mui/material/Modal';
-import CloseIcon from '@mui/icons-material/Close';
 import Box from '@mui/material/Box';
-
 import { modalStyle } from '@/Utils/Styles';
 
 export default function LanguageModal({show,setShow,language,languages,handleLanguage}){
 
-    const style = modalStyle();
+    const { sx } = modalStyle(false);
 
     const handleClose = () => {
         setShow(false)
@@ -16,14 +14,9 @@ export default function LanguageModal({show,setShow,language,languages,handleLan
     const lastElement = languagesLength-1;
 
     return (
-        <Modal
-            open={show}
-            onClose={handleClose}
-            aria-labelledby="language"
-            aria-describedby="language"
-        >
-            <Box sx={style}>
-                <div className='text-center'>
+        <Modal open={show} onClose={handleClose}>
+            <Box sx={sx} className=''>
+                <div className='language-modal-div'>
                     {
                         languagesLength > 0 && languages.map((item,index) => (
                             <div 

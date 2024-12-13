@@ -6,7 +6,7 @@ import { useForm } from '@inertiajs/react';
 import { useTranslation } from "react-i18next";
 import GoogleIcon from '@mui/icons-material/Google';
 
-export default function Register() {
+export default function Register({isApp}) {
 
     const { t } = useTranslation('global');
     

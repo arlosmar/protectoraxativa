@@ -9,7 +9,7 @@ export default function FilterNews({origin,t,originalItems,items,setItems,openSe
 filterUsed,setFilterUsed,options}){
 
     const fields = {
-        'user_name'  :   'text',
+        //'user_name'  :   'text',
         'title'  :   'text',
         'description'  :   'text',
         'date'  :   'date',

@@ -22,7 +22,7 @@ export default function Animals({origin,t,animals,options,baseUrl,imagesPaths,
 
     const [ tab, setTab ] = useState(subsection ? subsection : "adopt");
 
-    const { classes, sx, sxIcon } = styleSubTabs();
+    const { sxSubTabs, sx, sxIcon } = styleSubTabs();
 
     const handleChange = (event,newValue) => {
     	
@@ -107,8 +107,8 @@ export default function Animals({origin,t,animals,options,baseUrl,imagesPaths,
         <div className='subtabs-container'>
             <Tabs 
                 value={tab} 
-                onChange={handleChange}                 
-                className={classes.tabs}
+                sx={sxSubTabs}
+                onChange={handleChange}                                 
                 variant="scrollable"
             >
                 <Tab icon={<AnimalsIcon sx={sxIcon}/>} value="adopt" sx={sx} iconPosition="top" label={t('user.animals.adopt.icon')}/>                

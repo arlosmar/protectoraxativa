@@ -43,9 +43,9 @@ export default function Animals({user,section,subsection,emails,social,baseUrl,i
     // it keeps on that page
     const [ pageInitial, setPageInitial ] = useState(page);
 
-    const { stickyRef, sticky, offset } = Sticky();
+    const { stickyRef, sticky, offset, height, isApplicationOrWebApp } = Sticky();
 
-    const { classes, sx, sxIcon } = styleTabs();
+    const { sxTabs, sx, sxIcon } = styleTabs();
 
     const handleTabChange = (event, newValue) => {
 
@@ -189,12 +189,12 @@ export default function Animals({user,section,subsection,emails,social,baseUrl,i
     			{t('animals.title')}
     		</h1>
             */}
-            <div className='tabs-container'>
+            <div className='tabs-container' style={{marginTop: sticky ? height+'px': '0px'}}>
                 <Tabs 		
                     id="tabs"
                     ref={stickyRef} 
-                    className={`${classes.tabs} ${sticky && 'sticky'}`}
-                    sx={{zIndex:1}} 
+                    sx={sxTabs}
+                    className={`${sticky ? 'sticky-item' : ''}`}
                     value={tab} 
                     onChange={handleTabChange}
                     variant="scrollable"

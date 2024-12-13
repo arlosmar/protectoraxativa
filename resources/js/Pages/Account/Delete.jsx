@@ -17,7 +17,7 @@ export default function Delete({t,user}) {
             show={confirmingUserDeletion}
             setShow={setConfirmingUserDeletion}
         />
-        <div className='box'>
+        <div className='account-div-box'>
             <div>
                 <h1 className='title-subsection'>
                     {t('user.profile.account.title')}

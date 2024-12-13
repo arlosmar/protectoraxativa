@@ -9,9 +9,12 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+// to use api
+use Laravel\Sanctum\HasApiTokens;
+
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -24,6 +27,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'email_verified_at',
         'password',
+        'authentication',
+        'loginApp',
         'language',
         'settings',
         'person_id'
@@ -38,6 +43,12 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'remember_token',
     ];
+
+    // for fcm notifications for apps
+    // this method will return the token
+    public function routeNotificationForFcm(){
+        return $this->devices->pluck('token_firebase')->toArray();
+    }
 
     /**
      * Get the attributes that should be cast.
@@ -68,5 +79,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function person(): BelongsTo
     {
         return $this->belongsTo(Person::class);
+    }
+
+    public function devices(): HasMany
+    {
+        return $this->hasMany(Device::class);
     }
 }

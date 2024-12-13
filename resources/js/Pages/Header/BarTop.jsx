@@ -1,6 +1,3 @@
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,122 +8,15 @@ import ContactIcon from '@mui/icons-material/Email';
 import LogoutIcon from '@mui/icons-material/PowerSettingsNew';
 //import UserIcon from '@mui/icons-material/Person';
 
-import { setLanguage } from "@/Utils/Cookies";
-import { languages } from "@/Utils/Variables";
-
-import { getDarkMode } from "@/Utils/Cookies";
-
-import LanguageModal from "@/Modals/LanguageModal";
+//import { getDarkMode } from "@/Utils/Cookies";
 
 import IconButton from '@mui/material/IconButton';
 
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-
-import Fab from '@mui/material/Fab';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import Fade from '@mui/material/Fade';
-import useScrollTrigger from '@mui/material/useScrollTrigger';
-
 //https://mui.com/material-ui/material-icons/
 
-const theme = createTheme({
-    components: {
-        MuiIconButton: {
-            variants: [
-                {
-                    props: { variant: "black" },
-                    style: {
-                        color: "black"
-                    }
-                },
-                {
-                    props: { variant: "white" },
-                    style: {
-                        color: "white"
-                    }
-                },
-                {
-                    props: { variant: "red" },
-                    style: {
-                        color: "red"
-                    }
-                },
-                {
-                    props: { variant: "orange" },
-                    style: {
-                        color: "orange"
-                    }
-                }
-            ]
-        }
-    }
-});
+export default function BarTop({user,t,from,changeLanguage,handleLogout,handleContact}){
 
-export default function BarTop({user,t,from}){
-
-    const { i18n } = useTranslation('global');
-
-    const darkmode = getDarkMode();
-
-    const langs = languages();
-
-    const [ showLanguage, setShowLanguage ] = useState(false);
-
-    const changeLanguage = (event) => {
-        setShowLanguage(true);
-    };
-
-    const [ lang, setLang ] = useState(i18n.language);
-
-    const handleLanguage = (e) => {  
-
-        e.preventDefault();
-
-        setShowLanguage(false);
-        
-        const iso = e.currentTarget.id;
-
-        i18n.changeLanguage(iso);        
-
-        setLanguage(iso);
-        setLang(iso);
-        
-         // update user language if logged in
-        axios.put(route('language.update'),{language: iso})
-        .then(function (response){            
-            /*
-            if(response.result){
-                // success
-            }
-            else{
-                // error
-            }
-            */
-        })
-        .catch(function (error){
-            
-        });     
-
-        //put(route('language.update'));
-        /*
-        fetch(route('language.update'), {
-            method: 'PUT',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                language: 'a'
-            })
-        })
-        .then(function (response) {
-            
-        })
-        .catch(function (error) {
-            
-        });
-        */  
-    };
+    //const darkmode = getDarkMode();
 
     /*
     const login = () => {
@@ -163,30 +53,14 @@ export default function BarTop({user,t,from}){
         window.location = route('login');
     };
     */
-    const logout = () => {
-        window.location = route('logout.get');
-    };
-
-    const contact = () => {
-        window.location = route('contact');
-    };
-
-    const trigger = useScrollTrigger({
-        target: window ? window : undefined,
-        disableHysteresis: true,
-        threshold: 100,
-    });
-
-    const handleTop = (e) => {  
-        window.scrollTo({ top: 0, behavior: 'smooth' })
-    }
 
     //variant={darkmode ? "white" : "black"}
 
     const sxAppBar = { 
         /*bgcolor: darkmode ? "black" : "white", 
         width: '100%',*/ 
-        borderRadius: '5px 5px 5px 5px', 
+        //borderRadius: '5px 5px 5px 5px', 
+        //borderRadius: '5px 5px 0px 0px', 
         padding: '0px' 
     };
 
@@ -199,42 +73,34 @@ export default function BarTop({user,t,from}){
 
     return (        
         <div className=''>
-            <LanguageModal           
-                show={showLanguage}
-                setShow={setShowLanguage}
-                language={lang}
-                languages={langs}
-                handleLanguage={handleLanguage}
-            />
-            <ThemeProvider theme={theme}>
                 
-                <AppBar 
-                    id='bartop' 
-                    position="static" 
-                    sx={sxAppBar}
-                >
-                
-                    <Toolbar sx={sxToolbar}>                        
+            <AppBar 
+                id='bartop' 
+                position="static" 
+                sx={sxAppBar}
+            >
+            
+                <Toolbar sx={sxToolbar}>                        
 
-                        <IconButton color="primary" onClick={changeLanguage} id='language'>
-                            <LanguageIcon/>                  
-                        </IconButton>
+                    <IconButton onClick={changeLanguage} id='language'>
+                        <LanguageIcon/>                  
+                    </IconButton>
 
-                        {/*
-                            user &&                                                        
-                            <IconButton variant={darkmode ? 'black' : 'white'} color="primary" sx={{marginRight:'5px'}}>
+                    {/*
+                        user &&                                                        
+                        <IconButton variant={darkmode ? 'black' : 'white'} color="primary" sx={{marginRight:'5px'}}>
+                            <LogoutIcon/>                  
+                        </IconButton>                            
+                    */}
+                    
+                    <Box sx={{ flexGrow: 1 }}/>
+
+                    {
+                        (user && from === 'user')?
+                            <IconButton onClick={handleLogout} id='logout'>
                                 <LogoutIcon/>                  
-                            </IconButton>                            
-                        */}
-                        
-                        <Box sx={{ flexGrow: 1 }}/>
-
-                        {
-                            (user && from === 'user')?
-                                <IconButton variant="red" color="primary" onClick={logout} id='logout' sx={{marginLeft:'5px'}}>
-                                    <LogoutIcon/>                  
-                                </IconButton>                                                   
-                            :
+                            </IconButton>                                                   
+                        :
                             <a href='/'>
                                 <Box
                                     component="img"
@@ -244,52 +110,39 @@ export default function BarTop({user,t,from}){
                                     id='logo'
                                 />                            
                             </a>
-                        }
+                    }
 
-                        {/*
-                        <Box sx={{ flexGrow: 1 }}/>
+                    {/*
+                    <Box sx={{ flexGrow: 1 }}/>
 
-                        <a href='/'>
-                            <span id='logo-text'>protectoraxativa.org</span>
-                        </a>
-                        */}
-                        <Box sx={{ flexGrow: 1 }}/>
+                    <a href='/'>
+                        <span id='logo-text'>protectoraxativa.org</span>
+                    </a>
+                    */}
+                    <Box sx={{ flexGrow: 1 }}/>
 
-                        {/*
-                            user &&                                                        
-                            <IconButton variant="red" color="primary" onClick={logout} id='logout' sx={{marginLeft:'5px'}}>
-                                <LogoutIcon/>                  
-                            </IconButton>                            
-                        */} 
-                        {/*
-                        <IconButton variant={user && from === 'user' ? 'orange' : darkmode ? 'white' : 'black'} color="primary"  onClick={login} id='login'>
-                            <UserIcon/>                  
-                        </IconButton>
-                        */}
-                        <IconButton           
-                            id={from === 'contact' ? 'contact-selected' : 'contact'}                  
-                            color="primary" 
-                            onClick={contact}                             
-                        >
-                            <ContactIcon/>                  
-                        </IconButton>
+                    {/*
+                        user &&                                                        
+                        <IconButton variant="red" color="primary" onClick={logout} id='logout' sx={{marginLeft:'5px'}}>
+                            <LogoutIcon/>                  
+                        </IconButton>                            
+                    */} 
+                    {/*
+                    <IconButton variant={user && from === 'user' ? 'orange' : darkmode ? 'white' : 'black'} color="primary"  onClick={login} id='login'>
+                        <UserIcon/>                  
+                    </IconButton>
+                    */}
+                    <IconButton           
+                        id={from === 'contact' ? 'contact-selected' : 'contact'}
+                        onClick={handleContact}                             
+                    >
+                        <ContactIcon/>                  
+                    </IconButton>
 
-                    </Toolbar>
-                
-                </AppBar>
+                </Toolbar>
             
-            </ThemeProvider>
-            <Fade in={trigger}>
-                <Box
-                    onClick={handleTop}
-                    role="presentation"
-                    sx={{ position: 'fixed', bottom: 80, right: 16, zIndex: 1 }}
-                >
-                    <Fab size="small" sx={{color:'#FF8C00',bgcolor:'white'}}>
-                        <KeyboardArrowUpIcon/>
-                    </Fab>
-                </Box>
-            </Fade>
+            </AppBar>
+            
         </div>
-  );
+    );
 }

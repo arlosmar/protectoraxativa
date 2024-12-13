@@ -8,7 +8,7 @@ import { modalStyle } from '@/Utils/Styles';
 
 export default function DeleteAccountModal({t,user,show,setShow}){
 
-    const style = modalStyle();
+    const { sx, sxIcon, sxIconClose } = modalStyle();
 
     const passwordInput = useRef();
 
@@ -56,7 +56,7 @@ export default function DeleteAccountModal({t,user,show,setShow}){
             open={show}
             onClose={handleClose}
         >
-            <Box sx={style} className='flex flex-col'>
+            <Box sx={sx} className='flex flex-col'>
             
                 <form onSubmit={deleteUser} className="p-6">
                     {/*

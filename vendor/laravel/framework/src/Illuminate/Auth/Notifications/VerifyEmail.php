@@ -59,39 +59,13 @@ class VerifyEmail extends Notification
      * @param  string  $url
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    /*
-    [level] => info
-    [subject] => Verify Email Address
-    [greeting] => 
-    [salutation] => 
-    [introLines] => Array
-        (
-            [0] => Please click the button below to verify your email address.
-        )
-
-    [outroLines] => Array
-        (
-            [0] => If you did not create an account, no further action is required.
-        )
-
-    [actionText] => Verify Email Address
-    */
     protected function buildMailMessage($url)
     {
-        $mailMessage = (new MailMessage)
-            //->subject(Lang::get('Verify Email Address'))
-            //->line(Lang::get('Please click the button below to verify your email address.'))
-            //->action(Lang::get('Verify Email Address'), $url)
-            //->line(Lang::get('If you did not create an account, no further action is required.'));
-            ->subject(trans('mail.verify.subject'))
-            ->greeting(trans('mail.verify.greeting'))
-            ->line(trans('mail.verify.sentence1'))
-            ->action(trans('mail.verify.button'), $url)
-            ->line(trans('mail.verify.sentence2'))
-            ->salutation(trans('mail.verify.salutation'))
-            ->troubleLink(trans('mail.verify.troubleLink',['actionText' => trans('mail.verify.button')]));
-
-        return $mailMessage;
+        return (new MailMessage)
+            ->subject(Lang::get('Verify Email Address'))
+            ->line(Lang::get('Please click the button below to verify your email address.'))
+            ->action(Lang::get('Verify Email Address'), $url)
+            ->line(Lang::get('If you did not create an account, no further action is required.'));
     }
 
     /**

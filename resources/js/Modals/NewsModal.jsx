@@ -25,11 +25,7 @@ export default function NewsModal({user,origin,t,show,setShow,imagesPaths,newsIt
 
     const [ share , setShare ] = useState(false);
 
-    const style = modalStyle();
-
-    const sxIcon = {
-        fontSize: '35px'
-    };
+    const { sx, sxIcon, sxIconClose } = modalStyle();
 
     const handleClose = () => {
         setShow(false)
@@ -40,10 +36,10 @@ export default function NewsModal({user,origin,t,show,setShow,imagesPaths,newsIt
             'hidden' : newsItem?.hidden ? newsItem.hidden : 0,
             'date' : newsItem?.date ? date2db(newsItem.date,true,true) : null,
             'title' : newsItem?.title ? newsItem.title : null,
-            'description' : newsItem?.description ? newsItem.description : null,
+            'description' : newsItem?.description ? newsItem.description : null,/*
             'user_id' : newsItem?.user_id ? newsItem.user_id : null,
             'user'    : newsItem?.user ? newsItem.user : null,
-            'user_name' : newsItem?.user_name ? newsItem.user_name : null,
+            'user_name' : newsItem?.user_name ? newsItem.user_name : null,*/
             'image' : newsItem?.image ? newsItem.image : null,
             'image_file' : null
         });
@@ -115,7 +111,7 @@ export default function NewsModal({user,origin,t,show,setShow,imagesPaths,newsIt
     const handleShare = async () => {
 
         // if native mobile share        
-        if(navigator?.share) {
+        if(navigator?.share || window?.AndroidHandler?.share){
             
             try{
                 const shareData = {
@@ -123,8 +119,30 @@ export default function NewsModal({user,origin,t,show,setShow,imagesPaths,newsIt
                     //text: t('trans.text'),
                     url: route('news')+'?view='+newsItem?.id
                 };
+
+                if(newsItem?.image && newsItem.image.length > 0){
+                    shareData.image = window.location.protocol+'//'+window.location.host+imagesPaths?.news+newsItem.image;
+                }
+                /*
                 await navigator.share(shareData);
                 onSuccess?.();
+                */
+                if(window?.AndroidHandler?.share){                    
+                    window.AndroidHandler.share(JSON.stringify(shareData));                    
+                }
+                else {     
+                    if(shareData.image && shareData.image.length > 0){
+                        var split = shareData.image.split('/');   
+                        var imageName = split.slice(-1);                     
+                        let blob = await fetch(shareData.image).then(r => r.blob());
+                        shareData.files = [
+                            new File([blob],imageName, {
+                                type: blob.type,
+                            })
+                        ];
+                    }        
+                    await navigator.share(shareData);
+                }
             }
             catch(err){           
                 //onError?.(err);
@@ -165,7 +183,7 @@ export default function NewsModal({user,origin,t,show,setShow,imagesPaths,newsIt
             open={show}
             onClose={handleClose}
         >
-            <Box sx={style} className='flex flex-col'>
+            <Box sx={sx} className='flex flex-col'>
             
                 <div className='modal-div'>
                     <NewsCard 
@@ -194,7 +212,7 @@ export default function NewsModal({user,origin,t,show,setShow,imagesPaths,newsIt
                             </IconButton>                          
                                
                             <IconButton onClick={handleClose} className='closeIcon'>
-                                <CloseIcon sx={sxIcon}/>
+                                <CloseIcon sx={sxIconClose}/>
                             </IconButton>                         
                         </div>
                     :
@@ -209,7 +227,7 @@ export default function NewsModal({user,origin,t,show,setShow,imagesPaths,newsIt
                                 </IconButton> 
                             } 
                             <IconButton onClick={handleClose} className='closeIcon'>
-                                <CloseIcon sx={sxIcon}/>
+                                <CloseIcon sx={sxIconClose}/>
                             </IconButton>                         
                         </div>
                 }

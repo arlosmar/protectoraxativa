@@ -13,7 +13,7 @@ import { modalStyle } from '@/Utils/Styles';
 
 export default function ShareModal({t,show,setShow,link}){
 
-    const style = modalStyle();
+    const { sx, sxIcon, sxIconClose } = modalStyle();
 
     const handleClose = () => {
         setShow(false)
@@ -24,7 +24,7 @@ export default function ShareModal({t,show,setShow,link}){
             open={show}
             onClose={handleClose}
         >
-            <Box sx={style} className='flex flex-col'>
+            <Box sx={sx} className='flex flex-col'>
                 <div className='text-center'>
                     {t('share.title')}
                 </div>

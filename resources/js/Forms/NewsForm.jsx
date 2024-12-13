@@ -4,9 +4,9 @@ import InputSelect from '@/Components/InputSelect';
 import InputRichText from '@/Components/InputRichText';
 import Switch from '@/Components/Switch';
 
-export default function NewsForm({origin,t,data,setData,options,edit,filter,handleSubmit,imagePath}){
+export default function NewsForm({origin,t,data,setData,options,edit,filter,handleSubmit,imagePath,csrf_token}){
 
-	const [ optionsFormatted, setOptionsFormatted ] = useState([]);
+	//const [ optionsFormatted, setOptionsFormatted ] = useState([]);
 	const [ preview, setPreview ] = useState(null);
 
 	const handleKeyDown = (event) => {
@@ -53,13 +53,14 @@ export default function NewsForm({origin,t,data,setData,options,edit,filter,hand
     const [ valueUser, setValueUser ] = useState(null);
 
     const setValue = (field,newValue) => {
-
+    	/*
     	switch(field){
 
 			case 'user_id':
 				setValueUser(newValue);
 				break;
 		}
+		*/
     }
 
     const handleValue = (field,newValue) => {        
@@ -67,6 +68,7 @@ export default function NewsForm({origin,t,data,setData,options,edit,filter,hand
         setValue(field,newValue);
 
     	// save data
+    	/*
     	var tag = null;
     	switch(field){
 
@@ -102,6 +104,7 @@ export default function NewsForm({origin,t,data,setData,options,edit,filter,hand
 
 	        setData(newData);
 	    }
+	    */
     }
 
     const fields = [    	    	
@@ -109,6 +112,7 @@ export default function NewsForm({origin,t,data,setData,options,edit,filter,hand
     	{name: 'date',type: filter ? 'date' : 'datetime-local'}
     ];
 
+    /*
     const [ inputValues, setInputValues ] = useState('');
 
     const handleInputValue = (field,newValue) => {        
@@ -116,6 +120,7 @@ export default function NewsForm({origin,t,data,setData,options,edit,filter,hand
         newValues[field] = newValue;
         setInputValues(newValues);
     }
+    */
 
     const handleFileRemove = (field) => {
     	
@@ -132,6 +137,7 @@ export default function NewsForm({origin,t,data,setData,options,edit,filter,hand
 		setData('image',null);
     }
 
+    /*
     useEffect(() => {
         
         var optsFormatted = [];
@@ -185,6 +191,7 @@ export default function NewsForm({origin,t,data,setData,options,edit,filter,hand
         setOptionsFormatted(optsFormatted);
         setInputValues(optsInputs);       
     }, [options,data]);
+    */
 
 	return (
 
@@ -207,6 +214,7 @@ export default function NewsForm({origin,t,data,setData,options,edit,filter,hand
 		            <div className='mb-2'>
 		                <Input		                    
 		                    name="image"
+		                    capture="environment"
 		                    type="file"
 		                    autoComplete="image"
 		                    onChange={handleInput}		                    
@@ -259,7 +267,7 @@ export default function NewsForm({origin,t,data,setData,options,edit,filter,hand
 			            </div>
 			    	))
                 }
-                {
+                {/*
                 	!filter &&
 	                <div className='mt-2'>
 		            	<InputSelect                        
@@ -274,15 +282,17 @@ export default function NewsForm({origin,t,data,setData,options,edit,filter,hand
 	                        autoComplete                        
 	                    />
 		            </div>
-		        }
+		        */}
                 {
 	            	!filter &&
 		            <div className='mt-2'>
 		            	<InputRichText
+		            		origin={origin}
 		            		name='description'
 		            		value={data?.description}
 		            		placeholder={t('news.record.description')}
 		            		onChange={(content) => handleInputRichText('description',content)}
+		            		csrf_token={csrf_token}
 		            	/>		                
 		            </div>
 		        }		        

@@ -52,9 +52,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 use WeakMap;
 
-// https://laravel.com/docs/11.x/logging
-use Illuminate\Support\Facades\Log;
-
 class Handler implements ExceptionHandlerContract
 {
     use ReflectsClosures;
@@ -568,18 +565,6 @@ class Handler implements ExceptionHandlerContract
      */
     public function render($request, Throwable $e)
     {
-        // log laravel exceptions to send them to telegram
-        $errorClass = get_class($e);
-        if($errorClass !== 'Illuminate\Validation\ValidationException'){
-            
-            $error = $e->getMessage();
-            
-            if(isset($error) && !empty($error)){
-                //Log::error(print_r($e),true));
-                Log::error(print_r($error,true));
-            }
-        }
-
         $e = $this->mapException($e);
 
         if (method_exists($e, 'render') && $response = $e->render($request)) {

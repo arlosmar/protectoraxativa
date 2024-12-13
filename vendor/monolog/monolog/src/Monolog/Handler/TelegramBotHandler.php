@@ -50,7 +50,7 @@ class TelegramBotHandler extends AbstractProcessingHandler
     /**
      * The maximum number of characters allowed in a message according to the Telegram api documentation
      */
-    private const MAX_MESSAGE_LENGTH = 4096;
+    private const MAX_MESSAGE_LENGTH = 1000;//4096;
 
     /**
      * Telegram bot access token provided by BotFather.
@@ -111,12 +111,12 @@ class TelegramBotHandler extends AbstractProcessingHandler
         string $channel,
         $level = Level::Debug,
         bool   $bubble = true,
-        ?string $parseMode = null,
+        ?string $parseMode = 'HTML',//null,
         ?bool   $disableWebPagePreview = null,
         ?bool   $disableNotification = null,
         bool   $splitLongMessages = false,
         bool   $delayBetweenMessages = false,
-        int    $topic = null
+        ?int   $topic = null
     ) {
         if (!\extension_loaded('curl')) {
             throw new MissingExtensionException('The curl extension is needed to use the TelegramBotHandler');
@@ -196,7 +196,7 @@ class TelegramBotHandler extends AbstractProcessingHandler
     /**
      * @return $this
      */
-    public function setTopic(int $topic = null): self
+    public function setTopic(?int $topic = null): self
     {
         $this->topic = $topic;
 
@@ -232,7 +232,77 @@ class TelegramBotHandler extends AbstractProcessingHandler
      */
     protected function write(LogRecord $record): void
     {
-        $this->send($record->formatted);
+        /*
+        $record
+        Monolog\LogRecord Object
+        (
+        [datetime] => Monolog\DateTimeImmutable Object
+            (
+                [useMicroseconds:Monolog\DateTimeImmutable:private] => 1
+                [date] => 2024-11-16 17:30:20.428421
+                [timezone_type] => 3
+                [timezone] => UTC
+            )
+
+        [channel] => production
+        [level] => Monolog\Level Enum:int
+            (
+                [name] => Error
+                [value] => 400
+            )
+
+        [message] => syntax error, unexpected variable "$user"
+        [context] => Array
+            (
+                [exception] => ParseError Object
+                    (
+                        [message:protected] => syntax error, unexpected variable "$user"
+                        [string:Error:private] => 
+                        [code:protected] => 0
+                        [file:protected] => /home/arlosmar/webs/protectoraxativa/app/Http/Controllers/HomeController.php
+                        [line:protected] => 49
+                        [trace:Error:private] => Array
+                            (
+                                [0] => Array
+                                    (
+                                        [file] => /home/arlosmar/webs/protectoraxativa/vendor/composer/ClassLoader.php
+                                        [line] => 427
+                                        [function] => Composer\Autoload\{closure}
+                                    )
+
+                                [1] => Array
+                                    (
+                                        [function] => loadClass
+                                        [class] => Composer\Autoload\ClassLoader
+                                        [type] => ->
+                                    )
+
+                             
+                                        [f (...truncated)
+        */
+
+        /*
+        initial code  
+
+        $levelMarker = $levelMarkers[strtoupper($record['level_name'])] ?? 'LOG';
+        $message = "<b>From:</b> Laravel"."\n"."<b>Time:</b> " . $record['datetime']->format('Y-m-d H:i:s')."\n".
+        "<b>Level:</b> " . $levelMarker . "\n" .
+        "<b>Message:</b> " . $record['message'];
+
+        if(!empty($record['context'])){
+            $contextDetails = json_encode($record['context'], JSON_PRETTY_PRINT);
+            $message .= "\n<b>Details:</b>\n<pre>" . htmlspecialchars($contextDetails) . "</pre>";            
+        }
+
+        //$this->send($record->formatted);
+        */
+
+        $message = sendTelegramFromBotHandler($record);
+
+        if(isset($message) && !empty($message)){
+            $this->disableWebPagePreview(true);
+            $this->send($message);
+        }
     }
 
     /**

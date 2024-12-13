@@ -1,6 +1,8 @@
 <?php
 
-//amicsengirona@gmail.com
+// verify email => customize
+// app/Providers/AppServiceProvider.php => boot
+// same for forgot-password
 
 return [
 
@@ -109,15 +111,9 @@ return [
     | used globally for all emails that are sent by your application.
     |
     */
-    'test' => [
-        'to' => [
-            'address' => env('MAIL_TEST_FROM_ADDRESS', ''),
-            'name' => env('MAIL_TEST_FROM_NAME', ''),
-        ],
-        'from' => [
-             'address' => env('MAIL_TEST_TO_ADDRESS', ''),
-            'name' => env('MAIL_TEST_TO_NAME', ''),
-        ]
+    'noreply' => [
+        'address' => env('MAIL_FROM_ADDRESS_NOREPLY', ''),
+        'name' => env('MAIL_FROM_NAME_NOREPLY', ''),
     ],
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', ''),
@@ -140,7 +136,7 @@ return [
         'name' => env('MAIL_FROM_NAME_INFO', ''),
     ],
     'contact' => [
-        'address' => env('MAIL_FROM_ADDRESS_COLABORATION', ''),
-        'name' => env('MAIL_FROM_NAME_COLABORATION', ''),
+        'address' => env('MAIL_TO_ADDRESS_CONTACT', ''),
+        'name' => env('MAIL_T0_NAME_CONTACT', ''),
     ],
 ];

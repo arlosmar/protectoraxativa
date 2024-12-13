@@ -28,41 +28,51 @@ class ProfileController extends Controller{
 
         $user = auth()->user();
 
-        if(!isset($user->admin) || empty($user->admin)){
+        $status = session('status');
 
-            $status = session('status');
-
-            $msg = '';
-            if(isset($request->msg) && !empty($request->msg)){
-                $msg = $request->msg;
-            }
-
-            // get user person and animals
-            $user->load('person','person.animals');
-
-            // get foreign keys tables
-            $options = [                
-                'status_id' => Status::all()->select('id','name'),
-                'sponsor_id' => Sponsor::all()->select('id','name'),
-                'type_id' => Type::all()->select('id','name'),
-                'age_id' => Age::all()->select('id','name'),
-                'gender_id' => Gender::all()->select('id','name'),
-                'size_id' => Size::all()->select('id','name'),
-                'breed_id' => Breed::select('id',DB::raw('description as name'))->get(),
-                'person_id' => Person::all()
-            ];
-
-            $imagesPaths = config('paths.images');
-            $baseUrl = URL::to('/');
-            $itemsPerPage = config('variables.animalsPerPage');
-            $page = 1;
-
-            return Inertia::render('Intranet/Intranet',compact('user','section','subsection','msg','status','options','imagesPaths','baseUrl','itemsPerPage','page'));
+        $msg = '';
+        if(isset($request->msg) && !empty($request->msg)){
+            $msg = $request->msg;
         }
-        else{
-            // in case admin goes to the intranet url, redirect
-            return Redirect::route('admin');
+
+        // get user person and animals
+        $user->load('person','person.animals');
+
+        // get foreign keys tables
+        $options = [                
+            'status_id' => Status::all()->select('id','name'),
+            'sponsor_id' => Sponsor::all()->select('id','name'),
+            'type_id' => Type::all()->select('id','name'),
+            'age_id' => Age::all()->select('id','name'),
+            'gender_id' => Gender::all()->select('id','name'),
+            'size_id' => Size::all()->select('id','name'),
+            'breed_id' => Breed::select('id',DB::raw('description as name'))->get(),
+            'person_id' => Person::all()
+        ];
+
+        $imagesPaths = config('paths.images');
+        $baseUrl = URL::to('/');
+        $itemsPerPage = config('variables.animalsPerPage');
+        $page = 1;
+
+        // types of notifications to open a different url
+        $notifications = $this->getNotifications();
+
+        $emails = [
+            'info' => config('mail.info.address')
+        ];
+
+        $social = config('social.social');
+
+        $isApp = $this->isApp($request);
+
+        // if app, check if notifications parameter stating notifications are disabled
+        $appNotificationsEnabled = true;
+        if($isApp && isset($request->notifications) && intval($request->notifications) === 0){
+            $appNotificationsEnabled = false;
         }
+
+        return Inertia::render('Intranet/Intranet',compact('user','section','subsection','msg','status','options','imagesPaths','baseUrl','itemsPerPage','page','notifications','emails','social','isApp','appNotificationsEnabled'));
     }
 
     // Display the user's profile form.

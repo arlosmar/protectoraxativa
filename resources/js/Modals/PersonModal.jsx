@@ -26,11 +26,7 @@ export default function PersonModal({origin,t,show,setShow,imagesPaths,person,
 
     const [ share , setShare ] = useState(false);
 
-    const style = modalStyle();
-
-    const sxIcon = {
-        fontSize: '35px'
-    };
+    const { sx, sxIcon, sxIconClose } = modalStyle();
 
     const handleClose = () => {
         setShow(false)
@@ -127,7 +123,7 @@ export default function PersonModal({origin,t,show,setShow,imagesPaths,person,
     const handleShare = async () => {
 
         // if native mobile share        
-        if(navigator?.share) {
+        if(navigator?.share || window?.AndroidHandler?.share){
             
             try{
                 const shareData = {
@@ -135,8 +131,16 @@ export default function PersonModal({origin,t,show,setShow,imagesPaths,person,
                     //text: t('trans.text'),
                     url: route('admin.people')+'?view='+person?.id
                 };
+                /*
                 await navigator.share(shareData);
                 onSuccess?.();
+                */
+                if(window?.AndroidHandler?.share){                    
+                    window.AndroidHandler.share(JSON.stringify(shareData));                    
+                }
+                else {                
+                    await navigator.share(shareData);
+                }
             }
             catch(err){           
                 //onError?.(err);
@@ -173,7 +177,7 @@ export default function PersonModal({origin,t,show,setShow,imagesPaths,person,
             open={show}
             onClose={handleClose}
         >
-            <Box sx={style} className='flex flex-col'>
+            <Box sx={sx} className='flex flex-col'>
                 {/*
                 <div className={`w-full flex items-center mb-2`}>
                     <div className='w-full'>
@@ -241,7 +245,7 @@ export default function PersonModal({origin,t,show,setShow,imagesPaths,person,
                             </>
                         }
                         <IconButton onClick={handleClose} className='closeIcon'>
-                            <CloseIcon sx={sxIcon}/>
+                            <CloseIcon sx={sxIconClose}/>
                         </IconButton>                         
                     </div>
                 }

@@ -1,4 +1,5 @@
 {
+    "If you're having trouble clicking the \":actionText\" button, copy and paste the URL below\ninto your web browser:" : "If you're having trouble clicking the \":actionText\" button, copy and paste the URL below\ninto the browser:",
     "trans": {      
         "Back" : "Back",
         "Save" : "Save",
@@ -33,11 +34,29 @@
         "Form"  :   "Form",
         "Field-Empty" :   "Empty field",
         "All-Male-Singular"  :   "All",
-        "Update"    :   "Update"
+        "All-Plural"  :   "All",
+        "Update"    :   "Update",
+        "noElementsSelected" : "No items selected" 
+    },
+    "pwa"   :   {
+        "text" : "Install the app!",
+        "button" : "Install APP",
+        "apple" : {
+            "title" : "Add the app",
+            "subtitle" : "SPAX",
+            "description" : "Add our app for more comfort",
+            "share" : "Press the 'Share' button",
+            "add" : "Press 'Add to Home Screen'"           
+        }
+    },
+    "notifications"   :   {
+        "text" : "Enable notifications",
+        "button" : "Enable notifications"
     },
     "Cookies" : {
         "button-accept" : "Accept",
-        "message" : "This web uses the minimum necessary cookies to work. We do not collect information of any type."
+        "message" : "This web uses the minimum necessary cookies to work. We do not collect information of any type. You can check the cookies policy from ",
+        "here"  :   "here"
     },
     "Title" : {
         "Home" : "Home",
@@ -52,11 +71,16 @@
         "Animals" : "Animals",
         "News" : "News",
         "Contact" : "Contact",
-        "User"  :   "User"
+        "User"  :   "User",
+        "Menu"  :   "Menu",
+        "Language" : "Language",
+        "Contact" : "Contact",
+        "Logout" : "Logout",
+        "Whatsapp" : "Whatsapp"
     },
     "under-development" : "In development",
     "introduction": {
-        "title" : "Welcome",
+        "title" : "Animals shelter from Xàtiva",
         "colaboration" : {
             "title" : "Collaborate",
             "bizum": "Bizum",
@@ -196,8 +220,8 @@
                 "title": "Adopt"
             },
             "adopted": {
-                "icon": "Adopted",
-                "title": "Adopted"
+                "icon": "Happy ends",
+                "title": "Happy ends"
             }
         },
         "sponsor": {
@@ -310,7 +334,7 @@
             "Description": "Description",
             "Image": "Image",
             "Image2": "Image2",
-            "Image-Sponsored"   :   "Image sponsored",
+            "Image-Sponsored"   :   "Image sponsored/adopted",
             "Person": "Responsible persons",
             "Video" :   "Video",
             "Video2" :   "Video2",
@@ -366,7 +390,9 @@
                 "email": "Email",
                 "email-not-verified": "Your email address is not verified.",
                 "email-verify": "Send verification email",
-                "email-sent": "A new verification email has been sent to your email address."
+                "email-sent": "A new verification email has been sent to your email address.",
+                "personal-data" : "Personal data",
+                "update-personal-data" : "If you want to update your personal data get in contact with the shelter, please:"
             },
             "animals": {
                 "icon"  :   "Animals",
@@ -376,7 +402,23 @@
                 "icon": "Config",
                 "title": "Settings",
                 "description": "Here you can change different settings for your account",
-                "dark-mode": "Dark Mode"
+                "dark-mode": "Dark Mode",
+                "biometric" :   "Login with biometric",
+                "notifications" :   "Notifications",
+                "notifications" :   {
+                    "switch"    :   "Notifications",
+                    "enabled"   :   "Notifications enabled",
+                    "setup"  :   "You must enable your device notifications to can change this setting",
+                    "disabled"    :   "Your device notifications are disabled for this app. You must enable them to can change this setting.",
+                    "push" : "Push",
+                    "email" : "Email",
+                    "method" : "Methods",
+                    "type" : "Categories",
+                    "appDisabled" : "You must grant permission to the app to receive notifications"
+                },
+                "authentication" : {
+                    "notAllowed" : "This device/browser does not allow the biometric authentication"
+                }
             },
             "password": {
                 "icon": "Password",
@@ -405,6 +447,7 @@
             "edit": "Edit",
             "borrar": "Delete",
             "empty": "No animals",
+            "images-sponsored" : "Image sponsored/adopted",
             "adopt": {
                 "icon": "Adopt",
                 "title": "Adopt"
@@ -430,12 +473,28 @@
             "borrar": "Delete",
             "empty": "No people"
         },
+        "notifications": {
+            "icon"  :   "Notifications",
+            "title"  :   "Notifications",
+            "form" : {
+                "title" : "Title",            
+                "message" : "Message",
+                "users" : "Users",
+                "peopleAll" : "All people",
+                "usersAll" : "Registered users",
+                "type" : "Type"
+            },
+            "success" : "Notification sent",
+            "error" : "Error sending notification",
+            "button" : "Send"
+        },
         "email": {
             "title": "Verify Email",
-            "description": "You need to verify your email to access your account. You should have received a link to validate it. If you haven't received it, please try resending the verification email.",
+            "description" : "We have sent you an email to verify your account. If you have not received it try to resend it, please.",
             "verified": "Email verified",
             "verification-link-sent": "Email sent",
-            "resend-link": "Resend"
+            "resend-link": "Resend",
+            "empty" : "Cannot send an empty message"
         }
     },
     "login": {
@@ -468,6 +527,7 @@
             "title3": "Adoptions",
             "shift-adoptions" : "Monday to Friday from 05:00PM to 09:00PM",
             "title4": "Volunteering",
+            "email" : "Email",
             "phone": "Phone",
             "whatsapp": "Whatsapp",
             "shift-phone-title": "Phone Service Hours",
@@ -484,5 +544,22 @@
         "title" :   "Share",
         "title-native"  :   "SPAX - protectoraxativa",
         "text"  :   "Have a look at this animal"
+    },
+    "info" : {
+        "terms" : {
+            "icon": "Terms",
+            "title" :   "Terms of use",
+            "content" : "<h1 class='title-info-pages'>INFORMATION SOCIETY SERVICES ACT (LSSI)</h1><br/><br/>SOCIEDAD PROTECTORA DE ANIMALES DE XÀTIVA, responsible for the website, hereinafter referred to as RESPONSIBLE, provides users with this document in order to comply with the obligations set forth in Law 34/2002, of July 11, on Information Society Services and Electronic Commerce (LSSICE), BOE Nº 166, as well as to inform all users of the website regarding the conditions of use.<br/>Anyone who accesses this website assumes the role of user, committing to the observance and strict compliance with the provisions outlined here, as well as with any other applicable legal provisions.<br/><br/>SOCIEDAD PROTECTORA DE ANIMALES DE XÀTIVA reserves the right to modify any type of information that may appear on the website, with no obligation to give prior notice or inform users of these obligations, with publication on the SOCIEDAD PROTECTORA DE ANIMALES DE XÀTIVA website considered sufficient.<br/><br/><h1 class='subtitle-info-pages'>1. IDENTIFICATION DETAILS</h1><br/>Domain name: <a href='https://protectoraxativa.org' target='_blank'>protectoraxativa.org</a><br/>Trade name: SPAX<br/>Company name: SOCIEDAD PROTECTORA DE ANIMALES DE XÀTIVA Y LA COSTERA.<br/>Tax ID: G46388385<br/>Corporate address: PO Box 544<br/>Phone: <a href='tel:671870889' target='_blank'>671870889</a><br/>Email: <a href='mailto:colabora@protectoraxativa.org' target='_blank'>colabora@protectoraxativa.org</a><br/><br/><h1 class='subtitle-info-pages'>2. INTELLECTUAL AND INDUSTRIAL PROPERTY RIGHTS</h1><br/>The website, including but not limited to its programming, editing, compilation, and other elements necessary for its functioning, the designs, logos, text, and/or graphics, are the property of the RESPONSIBLE or, if applicable, have a license or express authorization from the authors. All website content is duly protected by intellectual and industrial property laws and registered in the appropriate public registries.<br/>Regardless of the purpose, total or partial reproduction, use, exploitation, distribution, and commercialization always requires prior written authorization from the RESPONSIBLE. Any unauthorized use is considered a serious infringement of the author’s intellectual or industrial property rights.<br/><br/>Designs, logos, text, and/or graphics that do not belong to the RESPONSIBLE and may appear on the website belong to their respective owners, who are responsible for any possible dispute that may arise regarding them. The RESPONSIBLE expressly authorizes third parties to redirect directly to specific content on the website, and in any case, to redirect to the main website <a href='https://protectoraxativa.org' target='_blank'>protectoraxativa.org</a><br/><br/>The RESPONSIBLE recognizes in favor of its owners the corresponding intellectual and industrial property rights, and their mere mention or appearance on the website does not imply any rights or responsibility for them, nor endorsement, sponsorship, or recommendation.<br/>To make any observations about possible violations of intellectual or industrial property rights, or any of the website's content, you can do so via email at: <a href='mailto:colabora@protectoraxativa.org' target='_blank'>colabora@protectoraxativa.org</a><br/><br/><h1 class='subtitle-info-pages'>3. DISCLAIMER</h1><br/>The RESPONSIBLE disclaims any liability for the information published on its website if such information has been altered or introduced by a third party not related to it.<br/><br/><b>Use of Cookies</b><br/>This website may use technical cookies (small information files that the server sends to the computer accessing the page) to perform certain functions deemed essential for the proper operation and viewing of the site. The cookies used are, in any case, temporary, with the sole purpose of making browsing more efficient and disappearing at the end of the user session. In no case do these cookies provide personal data by themselves and will not be used to collect such data.<br/><br/>By using cookies, the server where the web is located may recognize the user’s browser to make navigation easier, for example, to allow access to users who have previously registered to areas, services, promotions, or contests exclusively reserved for them without needing to log in on each visit. Cookies may also be used to measure audience, traffic parameters, track progress, and number of entries, etc. In such cases, cookies are not technically essential but beneficial to the user. This website will not install unnecessary cookies without prior user consent.<br/><br/>The user has the option of configuring their browser to be alerted to the reception of cookies and to prevent their installation on their device. Please refer to your browser's instructions for further information.<br/><br/><b>Link Policy</b><br/>From this website, it is possible to redirect to content on third-party websites. Given that the RESPONSIBLE cannot always control the content introduced by third parties on their respective websites, it does not assume any responsibility for such content. In any case, it will proceed to the immediate removal of any content that may violate national or international law, morality, or public order, promptly removing the link to the website in question and informing the competent authorities.<br/><br/>The RESPONSIBLE is not liable for the information and content stored, including but not limited to, in forums, chats, blog generators, comments, social networks, or any other means that allows third parties to publish content independently on the RESPONSIBLE’s website. However, in compliance with the provisions of articles 11 and 16 of the LSSICE, it makes itself available to all users, authorities, and security forces, actively collaborating in the removal or blocking of any content that may affect or violate national or international legislation, third-party rights, or morality and public order. If the user considers that there is any content on the website that could be subject to this classification, please notify the website administrator immediately.<br/><br/>This website has been reviewed and tested to work correctly. In principle, correct operation can be guaranteed 365 days a year, 24 hours a day. However, the RESPONSIBLE does not rule out the possibility of certain programming errors or force majeure events, natural disasters, strikes, or similar circumstances that may make access to the website impossible.<br/><br/><b>IP Addresses</b><br/>The website servers may automatically detect the IP address and domain name used by the user. An IP address is a number automatically assigned to a computer when it connects to the Internet. All this information is recorded in a duly registered server activity file that allows subsequent processing of the data to obtain statistical measurements only to determine the number of page impressions, the number of visits to web servers, the order of visits, the point of access, etc.<br/><br/><h1 class='subtitle-info-pages'>4. APPLICABLE LAW AND JURISDICTION</h1><br/>For the resolution of all disputes or questions related to this website or the activities carried out on it, Spanish law will apply, to which the parties expressly submit, with the Courts and Tribunals closest to Valencia being competent for the resolution of all conflicts arising or related to its use."
+        },
+        "policy" : {
+            "icon": "Privacy",
+            "title" :   "Privacy policy",
+            "content" : "<h1 class='title-info-pages'>1. USER INFORMATION<br/></h1><br/><b>SOCIEDAD PROTECTORA DE ANIMALES DE XÀTIVA</b>, hereinafter referred to as RESPONSIBLE, is the Data Controller for the User's personal data and informs that these data will be processed in accordance with the provisions of Regulation (EU) 2016/679 of April 27, 2016 (GDPR), on the protection of natural persons concerning the processing of personal data and the free movement of such data, and therefore provides the following information on processing:<br/><br/><b>Purpose of processing:</b> to maintain a commercial relationship with the User. The planned processing operations are:<ul class='list-info-pages'><li>Sending commercial advertising communications by email, fax, SMS, MMS, social communities, or any other electronic or physical means, present or future, that enables commercial communications. These communications will be carried out by the RESPONSIBLE and related to its products and services, or those of its collaborators or suppliers with whom it has reached a promotional agreement. In this case, third parties will never have access to personal data.</li><li>Conducting statistical studies.</li><li>Processing orders, requests, or any type of request made by the user through any of the contact methods provided.</li><li>Sending the website newsletter.</li></ul><br/><b>Legal basis for processing:</b> consent of the data subject.<br/><br/><b>Data retention criteria:</b> data will be kept as long as there is a mutual interest in maintaining the purpose of processing and when it is no longer necessary for that purpose, it will be deleted with appropriate security measures to ensure data pseudonymization or total destruction.<br/><br/><b>Data communication:</b> Data will not be communicated to third parties, except under legal obligation.<br/><br/><b>Rights of the User:</b><ul class='list-info-pages'><li>Right to withdraw consent at any time.</li><li>Right of access, rectification, portability, and erasure of data and to restrict or object to processing.</li><li>Right to file a complaint with the supervisory authority (www.aepd.es) if processing is deemed not in compliance with current regulations.</li></ul><br/><b>Contact information to exercise rights:</b><br/>SOCIEDAD PROTECTORA DE ANIMALES DE XÀTIVA. PO Box 544, XÀTIVA – 46800 (VALENCIA). Email: <a href='mailto:colabora@protectoraxativa.org'>colabora@protectoraxativa.org</a><br/><br/><h1 class='title-info-pages'>2. MANDATORY OR OPTIONAL NATURE OF THE INFORMATION PROVIDED BY THE USER</h1><br/>By marking the corresponding boxes and entering data in the fields, marked with an asterisk (*) in the contact form or presented in download forms, Users expressly, freely, and unequivocally accept that their data are necessary to fulfill their request by the provider, with the inclusion of data in the remaining fields being voluntary. The User guarantees that the personal data provided to the RESPONSIBLE are accurate and is responsible for notifying any changes to them.<br/><br/>The RESPONSIBLE expressly informs and guarantees Users that their personal data will not be transferred to third parties under any circumstances, and that any time it makes any type of personal data transfer, the prior, express, informed, and unequivocal consent of Users will be requested. All data requested through the website are mandatory, as they are necessary to provide an optimal service to the User. If not all data are provided, it is not guaranteed that the information and services provided will be fully adapted to their needs.<br/><br/><h1 class='title-info-pages'>3. SECURITY MEASURES</h1><br/>In compliance with current personal data protection regulations, the RESPONSIBLE is complying with all provisions of the GDPR for the processing of personal data under its responsibility, and manifestly with the principles described in Article 5 of the GDPR, whereby they are processed lawfully, fairly, and transparently in relation to the data subject and are adequate, relevant, and limited to what is necessary concerning the purposes for which they are processed.<br/><br/>The RESPONSIBLE guarantees that it has implemented appropriate technical and organizational policies to apply the security measures established by the GDPR to protect the rights and freedoms of Users and has communicated the appropriate information so they can exercise their rights."
+        },
+        "cookies" : {
+            "icon": "Cookies",
+            "title" :   "Cookies policy",
+            "content" : "We inform you that this website installs its own and third-party cookies when you browse its pages to facilitate your navigation and obtain statistical data. If you continue browsing, we consider that you accept their use and installation.<br/><br/><h1 class='subtitle-info-pages'>Definition and Function of Cookies</h1><br/><b>What are cookies?</b><br/>A cookie is a non-executable text file downloaded to your computer when you access certain web pages. Cookies allow a website, among other things, to store and retrieve information about a user's or device's browsing habits and, depending on the information they contain and how the device is used, they can be used to recognize the user. Cookies can also be used to record anonymous information about how a visitor uses a site, for example, from which website they accessed or if they used an advertising banner to arrive.<br/><br/><b>Why does this site use cookies?</b><br/>This site uses strictly necessary and essential cookies to allow you to use our website and to move freely, access private areas, customize options, etc. Additionally, it uses cookies that collect data related to website usage analysis. These are used to help improve service to the visitor by measuring page usage and performance, in order to optimize and customize it.<br/><br/>What types of cookies does this website use?<br/><br/>According to their purpose:<ul class='list-info-pages'><li><b>Technical Cookies:</b><br/>Technical cookies are essential and strictly necessary for the proper functioning of a website and the use of the various options and services it offers.<br/><br/>For example, those used to maintain a session, manage response times, performance, or validation of options, use security features, share content on social networks, etc.</li><br/><li><b>Personalization Cookies:</b><br/>These cookies allow the user to specify or customize certain characteristics of the website’s general options.<br/><br/>For example, setting the language, regional configuration, or browser type.</li><br/><li><b>Analytical Cookies (Google Analytics):</b><br/>Analytical cookies are used by our website to create browsing profiles and understand users' preferences to improve the offer of products and services.<br/><br/>For example, an analytical cookie might monitor the geographic areas of most interest to a user, which product has the most acceptance, etc.</li><br/><li><b>Advertising / Behavioral Advertising Cookies (Google Adsense):</b><br/>Advertising cookies allow the management of advertising spaces based on specific criteria.<br/><br/>For example, frequency of access, edited content, etc.<br/><br/>Behavioral advertising cookies allow the management of advertising by storing information on behavior through observation of habits, studying access, and forming a profile of user preferences to offer advertising related to their profile interests.</li></ul><br/>See this link for Google services' privacy policies.<br/><br/>According to the length of time they remain active:<ul class='list-info-pages'><li><b>Session Cookies:</b> Session cookies last only as long as the user is browsing the website and are deleted at the end.</li><li><b>Persistent Cookies:</b> These cookies remain stored on the user’s device for a longer period, thus facilitating control of the chosen preferences without having to repeat certain parameters each time they visit the website.</li></ul><br/><h1 class='subtitle-info-pages'>Revocation and Deletion of Cookies</h1><br/>You can allow, block, or delete cookies installed on your computer by configuring the options of the browser installed on your computer.<ul class='list-info-pages'><li>For more information about Firefox browser, click <a href='https://support.mozilla.org/en/kb/cookies-information-websites-store-on-your-computer' target='_blank'>here</a>.</li><li>For more information about Chrome browser, click <a href='https://support.google.com/chrome/answer/95647?hl=en' target='_blank'>here</a>.</li><li>For more information about Explorer browser, click <a href='https://support.microsoft.com/en-gb/windows/manage-cookies-in-microsoft-edge-view-allow-block-delete-and-use-168dab11-0753-043d-7c16-ede5947fc64d#ie=ie-11' target='_blank'>here</a>.</li><li>For more information about Safari browser, click <a href='https://support.apple.com/en-gb/guide/safari/sfri11471/mac' target='_blank'>here</a>.</li><li>For more information about Opera browser, click <a href='https://help.opera.com/en/latest/web-preferences/#cookies' target='_blank'>here</a>.</li>"
+        }
     }
 }

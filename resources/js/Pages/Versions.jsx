@@ -16,18 +16,20 @@ export default function Versions({laravel,php,database}){
     return (
     	<>
         <Head title='Versions'/>
-        <div id='versions'>
-        {
-            versions && versions.length > 0 && versions.map((version,i) => (                
-                <pre>
-                    {
-                        version && version.length > 0 &&               
-                        <><b>{names[i]}:</b> {version}<br/></>
-                    }
-                </pre>
-            ))
-        }
-        </div>
+        <main>
+            <div id='versions'>
+            {
+                versions && versions.length > 0 && versions.map((version,i) => (                
+                    <pre>
+                        {
+                            version && version.length > 0 &&               
+                            <><b>{names[i]}:</b> {version}<br/></>
+                        }
+                    </pre>
+                ))
+            }
+            </div>
+        </main>
     	</>
     )
 }

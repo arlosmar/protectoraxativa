@@ -1,4 +1,6 @@
 import Carousel from '@/Components/Carousel';
+
+import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import { useState, useEffect } from 'react';
@@ -91,6 +93,12 @@ export default function CarouselAnimals({user,origin,title,t,animals,baseUrl,
         }
     }
 
+    /*
+    <div className='loading mt-8'>
+        <CircularProgress sx={{color:"#FF8C00"}}/>
+    </div>
+    */
+
     return (
         <>
         <h1 className='title-carousel'>   
@@ -101,8 +109,6 @@ export default function CarouselAnimals({user,origin,title,t,animals,baseUrl,
         </h1>
         {
             !loading &&
-            filteredAnimals &&
-            filteredAnimals.length > 0 &&
             <ButtonsActions
                 origin={origin}                
                 handleExport={handleExport}
@@ -123,9 +129,12 @@ export default function CarouselAnimals({user,origin,title,t,animals,baseUrl,
         />
         {
             loading ?
-                <div className='text-center mt-4'>
-                    <CircularProgress sx={{color:"#FF8C00"}}/>
-                </div>
+                <Backdrop
+                    sx={(theme) => ({ color: '#FF8C00', zIndex: theme.zIndex.drawer + 1 })}
+                    open={loading}            
+                >
+                    <CircularProgress color="warning"/>
+                </Backdrop>                
             :                
                 filteredAnimals && filteredAnimals.length > 0 ?
                     <Carousel 

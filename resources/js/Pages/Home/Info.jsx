@@ -60,6 +60,23 @@ export default function Info({t}){
             </div>
             */}
         </div>
+        <div className='flex justify-between'>
+            <div className='w-1/3 px-1'>
+                <a className='info-button' href={route('terms')}>
+                    {t('info.terms.icon')}
+                </a>
+            </div>
+            <div className='w-1/3 px-1'>
+                <a className='info-button' href={route('policy')}>
+                    {t('info.policy.icon')}
+                </a>
+            </div>
+            <div className='w-1/3 px-1'>
+                <a className='info-button' href={route('cookies')}>
+                    {t('info.cookies.icon')}
+                </a>
+            </div>
+        </div>
         </>
     )
 }

@@ -18,7 +18,7 @@ export default function Sponsor({user,t,subsection,setSubsection,animals,sponsor
 
     const [ tab, setTab ] = useState(subsection ? subsection : "info");
 
-    const { classes, sx, sxIcon } = styleSubTabs();
+    const { sxSubTabs, sx, sxIcon } = styleSubTabs();
 
     const handleTabChange = (event, newValue) => {
         
@@ -45,8 +45,8 @@ export default function Sponsor({user,t,subsection,setSubsection,animals,sponsor
         <div className='subtabs-container'>
             <Tabs 					
                 value={tab} 
-                onChange={handleTabChange}                     
-                className={classes.tabs}
+                sx={sxSubTabs}
+                onChange={handleTabChange}                                     
                 variant="scrollable"
             >
                 <Tab icon={<InfoIcon sx={sxIcon}/>} value="info" sx={sx} iconPosition="top" label={t('animals.sponsor.info.icon')}/>

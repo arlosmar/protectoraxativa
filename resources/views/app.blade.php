@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>        
+    <head>
+        <!-- disable cache -->
+        <!--
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+        <meta http-equiv="Pragma" content="no-cache" />
+        <meta http-equiv="Expires" content="0" />        
+        -->
+
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -33,59 +40,57 @@
         <!-- Google tag (gtag.js) -->
         <!--
         <script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+        
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ env('GOOGLE_ANALYTICS','') }}"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-
-            gtag('config', '');
+            gtag('config', '{{ env('GOOGLE_ANALYTICS','') }}');
         </script>
-        -->
+
         <script>
             // when installing the pwa
-            /*
             const registerServiceWorker = async () => {
     
                 if ('serviceWorker' in navigator) {
                 
-                    try {
+                    try {                        
+                        const swURL = '{{url('sw.js')}}';                        
                         
-                        const configValues = {
-                            apiKey: '{{env('VITE_FIREBASE_apiKey','')}}',
-                            authDomain: '{{env('VITE_FIREBASE_authDomain','')}}',
-                            projectId: '{{env('VITE_FIREBASE_projectId','')}}',
-                            storageBucket: '{{env('VITE_FIREBASE_storageBucket','')}}',
-                            messagingSenderId: '{{env('VITE_FIREBASE_messagingSenderId','')}}',
-                            appId: '{{env('VITE_FIREBASE_appId','')}}',
-                            measurementId: '{{env('VITE_FIREBASE_measurementId','')}}'
-                        };
-                        
-                        const firebaseConfig = encodeURIComponent(JSON.stringify(configValues));
-                        
-                        const swURL = '{{url('sw.js')}}'+'?firebaseConfig='+firebaseConfig;
-                        
-                        //const swURL = '{{url('sw.js')}}';
                         const registration = await navigator.serviceWorker.register(swURL,{scope: './',});
-                  
+                        
+                        @if(app('request')->input('sw'))
+                            //console.log('sw unregistered');
+                            if('serviceWorker' in navigator){
+                                navigator.serviceWorker.getRegistrations()
+                                .then(function(registrations) {
+                                    for(let registration of registrations) {
+                                        registration.unregister();                                         
+                                    }
+                                });
+                            }
+                        @endif
+
+
                         if (registration.installing) {
-                            console.log('Service worker installing');
+                            //console.log('Service worker installing');                            
                         } 
                         else if (registration.waiting) {
-                            console.log('Service worker installed');
+                            //console.log('Service worker installed');                            
                         } 
                         else if (registration.active) {
-                            console.log('Service worker active');
+                            //console.log('Service worker active');
                         }
                     } 
                     catch (error) {
-                        console.error(`Registration failed with ${error}`);
+                        //console.error(`Registration failed with ${error}`);
                     }
                 }
             };
             registerServiceWorker();
-            */
         </script>
-        
         @routes
         @viteReactRefresh
         @vite(['resources/js/app.jsx', "resources/js/Pages/{$page['component']}.jsx"])

@@ -54,6 +54,12 @@ class HomeController extends Controller{
             $message = $request->msg;
         }
 
+        // if we receive darkmode from the app
+        $darkmode = null;
+        if(isset($request->darkmode) && !empty($request->darkmode)){
+            $darkmode = $request->darkmode;
+        }
+
         $language = null;
         if(isset($lang) && !empty($lang)){
             $language = $lang;
@@ -76,7 +82,7 @@ class HomeController extends Controller{
 
         $guides = config('guides');
 
-        return Inertia::render('Home',compact('user','email_colaboration','email_volunteering','language','social','partners','prices','forms','guides','message'));
+        return Inertia::render('Home',compact('user','email_colaboration','email_volunteering','language','social','partners','prices','forms','guides','message','darkmode'));
         //return view('welcome');
     }
 
@@ -104,20 +110,10 @@ class HomeController extends Controller{
         return Inertia::render('Home',compact('user','section','email_colaboration','email_volunteering','social','partners','prices','forms','guides'));
     }
 
-    public function info($item = null){
+    public function info($section = null){
 
         $user = auth()->user();
 
-        return Inertia::render('Info/Info',compact('user','item'));
-    }
-
-    // save fcm token from clients to send notifications
-    public function saveToken(Request $request){
-        if(isset($request->token) && !empty($request->token)){            
-            echo '<pre>'.print_r($request->token,true).'</pre>';die;
-        }
-        else{
-            echo '<pre>'.print_r('no token',true).'</pre>';die;
-        }
+        return Inertia::render('Info/Info',compact('user','section'));
     }
 }

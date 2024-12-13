@@ -40,7 +40,7 @@ export default function Card({t,origin,news,imagePath,imagesPaths}){
             {
                 columns && columns.length > 0 && columns.map((column,i) => (
                     <>                    
-                    <Grid size={{ xs: 12, md: 6 }}>
+                    <Grid size={{ xs: 6, md: 6 }}>
                         <span className='news-record-title'>{column?.text}:</span>
                         <br/>
                         {

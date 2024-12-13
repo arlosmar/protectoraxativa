@@ -8,10 +8,17 @@ return [
         'copyright' => 'Todos los derechos reservados.'
     ],
     'contact'   => [
-        'subject'   => 'Contacto desde Spax',
+        'subject'   => 'Contacto desde '.config('app.name'),
         'error' => 'Error enviando el email. Inténtalo otra vez, por favor.'
     ],
+    'notification'   => [
+        'subject'   => 'Notificación desde '.config('app.name'),
+        'button' => 'Abrir APP',
+        'salutation' => 'Saludos'
+    ],
     'generic'   => [
+        'greeting' => '¡Hola!',
+        'salutation' => 'Saludos',
         'troubleLink' => 'Si tienes problemas al pulsar el botón de ":actionText", pulsa el siguiente enlace o cópialo y pégalo en el navegador:'
     ],
     'verify' => [

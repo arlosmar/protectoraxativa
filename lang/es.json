@@ -1,4 +1,5 @@
-{   
+{
+    "If you're having trouble clicking the \":actionText\" button, copy and paste the URL below\ninto your web browser:" : "Si tienes problemas al pulsar el botón de \":actionText\", pulsa el siguiente enlace o cópialo y pégalo\nen el navegador:",
     "trans": {      
         "Back" : "Volver",
         "Save" : "Guardar",
@@ -33,11 +34,29 @@
         "Form"  :   "Formulario",
         "Field-Empty" :   "Campo vacío",
         "All-Male-Singular"  :   "Todo",
-        "Update"    :   "Actualizar"
+        "All-Plural"  :   "Tod@s",
+        "Update"    :   "Actualizar",
+        "noElementsSelected" : "No has seleccionado ningún elemento" 
+    },
+    "pwa"   :   {
+        "text" : "¡Instala la app!",
+        "button" : "Instalar APP",
+        "apple" : {
+            "title" : "Instala la app",
+            "subtitle" : "SPAX",
+            "description" : "Añade nuestra app para mayor comodidad.",
+            "share" : "Pulsa el botón 'Compartir'",
+            "add" : "Pulsa 'Agregar a inicio'"
+        }
+    },
+    "notifications"   :   {
+        "text" : "Activa las notificaciones",
+        "button" : "Activar notificaciones"
     },
     "Cookies" : {
         "button-accept" : "Aceptar",
-        "message" : "Esta web usa las cookies mínimas necesarias para funcionar. No se recopila información de ningún tipo."
+        "message" : "Esta web usa las cookies mínimas necesarias para funcionar. No se recopila información de ningún tipo. Puedes consultar la política de cookies desde ",
+        "here"  :   "aquí"
     },
     "Title" : {
         "Home" : "Inicio",
@@ -52,11 +71,16 @@
         "Animals" : "Animales",
         "News" : "Noticias",
         "Contact" : "Contacto",
-        "User"  :   "Usuario"
+        "User"  :   "Usuario",
+        "Menu"  :   "Menú",
+        "Language" : "Idioma",
+        "Contact" : "Contacto",
+        "Logout" : "Salir",
+        "Whatsapp" : "Whatsapp"
     },
     "under-development" : "En desarrollo",
     "introduction": {
-        "title" : "Bienvenid@s",
+        "title" : "Sociedad protectora de Animales de Xàtiva",
         "colaboration" : {
             "title" : "Colaborar",
             "bizum": "Bizum",
@@ -196,8 +220,8 @@
                 "title" :   "Adoptar"
             },
             "adopted"  :   {
-                "icon"  :   "Adoptados",
-                "title" :   "Adoptados"
+                "icon"  :   "Finales felices",
+                "title" :   "Finales felices"
             }
         },
         "sponsor" :   {
@@ -310,7 +334,7 @@
             "Description"   :   "Descripción",
             "Image" :   "Imagen",
             "Image2"    :   "Imagen2",
-            "Image-Sponsored"   :   "Imagen apadrinad@",
+            "Image-Sponsored"   :   "Imagen apadrinado/adoptado",
             "Person"    :   "Responsables",
             "Video" :   "Vídeo",
             "Video2" :   "Vídeo2",
@@ -366,7 +390,9 @@
                 "email" : "Email",
                 "email-not-verified" : "Tu dirección de email no está verificada.",
                 "email-verify" : "Enviar email verificación",
-                "email-sent" : "Un nuevo email de verificación ha sido enviado a tu dirección de email."
+                "email-sent" : "Un nuevo email de verificación ha sido enviado a tu dirección de email.",
+                "personal-data" : "Datos personales",
+                "update-personal-data" : "Si quieres actualizar los datos personales ponte en contacto con la protectora, por favor:"
             },
             "animals": {
                 "icon"  :   "Animales",
@@ -376,7 +402,22 @@
                 "icon"  :   "Config",
                 "title" :   "Configuración",
                 "description" : "Aquí puedes cambiar diferentes ajustes de tu cuenta",
-                "dark-mode" : "Modo oscuro"
+                "dark-mode" : "Modo oscuro",
+                "biometric" :   "Login con biometría",
+                "notifications" :   {
+                    "switch"    :   "Notificaciones",
+                    "enabled"   :   "Notificaciones habilitadas",
+                    "setup"  :   "Debes habilitar las notificaciones de tu dispositivo para poder activar este ajuste",
+                    "disabled"    :   "Las notificaciones de tu dispositivo están desactivadas para esta app. Debes habilitarlas para poder cambiar este ajuste.",
+                    "push" : "Push",
+                    "email" : "Email",
+                    "method" : "Métodos",
+                    "type" : "Categorías",
+                    "appDisabled" : "Debes dar permiso a la aplicación para poder recibir notifications"
+                },
+                "authentication" : {
+                    "notAllowed" : "Este dispositivo/navegador no permite usar autenticación con biometría"
+                }
             },
             "password": {
                 "icon"  :   "Contraseña",
@@ -405,6 +446,7 @@
             "edit"  :   "Editar",
             "borrar"  :   "Borrar",
             "empty" :   "No hay animales",
+            "images-sponsored" : "Imagen apadrinado/adoptado",
             "adopt" :   {
                 "icon"  :   "Adoptar",
                 "title" :   "Adoptar"
@@ -430,9 +472,25 @@
             "borrar"  :   "Borrar",
             "empty" :   "No hay personas"
         },
+        "notifications": {
+            "icon"  :   "Notificaciones",
+            "title"  :   "Notificaciones",
+            "form" : {
+                "title" : "Título",            
+                "message" : "Mensaje",
+                "users" : "Usuarios",
+                "peopleAll" : "Todo el mundo",
+                "usersAll" : "Usuarios registrados",
+                "type" : "Tipo"
+            },
+            "success" : "Notificación enviada",
+            "error" : "Error enviando la notificación",
+            "button" : "Enviar",
+            "empty" : "No se puede enviar un mensaje vacío"            
+        },
         "email": {
             "title" : "Verificar email",
-            "description" : "Debes verificar tu email para poder acceder a tu cuenta. Habrás recibido un enlace para validarlo. Si no lo has recibido, prueba a enviarte el email de verificación de nuevo, por favor.",
+            "description" : "Te hemos enviado un email para verificar tu cuenta. Si no lo has recibido prueba a reenviártelo, por favor.",
             "verified" : "Email verificado",
             "verification-link-sent" : "Email enviado",
             "resend-link" : "Reenviar"
@@ -468,6 +526,7 @@
             "title3"  :   "Adopciones",
             "shift-adoptions" : "Lunes a viernes de 17:00h a 21:00h",
             "title4"  :   "Voluntariado",
+            "email" : "Email",
             "phone"  :   "Teléfono",
             "whatsapp": "Whatsapp",
             "shift-phone-title"  :   "Horario de atención telefónica",
@@ -477,7 +536,7 @@
             "shift-phone-footer2" :   "Está atendido por personal voluntario.",
             "shift-live-title"  :   "Horario de atención al público",
             "shift-live-line1"  :   "Sábados de 09:30h a 13:30h",            
-            "title5"    :   "Refugio atendido los 365 días del año"
+            "title5"    :   "Refugio atendido los 365 día   s del año"
         }
     },
     "share" :   {
@@ -485,5 +544,22 @@
         "title-native"  :   "SPAX - protectoraxativa",
         "title-email"  :   "SPAX - protectoraxativa",
         "text"  :   "Mira este animalito"
+    },
+    "info" : {
+        "terms" : {
+            "icon": "Términos",
+            "title" :   "Términos de uso",
+            "content" : "<h1 class='title-info-pages'>LEY DE LOS SERVICIOS DE LA SOCIEDAD DE LA INFORMACIÓN(LSSI)</h1><br/><br/>SOCIEDAD PROTECTORA DE ANIMALES DE XÀTIVA, responsable del sitio web, en adelante RESPONSABLE, pone a disposición de los usuarios el presente documento, con el que pretende dar cumplimiento a las obligaciones dispuestas en la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSICE), BOE N º 166, así como informar a todos los usuarios del sitio web respecto a cuáles son las condiciones de uso.<br/>Toda persona que acceda a este sitio web asume el papel de usuario, comprometiéndose a la observancia y cumplimiento riguroso de las disposiciones aquí dispuestas, así como a cualquier otra disposición legal que fuera de aplicación.<br/><br/>SOCIEDAD PROTECTORA DE ANIMALES DE XÀTIVA se reserva el derecho de modificar cualquier tipo de información que pudiera aparecer en el sitio web, sin que exista obligación de preavisar o poner en conocimiento de los usuarios dichas obligaciones, entendiéndose como suficiente con la publicación en el sitio web de SOCIEDAD PROTECTORA DE ANIMALES DE XÀTIVA.<br/><br/><h1 class='subtitle-info-pages'>1. DATOS IDENTIFICATIVOS</h1><br/>Nombre de dominio: <a href='https://protectoraxativa.org' target='_blank'>protectoraxativa.org</a><br/>Nombre comercial: SPAX<br/>Denominación social: SOCIEDAD PROTECTORA DE ANIMALES DE XÀTIVA Y LA COSTERA.<br/>NIF: G46388385<br/>Domicilio social: Apartado DE correos 544<br/>Teléfono: <a href='tel:671870889' target='_blank'>671870889</a><br/>e-mail: <a href='mailto:colabora@protectoraxativa.org' target='_blank'>colabora@protectoraxativa.org</a><br/><br/><h1 class='subtitle-info-pages'>2. DERECHOS DE PROPIEDAD INTELECTUAL E INDUSTRIAL</h1><br/>El sitio web, incluyendo a título enunciativo pero no limitativo su programación, edición, compilación y demás elementos necesarios para su funcionamiento, los diseños, logotipos, texto y/o gráficos, son propiedad del RESPONSABLE o, si es el caso, dispone de licencia o autorización expresa por parte de los autores. Todos los contenidos del sitio web se encuentran debidamente protegidos por la normativa de propiedad intelectual e industrial, así como inscritos en los registros públicos correspondientes.<br/>Independientemente de la finalidad para la que fueran destinados, la reproducción total o parcial, uso, explotación, distribución y comercialización, requiere en todo caso de la autorización escrita previa por parte del RESPONSABLE. Cualquier uso no autorizado previamente se considera un incumplimiento grave de los derechos de propiedad intelectual o industrial del autor.<br/><br/>Los diseños, logotipos, texto y/o gráficos ajenos al RESPONSABLE y que pudieran aparecer en el sitio web, pertenecen a sus respectivos propietarios, siendo ellos mismos responsables de cualquier posible controversia que pudiera suscitarse respecto a los mismos. El RESPONSABLE autoriza expresamente a que terceros puedan redirigir directamente a los contenidos concretos del sitio web, y en todo caso redirigir al sitio web principal de <a href='https://protectoraxativa.org' target='_blank'>protectoraxativa.org</a><br/><br/>El RESPONSABLE reconoce a favor de sus titulares los correspondientes derechos de propiedad intelectual e industrial, no implicando su sola mención o aparición en el sitio web la existencia de derechos o responsabilidad alguna sobre los mismos, como tampoco respaldo, patrocinio o recomendación por parte del mismo.<br/>Para realizar cualquier tipo de observación respecto a posibles incumplimientos de los derechos de propiedad intelectual o industrial, así como sobre cualquiera de los contenidos del sitio web, puede hacerlo a través del correo electrónico e-mail: <a href='mailto:colabora@protectoraxativa.org' target='_blank'>colabora@protectoraxativa.org</a><br/><br/><h1 class='subtitle-info-pages'>3. EXENCIÓN DE RESPONSABILIDADES</h1><br/>El RESPONSABLE se exime de cualquier tipo de responsabilidad derivada de la información publicada en su sitio web siempre que esta información haya sido manipulada o introducida por un tercero ajeno al mismo.<br/><br/><b>Uso de Cookies</b><br/>Este sitio web puede utilizar cookies técnicas (pequeños archivos de información que el servidor envía al ordenador de quien accede a la página) para llevar a cabo determinadas funciones que son consideradas imprescindibles para el correcto funcionamiento y visualización del sitio. Las cookies utilizadas tienen, en todo caso, carácter temporal, con la única finalidad de hacer más eficaz la navegación, y desaparecen al terminar la sesión del usuario. En ningún caso, estas cookies proporcionan por sí mismas datos de carácter personal y no se utilizarán para la recogida de los mismos.<br/><br/>Mediante el uso de cookies también es posible que el servidor donde se encuentra la web reconozca el navegador utilizado por el usuario con la finalidad de que la navegación sea más sencilla, permitiendo, por ejemplo, el acceso de los usuarios que se hayan registrado previamente a las áreas, servicios, promociones o concursos reservados exclusivamente a ellos sin tener que registrarse en cada visita. También se pueden utilizar para medir la audiencia, parámetros de tráfico, controlar el progreso y número de entradas, etc, siendo en estos casos cookies prescindibles técnicamente pero beneficiosas para el usuario. Este sitio web no instalará cookies prescindibles sin el consentimiento previo del usuario.<br/><br/>El usuario tiene la posibilidad de configurar su navegador para ser alertado de la recepción de cookies y para impedir su instalación en su equipo. Por favor, consulte las instrucciones de su navegador para ampliar esta información.<br/><br/><b>Política de enlaces</b><br/>Desde el sitio web, es posible que se redirija a contenidos de terceros sitios web. Dado que el RESPONSABLE no puede controlar siempre los contenidos introducidos por los terceros en sus respectivos sitios web, no asume ningún tipo de responsabilidad respecto a dichos contenidos. En todo caso, procederá a la retirada inmediata de cualquier contenido que pudiera contravenir la legislación nacional o internacional, la moral o el orden público, procediendo a la retirada inmediata de la redirección a dicho sitio web, poniendo en conocimiento de las autoridades competentes el contenido en cuestión.<br/><br/>El RESPONSABLEno se hace responsable de la información y contenidos almacenados, a título enunciativo pero no limitativo, en foros, chats, generadores de blogs, comentarios, redes sociales o cualquier otro medio que permita a terceros publicar contenidos de forma independiente en la página web delRESPONSABLE. Sin embargo, y en cumplimiento de lo dispuesto en los artículos 11 y 16 de la LSSICE, se pone a disposición de todos los usuarios, autoridades y fuerzas de seguridad, colaborando de forma activa en la retirada o, en su caso, bloqueo de todos aquellos contenidos que puedan afectar o contravenir la legislación nacional o internacional, los derechos de terceros o la moral y el orden público. En caso de que el usuario considere que existe en el sitio web algún contenido que pudiera ser susceptible de esta clasificación, se ruega lo notifique de forma inmediata al administrador del sitio web.<br/><br/>Este sitio web ha sido revisado y probado para que funcione correctamente. En principio, puede garantizarse el correcto funcionamiento los 365 días del año, 24 horas al día. Sin embargo, elRESPONSABLEno descarta la posibilidad de que existan ciertos errores de programación, o que acontezcan causas de fuerza mayor, catástrofes naturales, huelgas o circunstancias semejantes que hagan imposible el acceso a la página web.<br/><br/><b>Direcciones IP</b><br/>Los servidores del sitio web podrán detectar de manera automática la dirección IP y el nombre de dominio utilizados por el usuario. Una dirección IP es un número asignado automáticamente a un ordenador cuando éste se conecta a Internet. Toda esta información es registrada en un fichero de actividad del servidor debidamente inscrito que permite el posterior procesamiento de los datos con el fin de obtener mediciones únicamente estadísticas que permitan conocer el número de impresiones de páginas, el número de visitas realizadas a los servidores web, el orden de visitas, el punto de acceso, etc.<br/><br/><h1 class='subtitle-info-pages'>4. LEY APLICABLE Y JURISDICCIÓN</h1><br/>Para la resolución de todas las controversias o cuestiones relacionadas con el presente sitio web o de las actividades en él desarrolladas, será de aplicación la legislación española, a la que se someten expresamente las partes, siendo competentes para la resolución de todos los conflictos derivados o relacionados con su uso los Juzgados y Tribunales más cercanos a Valencia."
+        },
+        "policy" : {
+            "icon": "Privacidad",
+            "title" :   "Política de privacidad",
+            "content" : "<h1 class='title-info-pages'>1. INFORMACIÓN AL USUARIO<br/></h1><br/><b>SOCIEDAD PROTECTORA DE ANIMALES DE XÀTIVA</b>, en adelante RESPONSABLE, es el Responsable del tratamiento de los datos personales del Usuario y le informa que estos datos serán tratados de conformidad con lo dispuesto en el Reglamento (UE) 2016/679 de 27 de abril de 2016 (GDPR)  relativo a la protección de las personas físicas en lo que respecta al tratamiento de datos personales y a la libre circulación de estos datos, por lo que se le facilita la siguiente información del tratamiento:<br/><br/><b>Fin del tratamiento:</b> mantener una relación comercial con el Usuario. Las operaciones previstas para realizar el tratamiento son:<ul class='list-info-pages'><li>Remisión de comunicaciones comerciales publicitarias por email, fax, SMS, MMS, comunidades sociales o cualquier otro medio electrónico o físico, presente o futuro, que posibilite realizar comunicaciones comerciales. Estas comunicaciones serán realizadas por el RESPONSABLE y relacionadas sobre sus productos y servicios, o de sus colaboradores o proveedores con los que éste haya alcanzado algún acuerdo de promoción. En este caso, los terceros nunca tendrán acceso a los datos personales.</li><li>Realizar estudios estadísticos.</li><li>Tramitar encargos, solicitudes o cualquier tipo de petición que sea realizada por el usuario a través de cualquiera de las formas de contacto que se ponen a su disposición.</li><li>Remitir el boletín de noticias de la página web.</li></ul><br/><b>Base jurídica del tratamiento:</b> consentimiento del interesado.<br/><br/><b>Criterios de conservación de los datos:</b> se conservarán mientras exista un interés mutuo para mantener el fin del tratamiento y cuando ya no sea necesario para tal fin, se suprimirán con medidas de seguridad adecuadas para garantizar la seudonimización de los datos o la destrucción total de los mismos.<br/><br/><b>Comunicación de los datos:</b> No se comunicarán los datos a terceros, salvo obligación legal.<br/><br/><b>Derechos que asisten al Usuario:</b><ul class='list-info-pages'><li>Derecho a retirar el consentimiento en cualquier momento.</li><li>Derecho de acceso, rectificación, portabilidad y supresión de sus datos y a la limitación u oposición al su tratamiento.</li><li>Derecho a presentar una reclamación ante la autoridad de control (www.aepd.es) si considera que el tratamiento no se ajusta a la normativa vigente.</li></ul><br/><b>Datos de contacto para ejercer sus derechos:</b><br/>SOCIEDAD PROTECTORA DE ANIMALES DE XÀTIVA. APARTADO DE CORREOS 544 XÀTIVA – 46800 (VALENCIA). Email: <a href='mailto:colabora@protectoraxativa.org'>colabora@protectoraxativa.org</a><br/><br/><h1 class='title-info-pages'>2. CARÁCTER OBLIGATORIO O FACULTATIVO DE LA INFORMACIÓN FACILITADA POR EL USUARIO</h1><br/>Los Usuarios, mediante la marcación de las casillas correspondientes y entrada de datos en los campos, marcados con un asterisco (*) en el formulario de contacto o presentados en formularios de descarga, aceptan expresamente y de forma libre e inequívoca, que sus datos son necesarios para atender su petición, por parte del prestador, siendo voluntaria la inclusión de datos en los campos restantes. El Usuario garantiza que los datos personales facilitados al RESPONSABLE son veraces y se hace responsable de comunicar cualquier modificación de los mismos. <br/><br/>El RESPONSABLE informa y garantiza expresamente a los usuarios que sus datos personales no serán cedidos en ningún caso a terceros, y que siempre que realizara algún tipo de cesión de datos personales, se pedirá previamente el consentimiento expreso, informado e inequívoco por parte los Usuarios. Todos los datos solicitados a través del sitio web son obligatorios, ya que son necesarios para la prestación de un servicio óptimo al Usuario. En caso de que no sean facilitados todos los datos, no se garantiza que la información y servicios facilitados sean completamente ajustados a sus necesidades.<br/><br/><h1 class='title-info-pages'>3. MEDIDAS DE SEGURIDAD</h1><br/>Que de conformidad con lo dispuesto en las normativas vigentes en protección de datos personales, el RESPONSABLE está cumpliendo con todas las disposiciones de las normativas GDPR para el tratamiento de los datos personales de su responsabilidad, y manifiestamente con los principios descritos en el artículo 5 del GDPR, por los cuales son tratados de manera lícita, leal y transparente en relación con el interesado y adecuados, pertinentes y limitados a lo necesario en relación con los fines para los que son tratados.<br/><br/>El RESPONSABLE garantiza que ha implementado políticas técnicas y organizativas apropiadas para aplicar las medidas de seguridad que establecen el GDPR con el fin de proteger los derechos y libertades de los Usuarios y les ha comunicado la información adecuada para que puedan ejercerlos."
+        },
+        "cookies" : {
+            "icon": "Cookies",
+            "title" :   "Política de cookies",
+            "content" : "Le informamos que este sitio web instala cookies propias y de terceros al navegar sus páginas con el fin de facilitar su navegación y obtener datos estadísticos. Si continúa navegando consideramos que acepta su uso e instalación.<br/><br/><h1 class='subtitle-info-pages'>Definición y función de las cookies</h1><br/><b>¿Qué son las cookies?</b><br/>Una cookie es un fichero de texto no ejecutable que se descarga en su ordenador al acceder a determinadas páginas web. Las cookies permiten a una página web, entre otras cosas, almacenar y recuperar información sobre los hábitos de navegación de un usuario o de su equipo y, dependiendo de la información que contengan y de la forma en que utilice su equipo, pueden utilizarse para reconocer al usuario. Las cookies también pueden ser utilizadas para registrar información anónima acerca de cómo un visitante utiliza un sitio. Por ejemplo, desde qué página Web ha accedido, o si ha utilizado un banner publicitario para llegar.<br/><br/><b>¿Por qué este sitio utiliza cookies?</b><br/>utiliza cookies estrictamente necesarias y esenciales para que usted utilice nuestro sitio Web y le permita moverse libremente, utilizar áreas privadas, opciones personalizadas, etc. Además, utiliza cookies que recogen datos relativos al análisis de uso de la Web. Éstas se utilizan para ayudar a mejorar el servicio al visitante, midiendo el uso y el rendimiento de la página, para optimizarla y personalizarla.<br/><br/>¿Qué tipos de cookies utilizan esta página web?<br/><br/>Según su finalidad:<ul class='list-info-pages'><li><b>Cookies técnicas:</b><br/>Las cookies técnicas son aquellas imprescindibles y estrictamente necesarias para el correcto funcionamiento de un portal Web y la utilización de las diferentes opciones y servicios que ofrece.<br/><br/>Por ejemplo, las que sirven para el mantenimiento de la sesión, la gestión del tiempo de respuesta, rendimiento o validación de opciones, utilizar elementos de seguridad, compartir contenido con redes sociales, etc.</li><br/><li><b>Cookies de personalización:</b><br/>Estas cookies permiten al usuario especificar o personalizar algunas características de las opciones generales de la página Web.<br/><br/>Por ejemplo, definir el idioma, configuración regional o tipo de navegador.</li><br/><li><b>Cookies de análisis (Google Analytics):</b><br/>Las cookies analíticas son las utilizadas por nuestro portal Web, para elaborar perfiles de navegación y poder conocer las preferencias de los usuarios del mismo con el fin de mejorar la oferta de productos y servicios.<br/><br/>Por ejemplo, mediante una cookie analítica se controlarían las áreas geográficas de mayor interés de un usuario, cuál es el producto de más aceptación, etc.</li><br/><li><b>Cookies publicitarias / de publicidad comportamental (Google Adsense):</b><br/>Las cookies publicitarias permiten la gestión de los espacios publicitarios en base a criterios concretos.<br/><br/>Por ejemplo la frecuencia de acceso, el contenido editado, etc.<br/><br/>Las cookies de publicidad comportamental permiten a través de la gestión de la publicidad almacenar información del comportamiento a través de la observación de hábitos, estudiando los accesos y formando un perfil de preferencias del usuario, para ofrecerle publicidad relacionada con los intereses de su perfil.</li></ul><br/>Consulte en este enlace donde puede consultar la política de privacidad de esto servicios de Google.<br/><br/>Según el plazo de tiempo que permanecen activadas:<ul class='list-info-pages'><li><b>Cookies de sesión:</b> Las cookies de sesión son aquellas que duran el tiempo que el usuario está navegando por la página Web y se borran al término.</li><li><b>Cookies persistentes:</b> Estas cookies quedan almacenadas en el terminal del usuario, por un tiempo más largo, facilitando así el control de las preferencias elegidas sin tener que repetir ciertos parámetros cada vez que se visite el sitio Web.</li></ul><br/><h1 class='subtitle-info-pages'>Revocación y eliminación de cookies</h1><br/>Puedes permitir, bloquear o eliminar las cookies instaladas en tu ordenador mediante la configuración de las opciones del navegador instalado en tu ordenador.<ul class='list-info-pages'><li>Para más información sobre el navegador Firefox pulse <a href='https://support.mozilla.org/es/kb/cookies-informacion-que-los-sitios-web-guardan-en-' target='_blank'>aquí</a>.</li><li>Para más información sobre el navegador Chrome pulse <a href='https://support.google.com/chrome/answer/95647?hl=es' target='_blank'>aquí</a>.</li><li>Para más información sobre el navegador Explorer pulse <a href='https://support.microsoft.com/en-gb/windows/manage-cookies-in-microsoft-edge-view-allow-block-delete-and-use-168dab11-0753-043d-7c16-ede5947fc64d#ie=ie-11' target='_blank'>aquí</a>.</li><li>Para más información sobre el navegador Safari desde <a href='https://support.apple.com/es-es/105082' target='_blank'>aquí</a>.</li><li>Para más información sobre el navegador Opera desde <a href='https://help.opera.com/en/latest/web-preferences/#cookies' target='_blank'>aquí</a>.</li>"
+        }
     }
 }

@@ -12,13 +12,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Inertia\Response;
-use App\Models\{User};
+use App\Models\{User,Device};
 use Illuminate\Support\Facades\Date;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Validation\ValidationException;
+use Google\Client as Google_Client;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Str;
 
-// redirect to when going to /login and already logged in
-// /vendor/laravel/framework/src/Illuminate/Auth/Middleware/RedirectIfAuthenticated.php
-// protected function defaultRedirectUri(): string{ return route('user'); }
 class AuthenticatedSessionController extends Controller
 {
 
@@ -36,23 +38,30 @@ class AuthenticatedSessionController extends Controller
 
         //$path = $request->get('path');
 
-        return Inertia::render('Auth/Login',compact('canResetPassword','status'/*,'path'*/));
+        $isApp = $this->isApp($request);
+
+        return Inertia::render('Auth/Login',compact('canResetPassword','status','isApp'/*,'path'*/));
     }
 
-    /**
-     * Handle an incoming authentication request.
-     */
-    public function store(LoginRequest $request): RedirectResponse{
-
-        $request->authenticate();
-
-        $request->session()->regenerate();
+    public function setUserSettings(){
 
         // save language on user
         $language = setUserLanguage();
 
         // save dark mode if on user settings
         $darkmode = setUserDarkMode();
+    }
+
+    /**
+     * Handle an incoming authentication request.
+     */
+    public function store(LoginRequest $request): RedirectResponse{
+               
+        $request->authenticate();
+
+        $request->session()->regenerate();
+
+        $this->setUserSettings();
 
         // if coming from the login button on top
         /*
@@ -62,8 +71,26 @@ class AuthenticatedSessionController extends Controller
         */
 
         //return redirect()->intended(route('dashboard', absolute: false));        
-        //return redirect()->intended(route('user', absolute: false));
+        //return redirect()->intended(route('user', absolute: false));        
         return redirect()->intended(route('user', absolute: false));
+    }
+
+    // when logging in with biometrics
+    public function authentication(User $user, Request $request): RedirectResponse{
+
+        if(isset($user) && !empty($user)){
+            
+            Auth::login($user);
+
+            $this->setUserSettings();
+
+            return redirect()->intended(route('user', absolute: false));
+        }
+        else{
+            throw ValidationException::withMessages([
+                'authentication' => trans('Error'),
+            ]);
+        }
     }
 
     /**
@@ -91,10 +118,20 @@ class AuthenticatedSessionController extends Controller
         return Socialite::driver('google')->with($info)->redirect();
     }
 
+    /*
+    public function apple(Request $request){
+
+        //$state = json_encode($state, JSON_THROW_ON_ERROR);
+        $state = [];
+
+        return Socialite::driver('apple')->setScopes(['name', 'email'])->with(['state' => $state])->redirect();
+    }
+    */
+
     public function loginCallback(Request $request, $type){
 
         switch($type){
-            
+
             case 'google':
                 return $this->googleCallback($request);
                 break;
@@ -161,16 +198,23 @@ class AuthenticatedSessionController extends Controller
         $found = User::where('email',$user->email)->first();
 
         $now = Date::now();
+        $loginApp = getRandomToken($found);
 
         // register
         if(!isset($found) || empty($found)){
             
             // create and auto verify
-            $found = User::create([
+            $userInfo = [
                 'name' => $user->getName(),
                 'email' => $user->getEmail(),
-                'email_verified_at' => $now
-            ]);
+                'email_verified_at' => $now,
+                'loginApp' => $loginApp
+            ];
+
+            // notifications activated by default
+            $userInfo['settings'] = $this->getDefaultSettings();
+            
+            $found = User::create($userInfo);
         }
         else{
             // check if not verified and auto verify
@@ -180,18 +224,13 @@ class AuthenticatedSessionController extends Controller
         }
      
         Auth::login($found);
+
+        $this->setUserSettings();
      
         return redirect()->intended(route('user', absolute: false));
     }
 
     /*
-    public function apple(Request $request){
-
-        //$state = json_encode($state, JSON_THROW_ON_ERROR);
-        $state = [];
-
-        return Socialite::driver('apple')->setScopes(['name', 'email'])->with(['state' => $state])->redirect();
-    }
 
     public function appleCallback(Request $request): RedirectResponse{
 
@@ -238,4 +277,234 @@ class AuthenticatedSessionController extends Controller
         }
     }
     */
+
+    // to have persistent login on the app
+    public function persistentLogin(Request $request): RedirectResponse{
+
+        // if already logged in, do nothing
+        $user = auth()->user();
+
+        // check language from the url
+        $language = '';
+        if(isset($request->language) && !empty($request->language)){
+            $language = "/".$language;
+        }
+
+        // check darkmode from the url
+        $darkmode = '';
+        if(isset($request->darkmode) && !empty($request->darkmode)){
+            $darkmode = "&darkmode=".$request->darkmode;
+        }
+
+        if(isset($user) && !empty($user)){
+            return redirect()->to(route('home').$language."?isApp=android&logged=".$user->id.'&token='.$user->loginApp.'&nomsg=1'.$darkmode);
+        }
+        else{
+            
+            if(isset($request->token) && !empty($request->token) && isset($request->userId) && !empty($request->userId)){
+
+                $token = $request->token;
+                $userId = $request->userId;
+                
+                $found = User::where('id',$userId)->where('loginApp',$token)->first();
+                 
+                if(isset($found) && !empty($found)){
+
+                    Auth::login($found);
+
+                    $this->setUserSettings();
+
+                    return redirect()->to(route('home').$language."?isApp=android&loading=0&logged=".$found->id.'&token='.$token.'&nomsg=1'.$darkmode);
+                }
+            }
+        }
+
+        return redirect()->to(route('home').$language.'?isApp=android&loading=0&logged=0&nomsg=1'.$darkmode);
+    }
+
+    public function loginCallbackApp(Request $request, $platform, $type): RedirectResponse{
+
+        switch($platform){
+
+            case 'android':
+                return $this->loginAndroid($request,$type);
+                break;
+        }
+
+        return redirect()->to(route('login').'?isApp=android&loading=0&logged=0');
+    }
+
+    public function loginAndroid($request,$type){
+
+        switch($type){
+
+            case 'password':
+                return $this->loginAndroidPassword($request);
+                break;
+
+            case 'google':
+                return $this->loginAndroidGoogle($request);
+                break;
+        }
+
+        return redirect()->to(route('login').'?isApp=android&loading=0&logged=0');
+    }
+
+    public function loginAndroidPassword(Request $request): RedirectResponse{
+
+        if(isset($request->email) && !empty($request->email) && isset($request->password) && !empty($request->password)){
+
+            $email = $request->email;
+            $password = $request->password;
+            $remember = true;
+
+            // to avoid too many attemps
+            $throttleKey = Str::transliterate(Str::lower($request->string('email')).'|'.$request->ip());
+            if(!RateLimiter::tooManyAttempts($throttleKey,5)){
+          
+                if(Auth::attempt($request->only('email', 'password'),$remember)){
+
+                    RateLimiter::clear($throttleKey);
+
+                    $found = User::where('email',$email)->first();
+
+                    $this->setUserSettings();
+
+                    // save device id
+                    if(isset($request->deviceId) && !empty($request->deviceId)){
+                        
+                        $deviceId = $request->deviceId;
+
+                        // check if already on database. if so, update the user id
+                        $now = Date::now();
+                        $device = Device::updateOrCreate(
+                            ['token_firebase' => $deviceId],
+                            ['user_id' => $found->id, 'token_firebase_date' => $now]
+                        );
+                    }
+                 
+                    if(isset($found->admin) && !empty($found->admin)){
+                        return redirect()->to(route('admin').'?isApp=android&loading=0&logged='.$found->id.'&token='.$found->loginApp);
+                    }
+                    else{                        
+                        return redirect()->to(route('intranet').'?isApp=android&loading=0&logged='.$found->id.'&token='.$found->loginApp);
+                    }
+                }
+                else{
+                    RateLimiter::hit($throttleKey);
+                }
+            }
+        }
+
+        return redirect()->to(route('login').'?isApp=android&loading=0&logged=0');
+    }
+
+    //https://developers.google.com/identity/gsi/web/guides/verify-google-id-token#php
+    public function loginAndroidGoogle(Request $request): RedirectResponse{
+
+        if(isset($request->token) && !empty($request->token)){
+
+            $token = $request->token;
+
+            // Specify the CLIENT_ID of the app that accesses the backend
+            // the key is from google console => android app => debug => client_id_app_android_debug
+            // the key is from google console => android app => prod => client_id_app_android
+
+            // on the app we use the web client id, so using the same here
+            $client = new Google_Client(['client_id' => config('services.google.client_id_app_android')]);
+            $payload = $client->verifyIdToken($token);
+            //echo '<pre>'.print_r($payload,true).'</pre>';die;
+
+            /*
+                Array
+                (
+                    [iss] => https://accounts.google.com
+                    [azp] => 574697809635-8e11m4jj2nrlv2gvful658sjsgojo44o.apps.googleusercontent.com
+                    [aud] => 574697809635-5cflqub84gvuddur662c6a8vvvsg7shp.apps.googleusercontent.com
+                    [sub] => 114276970029095412274
+                    [email] => arlosmar@gmail.com
+                    [email_verified] => 1
+                    [name] => Armando
+                    [picture] => https://lh3.googleusercontent.com/a/ACg8ocL0lgsIIKIhxs3YAh1yrn9Q87aEKOo-el8ZNlVDgpTd1h1E6S1r1g=s96-c
+                    [given_name] => Armando
+                    [iat] => 1733938900
+                    [exp] => 1733942500
+                )
+            */
+            if($payload){
+
+                $userEmail = $payload['email'];
+                // If the request specified a Google Workspace domain
+                //$domain = $payload['hd'];
+
+                $found = User::where('email',$userEmail)->first();
+
+                $now = Date::now();                    
+
+                // register
+                if(!isset($found) || empty($found)){
+
+                    $loginApp = getRandomToken($found);
+
+                    $name = '';
+                    if(isset($payload['name']) && !empty($payload['name'])){
+                        $name = $payload['name'];
+                    }
+                    else{
+                        if(isset($payload['given_name']) && !empty($payload['given_name'])){
+                            $name = $payload['given_name'];
+                        }
+                    }
+                    
+                    // create and auto verify
+                    $userInfo = [
+                        'name' => $name,
+                        'email' => $userEmail,
+                        'email_verified_at' => $now,
+                        'loginApp' => $loginApp
+                    ];
+
+                    // notifications activated by default
+                    $userInfo['settings'] = $this->getDefaultSettings();
+                    
+                    $found = User::create($userInfo);
+                }
+                else{
+                    // check if not verified and auto verify
+                    if(!isset($found->email_verified_at) || empty($found->email_verified_at)){
+                        $found->update(['email_verified_at',$now]);   
+                    }            
+                }
+
+                // save device id
+                if(isset($request->deviceId) && !empty($request->deviceId)){
+                    
+                    $deviceId = $request->deviceId;
+
+                    // check if already on database. if so, update the user id
+                    $device = Device::updateOrCreate(
+                        ['token_firebase' => $deviceId],
+                        ['user_id' => $found->id, 'token_firebase_date' => $now]
+                    );
+                }
+             
+                Auth::login($found);
+
+                $this->setUserSettings();
+
+                //return redirect()->intended(route('user', absolute: false));
+             
+                // going directly to admin or intranet to can add get parameter and 
+                // be aware of the login on the app and save a flag
+                if(isset($found->admin) && !empty($found->admin)){
+                    return redirect()->to(route('admin').'?isApp=android&loading=0&logged='.$found->id.'&token='.$found->loginApp);
+                }
+                else{                        
+                    return redirect()->to(route('intranet').'?isApp=android&loading=0&logged='.$found->id.'&token='.$found->loginApp);
+                }
+            }
+        }
+
+        return redirect()->to(route('login').'?isApp=android&loading=0&logged=0');
+    }
 }

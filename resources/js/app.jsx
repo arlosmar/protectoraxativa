@@ -15,13 +15,35 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { I18nextProvider } from 'react-i18next';
 import i18n from './i18n';
 
-// request notification permissions
-import { requestPermission } from '@/Utils/Notifications';
-requestPermission();
-
 // apply dark mode
-import { applyDarkMode } from "@/Utils/Cookies";
+import { applyDarkMode, setCookie } from "@/Utils/Cookies";
 const darkmode = applyDarkMode();
+
+// save device info on cookie to have useful information
+import { getDeviceInfo } from "@/Utils/Device";
+const device = getDeviceInfo();
+setCookie('device',device);
+
+// https://www.npmjs.com/package/react-error-boundary
+//import { useTranslation } from "react-i18next";
+import { ErrorBoundary } from "react-error-boundary";
+import Error from '@/Pages/Error';
+import { sendTelegram } from '@/Utils/Notifications';
+
+const logError = (error,info) => {    
+    sendTelegram(error.message,false,info?.componentStack);
+};
+
+const fallback = ({error,resetErrorBoundary }) => {
+
+    // Call resetErrorBoundary() to reset the error boundary and retry the render.
+    //const { t } = useTranslation('global');
+    if(!window.location.href.includes('localhost')){
+        return (
+            <Error/>
+        );
+    }
+}
 
 const appName = import.meta.env.VITE_APP_NAME || '';
 
@@ -33,9 +55,11 @@ createInertiaApp({
         const root = createRoot(el);
 
         root.render(
-            <I18nextProvider i18n={i18n}>                
-                <App {...props}/>                
-            </I18nextProvider>
+            <ErrorBoundary FallbackComponent={fallback} onError={logError}>
+                <I18nextProvider i18n={i18n}>
+                    <App {...props}/>
+                </I18nextProvider>
+            </ErrorBoundary>
         );
     },
     progress: {

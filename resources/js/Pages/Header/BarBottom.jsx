@@ -10,12 +10,15 @@ import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import Paper from '@mui/material/Paper';
 
-import Box from '@mui/material/Box';
+//import Box from '@mui/material/Box';
 
 import HomeIcon from '@mui/icons-material/Home';
 import AnimalsIcon from '@mui/icons-material/Pets';
 import NewsIcon from '@mui/icons-material/Newspaper';
 import UserIcon from '@mui/icons-material/Person';
+import MenuIcon from '@mui/icons-material/Menu';
+import Menu from "@/Components/Menu";
+
 //import ContactIcon from '@mui/icons-material/Email';
 
 //import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -33,7 +36,9 @@ const darkTheme = createTheme({
 });
 */
 
-export default function BarBottom({t,from}){
+export default function BarBottom({user,t,from,changeLanguage,handleLogout,handleContact,handleWhatsapp}){
+
+    const [ openMenu, setOpenMenu ] = useState(false);
 
     var highlighted = '';
     switch(from){
@@ -57,15 +62,19 @@ export default function BarBottom({t,from}){
         case 'user':
             highlighted = 'user';
             break;
+
+        case 'menu':
+            highlighted = 'menu';
+            break;
     }
 
-    const [value, setValue] = useState(highlighted);
+    const [value, setValue] = useState(highlighted);    
 
     const clickIcon = (e, newValue) => {
 
         setValue(newValue);
 
-        var link = 'home';
+        var link = '';
 
         //const id = e.currentTarget.id;
         const id = newValue;
@@ -89,67 +98,36 @@ export default function BarBottom({t,from}){
                 break;
 
             case 'user':
-                link = 'login';
+                // we change this because if not the app does not get aware of auto log off from the web
+                // and detects login url and goes to login activity
+                //link = 'login';
+                if(user){
+                    if(user?.admin){
+                        link = 'admin'
+                    }
+                    else{
+                        link = 'intranet'
+                    }
+                }
+                else{
+                    link = 'login'
+                }
+                break;
+
+            case 'menu':
+                setOpenMenu(!openMenu);
                 break;
         }
 
-        /*if(link === 'news'){            
-            window.open('https://protectoraxativa.blogspot.com','_blank');
+        if(link && link.length > 0){
+            /*if(link === 'news'){            
+                window.open('https://protectoraxativa.blogspot.com','_blank');
+            }
+            else{*/
+                window.location.href = route(link);
+            //}
         }
-        else{*/
-            window.location.href = route(link);
-        //}
     }
-
-    /*
-    <Box sx={{ flexGrow: 1 }}/>
-    <IconButton color="inherit">
-        <SearchIcon />
-    </IconButton>
-
-    <IconButton color="inherit">
-        <MoreIcon />
-    </IconButton>
-    */
-
-    //left:'5%', top: 'auto', bottom: 0, maxWidth: '1280px', marginLeft: 'auto', marginRight: 'auto'
-    //<Toolbar sx={{ justifyContent: 'center' }}>
-
-    {/*
-        <ThemeProvider theme={darkTheme}>
-            
-            <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0 }}>
-            
-                <Toolbar>
-
-                    <Box sx={{ flexGrow: 1 }}/>
-                                 
-                    <IconButton color="inherit" onClick={clickIcon} id='groups' sx={{ flexDirection: 'column' }}>
-                        <GroupIcon/>
-                        <Typography variant="caption">{t('MenuBar.Groups')}</Typography>
-                    </IconButton>
-
-                    <Box sx={{ flexGrow: 1 }}/>
-
-                    <IconButton color="inherit" onClick={clickIcon} id='events' sx={{ flexDirection: 'column' }}>
-                        <EventIcon/>
-                        <Typography variant="caption">{t('MenuBar.Events')}</Typography>
-                    </IconButton>
-
-                    <Box sx={{ flexGrow: 1 }}/>
-
-                    <IconButton color="inherit" onClick={clickIcon} id='user' sx={{ flexDirection: 'column' }}>
-                        <AccountIcon/>
-                        <Typography variant="caption">{t('MenuBar.User')}</Typography>
-                    </IconButton> 
-
-                    <Box sx={{ flexGrow: 1 }}/>
-
-                </Toolbar>
-            
-            </AppBar>
-        </ThemeProvider>
-    */}
 
     const sxNavigation = {         
         "& .Mui-selected, .Mui-selected > svg": {
@@ -163,7 +141,9 @@ export default function BarBottom({t,from}){
     };
 
     const sxNavigationAction = { 
-        color: 'white'
+        minWidth: '0',
+        color: 'white',
+        padding: '0px 8px'
     };
 
     const sxIcon = {
@@ -175,11 +155,22 @@ export default function BarBottom({t,from}){
         }
     }
 
-    //<ThemeProvider theme={darkTheme}>
-
     return (
+        <>
+        <Menu 
+            user={user}
+            t={t} 
+            from={from}
+            open={openMenu} 
+            setOpen={setOpenMenu} 
+            changeLanguage={changeLanguage}
+            handleLogout={handleLogout}
+            handleContact={handleContact}
+            handleWhatsapp={handleWhatsapp}
+        />
         <Paper 
-            sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 1  }} 
+            id='barbottom'
+            sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, marginRight: 'auto', marginLeft: 'auto', zIndex: 2  }} 
             elevation={3}
         >
 
@@ -189,7 +180,8 @@ export default function BarBottom({t,from}){
                 onChange={clickIcon} 
                 sx={sxNavigation}               
             >      
-                <Box sx={{ flexGrow: 1 }}/>
+
+                {/*<Box sx={{ flexGrow: 1 }}/>*/}
 
                 <BottomNavigationAction
                     label={t('MenuBar.Home')}
@@ -198,7 +190,7 @@ export default function BarBottom({t,from}){
                     sx={sxNavigationAction}
                 />
 
-                <Box sx={{ flexGrow: 1 }}/>
+                
 
                 <BottomNavigationAction
                     label={t('MenuBar.Animals')}
@@ -207,7 +199,7 @@ export default function BarBottom({t,from}){
                     sx={sxNavigationAction}
                 />
 
-                <Box sx={{ flexGrow: 1 }}/>
+                
 
                 <BottomNavigationAction
                     label={t('MenuBar.News')}
@@ -216,7 +208,7 @@ export default function BarBottom({t,from}){
                     sx={sxNavigationAction}
                 />
 
-                <Box sx={{ flexGrow: 1 }}/>
+                
 
                 <BottomNavigationAction
                     label={t('MenuBar.User')}
@@ -233,10 +225,20 @@ export default function BarBottom({t,from}){
                 />
                 */}
 
-                <Box sx={{ flexGrow: 1 }}/>
+                
+
+                <BottomNavigationAction
+                    label={t('MenuBar.Menu')}
+                    icon={<MenuIcon sx={sxIcon}/>}
+                    value='menu'
+                    sx={sxNavigationAction}
+                />
+
+                
 
             </BottomNavigation>
 
         </Paper>
+        </>
     );
 }

@@ -4,6 +4,160 @@
 
 use Illuminate\Support\Facades\App;
 
+function isLocalhost(){
+    
+    $myUrl = url('/');
+
+    if(str_contains($myUrl,'localhost') || str_contains($myUrl,'192.168')){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+// to avoid adding code to TelegramBotHandler.php in case it is change on any update
+// vendor/monolog/monolog/src/Monolog/Handler/TelegramBotHandler.php
+// method write
+/*
+change the default code for:
+protected function write(LogRecord $record): void
+    {
+    $message = sendTelegramFromBotHandler();
+
+    if(isset($message) && !empty($message)){
+        $this->disableWebPagePreview(true);
+        $this->send($message);
+    }
+}
+*/
+
+// to create random token to log in on the app
+function getRandomToken($user){
+    $random = substr($user->id.'_'.time().'_'.str()->password(100,true,true,false),0,100);
+    return $random;
+}
+
+function sendTelegramFromBotHandler($record){
+
+    //https://gmblog.org/blog/how-to-use-telegram-for-storing-laravel-logs/    
+
+    // do not send if localhost
+    $logDetails = '';
+    $url = '';
+    if(isset($record['context']) && !empty($record['context'])){  
+
+        $logDetails = print_r($record['context']['exception'],true);
+
+        $split = explode('[trace:',$logDetails);
+
+        $logDetailsInfo = $split[0];
+        $logDetailsTrace = $split[1];
+        
+        // $split[0]
+        /*
+        [message:protected] => syntax error, unexpected token "try"
+        [string:Error:private] => 
+        [code:protected] => 0
+        [file:protected] => /home/arlosmar/webs/protectoraxativa/app/Http/Controllers/Auth/AdminController.php
+        [line:protected] => 48
+        */
+
+        preg_match('/\[message.*\n/',$logDetailsInfo,$matchesMessage);
+        preg_match('/\[file.*\n/',$logDetailsInfo,$matchesFile);
+        preg_match('/\[line.*\n/',$logDetailsInfo,$matchesLine);              
+
+        $message = str_replace('[message:protected] => ','',$matchesMessage[0]);
+        $file = str_replace('[file:protected] => ','',$matchesFile[0]);
+        $path = str_replace('/public','',getcwd());
+        $file = str_replace($path.'/','',$file);
+        $line = trim(str_replace('[line:protected] =>','',$matchesLine[0]));
+        $trace = str_replace(['Error:private] => Array','[previous:Error:private] =>'],'',$logDetailsTrace);            
+        $traceSplit = explode(')',$trace);
+        array_pop($traceSplit);
+        $trace = implode(')',$traceSplit);
+        $traceSubstr = '<pre>'.substr($trace,0,300).'</pre>';            
+        $logDetailsFormatted = $traceSubstr;
+        
+        $url = '* File: '.$file.'* Line: '.$line;
+    }
+
+    $log = $record['message'];
+
+    $user = auth()->user();
+
+    $device = (array)json_decode(getCookieValue('device'));
+
+    $date = $record['datetime']->format('Y-m-d H:i:s');
+
+    $message = formatTelegramMessage($date,'Laravel',$url,$user,$device,$log,$logDetailsFormatted,true);
+
+    if(isset($message) && !empty($message)){
+        return $message;
+    }
+    else{
+        return '';
+    }
+}
+
+function formatTelegramMessage($date = '', $from = '',$url = '',$user = null,$device = '',$log = '',$details = '', $filter = false){
+
+    // if filter, filter messages. we do not filter all here because if react
+    // it makes no sense to call the server to filter. we can filter in advance and avoid a call
+    if(isset($filter) && !empty($filter)){
+
+        if(
+            (strpos($log,'could not be found') !== false) ||
+            (strpos($log,'Vite manifest not found') !== false) ||
+            (strpos($log,'Unable to locate file in Vite') !== false) ||
+            (strpos($log,'Unable to preload CSS') !== false)
+        ){
+            return '';
+        }
+    }
+
+    if(isset($date) && !empty($date)){
+        $logDate = $date;
+    }
+    else{
+        $logDate = gmdate('Y-m-d H:i:s');
+    }
+    
+    $logUser = '';
+    if(isset($user) && !empty($user)){
+        $logUser = $user->id.'# '.$user->email;
+    }
+
+    $logDevice = '';
+    if(isset($device) && !empty($device)){
+        foreach($device as $deviceItem => $deviceValue){
+            $logDevice .= '* '.$deviceItem.': '.$deviceValue.PHP_EOL;
+        }
+    }
+
+    $info = '<b>[UTC]</b>'.PHP_EOL.$logDate.PHP_EOL.PHP_EOL.'<b>[FROM]</b>'.PHP_EOL.$from.PHP_EOL.PHP_EOL.'<b>[URL]</b>'.PHP_EOL.$url.PHP_EOL.PHP_EOL.'<b>[USER]</b>'.PHP_EOL.$logUser.PHP_EOL.PHP_EOL.'<b>[DEVICE]</b>'.PHP_EOL.$logDevice.PHP_EOL.'<b>[LOG]</b>'.PHP_EOL.$log;
+
+    if(isset($details) && !empty($details)){
+        $info .= PHP_EOL.PHP_EOL.'<b>[DETAILS]</b>'.PHP_EOL.$details;
+    }
+
+    return $info;
+}
+
+function getCookieValue($name){
+
+    if(isset($_COOKIE[$name])){
+        return $_COOKIE[$name];
+    }
+    else{
+        return '';
+    }
+}
+
+function setCookieValue($name,$value){
+    setcookie($name,$value,0,'/');
+}
+
 // browser language
 //$language = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
 
@@ -39,6 +193,7 @@ function setUserLanguage(){
         }
         else{
             // if no language on user and cookie, set it
+            // and update on user
             $cookieLanguage = getLanguageCookie();
         
             if(isset($cookieLanguage) && !empty($cookieLanguage)){
@@ -50,6 +205,21 @@ function setUserLanguage(){
     return $language;
 }
 
+function getDarkModeCookie(){
+
+    if(isset($_COOKIE['darkmode'])){
+        if(!empty($_COOKIE['darkmode'])){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
+    else{
+        return null;
+    }
+}
+
 function setDarkModeCookie($darkmode){
     setcookie('darkmode',$darkmode,0,'/');
 }
@@ -58,20 +228,73 @@ function setUserDarkMode(){
 
     $user = auth()->user();
 
-    $settings = (array)json_decode($user['settings']);
+    if(isset($user['settings'])){
 
-    if(isset($settings['darkmode'])){
-        
-        if(!empty($settings['darkmode'])){
-            setDarkModeCookie(true);
+        $settings = (array)json_decode($user['settings']);
+
+        if(isset($settings['darkmode'])){
+            
+            if(!empty($settings['darkmode'])){
+                setDarkModeCookie(true);
+            }
+            else{
+                setDarkModeCookie(false);
+            }
+
+            return $settings['darkmode'];
         }
         else{
-            setDarkModeCookie(false);
-        }
+            // if user does not have darkmode setting, check if cookie
+            // if cookie add it to the user settings
+            $darkmode = getDarkModeCookie();
 
-        return $settings['darkmode'];
+            if($darkmode !== null){
+                $settings['darkmode'] = $darkmode;
+                $settingsNew = json_encode($settings);
+                $user->update(['settings' => $settingsNew]);
+                return $darkmode;
+            }
+            else{
+                return false;
+            }
+        }
     }
     else{
-        return false;
+        // if user does not have darkmode setting, check if cookie
+        // if cookie add it to the user settings
+        $darkmode = getDarkModeCookie();
+
+        if($darkmode !== null){
+            $settings = [
+                'darkmode' => $darkmode
+            ];
+            $settingsNew = json_encode($settings);
+            $user->update(['settings' => $settingsNew]);
+            return $darkmode;
+        }
+        else{
+            return false;
+        }
     }
+}
+
+function apiResponse($success,$status,$data = [],$language = null){
+
+    // messages on api always in English unless indicated by parameter on the api call with language
+    //app()->setLocale('en'); => en
+
+    if(!isset($language) || empty($language)){
+        $language = 'en';
+    }
+
+    $response = [
+        'success' => $success,
+        'status' => trans('api.'.$status,[],$language)
+    ];
+
+    if(isset($data) && !empty($data)){
+        $response['data'] = $data;
+    }
+
+    return response()->json($response);
 }

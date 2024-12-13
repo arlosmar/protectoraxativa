@@ -1,13 +1,18 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, lazy, Suspense } from 'react';
 
+import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import Pagination from '@/Components/Pagination';
 import ItemsPerPage from '@/Components/ItemsPerPage';
 import { itemsPerPageList } from "@/Utils/Variables";
 
-import AnimalModal from "@/Modals/AnimalModal";
-import AnimalEditModal from "@/Modals/AnimalEditModal";
+//import AnimalModal from "@/Modals/AnimalModal";
+//import AnimalEditModal from "@/Modals/AnimalEditModal";
+//import FilterAnimals from '@/Pages/Animals/FilterAnimals';
+const AnimalModal = lazy(() => import("@/Modals/AnimalModal"));
+const AnimalEditModal = lazy(() => import("@/Modals/AnimalEditModal"));
+const FilterAnimals = lazy(() => import("@/Pages/Animals/FilterAnimals"));
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -22,7 +27,6 @@ import Box from '@mui/material/Box';
 import visuallyHidden from '@mui/utils/visuallyHidden';
 import Typography from '@mui/material/Typography';
 
-import FilterAnimals from '@/Pages/Animals/FilterAnimals';
 import { styled } from '@mui/material/styles';
 
 import { getParameter } from "@/Utils/Variables";
@@ -283,6 +287,12 @@ export default function List({t,origin,animals,setAnimals,baseUrl,
         }
     }
 
+    /*
+    <div className='loading mt-8'>
+        <CircularProgress sx={{color:"#FF8C00"}}/>
+    </div>
+    */
+
 	return (
         <>
         {
@@ -313,65 +323,82 @@ export default function List({t,origin,animals,setAnimals,baseUrl,
         }
         {
             loading ?
-                <div className='loading'>
-                    <CircularProgress sx={{color:"#FF8C00"}}/>
-                </div>
+                <Backdrop
+                    sx={(theme) => ({ color: '#FF8C00', zIndex: theme.zIndex.drawer + 1 })}
+                    open={loading}            
+                >
+                    <CircularProgress color="warning"/>
+                </Backdrop>
             :
                 <div className='mt-4'>
-                    <AnimalEditModal   
-                        t={t}      
-                        origin={origin}  
-                        show={showEditAnimal}
-                        setShow={setShowEditAnimal}  
-                        items={filteredAnimals}               
-                        setItems={setFilteredAnimals}
-                        item={animalEditItem}
-                        setItem={setAnimalItem}
-                        position={position}
-                        options={options}
-                        subsection={subsection}
-                        imagesPaths={imagesPaths}
-                        animals={animals}
-                        setAnimals={setAnimals}
-                        filterUsed={filterUsed}
-                        setInternal={setInternal}
-                        data={data}
-                        setData={setData}
-                    />
-                    <FilterAnimals
-                        origin={origin}
-                        t={t}
-                        openSearch={openSearch}                    
-                        setOpenSearch={setOpenSearch}
-                        originalItems={animals}
-                        items={filteredAnimals}
-                        setItems={setFilteredAnimals}
-                        options={options}
-                        filterUsed={filterUsed}
-                        setFilterUsed={setFilterUsed}
-                        subsection={subsection}
-                    />
+                    {
+                        showEditAnimal &&
+                        <Suspense>
+                        <AnimalEditModal   
+                            t={t}      
+                            origin={origin}  
+                            show={showEditAnimal}
+                            setShow={setShowEditAnimal}  
+                            items={filteredAnimals}               
+                            setItems={setFilteredAnimals}
+                            item={animalEditItem}
+                            setItem={setAnimalItem}
+                            position={position}
+                            options={options}
+                            subsection={subsection}
+                            imagesPaths={imagesPaths}
+                            animals={animals}
+                            setAnimals={setAnimals}
+                            filterUsed={filterUsed}
+                            setInternal={setInternal}
+                            data={data}
+                            setData={setData}
+                        />
+                        </Suspense>
+                    }
+                    {
+                        openSearch &&
+                        <Suspense>
+                        <FilterAnimals
+                            origin={origin}
+                            t={t}
+                            openSearch={openSearch}                    
+                            setOpenSearch={setOpenSearch}
+                            originalItems={animals}
+                            items={filteredAnimals}
+                            setItems={setFilteredAnimals}
+                            options={options}
+                            filterUsed={filterUsed}
+                            setFilterUsed={setFilterUsed}
+                            subsection={subsection}
+                        />
+                        </Suspense>
+                    }
                     {
                         filteredAnimals && filteredAnimals.length > 0 ?
-
                             <>                            
-                            <AnimalModal
-                                origin={origin}
-                                t={t}
-                                show={showAnimal}
-                                setShow={setShowAnimal}      
-                                animal={animalItem}
-                                imagesPaths={imagesPaths}
-                                setAnimalEditItem={setAnimalEditItem}
-                                setShowEditAnimal={setShowEditAnimal}
-                                items={filteredAnimals}               
-                                setItems={setFilteredAnimals}
-                                animals={animals}                              
-                                setAnimals={setAnimals}
-                                filterUsed={filterUsed}
-                                setInternal={setInternal}                                
-                                setData={setData}
-                            />    
+                            {
+                                showAnimal &&
+                                <Suspense>
+                                <AnimalModal
+                                    origin={origin}
+                                    t={t}
+                                    show={showAnimal}
+                                    setShow={setShowAnimal}      
+                                    animal={animalItem}
+                                    imagesPaths={imagesPaths}
+                                    setAnimalEditItem={setAnimalEditItem}
+                                    setShowEditAnimal={setShowEditAnimal}
+                                    items={filteredAnimals}               
+                                    setItems={setFilteredAnimals}
+                                    animals={animals}                              
+                                    setAnimals={setAnimals}
+                                    filterUsed={filterUsed}
+                                    setInternal={setInternal}                                
+                                    setData={setData}
+                                />    
+                                </Suspense>
+                            }
                             <ItemsPerPage
                                 origin={origin}
                                 t={t}

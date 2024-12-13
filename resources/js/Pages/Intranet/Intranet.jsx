@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, lazy, Suspense } from 'react';
 import { useTranslation } from "react-i18next";
 import Header from '@/Pages/Header/Header';
 
@@ -24,18 +24,19 @@ import { useSwipeable } from 'react-swipeable';
 import { applyDarkMode } from "@/Utils/Cookies";
 
 export default function Intranet({auth,user,section,subsection,status,msg,
-    options,imagesPaths,baseUrl,itemsPerPage,page}){
+    options,imagesPaths,baseUrl,itemsPerPage,page,notifications,emails,social,isApp,appNotificationsEnabled}){
 
-    // when logged in, it does not reload the page, so we have to force here the darkmode
-    // for the rest of pages, it is on the app.jsx
-    const darkmode = applyDarkMode();
+    // when logged in, if the user has in its preferences the darkmode, apply it
+    const darkmode = applyDarkMode(user);
 
     const { t } = useTranslation('global');
+
+    const [ userSettings, setUserSettings ] = useState(user && user?.settings ? JSON.parse(user.settings) : null);
 
     const [ tab, setTab ] = useState(section ? section : "animals");
     const [ subtab, setSubtab ] = useState(subsection ? subsection : '');
 
-    const { stickyRef, sticky, offset } = Sticky();
+    const { stickyRef, sticky, offset, height, isApplicationOrWebApp } = Sticky();
 
     const handleTabChange = (event, newValue) => {
         
@@ -51,7 +52,7 @@ export default function Intranet({auth,user,section,subsection,status,msg,
         window.history.pushState({path:url},'',url);
     };
 
-    const { classes, sx, sxIcon } = styleTabs();
+    const { sxTabs, sx, sxIcon } = styleTabs();
 
     const [ openToast, setOpenToast ] = useState(msg && msg.length > 0 ? true : false);
     const [ toastMsg, setToastMsg ] = useState(msg && msg.length > 0 ? t(msg) : '');
@@ -89,19 +90,19 @@ export default function Intranet({auth,user,section,subsection,status,msg,
             message={toastMsg}
             error={toastErrorMsg}
         />
-        <Header user={user} t={t} from='user'/>
+        <Header user={user} t={t} from='user' closeNotifications={tab === 'settings'}/>        
         <main {...handlers}>
             {/*
             <h1 className="title">
                 {t('user.title')}
             </h1>            
             */}
-            <div className='tabs-container'>
+            <div className='tabs-container' style={{marginTop: sticky ? height+'px': '0px'}}>
                 <Tabs 
                     id="tabs"
                     ref={stickyRef} 
-                    className={`${classes.tabs} ${sticky && 'sticky'}`}
-                    sx={{zIndex:1}} 
+                    sx={sxTabs}
+                    className={`${sticky ? 'sticky-item' : ''}`}
                     value={tab} 
                     onChange={handleTabChange}
                     variant="scrollable"
@@ -115,7 +116,12 @@ export default function Intranet({auth,user,section,subsection,status,msg,
                     tab === 'settings' ?
                         <Settings
                             t={t}     
-                            user={user}                       
+                            user={user}
+                            userSettings={userSettings}  
+                            setUserSettings={setUserSettings}
+                            notifications={notifications}    
+                            isApp={isApp}   
+                            appNotificationsEnabled={appNotificationsEnabled}        
                         />
                     :
                         tab === 'account' ?
@@ -124,6 +130,8 @@ export default function Intranet({auth,user,section,subsection,status,msg,
                                 status={status}
                                 t={t}
                                 subsection={subtab}
+                                emails={emails}
+                                social={social} 
                             />
                         :
                             <Animals
@@ -134,7 +142,7 @@ export default function Intranet({auth,user,section,subsection,status,msg,
                                 imagesPaths={imagesPaths}
                                 baseUrl={baseUrl}
                                 itemsPerPage={itemsPerPage}
-                                page={page}
+                                page={page}                                
                             />
                 }
                 </div>

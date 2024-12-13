@@ -96,7 +96,7 @@ export default function Partners({t,partners}){
 
                         return (
                             <Grid container spacing={1}>
-                                <Grid size={{ xs: 12, sm: 6 }} className='partners-div'>
+                                <Grid size={{ xs: 12, sm: 6 }} className='partners-div-even'>
                                     {
                                         friends.names[index] && friends.names[index].length > 0 &&
                                         <h1 className='partners-title'>{friends.names[index]}</h1>
@@ -120,7 +120,7 @@ export default function Partners({t,partners}){
                                 </Grid>
                                 {
                                     friends.logos[index+1] &&
-                                    <Grid size={{ xs: 12, sm: 6 }} className='partners-div'>
+                                    <Grid size={{ xs: 12, sm: 6 }} className='partners-div-odd'>
                                         {
                                             friends.names[index+1] && friends.names[index+1].length > 0 &&
                                             <h1 className='partners-title'>{friends.names[index+1]}</h1>
@@ -163,7 +163,7 @@ export default function Partners({t,partners}){
 
                         return (
                             <Grid container spacing={1}>
-                                <Grid size={{ xs: 12, sm: 6 }} className='apu-div'>
+                                <Grid size={{ xs: 12, sm: 6 }} className='partners-div-even'>
                                     {
                                         (apus.links[index] && apus.links[index].length > 0) ?
                                             <a href={apus.links[index]} target="_blank">
@@ -183,7 +183,7 @@ export default function Partners({t,partners}){
                                 </Grid>
                                 {
                                     apus.logos[index+1] &&
-                                    <Grid size={{ xs: 12, sm: 6 }} className='apu-div'>
+                                    <Grid size={{ xs: 12, sm: 6 }} className='partners-div-odd'>
                                         {
                                             (apus.links[index+1] && apus.links[index+1].length > 0) ?
                                                 <a href={apus.links[index+1]} target="_blank">
@@ -225,7 +225,7 @@ export default function Partners({t,partners}){
 
                         return (
                             <Grid container spacing={1}>
-                                <Grid size={{ xs: 12, sm: 6 }} className='partners-div'>
+                                <Grid size={{ xs: 12, sm: 6 }} className='partners-div-even'>
                                     {
                                         (subsidized.links[index] && subsidized.links[index].length > 0) ?
                                             <a href={subsidized.links[index]} target="_blank">
@@ -245,7 +245,7 @@ export default function Partners({t,partners}){
                                 </Grid>
                                 {
                                     subsidized.logos[index+1] &&
-                                    <Grid size={{ xs: 12, sm: 6 }} className='partners-div'>
+                                    <Grid size={{ xs: 12, sm: 6 }} className='partners-div-odd'>
                                         {
                                             (subsidized.links[index+1] && subsidized.links[index+1].length > 0) ?
                                                 <a href={subsidized.links[index+1]} target="_blank">

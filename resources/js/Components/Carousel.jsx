@@ -116,8 +116,23 @@ export default function Carousel({user,t,origin,imagePath,imagesPaths,animals,pa
                         }
 
                         var imgPath = '/images/animalgeneric.jpeg';
-                        if(item?.image && item?.image.length > 0){
-                            imgPath = imagePath+item?.image;
+                        if(
+                            (item?.image && item?.image.length > 0) ||
+                            (item?.image2 && item?.image2.length > 0) ||
+                            (item?.image_sponsored && item?.image_sponsored.length > 0)
+                        ){
+                            var imgToUse = null;
+                            if(origin === 'adopted' || origin === 'sponsored'){
+                                imgToUse = item?.image_sponsored;
+                            }
+
+                            // if adopted/sponsored but not image_sponsored OR
+                            // if any other origin                            
+                            if(!imgToUse || imgToUse.length === 0){                                
+                                imgToUse = item?.image && item?.image.length > 0 ? item?.image : item?.image2;
+                            }
+
+                            imgPath = imagePath+imgToUse;
                         }
 
                         return (

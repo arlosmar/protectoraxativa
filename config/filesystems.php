@@ -80,7 +80,7 @@ return [
         // this creates link from public/forms => storage/app/forms
         public_path('forms') => storage_path('app/forms'),
 
-        // this creates link from public/css => storage/app/forms
+        // this creates link from public/css => storage/app/css
         public_path('css') => storage_path('app/css'),
 
         // this creates link from public/guides => storage/app/guides

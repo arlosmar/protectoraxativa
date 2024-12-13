@@ -2,28 +2,19 @@
 
 use Illuminate\Support\Str;
 
-// get domain
-// to avoid error with php artisan serve
-$url = PHP_SAPI === 'cli' ? false : url('/');
-
-if(isset($url) && !empty($url)){
+// in case we execute commands on the console
+// we don't go to public/index.php, so set env here
+$dbConnection = env('DB_CONNECTION','mysql');
+if(app()->runningInConsole()){
     
-    // if localhost use sqlite
-    $databaseConnection = 'mysql';
-    if(str_contains($url,'localhost') || str_contains($url,'192.168')){
-        $databaseConnection = 'sqlite';
+    // if localhost
+    if(str_contains(getcwd(),'/home/arlosmar')){
+        $dbConnection = 'sqlite';
     }
     else{
-        // if not use mysql
-        $databaseConnection = 'mysql';
+        // if server
+        // if server .env already loaded by default, so working properly
     }
-}
-else{
-    // for migration/reverb online
-    //$databaseConnection = 'mysql';
-
-    // for migration/reverb localhost
-    $databaseConnection = 'sqlite';
 }
 
 return [
@@ -40,7 +31,8 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION',$databaseConnection),
+    //'default' => env('DB_CONNECTION','mysql'),
+    'default' => $dbConnection,
 
     /*
     |--------------------------------------------------------------------------
@@ -58,7 +50,7 @@ return [
         'sqlite' => [
             'driver' => 'sqlite',
             'url' => env('DB_URL'),
-            'database' => env('DB_DATABASE_SQLITE', database_path('database.sqlite')),
+            'database' => env('DB_DATABASE_LOCAL', database_path('database.sqlite')),
             'prefix' => '',
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],

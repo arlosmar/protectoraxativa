@@ -10,20 +10,34 @@ import Toast from '@/Components/Toast';
 
 import GoogleIcon from '@mui/icons-material/Google';
 
+import { authenticate, getStoredCredential } from '@/Components/Authentication';
 
 export default function Login({ status, canResetPassword, path }) {
- 
+
     const { t } = useTranslation('global');
+
+    const [ biometricSaved, setBiometricSaved ] = useState(getStoredCredential(true));
     
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
         password: '',
-        remember: false/*,
-        path: path && path.length > 0 ? path : ''*/
+        remember: true /* remember always */
+        /*,path: path && path.length > 0 ? path : ''*/
     });
 
-    useEffect(() => {
+    const checkAuthentication = async () => {        
         
+        const credential = await authenticate();
+
+        if(credential?.authentication){
+            post(route('login.authentication',[credential?.userId]));
+        }
+    }
+
+    useEffect(() => {
+
+        const credential = checkAuthentication();
+
         return () => {
             reset('password');
         };
@@ -125,12 +139,24 @@ export default function Login({ status, canResetPassword, path }) {
     }
 
     const [ openToast, setOpenToast ] = useState(status ? true : false);
+    const [ message, setMessage ] = useState(status ? status : null);
+    const [ error, setError ] = useState(null);
 
     useEffect(() => {
         if(status){
+            setMessage(status);
+            setError(null);
             setOpenToast(true);
         }
     }, [status]);
+
+    useEffect(() => {
+        if(errors?.authentication){
+            setMessage(null);
+            setError(errors?.authentication);
+            setOpenToast(true);
+        }
+    }, [errors?.authentication]);
 
     return (
         
@@ -138,7 +164,8 @@ export default function Login({ status, canResetPassword, path }) {
         <Toast 
             open={openToast}
             setOpen={setOpenToast}
-            message={status}
+            message={message}
+            error={error}
         />
         <Header t={t} from='user'/>
         <main>
@@ -163,6 +190,7 @@ export default function Login({ status, canResetPassword, path }) {
                         placeholder={t('login.email')}                        
                         error={errors.email}                        
                         isFocused
+                        shrink
 
                     />
                 </div>
@@ -177,6 +205,7 @@ export default function Login({ status, canResetPassword, path }) {
                         onChange={handleInput}                        
                         placeholder={t('login.password')}                        
                         error={errors.password}
+                        shrink
                     />
                 </div>
                 {/*
@@ -191,6 +220,9 @@ export default function Login({ status, canResetPassword, path }) {
                     </label>
                 </div>
                 */}
+
+                {/*
+                remember always
                 <div className='mt-4'>                  
                     <Switch
                         name="remember"                       
@@ -199,6 +231,7 @@ export default function Login({ status, canResetPassword, path }) {
                         label={t('login.remember')}
                     />
                 </div>
+                */}
                 <div className="flex items-center justify-end mt-4">
                     {
                         canResetPassword &&
@@ -220,6 +253,14 @@ export default function Login({ status, canResetPassword, path }) {
                     <GoogleIcon/> {t('login.google')}
                 </a>
             </div>
+            {
+                biometricSaved &&
+                <div className="text-center mt-8">                   
+                    <a className='cursor-pointer' onClick={checkAuthentication}>
+                        {t('user.profile.settings.biometric')}
+                    </a>
+                </div>
+            }
             
             <div className="text-center mt-8">                   
                 <a href={route('register')}>

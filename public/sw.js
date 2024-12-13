@@ -1,8 +1,86 @@
 //https://github.com/mdn/dom-examples/blob/main/service-worker/simple-service-worker/sw.js
-/*
-self.addEventListener('fetch', function(event){
-});
-*/
+function clickNotification(event){	
+	
+	event.notification.close();
+	
+	// if no actions, it means we clicked on the notification itself, not a button
+	var url = null;
+    if(!event?.action) {
+    	
+    	if(event?.notification?.data?.url && event?.notification?.data?.url.length > 0){
+        	url = event?.notification?.data?.url;
+        }
+        else{
+        	url = event?.notification?.data?.urlGeneric;
+        }
+    }
+    else{
+    	switch(event.action) {
+        
+        	// if buttons
+        	case 'url2':
+        	case 'url1':
+        		var url = event?.notification?.data[event.action];
+        		break;
+        }
+    }
+        	
+    // if any url to open
+    if(url && url.length > 0){	
+
+    	// get root path
+    	var split = url.split('/');
+    	var rootPath = split[0];
+
+    	var clientWithApp = null;
+
+    	event.waitUntil(
+
+	        clients.matchAll({type: 'window'}).then(windowClients => {
+	            
+	            // Check if there is already a window/tab open with the target URL
+	            for(var i = 0; i < windowClients.length; i++){
+	                
+	                var client = windowClients[i];		                
+	                
+	                // If so, just focus it and open
+	                if(client.url === url && 'focus' in client){
+	                	client.navigate(url);
+	                	client.focus();
+	                    return;
+	                }
+	                else{
+	                	if(!clientWithApp && client.url.includes(rootPath)){
+	                		clientWithApp = client;
+	                	}
+	                }
+	            }
+	            
+	            // If not but any window with the app, open on it
+	            if(clientWithApp && 'focus' in clientWithApp){
+	                clientWithApp.navigate(url);
+	                clientWithApp.focus();		                
+	                return;
+	            }
+
+	            // if not, then open the target URL in a new window/tab.
+	            if(clients.openWindow){
+	                return clients.openWindow(url);
+	            }
+	        })
+	    );
+    }
+
+    // if reply action
+    //const reply = event.reply;
+}
+//self.removeEventListener('notificationclick',clickNotification);
+self.addEventListener('notificationclick',clickNotification);
+
+////////////////////////
+// to use on a webapp to receive a message from firebase fcm
+// instead of using pusher
+/////////////////////////
 
 // https://medium.com/@theDeepakYadav/web-push-notification-with-firebase-cloud-messaging-313536815628
 // File: firebase-messaging-sw.js
@@ -73,33 +151,4 @@ if (messaging) {
 		console.log(err);
 	}
 }
-
-// File: firebase-messaging-sw.js
-// Handling Notification click
-self.addEventListener('notificationclick', (event) => {
-	
-    event.notification.close(); // CLosing the notification when clicked
-    
-    const urlToOpen = event?.notification?.data?.url || '';
-    // Open the URL in the default browser.
-    
-    event.waitUntil(
-     	clients.matchAll({
-        	type: 'window',
-      	})
-      	.then((windowClients) => {
-        	// Check if there is already a window/tab open with the target URL
-        	for (const client of windowClients) {
-          		if (client.url === urlToOpen && 'focus' in client) {
-            		return client.focus();
-          		}
-        	}
-        
-        	// If not, open a new window/tab with the target URL
-        	if (clients.openWindow) {
-          		return clients.openWindow(urlToOpen);
-        	}
-      	})
-    );
-});
 */

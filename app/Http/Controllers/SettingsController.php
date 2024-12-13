@@ -15,31 +15,67 @@ class SettingsController extends Controller{
         parent::__construct();   
     }
 
-    public function update(Request $request) : JsonResponse
-    {
+    public function authentication(Request $request) : JsonResponse {
 
         try{
 
             $user = auth()->user();
 
-            $values = $request->all();
+            if(isset($user) && !empty($user)){
 
-            // update table users
-            if(isset($user) && !empty($user)){            
-                $settings = (array)json_decode($user->settings);
-            }
+                $values = $request->all();
 
-            foreach($values as $setting => $value){
-                $settings[$setting] = $value;
-            }
+                if(isset($values['authentication']) && !empty($values['authentication'])){
+                                                    
+                    // already json format
+                    $authentication = $values['authentication'];
+                }
+                else{
+                    $authentication = null;
+                }
+                 
+                $user->update(['authentication' => $authentication]);
 
-            $user->update(['settings' => json_encode($settings)]);
+                return response()->json(['result' => true]);
+            }             
+        }
+        catch(\Exception $e){            
+            return response()->json(['result' => false]);
+        }
 
-            return response()->json(['result' => true]);
+        return response()->json(['result' => false]);
+    }
+
+    public function update(Request $request) : JsonResponse{
+
+        try{
+
+            $user = auth()->user();
+
+            if(isset($user) && !empty($user)){
+
+                $values = $request->all();
+
+                if(isset($values['settings']) && !empty($values['settings'])){
+                                
+                    $newSettings = $values['settings'];
+                    $settings = (array)json_decode($user->settings);                    
+        
+                    foreach($newSettings as $setting => $value){
+                        $settings[$setting] = $value;
+                    }
+
+                    $user->update(['settings' => json_encode($settings)]);
+
+                    return response()->json(['result' => true, 'settings' => $settings]);
+                }
+            }             
         }
         catch(\Exception $e){
             return response()->json(['result' => false]);
         }
+
+        return response()->json(['result' => false]);
     }
 
     public function languageUpdate(LanguageUpdateRequest $request) : JsonResponse

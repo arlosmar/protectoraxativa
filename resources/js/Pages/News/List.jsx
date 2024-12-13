@@ -1,13 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 
+import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import Pagination from '@/Components/Pagination';
 import ItemsPerPage from '@/Components/ItemsPerPage';
 import { itemsPerPageList } from "@/Utils/Variables";
 
-import NewsModal from "@/Modals/NewsModal";
-import NewsEditModal from "@/Modals/NewsEditModal";
+//import NewsModal from "@/Modals/NewsModal";
+const NewsModal = lazy(() => import("@/Modals/NewsModal"));
+
+//import NewsEditModal from "@/Modals/NewsEditModal";
+const NewsEditModal = lazy(() => import("@/Modals/NewsEditModal"));
+
+//import FilterNews from '@/Pages/News/FilterNews';
+const FilterNews = lazy(() => import("@/Pages/News/FilterNews"));
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -22,7 +29,6 @@ import Box from '@mui/material/Box';
 import visuallyHidden from '@mui/utils/visuallyHidden';
 import Typography from '@mui/material/Typography';
 
-import FilterNews from '@/Pages/News/FilterNews';
 import { styled } from '@mui/material/styles';
 
 import { getParameter } from "@/Utils/Variables";
@@ -34,8 +40,19 @@ import { csv } from "@/Utils/Export";
 import ButtonsActions from '@/Components/ButtonsActions';
 import { useForm } from '@inertiajs/react';
 
+import Checkbox from '@/Components/Checkbox';
+import DeleteModal from '@/Modals/DeleteModal';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+
+import Toast from '@/Components/Toast';
+
 export default function List({t,origin,news,setNews,imagesPaths,loading,page,options,
-    internal,setInternal,baseUrl}){
+    internal,setInternal,baseUrl,csrf_token}){
+    
+    const [ toastMsg, setToastMsg ] = useState('');
+    const [ toastErrorMsg, setToastErrorMsg ] = useState('');
+    const [ openToast, setOpenToast ] = useState(false);
 
     const [ itemsPerPage, setItemsPerPage ] = useState(itemsPerPageList(origin));
 
@@ -48,6 +65,36 @@ export default function List({t,origin,news,setNews,imagesPaths,loading,page,opt
     const handleOpenSearch = (e) => {
         setOpenSearch(!openSearch);
     };
+
+    const [ checksDelete, setChecksDelete ] = useState({});
+
+    const handleChecksDelete = (e) => {
+        
+        const name = e.target.name;
+        const value = e.target.checked;
+
+        var newChecksDelete = checksDelete;
+        newChecksDelete[name] = value;
+        setChecksDelete(newChecksDelete);        
+    }
+
+    const handleCellChecksDelete = (id) => {
+        
+        var newChecksDelete = checksDelete;
+
+        if(Object.hasOwn(checksDelete,id)){
+            var value = checksDelete[id];
+            // the opposite
+            newChecksDelete[id] = value ? false : true;
+            document.getElementById(id).checked = value ? false : true;
+        }
+        else{
+            newChecksDelete[id] = true;
+            document.getElementById(id).checked = true;
+        }
+
+        setChecksDelete(newChecksDelete);
+    }
 
     const [ showNews, setShowNews ] = useState(false);
     const [ newsItem, setNewsItem ] = useState(null);
@@ -252,8 +299,67 @@ export default function List({t,origin,news,setNews,imagesPaths,loading,page,opt
         }
     }
 
+    const [ massiveDeleteConfirm , setMassiveDeleteConfirm ] = useState(false);
+
+    const handleConfirmMassiveDelete = (e) => {
+        setMassiveDeleteConfirm(true);
+    }
+
+    const handleMassiveDelete = (e) => {
+
+        setMassiveDeleteConfirm(false);
+
+        if(checksDelete && checksDelete.length > 0){
+
+            axios.post(route('news.delete.massive'),{ids:checksDelete})
+            .then(function (response){            
+                
+                if(response.data.result){
+
+                    const deletedIds = response.data.deletedIds;
+                    
+                    // update array to remove it from the list
+                    const removeElements = filteredNews.filter((item, index) => !deletedIds.includes(item?.id));
+                    setFilteredNews(removeElements);                
+                    
+                    // show message
+                    setToastMsg(t('trans.Deleted'));
+                    setOpenToast(true);                
+                }
+                else{
+                    // error  
+                    setToastMsg('');                 
+                    setToastErrorMsg(response.data.error);
+                    setOpenToast(true);                
+                }                
+            })
+            .catch(function (error){    
+                setToastMsg('');
+                setToastErrorMsg(t('Error'));    
+                setOpenToast(true);        
+            });
+        }
+        else{
+            setToastMsg('');
+            setToastErrorMsg(t('trans.noElementsSelected'));
+            setOpenToast(true);      
+        }
+    }
+
+    /*
+    <div className='loading mt-8'>
+        <CircularProgress sx={{color:"#FF8C00"}}/>
+    </div>
+    */
+
     return (
-        <>
+        <>        
+        <Toast 
+            open={openToast}
+            setOpen={setOpenToast}
+            message={toastMsg}
+            error={toastErrorMsg}
+        />
         <h1 className='title-user-list'>            
             {t('user.news.title')}
             {
@@ -271,63 +377,88 @@ export default function List({t,origin,news,setNews,imagesPaths,loading,page,opt
         }
         {
             loading ?
-                <div className='text-center'>
-                    <CircularProgress sx={{color:"#FF8C00"}}/>
-                </div>
+                <Backdrop
+                    sx={(theme) => ({ color: '#FF8C00', zIndex: theme.zIndex.drawer + 1 })}
+                    open={loading}            
+                >
+                    <CircularProgress color="warning"/>
+                </Backdrop>
             :
                 <div className='mt-4'>
-                    <NewsEditModal       
-                        origin={origin}                 
-                        t={t}        
-                        show={showEditNews}
-                        setShow={setShowEditNews}  
-                        items={filteredNews}               
-                        setItems={setFilteredNews}
-                        item={newsEditItem}
-                        setItem={setNewsItem}
-                        position={position}
-                        news={news}
-                        setNews={setNews}
-                        filterUsed={filterUsed}
-                        setInternal={setInternal}
-                        imagesPaths={imagesPaths}
-                        options={options}
-                        data={data}
-                        setData={setData}
-                    />
-                    <FilterNews
-                        origin={origin}
-                        t={t}                        
-                        openSearch={openSearch}
-                        setOpenSearch={setOpenSearch}
-                        originalItems={news}
-                        items={filteredNews}
-                        setItems={setFilteredNews} 
-                        filterUsed={filterUsed}
-                        setFilterUsed={setFilterUsed} 
-                        options={options}                      
-                    />
+                    {
+                        showEditNews &&
+                        <Suspense>
+                        <NewsEditModal       
+                            origin={origin}                 
+                            t={t}        
+                            show={showEditNews}
+                            setShow={setShowEditNews}  
+                            items={filteredNews}               
+                            setItems={setFilteredNews}
+                            item={newsEditItem}
+                            setItem={setNewsItem}
+                            position={position}
+                            news={news}
+                            setNews={setNews}
+                            filterUsed={filterUsed}
+                            setInternal={setInternal}
+                            imagesPaths={imagesPaths}
+                            options={options}
+                            data={data}
+                            setData={setData}
+                            csrf_token={csrf_token}
+                        />
+                        </Suspense>
+                    }
+                    {
+                        openSearch &&
+                        <Suspense>
+                        <FilterNews
+                            origin={origin}
+                            t={t}                        
+                            openSearch={openSearch}
+                            setOpenSearch={setOpenSearch}
+                            originalItems={news}
+                            items={filteredNews}
+                            setItems={setFilteredNews} 
+                            filterUsed={filterUsed}
+                            setFilterUsed={setFilterUsed} 
+                            options={options}                      
+                        />
+                        </Suspense>
+                    }
                     {
                         filteredNews && filteredNews.length > 0 ?
 
                             <>
-                            <NewsModal
-                                origin={origin}
+                            <DeleteModal
                                 t={t}
-                                show={showNews}
-                                setShow={setShowNews}      
-                                newsItem={newsItem}  
-                                imagesPaths={imagesPaths}    
-                                setNewsEditItem={setNewsEditItem}
-                                setShowEditNews={setShowEditNews}   
-                                items={filteredNews}               
-                                setItems={setFilteredNews}  
-                                news={news}
-                                setNews={setNews}
-                                filterUsed={filterUsed}
-                                setInternal={setInternal}                                
-                                setData={setData}
-                            />   
+                                show={massiveDeleteConfirm}
+                                setShow={setMassiveDeleteConfirm}
+                                handleDelete={handleMassiveDelete}
+                            />
+                            {
+                                showNews &&
+                                <Suspense>
+                                <NewsModal
+                                    origin={origin}
+                                    t={t}
+                                    show={showNews}
+                                    setShow={setShowNews}      
+                                    newsItem={newsItem}  
+                                    imagesPaths={imagesPaths}    
+                                    setNewsEditItem={setNewsEditItem}
+                                    setShowEditNews={setShowEditNews}   
+                                    items={filteredNews}               
+                                    setItems={setFilteredNews}  
+                                    news={news}
+                                    setNews={setNews}
+                                    filterUsed={filterUsed}
+                                    setInternal={setInternal}                                
+                                    setData={setData}
+                                />  
+                                </Suspense> 
+                            }
                             <ItemsPerPage
                                 origin={origin}
                                 t={t}
@@ -344,6 +475,15 @@ export default function List({t,origin,news,setNews,imagesPaths,loading,page,opt
                                 <Table size="small" stickyHeader>
                                     <TableHead>
                                         <TableRow>
+                                            <StyledTableCell
+                                                key='checkbox'
+                                                align='left'                                                
+                                                sx={{zIndex:0}}
+                                            >
+                                                <IconButton onClick={handleConfirmMassiveDelete} className='deleteIcon'>
+                                                    <DeleteIcon sx={{fontSize: '20px'}}/>
+                                                </IconButton> 
+                                            </StyledTableCell>
                                             {
                                                 columns && columns.length > 0 && columns.map((item,i) => (
                                                 <StyledTableCell
@@ -379,13 +519,26 @@ export default function List({t,origin,news,setNews,imagesPaths,loading,page,opt
                                             filteredNews.sort(getComparator(order, orderBy, origin)).slice(from,to+1).map((item,i) => (
 
                                                 <StyledTableRow
-                                                    hover
-                                                    onClick={(event) => handleInfo(item,from+i)}
+                                                    hover                                                    
                                                     sx={{ cursor: 'pointer' }}
                                                 >
+                                                    <StyledTableCell 
+                                                        align='left'
+                                                        onClick={(event) => handleCellChecksDelete(item?.id)}
+                                                    >
+                                                        <Checkbox
+                                                            id={item?.id}
+                                                            name={item?.id}
+                                                            checked={checksDelete[item?.id]}
+                                                            onChange={handleChecksDelete}
+                                                        />
+                                                    </StyledTableCell>
                                                     {
-                                                        columns && columns.length > 0 && columns.map((column,i) => (
-                                                            <StyledTableCell align={column?.align}>                                                                
+                                                        columns && columns.length > 0 && columns.map((column,j) => (
+                                                            <StyledTableCell 
+                                                                align={column?.align}
+                                                                onClick={(event) => handleInfo(item,from+i)}
+                                                            >
                                                                 {
                                                                     item[column?.id] !== null ? 
 

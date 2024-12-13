@@ -33,7 +33,7 @@ html{
 
 body{
 	background-color: #DCDCDC;
-	@apply pt-1 px-1;
+	@apply md:pt-1 pt-0 md:px-1 px-0;
 }
 
 .lightmode{
@@ -47,6 +47,10 @@ body{
 /* orange */
 .app-text-color{
 	color: #FF8C00;
+}
+
+.app-border-color{
+	border-color: #FF8C00;
 }
 
 /* orange */
@@ -67,7 +71,15 @@ body{
 }
 
 .main-background-color-darkmode{
-	@apply bg-neutral-800;
+	@apply bg-neutral-800 !important;
+}
+
+.input-background-color-ligthmode{
+	background-color: #FFFFFF;
+}
+
+.input-background-color-darkmode{
+	background-color: #DCDCDC;
 }
 
 .box-background-color-lightmode{
@@ -86,42 +98,70 @@ body{
 	@apply main-color-darkmode;
 }
 
+.paddings-main-sticky{
+	@apply md:px-4 sm:px-2 px-1;
+}
+
 .main-generic{
-	@apply rounded md:px-4 px-2 pt-1 my-1 shadow-lg min-h-screen;	
+	@apply paddings-main-sticky;
+	@apply pt-1 mb-1 shadow-lg min-h-screen;	
 	@apply pb-20;
+	/*@apply rounded;*/
+	/*@apply rounded-b;*/
+}
+
+.app-width{
+	@apply max-w-screen-lg;
 }
 
 #bartop{
-	@apply max-w-screen-xl mx-auto;
+	@apply app-width mx-auto mb-1;
+}
+
+.pwa-banner,.notifications-banner{
+	@apply flex items-center;
+	@apply app-width mx-auto mb-1;
+	@apply rounded-none !important;
+	@apply py-0 px-2 !important;
 }
 
 .lightmode main{
 	@apply main-generic main-background-color-lightmode;
-	@apply max-w-screen-xl mx-auto;
+	@apply app-width mx-auto;
 }
 
 .darkmode main{
 	@apply main-generic main-background-color-darkmode;
-	@apply max-w-screen-xl mx-auto;
+	@apply app-width mx-auto;
 }
 
 .sticky-general {  	
     @apply w-full fixed;
     top: 0;
     left: 0;
-    @apply border-b /*min-h-screen*/;
+    /*min-h-screen*/;
 }
 
-.lighmode .sticky {
+.lightmode .sticky-item {
 	@apply sticky-general main-background-color-lightmode;
+	@apply border-b;
+	@apply app-width mx-auto left-0 right-0;
+	@apply paddings-main-sticky;
 }
 
-.darkmode .sticky {
+.darkmode .sticky-item {
 	@apply sticky-general main-background-color-darkmode;
+	/*@apply border-b border-black;*/
+	@apply app-width mx-auto left-0 right-0;
+	@apply paddings-main-sticky;
 }
 
 .modal-div{
 	@apply flex flex-col overflow-y-auto hide-scroll pb-4;
+}
+
+.language-modal-div{
+	@apply overflow-y-auto hide-scroll text-center;
 }
 
 #versions{
@@ -180,6 +220,14 @@ body{
 	@apply subtitle-home text-center md:text-left;
 }
 
+.title-info-pages{
+	@apply text-xl font-bold;
+}
+
+.subtitle-info-pages{
+	@apply text-lg font-bold;
+}
+
 #internal-info-title{
 	@apply font-bold text-center;
 	@apply mt-4 pt-2;
@@ -222,12 +270,16 @@ a{
 	@apply font-bold text-2xl text-black text-opacity-70;
 }
 
+.language-item-generic{
+	@apply py-4;
+}
+
 .lightmode .language-item{
-	@apply py-2 text-black;
+	@apply language-item-generic text-black;
 }
 
 .darkmode .language-item{
-	@apply py-2 text-white;
+	@apply language-item-generic text-white;
 }	
 
 .language-item-selected{
@@ -250,6 +302,10 @@ a{
 	@apply text-white;	
 }
 
+.MuiAppBar-root #logout{
+	@apply text-red-600;
+}
+
 .MuiAppBar-root #contact-selected{
 	@apply app-text-color;	
 }
@@ -262,14 +318,8 @@ a{
 	@apply text-white;
 }
 
-.barbottom-div{
-    /*z-index:2;*/
-    @apply w-full;
-}
-
-.barbottom-div .MuiPaper-root{
-    /*@apply max-w-screen-xl w-full mx-auto;*/
-    @apply w-full;
+#barbottom{
+    /*@apply app-width*/;
 }
 
 .animal-name,.person-name{
@@ -330,14 +380,54 @@ a{
 
 .lightmode .back-button, .lightmode .cancel-button{
 	@apply app-button;
-	background-color: black;
-	/*border: 1px solid white;*/
+	@apply bg-black;
 }
 
 .darkmode .back-button, .darkmode .cancel-button{
 	@apply app-button;
 	@apply app-background-color;
-	/*border: 1px solid white;*/
+}
+
+.lightmode .error-button{
+	@apply app-button;
+	@apply bg-black;
+	@apply pt-2 px-4 !important;
+}
+
+.darkmode .error-button{
+	@apply app-button;
+	@apply app-background-color;
+	@apply p-0 !important;
+}
+
+.lightmode .info-button{
+	@apply app-button w-full;
+	@apply app-background-color;
+}
+
+.darkmode .info-button{
+	@apply app-button w-full;
+	@apply app-background-color;
+}
+
+.lightmode .notifications-button{
+	@apply app-button w-full;
+	@apply app-background-color;
+}
+
+.darkmode .notifications-button{
+	@apply app-button w-full;
+	@apply app-background-color;
+}
+
+.lightmode .install-app-button{
+	@apply app-button;
+	@apply app-background-color;
+}
+
+.darkmode .install-app-button{
+	@apply app-button;
+	@apply app-background-color;
 }
 
 .load-more-button{
@@ -375,12 +465,15 @@ input[type=number] {
 	height: 1000px;
 }
 
+/*
 .animal-link:hover, .animal-link:focus,
 .animal-link-edit:hover, .animal-link-edit:focus,
 .person-link:hover, .person-link:focus,
 .person-link-edit:hover, .person-link-edit:focus,
 .login-button:hover,.login-button:focus,
 .back-button:hover,.back-button:focus 
+*/
+.app-button:hover,.app-button:focus
 {
  	background-color: #F082AC;
 }
@@ -409,21 +502,56 @@ fieldset{
 }
 */
 
+.lightmode .Mui-focused .MuiOutlinedInput-notchedOutline{
+	@apply app-border-color !important;
+}
+
+.darkmode .Mui-focused .MuiOutlinedInput-notchedOutline{
+	@apply border-white !important;
+}
+
 .app-input-generic{
 	@apply rounded-md shadow-sm;
 	@apply w-full;	
+	padding: 16.5px 14px;
+}
+
+.app-input-generic-select{
+	@apply rounded-md shadow-sm;
+	@apply w-full;	
+	/*padding: 16.5px 14px;*/
+}
+
+.app-input-lightmode{
+	@apply border-gray-600 bg-white focus:border-orange-500 focus:ring-orange-500 !important;
+}
+
+.app-input-darkmode{
+	@apply bg-neutral-500 text-white focus:border-white focus:ring-white !important;
 }
 
 .lightmode .app-input{
-	@apply app-input-generic border-gray-600 bg-white focus:border-indigo-500 focus:ring-indigo-500 !important;
-}
-
-.lightmode .app-input-readonly{
-	@apply app-input-generic border-gray-600 bg-slate-100 focus:border-indigo-500 focus:ring-indigo-500 !important;
+	@apply app-input-generic app-input-lightmode; 
 }
 
 .darkmode .app-input{
-	@apply app-input-generic bg-neutral-500 text-white focus:border-white focus:ring-white !important;
+	@apply app-input-generic app-input-darkmode;
+}
+
+.lightmode .app-input-select{
+	@apply app-input-generic-select app-input-lightmode; 
+}
+
+.darkmode .app-input-select{
+	@apply app-input-generic-select app-input-darkmode;
+}
+
+.darkmode .MuiAutocomplete-inputFocused{
+	color: #FFFFFF !important;
+}
+
+.lightmode .app-input-readonly{
+	@apply app-input-generic border-gray-600 bg-slate-100 focus:border-orange-500 focus:ring-orange-500 !important;
 }
 
 .darkmode .app-input-readonly{
@@ -551,6 +679,23 @@ fieldset{
 	@apply box-darkmode box-background-color-darkmode;
 }
 
+.lightmode .settings-div-box{
+	@apply box-lightmode box-background-color-lightmode;
+}
+
+.darkmode .settings-div-box{
+	@apply box-darkmode box-background-color-darkmode;
+}
+
+.lightmode .account-div-box{
+	@apply box-lightmode box-background-color-lightmode;
+}
+
+.darkmode .account-div-box{
+	@apply box-darkmode box-background-color-darkmode;
+}
+
+
 .news-title{
 	@apply text-xl font-bold text-center;
 }
@@ -575,6 +720,10 @@ fieldset{
 
 ul{
 	list-style: unset !important;
+}
+
+.list-info-pages{
+	@apply pl-6;
 }
 
 .home-colaboration-sponsorship-list{
@@ -725,4 +874,27 @@ ul{
 .carousel-image{
 	/*height: 100% !important;*/
 	@apply md:h-52 sm:h-36 h-24	border !important;
+}
+
+/* tinymce */
+.darkmode .tox-editor-header,
+.darkmode .tox-menubar,
+.darkmode .tox-toolbar-overlord,
+.darkmode .tox-toolbar,
+.darkmode .tox-toolbar__overflow,
+.darkmode .tox-toolbar__primary,
+.darkmode .mce-content-body,
+.darkmode .tox-statusbar,
+.darkmode .tox-mbtn,
+.darkmode .tox-tbtn,
+.darkmode .tox-tbtn--bespoke,
+.darkmode .tox-menu,
+.darkmode .tox-collection__item-label/*,
+.darkmode .tox-insert-table-picker*/
+{
+	@apply main-background-color-darkmode !important;
+}
+
+.darkmode .tox-tinymce{
+	@apply border border-white !important;
 }

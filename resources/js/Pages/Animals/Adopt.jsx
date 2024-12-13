@@ -17,7 +17,7 @@ export default function Adopt({user,t,subsection,setSubsection,animals,email_ado
 
     const [ tab, setTab ] = useState(subsection ? subsection : "info");
 
-    const { classes, sx, sxIcon } = styleSubTabs();
+    const { sxSubTabs, sx, sxIcon } = styleSubTabs();
 
     const handleTabChange = (event, newValue) => {
         
@@ -44,31 +44,37 @@ export default function Adopt({user,t,subsection,setSubsection,animals,email_ado
         <div className='subtabs-container'>
             <Tabs                   
                 value={tab} 
+                sx={sxSubTabs}
                 onChange={handleTabChange}                     
-                className={classes.tabs}
                 variant="scrollable"
             >
                 <Tab icon={<InfoIcon sx={sxIcon}/>} value="info" sx={sx} iconPosition="top" label={t('animals.adopt.info.icon')}/>
                 <Tab icon={<AnimalsIcon sx={sxIcon}/>} value="animals" sx={sx} iconPosition="top" label={t('animals.adopt.animals.icon')}/>
-                {/*<Tab icon={<AdoptedIcon/>} value="adopted" sx={sx} iconPosition="top" label={t('animals.adopt.adopted.icon')}/>*/}
+                <Tab icon={<AdoptedIcon/>} value="adopted" sx={sx} iconPosition="top" label={t('animals.adopt.adopted.icon')}/>
             </Tabs>
             <div className='subcontent-container'>
-            {
-                tab === 'info' ?
-                    <Info 
+            {                 
+                tab === 'animals' ?
+                    <CarouselAnimals
+                        user={user}
+                        origin='adopt' 
+                        title={t('animals.adopt.animals.title')}
                         t={t} 
-                        email_adoptions={email_adoptions} 
-                        social={social}
-                        forms={forms}
-                        guides={guides}
-                        prices={prices}
+                        animals={animals}
+                        imagePath={imagesPaths?.animals}
+                        imagesPaths={imagesPaths}
+                        page={page}
+                        loading={loading}
+                        options={options}
+                        baseUrl={baseUrl}
+                        itemsPerPage={itemsPerPage}
                     />
-                :                       
-                    tab === 'animals' ?
+                :
+                    tab === 'adopted' ?
                         <CarouselAnimals
                             user={user}
-                            origin='adopt' 
-                            title={t('animals.adopt.animals.title')}
+                            origin='adopted' 
+                            title={t('animals.adopt.adopted.title')}
                             t={t} 
                             animals={animals}
                             imagePath={imagesPaths?.animals}
@@ -80,8 +86,14 @@ export default function Adopt({user,t,subsection,setSubsection,animals,email_ado
                             itemsPerPage={itemsPerPage}
                         />
                     :
-                        
-                        ''
+                        <Info 
+                            t={t} 
+                            email_adoptions={email_adoptions} 
+                            social={social}
+                            forms={forms}
+                            guides={guides}
+                            prices={prices}
+                        />
             }
             </div>
         </div>

@@ -99,12 +99,13 @@ export default function News({user,imagesPaths,page,news,disabled,initialNews}){
         });      
     }
 
-    const handleShare = async (newId) => {
+    const handleShare = async (newId,image) => {
 
     	const linkNews = route('news')+'?view='+newId;    	
 
-        // if native mobile share        
-        if(navigator?.share) {
+        // if native mobile share          
+        // typeof (window.AndroidShareHandler) !== 'undefined'
+        if(navigator?.share || window?.AndroidHandler?.share){
             
             try{
                 const shareData = {
@@ -112,8 +113,30 @@ export default function News({user,imagesPaths,page,news,disabled,initialNews}){
                     //text: t('trans.text'),
                     url: linkNews
                 };
+
+                if(image && image.length > 0){
+                	shareData.image = window.location.protocol+'//'+window.location.host+imagesPaths?.news+image;
+                }
+                /*
                 await navigator.share(shareData);
                 onSuccess?.();
+                */
+                if(window?.AndroidHandler?.share){
+                    window.AndroidHandler.share(JSON.stringify(shareData));                    
+                }
+                else {                
+                	if(shareData.image && shareData.image.length > 0){
+                        var split = shareData.image.split('/');   
+                        var imageName = split.slice(-1);                     
+                        let blob = await fetch(shareData.image).then(r => r.blob());
+                        shareData.files = [
+                            new File([blob],imageName, {
+                                type: blob.type,
+                            })
+                        ];
+                    }
+                    await navigator.share(shareData);
+                }
             }
             catch(err){           
                 //onError?.(err);
@@ -175,9 +198,13 @@ export default function News({user,imagesPaths,page,news,disabled,initialNews}){
     		{/*
             <h1 className="title-news">
     			{t('news.title')}
-    		</h1>
-    		*/}
-    		<FilterNews
+    		</h1>	
+	    	<div className='list-icons'>               
+                <IconButton onClick={handleOpenSearch} id='filter'>
+                    <FilterListIcon sx={{ fontSize: '50px' }}/>
+                </IconButton>
+            </div>
+            <FilterNews
 	            origin='news'
 	            t={t}                        
 	            openSearch={openSearch}
@@ -188,14 +215,10 @@ export default function News({user,imagesPaths,page,news,disabled,initialNews}){
 	            filterUsed={filterUsed}
 	            setFilterUsed={setFilterUsed}                       
 	        />
-	    	<div className='list-icons'>               
-                <IconButton onClick={handleOpenSearch} id='filter'>
-                    <FilterListIcon sx={{ fontSize: '50px' }}/>
-                </IconButton>
-            </div>
+	        */}
     		{
     			newsPaged && newsPaged.length > 0 ?
-    				<>
+    				<div className='mt-4'>
     				{
 		    			newsPaged.map((newsItem,index) => (
 				            <div className='news-div-box' id={'news-'+newsItem?.id}>
@@ -228,7 +251,7 @@ export default function News({user,imagesPaths,page,news,disabled,initialNews}){
 						            </div>
 						        }
 						        <div className={`w-full flex items-center ${user && user?.admin ? 'justify-between' : 'justify-center'}`}>
-		                            <IconButton onClick={(e) => handleShare(newsItem?.id)} className='shareIcon'>
+		                            <IconButton onClick={(e) => handleShare(newsItem?.id,newsItem?.image)} className='shareIcon'>
 		                                <ShareIcon sx={sxIcon}/>
 		                            </IconButton> 
 		                            {
@@ -251,9 +274,9 @@ export default function News({user,imagesPaths,page,news,disabled,initialNews}){
 				        	/>
 				        </div>
 				    }
-			        </>
+			        </div>
 	        	:
-                    <div className='text-center'>
+                    <div className='text-center mt-4'>
                         {t('news.empty')}
                     </div>
 	        }

@@ -74,17 +74,12 @@ class ResetPassword extends Notification
      */
     protected function buildMailMessage($url)
     {
-        // change body => vendor/laravel/framework/src/Illuminate/Notifications/resources/views/email.blade.php
-        // header/footer => resources/views/vendor/mail/html/message.blade.php
         return (new MailMessage)
-            ->subject(trans('mail.reset-password.subject'))
-            ->greeting(trans('mail.reset-password.greeting'))
-            ->line(trans('mail.reset-password.sentence1'))
-            ->action(trans('mail.reset-password.button'), $url)
-            ->line(trans('mail.reset-password.sentence2', ['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')]))            
-            ->line(trans('mail.reset-password.sentence3'))
-            ->salutation(trans('mail.reset-password.salutation'))
-            ->troubleLink(trans('mail.reset-password.troubleLink',['actionText' => trans('mail.reset-password.button')]));
+            ->subject(Lang::get('Reset Password Notification'))
+            ->line(Lang::get('You are receiving this email because we received a password reset request for your account.'))
+            ->action(Lang::get('Reset Password'), $url)
+            ->line(Lang::get('This password reset link will expire in :count minutes.', ['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')]))
+            ->line(Lang::get('If you did not request a password reset, no further action is required.'));
     }
 
     /**

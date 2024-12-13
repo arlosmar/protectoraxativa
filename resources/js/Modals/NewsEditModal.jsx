@@ -16,13 +16,9 @@ import SaveIcon from '@mui/icons-material/Save';
 import { modalStyle } from '@/Utils/Styles';
 
 export default function NewsEditModal({origin,t,show,setShow,data,setData,items,setItems,item,setItem,position,
-    options,news,setNews,filterUsed,setInternal,imagesPaths}){
+    options,news,setNews,filterUsed,setInternal,imagesPaths,csrf_token}){
 
-    const style = modalStyle();
-
-    const sxIcon = {
-        fontSize: '35px'
-    };
+    const { sx, sxIcon, sxIconClose } = modalStyle();
 
     const handleClose = () => {
         setShow(false);
@@ -114,7 +110,7 @@ export default function NewsEditModal({origin,t,show,setShow,data,setData,items,
             setToastMsg('');          
             setToastErrorMsg(error);    
             setOpenToast(true);        
-        }); 
+        });
     }
 
     const [ toastMsg, setToastMsg ] = useState('');
@@ -131,7 +127,7 @@ export default function NewsEditModal({origin,t,show,setShow,data,setData,items,
         />
         <Modal open={show} onClose={handleClose}>
 
-            <Box sx={style} className='flex flex-col'>
+            <Box sx={sx} className='flex flex-col'>
                 
                 <div className='modal-div'>
                     <h1 className='title-user-list'>
@@ -146,6 +142,7 @@ export default function NewsEditModal({origin,t,show,setShow,data,setData,items,
                         edit={item ? true : false}                        
                         imagePath={imagesPaths?.news}
                         handleSubmit={handleSubmit}
+                        csrf_token={csrf_token}
                     />
                 </div>
 
@@ -154,7 +151,7 @@ export default function NewsEditModal({origin,t,show,setShow,data,setData,items,
                         <SaveIcon sx={sxIcon}/>
                     </IconButton> 
                     <IconButton onClick={handleClose} className='closeIcon'>
-                        <CloseIcon sx={sxIcon}/>
+                        <CloseIcon sx={sxIconClose}/>
                     </IconButton>                         
                 </div>               
             </Box>

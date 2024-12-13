@@ -46,26 +46,8 @@ class ContactController extends Controller{
             isset($values['email']) && !empty($values['email']) &&
             isset($values['message']) && !empty($values['message'])
         ){
-            //$to = config('mail.contact.address');
-            $url = url('/');
-
-            $toEmail = '';
-            $toName = '';
-            if(isset($url) && !empty($url)){
-                                
-                if(str_contains($url,'localhost') || str_contains($url,'192.168')){
-                    $toEmail = config('mail.test.to.address');
-                    $toName = config('mail.test.to.name');                    
-                }
-                else{
-                    $toEmail = config('mail.contact.address');
-                    $toName = config('mail.contact.name');
-                }
-            }
-            else{                
-                $toEmail = config('mail.test.to.address');
-                $toName = config('mail.test.to.name');  
-            }
+            $toEmail = config('mail.contact.address');
+            $toName = config('mail.contact.name');
 
             $to = [
                 [                    

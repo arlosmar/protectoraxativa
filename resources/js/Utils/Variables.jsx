@@ -1,5 +1,18 @@
 import { getCookie, setCookie } from '@/Utils/Cookies';
 
+export const isLocalhost = () => {
+
+    if(
+        window.location.href.includes('localhost') ||
+        window.location.href.includes('192.168')
+    ){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
 export const languages = () => {
 
     const languages = [

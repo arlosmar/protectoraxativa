@@ -8,10 +8,17 @@ return [
         'copyright' => 'Tots els drets reservats.'
     ],
     'contact'   => [
-        'subject'   => 'Contacte des de Spax',
+        'subject'   => 'Contacte des de '.config('app.name'),
         'error' => 'Error enviant l\'email. Intenta-ho una altra vegada, per favor.'
     ],
+    'notification'   => [
+        'subject'   => 'Notificació des de '.config('app.name'),
+        'button' => 'Obrir APP',
+        'salutation' => 'Records'
+    ],
     'generic'   => [
+        'greeting' => 'Hola!',
+        'salutation' => 'Records',
         'troubleLink' => 'Si tens problemes al prémer el botó de ":actionText", prem el següent enllaç o còpia\'l i pèga\'l en el navegador:'
     ],
     'verify' => [

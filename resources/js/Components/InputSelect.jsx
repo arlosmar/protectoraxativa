@@ -24,9 +24,7 @@ export default function Select({
     onInputChange,
     options,
     placeholder,
-    readOnly,
     native,
-    disabled,
     error,
     multiple,
     onKeyUp,
@@ -51,25 +49,13 @@ export default function Select({
 
     var classString = '';
     if(!className || className.length === 0){
-        classString = 'app-input';
+        classString = 'app-input-select';
     }
     else{
         classString = className;
     }
 
-    if(disabled){
-        classString = classString+' app-input-disabled';
-    }
-
-    if(readOnly){
-        classString = classString+' app-input-readonly';
-    }
-
     var inputProperties = {className: classString};
-
-    if(readOnly){
-        inputProperties.readOnly = readOnly;
-    }
 
     if(native){
         inputProperties.native = true;   
@@ -112,6 +98,7 @@ export default function Select({
     */
 
     var sxChip = {
+        zIndex: 1,
         padding: '0px 2px 0px 0px', 
         margin: '2px'
     };
@@ -122,6 +109,15 @@ export default function Select({
             color: '#FFFFFF',
             '& .MuiChip-deleteIcon' : {
                 color: '#FFFFFF'
+            }
+        };
+    }
+    else{
+        sxChip = {
+            ...sxChip,
+            //color: '#FF8C00',
+            '& .MuiChip-deleteIcon' : {
+                color: '#FF8C00'
             }
         };
     }
@@ -138,8 +134,7 @@ export default function Select({
                 onChange={onChange}
                 disablePortal
                 options={options}
-                required={required}
-                disabled={disabled}
+                required={required}                
                 renderInput={(params) => 
                     <TextField 
                         {...params}                         
@@ -168,9 +163,8 @@ export default function Select({
                     onChange={onChange}
                     disablePortal
                     options={options}
-                    required={required}
-                    disabled={disabled}   
-                    InputProps={inputProperties}                       
+                    required={required}                    
+                    InputProps={inputProperties}
                     renderInput={(params) => 
                         <TextField 
                             {...params}  

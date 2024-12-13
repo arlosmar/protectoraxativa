@@ -6,16 +6,18 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "google/apiclient": "^2.18",
+        "illuminate/contracts": "*",
         "inertiajs/inertia-laravel": "^1.0",
         "laravel-notification-channels/fcm": "^4.3",
         "laravel/breeze": "^2.0",
         "laravel/framework": "^11.0",
-        "laravel/reverb": "^1.0",
         "laravel/sanctum": "^4.0",
         "laravel/socialite": "^5.14",
         "laravel/tinker": "^2.9",
         "laravel/ui": "^4.5",
-        "pusher/pusher-php-server": "^7.2",
+        "plesk/ext-laravel-integration": "*",
+        "pusher/pusher-php-server": "*",
         "tightenco/ziggy": "^2.0"
     },
     "require-dev": {

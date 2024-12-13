@@ -348,7 +348,7 @@ export default function AnimalForm({origin,t,data,setData,options,edit,filter,
             	{
 	            	(
 	            		!filter ||
-	            		(origin && origin === 'user-animals' && subsection && subsection === 'heaven')
+	            		(origin === 'user-animals' && subsection === 'heaven')
 	            	) &&
 	            	<div className=''>            		
 		                <Switch
@@ -381,8 +381,7 @@ export default function AnimalForm({origin,t,data,setData,options,edit,filter,
 				                    autoComplete="code"
 				                    onChange={handleInput}
 				                    error=''
-	                    			handleKeyDown={handleKeyDown}
-	                    			isFocused
+	                    			handleKeyDown={handleKeyDown}	                    			
 				                />
 				            </div>
 				        :
@@ -407,7 +406,11 @@ export default function AnimalForm({origin,t,data,setData,options,edit,filter,
 	            </div>
 
 	            {
-	            	!filter &&
+	            	(
+	            		!filter ||
+	            		(origin === 'user-animals' && subsection === 'adopt')
+	            	) 
+	            	&&
 		            <div className='mt-2'>
 		            	<InputSelect                        
 	                        name="sponsor_id"                        
@@ -502,8 +505,7 @@ export default function AnimalForm({origin,t,data,setData,options,edit,filter,
 	                    onChange={handleInput}                        
 	                    placeholder={t('animals.record.Name')}                        
 	                    error=''
-	                    handleKeyDown={filter ? handleKeyDown : null} 
-	                    isFocused={!filter}                   
+	                    handleKeyDown={filter ? handleKeyDown : null} 	                    
                     />
 	            </div>
 
@@ -578,7 +580,7 @@ export default function AnimalForm({origin,t,data,setData,options,edit,filter,
 		            	<InputRichText
 		            		name='description'
 		            		value={data?.description}
-		            		placeholder={t('animals.record.description')}
+		            		placeholder={t('animals.record.Description')}
 		            		onChange={(content) => handleInputRichText('description',content)}
 		            	/>		                
 		            </div>
@@ -700,6 +702,11 @@ export default function AnimalForm({origin,t,data,setData,options,edit,filter,
 
 		        {
 	            	!filter &&
+	            	<h1 className='border-b mt-4 text-center'>{t('user.animals.images-sponsored')}</h1>
+	            }
+
+		        {
+	            	!filter &&
 		            <div className='mt-2'>
 		                <Input		                    
 		                    name="image_sponsored"
@@ -772,7 +779,7 @@ export default function AnimalForm({origin,t,data,setData,options,edit,filter,
 
 	            {
 	            	!filter &&
-	            	<div className='mt-8'>
+	            	<div className='mt-4'>
 		                <Input	                    
 		                    name="video2"
 		                    type="text"

@@ -13,7 +13,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import LockIcon from '@mui/icons-material/Lock';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-export default function Account({ user, status, t, subsection }) {
+export default function Account({ user, status, t, subsection, emails, social }) {
 
     const [ tab, setTab ] = useState(subsection ? subsection : "info");
 
@@ -31,7 +31,7 @@ export default function Account({ user, status, t, subsection }) {
         window.history.pushState({path:url},'',url);
     };
 
-    const { classes, sx, sxIcon } = styleSubTabs();
+    const { sxSubTabs, sx, sxIcon } = styleSubTabs();
 
     return (
         <>
@@ -43,8 +43,8 @@ export default function Account({ user, status, t, subsection }) {
         <div className='subtabs-container'>
             <Tabs 
                 value={tab} 
-                onChange={handleChange}
-                className={classes.tabs}
+                sx={sxSubTabs}
+                onChange={handleChange}                
                 variant="scrollable"
             >
                 <Tab icon={<InfoIcon sx={sxIcon}/>} value="info" sx={sx} iconPosition="top" label={t('user.profile.information.icon')}/>                
@@ -69,7 +69,9 @@ export default function Account({ user, status, t, subsection }) {
                         <Info
                             t={t}
                             user={user}
-                            status={status}                            
+                            status={status}
+                            emails={emails}
+                            social={social}                           
                         />
             }
             </div>

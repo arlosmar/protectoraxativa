@@ -17,6 +17,7 @@ if(!language || language.length === 0){
     //cookies.set("language",language,{path: '/'}); NOT NECESSARY TO DO ALL THE TIME.
 }
 
+// if language detector it does not use defaultLanguage above
 i18n.use(LanguageDetector)
     .use(initReactI18next)
     .init({

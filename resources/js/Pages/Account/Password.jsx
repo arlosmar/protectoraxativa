@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 
 export default function Password({t,user}) {
 
-    const { data, setData, errors, put, reset, processing, recentlySuccessful } = useForm({
+    const { data, setData, errors, post, reset, processing, recentlySuccessful } = useForm({
         current_password: '',
         password: '',
         password_confirmation: '',
@@ -27,7 +27,7 @@ export default function Password({t,user}) {
         }
         */
 
-        put(route(path), {
+        post(route(path), {
             preserveScroll: true,
             onSuccess: () => reset(),
             onError: (errors) => {
@@ -60,13 +60,13 @@ export default function Password({t,user}) {
             setOpen={setOpenToast}
             message={t('trans.Saved-Male')}
         />
-        <div className='box'>
+        <div className='account-div-box'>
             {/*
             <h1 className='title-subsection'>              
                 {t('user.profile.password.title')}
             </h1>
             */}
-            <form onSubmit={updatePassword}>
+            <form onSubmit={updatePassword} className='mt-4'>
                 <div className=''>
                     <Input
                         id="current_password"
@@ -76,8 +76,7 @@ export default function Password({t,user}) {
                         autoComplete="current-password"                        
                         onChange={handleInput}                        
                         placeholder={t('user.profile.password.password-current')}                        
-                        error={errors.current_password}
-                        isFocused
+                        error={errors.current_password}                        
                     />                   
                 </div>
 

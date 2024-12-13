@@ -1,5 +1,6 @@
 //import { useTranslation } from "react-i18next";
 import Grid from '@mui/material/Grid2';
+import MobileScreenShareIcon from '@mui/icons-material/MobileScreenShare';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 import HandshakeIcon from '@mui/icons-material/Handshake';
@@ -25,12 +26,15 @@ export default function Colaboration({t,email_colaboration,email_volunteering,pr
         */}
         <Grid container spacing={0} className='home-div-box'>
             <Grid size={{ xs: 12, md: 2 }} className='home-div-icon'>
+                {/*
                 <img
                     className='home-image-icon'
                     alt="bizum"
                     src='/images/bizum.jpg'
                     id='bizum'
                 />
+                */}
+                <MobileScreenShareIcon className="home-icon"/>
             </Grid>
             <Grid size={{ xs: 12, md: 10 }}>
                 <h1 className='subtitle-colaboration'>

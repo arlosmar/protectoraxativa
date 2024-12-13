@@ -1,5 +1,7 @@
 <?php
 
+// https://laravel.com/docs/11.x/http-client#making-requests
+
 namespace App\Http\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
@@ -9,7 +11,14 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
 
-use App\Models\{Animal};
+use App\Models\{Animal,User};
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+
+use App\Notifications\UserNotifications;
+use App\Events\{GenericEvent,PrivateEvent};
+use Illuminate\Support\Facades\Notification;
 
 class Controller extends BaseController{
 
@@ -25,6 +34,276 @@ class Controller extends BaseController{
 		else{			
 			// default language on config/app.php
 		}
+    }
+
+    // webview from app android/ios
+    public function isApp(Request $request){
+
+    	/*
+    	[HTTP_SEC_CH_UA] => "Android WebView";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+    	[HTTP_X_REQUESTED_WITH] => com.app.spax
+    	[HTTP_USER_AGENT] => Mozilla/5.0 (Linux; Android 15; Pixel 7a Build/AP3A.241105.007; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/131.0.6778.39 Mobile Safari/537.36
+    	*/
+
+    	if(isset($request->isApp) && !empty($request->isApp)){
+    		return true;
+    	}
+    	else{
+    		return false;
+    	}
+    }
+
+    // log on telegram from react or from controllers
+    public function logTelegram(Request $request, $array = null){
+
+    	$message = '';
+
+    	// if providing array of values
+    	if(isset($array) && !empty($array)){
+    		$info = print_r($array);
+    		$message = urlencode($info);
+    	}
+    	else{
+    		// if from react
+    		if(isset($request->log) && !empty($request->log)){
+
+    			$logString = '';
+    			$logUrl = '';
+    			$logDevice = '';
+    			$logExtra = '';
+    		
+	    		$logString = json_decode($request->log);
+
+	    		if(isset($request->url) && !empty($request->url)){
+	    			$logUrl = $request->url;
+	    		}
+
+	    		if(isset($request->device) && !empty($request->device)){
+	    			$logDevice = $request->device;    			
+	    		}
+
+	    		$user = auth()->user();
+
+	    		if(isset($request->extraInfo) && !empty($request->extraInfo)){    			
+	    			$logExtra = '<pre>'.$request->extraInfo.'</pre>';
+	    		}
+
+	    		$info = formatTelegramMessage('','React',$logUrl,$user,$logDevice,$logString,$logExtra);
+	    		$message = urlencode($info);	    		
+	    	}
+	    }
+
+	    if(isset($message) && !empty($message)){
+
+	    	$botToken = env('TELEGRAM_API_KEY');
+    		$channel = env('TELEGRAM_CHANNEL');    		
+
+    		$urlTelegram = 'https://api.telegram.org/bot'.$botToken.'/sendMessage?parse_mode=html&chat_id='.$channel.'&text='.$message.'&disable_web_page_preview=true';
+    		
+    		$response = Http::get($urlTelegram);
+    		//return $response;
+	    }
+    }
+
+    public function getDefaultSettings($extraDefaultSettings = []){
+
+    	$settings = [
+            'notifications' => 1,
+            'notifications_push' => 1            
+        ];
+
+        $notificationsIds = $this->getNotificationsIds(false);        
+        if(isset($notificationsIds) && !empty($notificationsIds)){
+            $settings['notifications_types'] = $notificationsIds;
+        }
+
+        if(isset($extraDefaultSettings) && !empty($extraDefaultSettings)){
+        	// we can use array_merge
+        	foreach($extraDefaultSettings as $name => $value){
+        		$settings[$name] = $value;
+        	}
+        }
+
+        return json_encode($settings);
+    }
+
+    public function getNotificationsIds($array = true){
+
+    	$result = null;
+
+    	$notifications = $this->getNotifications(true);
+        
+        if(isset($notifications) && !empty($notifications)){
+            
+            $notificationsArray = [];
+            
+            foreach($notifications as $id => $notification){
+                $notificationsArray[] = $id;                
+            }          
+
+            if(isset($array) && !empty($array)){
+            	$result = $notificationsArray;
+            }  
+            else{
+            	$result = implode(',',$notificationsArray);  	
+            }
+        }
+
+        return $result;
+    }
+
+    public function getNotifications($urls = false, $channels = false){
+
+    	// for notifications channels for fcm
+    	if(isset($channels) && !empty($channels)){
+    		
+    		$notifications = [
+            	1 => 'General',
+            	2 => 'Animals',
+            	3 => 'News',
+            	4 => 'User'
+        	];
+    	}
+    	else{
+	    	if(isset($urls) && !empty($urls)){
+	        	$notifications = [
+	            	1 => route('home'),
+	            	2 => route('animals'),
+	            	3 => route('news'),
+	            	4 => route('user')
+	        	];
+	    	}
+	    	else{
+
+		    	$notifications = [	            
+		            ['id' => 2,'label' => trans('notifications.types.animals')],
+		            ['id' => 3,'label' => trans('notifications.types.news')],
+		            ['id' => 4,'label' => trans('notifications.types.user')]
+		        ];
+
+		        // order
+				usort($notifications,function ($a, $b) {
+	    			return strcmp($a["label"],$b["label"]);
+				});
+
+				// general always the 1st
+				array_unshift($notifications,['id' => 1,'label' => trans('notifications.types.general')]);
+		    }
+		}
+
+	    return $notifications;
+    }
+
+    public function sendNotificationFromArray($notification,$users = [],$people = false){
+
+    	try{
+	    	/*
+			//$user = auth()->user();
+		    //$user = User::where('email','arlosmar@gmail.com')->first();
+		    //$users = [$user];
+
+		    // private event
+		    //event(new PrivateEvent($user,$notification));
+		    
+		    //$user->notify(new UserNotifications($notification));  
+	    	*/
+
+	    	// to everyone
+	    	if(isset($people) && !empty($people)){
+	            event(new GenericEvent($notification));
+	        }
+	        else{
+	        	if(isset($users) && !empty($users)){
+	            	Notification::send($users, new UserNotifications($notification));
+	            }
+	    	}
+
+    		return true;
+    	}
+    	catch(\Exception $e){
+    		//echo '<pre>'.print_r($e,true).'</pre>';die;
+    		return false;
+    	}
+    }
+
+    public function sendNotification(Request $request){
+        
+        // notifications have the advantage of can use email,broadcast,fcm, etc.
+        // event only broadcast
+        try{
+
+        	$notifications = $this->getNotifications(true);
+
+        	// get type and label for the type
+        	if(isset($request->type)){
+        		$type = $request->type;
+        	}
+        	else{
+        		// general type
+        		$type = 1;
+        	}
+
+        	$categories = $this->getNotifications(false,true);
+        	$channel = isset($categories[$type]) ? $categories[$type] : 'General';
+
+            $notification = [
+                'title' => isset($request->title) ? $request->title : '',
+                'message' => isset($request->message) ? $request->message : '',
+                'type' => isset($request->type) ? $request->type : 1,
+                'channel' => $channel
+            ];
+
+            if(isset($request->type) && !empty($request->type)){
+       			$notification['url'] = $notifications[$request->type];
+        	}
+        	else{
+        		$notification['url'] = $notifications[1];
+        	}
+
+        	if(isset($request->peopleAll) && !empty($request->peopleAll)){
+                // public event
+                $sent = $this->sendNotificationFromArray($notification,null,true);
+            }
+            else{
+                if(
+                    (isset($request->users) && !empty($request->users)) ||
+                    (isset($request->usersAll) && !empty($request->usersAll))
+                ){
+
+                    if(isset($request->usersAll) && !empty($request->usersAll)){
+                        $users = User::where('admin',false)->get();
+                    }
+                    else{
+                        $usersToSend = $request->users;
+                        $users = [];                    
+                        foreach($usersToSend as $userToSend){
+
+                            $id = $userToSend['value'];
+                            //$label = $userToSend['label'];
+                            $found = User::find($id);
+
+                            if(isset($found) && !empty($found)){
+                                $users[] = $found;
+                            }                    
+                        }
+                    }
+                    
+                    $sent = $this->sendNotificationFromArray($notification,$users);
+                }
+            }
+
+            if(isset($sent) && !empty($sent)){
+        		return response()->json(['result' => true]);    	
+            }
+            else{
+            	return response()->json(['result' => false,'message' => 'Error']);
+            }
+        }
+        catch(\Exception $e){
+            //echo '<pre>'.print_r($e,true).'</pre>';die;
+            //return response()->json(['result' => false,'message' => $e->getMessage()]);
+            return response()->json(['result' => false,'message' => 'Error']);
+        }
     }
 
     // work with files

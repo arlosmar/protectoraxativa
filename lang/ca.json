@@ -1,4 +1,5 @@
 {
+    "If you're having trouble clicking the \":actionText\" button, copy and paste the URL below\ninto your web browser:" : "Si tens problemes al prémer el botó de \":actionText\", prem el següent enllaç o còpia'l i pèga'l\nen el navegador:",
     "trans": {
         "Back": "Tornar",
         "Save": "Guardar",
@@ -33,11 +34,29 @@
         "Form"  :   "Formulari",
         "Field-Empty" :   "Camp vuit",
         "All-Male-Singular"  :   "Tot",
-        "Update"    :   "Actualitzar"        
+        "All-Plural"  :   "Tots/Totes",
+        "Update"    :   "Actualitzar",
+        "noElementsSelected" : "No has seleccionat cap element" 
+    },
+    "pwa"   :   {
+        "text" : "¡Instal·la la app!",
+        "button" : "Instal·lar APP",
+        "apple" : {
+            "title" : "Instal·la la app",
+            "subtitle" : "SPAX",
+            "description" : "Afegeix la notra app per a major comoditat.",
+            "share" : "Prem el botó 'Compartir'",
+            "add" : "Prem 'Afegir a inici'"
+        }
+    },
+    "notifications"   :   {
+        "text" : "Activa les notificacions",
+        "button" : "Activar notificacions"
     },
     "Cookies" : {
         "button-accept" : "Acceptar",
-        "message" : "Esta web utilitza les cookies mínimes necessàries per a funcionar. No es recopila informació de cap tipus."
+        "message" : "Esta web utilitza les cookies mínimes necessàries per a funcionar. No es recopila informació de cap tipus. Pots consultar la política de cookies des d'",
+        "here"  :   "açí"
     },
     "Title": {
         "Home": "Inici",
@@ -52,22 +71,27 @@
         "Animals": "Animals",
         "News": "Notícies",
         "Contact": "Contacte",
-        "User"  :   "Usuari"
+        "User"  :   "Usuari",
+        "Menu"  :   "Menú",
+        "Language" : "Idioma",
+        "Contact" : "Contacte",
+        "Logout" : "Eixir",
+        "Whatsapp" : "Whatsapp"
     },
     "under-development" : "En desenvolupament",
     "introduction": {
-        "title" : "Benvinguts i benvingudes",
+        "title" : "Societat protectora d'Animals de Xàtiva",
         "colaboration" : {
             "title" : "Col·labora",
             "bizum": "Bizum",
-            "line1" : "Si vols fer una donació a la SPAX a través de **Bizum**, segueix les següents instruccions:",
-            "line2" : "Entra a l'app bancària del teu mòbil a **Bizum**, clica a **\"fer una donació\"**, **\"col·laborar en una causa solidària\"** o similar, segons la teva entitat bancària, i després l'aplicació et demanarà el nostre **\"codi de campanya\"** o **\"codi de l'ONG\"** o similar, també segons la teva entitat bancària.",
-            "line3" : "El nostre **codi** és:",
+            "line1" : "Si vols fer una donació a la SPAX a través de <b>Bizum</b> segueix les següents instruccions:",
+            "line2" : "Entra a l'app bancària del teu mòbil a <b>Bizum</b> clica a <b>\"fer una donació\"</b>, <b>\"col·laborar en una causa solidària\"</b> o similar, segons la teva entitat bancària, i després l'aplicació et demanarà el nostre <b>\"codi de campanya\"</b> o <b>\"codi de l'ONG\"</b> o similar, també segons la teva entitat bancària.",
+            "line3" : "El nostre <b>codi</b> és:",
             "line4" : "<h1 class='text-xl'>04318</h1>",
             "line5" : "Moltes gràcies.",
-            "line6" : "**Nota important:** No facis la donació enviant el Bizum directament al nostre mòbil. D'aquesta manera no quedarà registrada com a donatiu i no podràs deduir-la a la renda.",
+            "line6" : "<b>Nota important:</b> No facis la donació enviant el Bizum directament al nostre mòbil. D'aquesta manera no quedarà registrada com a donatiu i no podràs deduir-la a la renda.",
             "bank": "Transferència bancària",
-            "line7" : "També pots fer una donació mitjançant **transferència bancària**.",
+            "line7" : "També pots fer una donació mitjançant <b>transferència bancària</b>.",
             "line8" : "Aquí tens les dades bancàries per fer la teva donació:",
             "line9" : "Caixa Popular<br><b>ES1031590004662253405720</b><br>BIC BCOEESMM159",
             "line10": "Caixa Ontinyent<br><b>ES5820456008743000036569</b><br>BIC CECAESMM045",
@@ -197,8 +221,8 @@
                 "title" :   "Adoptar"
             },
             "adopted"  :   {
-                "icon"  :   "Adoptats",
-                "title" :   "Adoptats"
+                "icon"  :   "Finals feliços",
+                "title" :   "Finals feliços"
             }
         },
         "sponsor" :   {
@@ -311,7 +335,7 @@
             "Description"   :   "Descripció",
             "Image" :   "Imatge",
             "Image2"    :   "Imatge2",
-            "Image-Sponsored"   :   "Imatge apadrinat",
+            "Image-Sponsored"   :   "Imatge apadrinat/adoptat",
             "Person"    :   "Responsables",
             "Video" :   "Video",
             "Video2" :   "Video2",
@@ -367,7 +391,9 @@
                 "email" : "Email",
                 "email-not-verified" : "La teva adreça de correu electrònic no està verificada.",
                 "email-verify" : "Enviar correu de verificació",
-                "email-sent" : "S'ha enviat un nou correu de verificació a la teva adreça de correu."
+                "email-sent" : "S'ha enviat un nou correu de verificació a la teva adreça de correu.",
+                "personal-data" : "Dades personals",
+                "update-personal-data" : "Si vols actualitzar les dades personals contacta amb la protectora, per favor:"
             },
             "animals": {
                 "icon"  :   "Animals",
@@ -377,7 +403,22 @@
                 "icon"  :   "Config",
                 "title" :   "Configuració",
                 "description" : "Aquí pots canviar diferents ajustos del teu compte",
-                "dark-mode" : "Mode fosc"
+                "dark-mode" : "Mode fosc",
+                "biometric" :   "Login amb biometria",                
+                "notifications" :   {
+                    "switch"    :   "Notificacions",
+                    "enabled"   :   "Notificacions habilitades",
+                    "setup"  :   "Cal que habilites les notificacions del teu dispositiu per a poder activar aquesta configuració",
+                    "disabled"    :   "Les notificacions del teu dispositiu estan desactivades per a aquesta app. Cal que les actives per a poder canviar aquesta configuració.",
+                    "push" : "Push",
+                    "email" : "Email",
+                    "method" : "Mètodes",
+                    "type" : "Categories",
+                    "appDisabled" : "Has de donar permís a l'aplicació per a poder rebre notificacions"
+                },
+                "authentication" : {
+                    "notAllowed" : "Aquest dispositiu/navegador no permet usar autenticació amb biometría"
+                }
             },
             "password": {
                 "icon"  :   "Contrasenya",
@@ -406,6 +447,7 @@
             "edit"  :   "Editar",
             "borrar"  :   "Esborrar",
             "empty" :   "No hi ha animals",
+            "images-sponsored" : "Imatge apadrinat/adoptat",
             "adopt" :   {
                 "icon"  :   "Adoptar",
                 "title" :   "Adoptar"
@@ -431,9 +473,25 @@
             "borrar"  :   "Esborrar",
             "empty" :   "No hi ha persones"
         },
+        "notifications": {
+            "icon"  :   "Notificacions",
+            "title"  :   "Notificacions",
+            "form" : {
+                "title" : "Títol",            
+                "message" : "Missatge",
+                "users" : "Usuaris",
+                "peopleAll" : "Tot el món",
+                "usersAll" : "Usuaris registrats",
+                "type" : "Tipus"
+            },
+            "success" : "Notificació enviada",
+            "error" : "Error enviant la notificació",
+            "button" : "Enviar",
+            "empty" : "No es pot enviar un missatge vuit"
+        },
         "email": {
             "title" : "Verificar correu",
-            "description" : "Has de verificar el teu correu electrònic per accedir al teu compte. Hauràs rebut un enllaç per validar-lo. Si no l'has rebut, si us plau intenta enviar-te el correu de verificació de nou.",
+            "description" : "T'hem enviar un email per a verificar el teu compte. Si no l'has rebut prova a reenviar-te'l, per favor.",
             "verified" : "Correu verificat",
             "verification-link-sent" : "Correu enviat",
             "resend-link" : "Reenviar"
@@ -469,6 +527,7 @@
             "title3"  :   "Adopcions",
             "shift-adoptions" : "Dilluns a divendres de 17:00h a 21:00h",
             "title4"  :   "Voluntariat",
+            "email" : "Email",
             "phone"  :   "Telèfon",
             "whatsapp": "Whatsapp",
             "shift-phone-title"  :   "Horari d'atenció telefònica",
@@ -485,5 +544,22 @@
         "title" :   "Compartir",
         "title-native"  :   "SPAX - protectoraxativa",
         "text"  :   "Mira aquest animalet"
+    },
+    "info" : {
+        "terms" : {
+            "icon": "Terminis",
+            "title" :   "Terminis d'ús",
+            "content" : "<h1 class='title-info-pages'>LLEI DELS SERVEIS DE LA SOCIETAT DE LA INFORMACIÓ (LSSI)</h1><br/><br/>SOCIETAT PROTECTORA D'ANIMALS DE XÀTIVA, responsable del lloc web, d'ara endavant RESPONSABLE, posa a disposició dels usuaris el present document, amb el qual pretén complir amb les obligacions disposades en la Llei 34/2002, de l'11 de juliol, de Serveis de la Societat de la Informació i de Comerç Electrònic (LSSICE), BOE N º 166, així com informar a tots els usuaris del lloc web respecte a quines són les condicions d'ús.<br/>Tota persona que accedeix a aquest lloc web assumeix el paper d'usuari, comprometent-se a l'observança i compliment rigorós de les disposicions aquí disposades, així com a qualsevol altra disposició legal que fos d'aplicació.<br/><br/>SOCIETAT PROTECTORA D'ANIMALS DE XÀTIVA es reserva el dret de modificar qualsevol tipus d'informació que poguera aparéixer al lloc web, sense que existisca obligació d'avisar prèviament o posar en coneixement dels usuaris aquestes obligacions, considerant-se suficient amb la publicació al lloc web de SOCIETAT PROTECTORA D'ANIMALS DE XÀTIVA.<br/><br/><h1 class='subtitle-info-pages'>1. DADES IDENTIFICATIVES</h1><br/>Nom de domini: <a href='https://protectoraxativa.org' target='_blank'>protectoraxativa.org</a><br/>Nom comercial: SPAX<br/>Denominació social: SOCIETAT PROTECTORA D'ANIMALS DE XÀTIVA I LA COSTERA.<br/>NIF: G46388385<br/>Domicili social: Apartat DE correus 544<br/>Telèfon: <a href='tel:671870889' target='_blank'>671870889</a><br/>Correu electrònic: <a href='mailto:colabora@protectoraxativa.org' target='_blank'>colabora@protectoraxativa.org</a><br/><br/><h1 class='subtitle-info-pages'>2. DRETS DE PROPIETAT INTEL·LECTUAL I INDUSTRIAL</h1><br/>El lloc web, incloent-hi a títol enunciatiu però no limitatiu la seua programació, edició, compilació i altres elements necessaris per al seu funcionament, els dissenys, logotips, text i/o gràfics, són propietat del RESPONSABLE o, si és el cas, disposa de llicència o autorització expressa per part dels autors. Tots els continguts del lloc web es troben degudament protegits per la normativa de propietat intel·lectual i industrial, així com inscrits en els registres públics corresponents.<br/>Independentment de la finalitat per a la qual foren destinats, la reproducció total o parcial, ús, explotació, distribució i comercialització, requereix en tot cas de l'autorització escrita prèvia per part del RESPONSABLE. Qualsevol ús no autoritzat prèviament es considera un incompliment greu dels drets de propietat intel·lectual o industrial de l'autor.<br/><br/>Els dissenys, logotips, text i/o gràfics aliens al RESPONSABLE i que pogueren aparéixer en el lloc web, pertanyen als seus respectius propietaris, sent ells mateixos responsables de qualsevol possible controvèrsia que poguera sorgir respecte als mateixos. El RESPONSABLE autoritza expressament que tercers puguen redirigir directament als continguts concrets del lloc web, i en tot cas redirigir al lloc web principal de <a href='https://protectoraxativa.org' target='_blank'>protectoraxativa.org</a><br/><br/>El RESPONSABLE reconeix a favor dels seus titulars els drets de propietat intel·lectual i industrial corresponents, no implicant la seua sola menció o aparició en el lloc web l'existència de drets o responsabilitat alguna sobre els mateixos, com tampoc recolzament, patrocini o recomanació per part del mateix.<br/>Per a realitzar qualsevol tipus d'observació respecte a possibles incompliments dels drets de propietat intel·lectual o industrial, així com sobre qualsevol dels continguts del lloc web, pot fer-ho a través del correu electrònic: <a href='mailto:colabora@protectoraxativa.org' target='_blank'>colabora@protectoraxativa.org</a><br/><br/><h1 class='subtitle-info-pages'>3. EXEMPCIÓ DE RESPONSABILITATS</h1><br/>El RESPONSABLE s'eximeix de qualsevol tipus de responsabilitat derivada de la informació publicada en el seu lloc web sempre que aquesta informació haja sigut manipulada o introduïda per un tercer alié al mateix.<br/><br/><b>Ús de Cookies</b><br/>Aquest lloc web pot utilitzar cookies tècniques (petits fitxers d'informació que el servidor envia a l'ordinador de qui accedeix a la pàgina) per a dur a terme determinades funcions que són considerades imprescindibles per al correcte funcionament i visualització del lloc. Les cookies utilitzades tenen, en tot cas, caràcter temporal, amb l'única finalitat de fer més eficaç la navegació, i desapareixen en acabar la sessió de l'usuari. En cap cas, aquestes cookies proporcionen per si mateixes dades de caràcter personal i no s'utilitzaran per a la recollida dels mateixos.<br/><br/>Mitjançant l'ús de cookies també és possible que el servidor on es troba la web reconega el navegador utilitzat per l'usuari amb la finalitat que la navegació siga més senzilla, permetent, per exemple, l'accés dels usuaris que s'hagen registrat prèviament a les àrees, serveis, promocions o concursos reservats exclusivament a ells sense haver de registrar-se en cada visita. També es poden utilitzar per a mesurar l'audiència, paràmetres de trànsit, controlar el progrés i nombre d'entrades, etc., sent en aquests casos cookies prescindibles tècnicament però beneficioses per a l'usuari. Aquest lloc web no instal·larà cookies prescindibles sense el consentiment previ de l'usuari.<br/><br/>L'usuari té la possibilitat de configurar el seu navegador per a ser alertat de la recepció de cookies i per a impedir la seua instal·lació en el seu equip. Per favor, consulte les instruccions del seu navegador per a ampliar aquesta informació.<br/><br/><b>Política d'enllaços</b><br/>Des del lloc web, és possible que es redirigisca a continguts de tercers llocs web. Com que el RESPONSABLE no pot controlar sempre els continguts introduïts pels tercers en els seus respectius llocs web, no assumeix cap tipus de responsabilitat respecte a aquests continguts. En tot cas, procedirà a la retirada immediata de qualsevol contingut que poguera contravenir la legislació nacional o internacional, la moral o l'ordre públic, procedint a la retirada immediata de la redirecció a aquest lloc web, posant en coneixement de les autoritats competents el contingut en qüestió.<br/><br/>El RESPONSABLE no es fa responsable de la informació i continguts emmagatzemats, a títol enunciatiu però no limitatiu, en fòrums, xats, generadors de blogs, comentaris, xarxes socials o qualsevol altre mitjà que permeta a tercers publicar continguts de forma independent en la pàgina web del RESPONSABLE. No obstant això, i en compliment del que es disposa en els articles 11 i 16 de la LSSICE, es posa a disposició de tots els usuaris, autoritats i forces de seguretat, col·laborant de forma activa en la retirada o, si és el cas, bloqueig de tots aquells continguts que puguen afectar o contravenir la legislació nacional o internacional, els drets de tercers o la moral i l'ordre públic. En cas que l'usuari considere que existeix en el lloc web algun contingut que poguera ser susceptible d'aquesta classificació, es prega que ho notifique de forma immediata a l'administrador del lloc web.<br/><br/>Aquest lloc web ha sigut revisat i provat perquè funcione correctament. En principi, es pot garantir el correcte funcionament els 365 dies de l'any, 24 hores al dia. No obstant això, el RESPONSABLE no descarta la possibilitat que existisquen certs errors de programació, o que esdevinguen causes de força major, catàstrofes naturals, vagues o circumstàncies semblants que facen impossible l'accés a la pàgina web.<br/><br/><b>Adreces IP</b><br/>Els servidors del lloc web podran detectar de manera automàtica l'adreça IP i el nom de domini utilitzats per l'usuari. Una adreça IP és un número assignat automàticament a un ordinador quan aquest es connecta a Internet. Tota aquesta informació és registrada en un fitxer d'activitat del servidor degudament inscrit que permet el posterior processament de les dades amb la finalitat d'obtenir mesuraments únicament estadístics que permeten conéixer el nombre d'impressions de pàgines, el nombre de visites realitzades als servidors web, l'ordre de visites, el punt d'accés, etc.<br/><br/><h1 class='subtitle-info-pages'>4. LLEI APLICABLE I JURISDICCIÓ</h1><br/>Per a la resolució de totes les controvèrsies o qüestions relacionades amb el present lloc web o de les activitats en ell desenvolupades, serà d'aplicació la legislació espanyola, a la qual se sotmeten expressament les parts, sent competents per a la resolució de tots els conflictes derivats o relacionats amb el seu ús els Jutjats i Tribunals més pròxims a València."
+        },
+        "policy" : {
+            "icon": "Privacitat",
+            "title" :   "Política de privacitat",
+            "content" : "<h1 class='title-info-pages'>1. INFORMACIÓ A L'USUARI<br/></h1><br/><b>SOCIETAT PROTECTORA D'ANIMALS DE XÀTIVA</b>, en endavant RESPONSABLE, és el Responsable del tractament de les dades personals de l'Usuari i l'informa que aquestes dades seran tractades de conformitat amb el disposat en el Reglament (UE) 2016/679 de 27 d'abril de 2016 (GDPR) relatiu a la protecció de les persones físiques pel que fa al tractament de dades personals i a la lliure circulació d'aquestes dades, per la qual cosa se li facilita la següent informació del tractament:<br/><br/><b>Finalitat del tractament:</b> mantenir una relació comercial amb l'Usuari. Les operacions previstes per realitzar el tractament són:<ul class='list-info-pages'><li>Enviament de comunicacions comercials publicitàries per email, fax, SMS, MMS, comunitats socials o qualsevol altre mitjà electrònic o físic, present o futur, que possibiliti realitzar comunicacions comercials. Aquestes comunicacions seran realitzades pel RESPONSABLE i relacionades amb els seus productes i serveis, o dels seus col·laboradors o proveïdors amb els quals aquest hagi arribat a algun acord de promoció. En aquest cas, els tercers mai tindran accés a les dades personals.</li><li>Realitzar estudis estadístics.</li><li>Tramitar encàrrecs, sol·licituds o qualsevol tipus de petició que sigui realitzada per l'usuari a través de qualsevol de les formes de contacte que es posen a la seva disposició.</li><li>Enviament del butlletí de notícies de la pàgina web.</li></ul><br/><b>Base jurídica del tractament:</b> consentiment de l'interessat.<br/><br/><b>Criteris de conservació de les dades:</b> es conservaran mentre existeixi un interès mutu per mantenir la finalitat del tractament i quan ja no sigui necessari per a aquesta finalitat, se suprimiran amb mesures de seguretat adequades per garantir la seudonimització de les dades o la destrucció total d'aquests.<br/><br/><b>Comunicació de les dades:</b> No es comunicaran les dades a tercers, excepte obligació legal.<br/><br/><b>Drets que assisteixen l'Usuari:</b><ul class='list-info-pages'><li>Dret a retirar el consentiment en qualsevol moment.</li><li>Dret d'accés, rectificació, portabilitat i supressió de les seves dades i a la limitació o oposició al seu tractament.</li><li>Dret a presentar una reclamació davant l'autoritat de control (www.aepd.es) si considera que el tractament no s'ajusta a la normativa vigent.</li></ul><br/><b>Dades de contacte per exercir els seus drets:</b><br/>SOCIETAT PROTECTORA D'ANIMALS DE XÀTIVA. APARTAT DE CORREUS 544 XÀTIVA – 46800 (VALÈNCIA). Email: <a href='mailto:colabora@protectoraxativa.org'>colabora@protectoraxativa.org</a><br/><br/><h1 class='title-info-pages'>2. CARÀCTER OBLIGATORI O FACULTATIU DE LA INFORMACIÓ FACILITADA PER L'USUARI</h1><br/>Els Usuaris, mitjançant la selecció de les caselles corresponents i entrada de dades en els camps, marcats amb un asterisc (*) en el formulari de contacte o presentats en formularis de descàrrega, accepten expressament i de forma lliure i inequívoca, que les seves dades són necessàries per atendre la seva petició, per part del prestador, essent voluntària la inclusió de dades en els camps restants. L'Usuari garanteix que les dades personals facilitades al RESPONSABLE són veraces i es fa responsable de comunicar qualsevol modificació d'aquestes. <br/><br/>El RESPONSABLE informa i garanteix expressament als usuaris que les seves dades personals no seran cedides en cap cas a tercers, i que sempre que realitzi algun tipus de cessió de dades personals, es demanarà prèviament el consentiment exprés, informat i inequívoc per part dels Usuaris. Totes les dades sol·licitades a través del lloc web són obligatòries, ja que són necessàries per a la prestació d'un servei òptim a l'Usuari. En cas que no siguin facilitades totes les dades, no es garanteix que la informació i serveis facilitats siguin completament ajustats a les seves necessitats.<br/><br/><h1 class='title-info-pages'>3. MESURES DE SEGURETAT</h1><br/>Que de conformitat amb el disposat en les normatives vigents en protecció de dades personals, el RESPONSABLE està complint amb totes les disposicions de les normatives GDPR per al tractament de les dades personals de la seva responsabilitat, i manifestament amb els principis descrits en l'article 5 del GDPR, pels quals són tractats de manera lícita, lleial i transparent en relació amb l'interessat i adequats, pertinents i limitats al necessari en relació amb les finalitats per les quals són tractats.<br/><br/>El RESPONSABLE garanteix que ha implementat polítiques tècniques i organitzatives apropiades per aplicar les mesures de seguretat que estableix el GDPR amb la finalitat de protegir els drets i llibertats dels Usuaris i els ha comunicat la informació adequada perquè puguin exercir-los."
+        },
+        "cookies" : {
+            "icon": "Cookies",
+            "title" :   "Política de cookies",
+            "content" : "L'informem que aquest lloc web instal·la cookies pròpies i de tercers en navegar per les seves pàgines amb la finalitat de facilitar la seva navegació i obtenir dades estadístiques. Si continua navegant, considerem que accepta el seu ús i instal·lació.<br/><br/><h1 class='subtitle-info-pages'>Definició i funció de les cookies</h1><br/><b>Què són les cookies?</b><br/>Una cookie és un fitxer de text no executable que es descarrega al seu ordinador en accedir a determinades pàgines web. Les cookies permeten a una pàgina web, entre altres coses, emmagatzemar i recuperar informació sobre els hàbits de navegació d'un usuari o del seu equip i, depenent de la informació que continguin i de la forma en que utilitzi el seu equip, poden utilitzar-se per reconèixer l'usuari. Les cookies també es poden utilitzar per registrar informació anònima sobre com un visitant utilitza un lloc. Per exemple, des de quina pàgina web ha accedit, o si ha utilitzat un banner publicitari per arribar.<br/><br/><b>Per què aquest lloc utilitza cookies?</b><br/>utilitza cookies estrictament necessàries i essencials perquè vostè utilitzi el nostre lloc web i li permeti moure's lliurement, utilitzar àrees privades, opcions personalitzades, etc. A més, utilitza cookies que recullen dades relatives a l'anàlisi d'ús de la web. Aquestes s'utilitzen per ajudar a millorar el servei al visitant, mesurant l'ús i el rendiment de la pàgina, per optimitzar-la i personalitzar-la.<br/><br/>Quins tipus de cookies utilitza aquesta pàgina web?<br/><br/>Segons la seva finalitat:<ul class='list-info-pages'><li><b>Cookies tècniques:</b><br/>Les cookies tècniques són aquelles imprescindibles i estrictament necessàries per al correcte funcionament d'un portal web i la utilització de les diferents opcions i serveis que ofereix.<br/><br/>Per exemple, les que serveixen per al manteniment de la sessió, la gestió del temps de resposta, rendiment o validació d'opcions, utilitzar elements de seguretat, compartir contingut amb xarxes socials, etc.</li><br/><li><b>Cookies de personalització:</b><br/>Aquestes cookies permeten a l'usuari especificar o personalitzar algunes característiques de les opcions generals de la pàgina web.<br/><br/>Per exemple, definir l'idioma, configuració regional o tipus de navegador.</li><br/><li><b>Cookies d'anàlisi (Google Analytics):</b><br/>Les cookies analítiques són les utilitzades pel nostre portal web, per elaborar perfils de navegació i poder conèixer les preferències dels usuaris del mateix amb la finalitat de millorar l'oferta de productums i serveis.<br/><br/>Per exemple, mitjançant una cookie analítica es controlarien les àrees geogràfiques de major interès d'un usuari, quin és el producte de més acceptació, etc.</li><br/><li><b>Cookies publicitàries / de publicitat comportamental (Google Adsense):</b><br/>Les cookies publicitàries permeten la gestió dels espais publicitaris en base a criteris concrets.<br/><br/>Per exemple la freqüència d'accés, el contingut editat, etc.<br/><br/>Les cookies de publicitat comportamental permeten a través de la gestión de la publicitat emmagatzemar informació del comportament a través de l'observació d'hàbits, estudiant els accessos i formant un perfil de preferències de l'usuari, per oferir-li publicitat relacionada amb els interessos del seu perfil.</li></ul><br/>Consulteu en aquest enllaç on pot consultar la política de privacitat d'aquests serveis de Google.<br/><br/>Segons el termini de temps que romanen activades:<ul class='list-info-pages'><li><b>Cookies de sessió:</b> Les cookies de sessió són aquelles que duren el temps que l'usuari està navegant per la pàgina web i es borren al terme.</li><li><b>Cookies persistents:</b> Aquestes cookies queden emmagatzemades en el terminal de l'usuari, per un temps més llarg, facilitant així el control de les preferències escollides sense haver de repetir certs paràmetres cada vegada que es visiti el lloc web.</li></ul><br/><h1 class='subtitle-info-pages'>Revocació i eliminació de cookies</h1><br/>Pot permetre, bloquejar o eliminar les cookies instal·lades en el seu ordinador mitjançant la configuració de les opcions del navegador instal·lat en el seu ordinador.<ul class='list-info-pages'><li>Per a més informació sobre el navegador Firefox des d' <a href='https://support.mozilla.org/es/kb/cookies-informacion-que-los-sitios-web-guardan-en-' target='_blank'>aquí</a>.</li><li>Per a més informació sobre el navegador Chrome des d' <a href='https://support.google.com/chrome/answer/95647?hl=es' target='_blank'>aquí</a>.</li><li>Per a més informació sobre el navegador Explorer des d' <a href='https://support.microsoft.com/en-gb/windows/manage-cookies-in-microsoft-edge-view-allow-block-delete-and-use-168dab11-0753-043d-7c16-ede5940fc64d#ie=ie-11' target='_blank>aquí</a>.</li><li>Per a més informació sobre el navegador Safari des d' <a href='https://support.apple.com/es-es/105082' target='_blank'>aquí</a>.</li><li>Per a més informació sobre el navegador Opera des d' <a href='https://help.opera.com/en/latest/web-preferences/#cookies' target='_blank'>aquí</a>.</li>"
+        }
     }
 }

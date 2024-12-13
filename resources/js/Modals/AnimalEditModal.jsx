@@ -18,11 +18,7 @@ import { modalStyle } from '@/Utils/Styles';
 export default function AnimalEditModal({t,origin,show,setShow,items,setItems,item,setItem,position,
     options,subsection,imagesPaths,animals,setAnimals,filterUsed,setInternal,data,setData}){
 
-    const style = modalStyle();
-
-    const sxIcon = {
-        fontSize: '35px'
-    };
+    const { sx, sxIcon, sxIconClose } = modalStyle();
 
     const handleClose = () => {
         setShow(false);
@@ -214,7 +210,7 @@ export default function AnimalEditModal({t,origin,show,setShow,items,setItems,it
         />
         <Modal open={show} onClose={handleClose}>
 
-            <Box sx={style} className='flex flex-col'>              
+            <Box sx={sx} className='flex flex-col'>              
                 
                 <div className='modal-div'>
                     <h1 className='title-user-list'>
@@ -242,7 +238,7 @@ export default function AnimalEditModal({t,origin,show,setShow,items,setItems,it
                         <SaveIcon sx={sxIcon}/>
                     </IconButton> 
                     <IconButton onClick={handleClose} className='closeIcon'>
-                        <CloseIcon sx={sxIcon}/>
+                        <CloseIcon sx={sxIconClose}/>
                     </IconButton>                         
                 </div>
             </Box>

@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, lazy, Suspense } from 'react';
 import { useTranslation } from "react-i18next";
 import Toast from '@/Components/Toast'; 
 
@@ -19,16 +19,22 @@ import HandshakeIcon from '@mui/icons-material/Handshake';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 
-import Colaboration from '@/Pages/Home/Colaboration';
-import Social from '@/Pages/Home/Social';
-import Partners from '@/Pages/Home/Partners';
-import Info from '@/Pages/Home/Info';
+import { setDarkMode } from "@/Utils/Cookies";
+
+//import Colaboration from '@/Pages/Home/Colaboration';
+//import Social from '@/Pages/Home/Social';
+//import Partners from '@/Pages/Home/Partners';
+//import Info from '@/Pages/Home/Info';
+const Colaboration = lazy(() => import("@/Pages/Home/Colaboration"));
+const Social = lazy(() => import("@/Pages/Home/Social"));
+const Partners = lazy(() => import("@/Pages/Home/Partners"));
+const Info = lazy(() => import("@/Pages/Home/Info"));
 
 import { useSwipeable } from 'react-swipeable';
 import Sticky from '@/Components/Sticky';
 
 export default function Home({user,language,section,email_colaboration,email_volunteering,
-    social,partners,prices,forms,guides,message}){
+    social,partners,prices,forms,guides,message,darkmode}){
 
 	const { t, i18n } = useTranslation('global');
 
@@ -39,11 +45,17 @@ export default function Home({user,language,section,email_colaboration,email_vol
 			setLanguage(language);
 		}
 
+        // check if darkmode from the app
+        if(darkmode){
+            setDarkMode(darkmode,false);
+        }
+
     }, []);
+
 
 	const [ tab, setTab ] = useState(section ? section : "info");
 
-    const { stickyRef, sticky, offset } = Sticky();
+    const { stickyRef, sticky, offset, height, isApplicationOrWebApp } = Sticky();
 
     const handleTabChange = (event, newValue) => {
         
@@ -58,7 +70,7 @@ export default function Home({user,language,section,email_colaboration,email_vol
         window.history.pushState({path:url},'',url);
     };
 
-    const { classes, sx, sxIcon } = styleTabs();
+    const { sxTabs, sx, sxIcon } = styleTabs();
 
     const [ tabsArray , setTabsArray ] = useState(['info','colaboration','social','partners']);
     const [ tabsLength , setTabsLength ] = useState(4);
@@ -102,12 +114,13 @@ export default function Home({user,language,section,email_colaboration,email_vol
             error={toastErrorMsg}
         />
     	<Header user={user} t={t} from='home'/>
-    	<main {...handlers}>
-            {/*
-    		<h1 className="title">
-    			{t('introduction.title')}
-    		</h1>
-            */}
+    	<main {...handlers}>            
+    		{
+                !isApplicationOrWebApp &&
+                <h1 className="text-center mt-4 text-lg font-bold">
+                    {t('introduction.title')}
+                </h1>
+            }            
             {/*
 			<div className='text-center'>
 				<img
@@ -118,11 +131,12 @@ export default function Home({user,language,section,email_colaboration,email_vol
 				/>
 			</div>
             */}
-			<div className='tabs-container'>
+			<div className='tabs-container' style={{marginTop: sticky ? height+'px': '0px'}}>
                 <Tabs 	
                     id="tabs"
                     ref={stickyRef} 
-                    className={`${classes.tabs} ${sticky && 'sticky'}`}
+                    sx={sxTabs}
+                    className={`${sticky ? 'sticky-item' : ''}`}
                     value={tab} 
                     onChange={handleTabChange}
 					variant="scrollable"                    
@@ -136,9 +150,12 @@ export default function Home({user,language,section,email_colaboration,email_vol
                 <div className='content-container'>
                 {
                     tab === 'info' ?
+                        <Suspense>
                         <Info t={t}/>
+                        </Suspense>
                     :
                         tab === 'colaboration' ?
+                            <Suspense>
                             <Colaboration 
                                 t={t} 
                                 email_colaboration={email_colaboration}
@@ -148,12 +165,17 @@ export default function Home({user,language,section,email_colaboration,email_vol
                                 social={social}
                                 guides={guides}
                             />
+                            </Suspense>
                         :						
     						tab === 'social' ?
+                                <Suspense>
     							<Social t={t} social={social}/>
+                                </Suspense>
     						:
     							tab === 'partners' ?
+                                    <Suspense>
     								<Partners t={t} partners={partners}/>
+                                    </Suspense>
     							:
     								
     								''

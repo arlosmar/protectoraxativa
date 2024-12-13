@@ -67,8 +67,13 @@ export default function PersonForm({t,data,setData,edit,filter,handleSubmit,opti
     	// remove from data
     	setData('users_ids',newValuesUsers);
 
+    	// order the list again
+        var orderUsers = [...usersFormatted,item];
+        orderUsers.sort(getComparator('asc','label',''));
+        setUsersFormatted(orderUsers);
+
     	// add to options to select
-    	setUsersFormatted([...usersFormatted,item]);
+    	//setUsersFormatted([...usersFormatted,item]);
   	};
 
   	const handleEnter = (e) => {

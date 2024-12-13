@@ -3,6 +3,7 @@
 //https://laravel.com/docs/11.x/routing#the-default-route-files
 
 use App\Http\Controllers\{
+    Controller,
     HomeController,
     AnimalController,
     NewsController,
@@ -10,6 +11,7 @@ use App\Http\Controllers\{
     SettingsController,
     ExportController
 };
+use App\Http\Controllers\Auth\{AuthenticatedSessionController};
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -36,7 +38,9 @@ Route::get('/dashboard', function () {
 
 Route::get('/versions', [HomeController::class, 'versions'])->name('versions');
 Route::get('/php', [HomeController::class, 'php'])->name('php');
-Route::post('/save-token', [HomeController::class, 'saveToken'])->name('save.token');
+
+// react to telegram
+Route::post('/log-telegram', [Controller::class, 'logTelegram'])->name('log.telegram');
 
 //Route::get('/export', [ExportController::class, 'export'])->name('export');
 
@@ -65,8 +69,9 @@ Route::get('/social', [HomeController::class, 'section'])->defaults('section','s
 Route::get('/partners', [HomeController::class, 'section'])->defaults('section','partners')->name('home.partners');
 Route::get('/info', [HomeController::class, 'section'])->defaults('section','info')->name('home.info');
 
-Route::get('/terms', [HomeController::class, 'info'])->defaults('item','terms')->name('terms');
-Route::get('/policy', [HomeController::class, 'info'])->defaults('item','policy')->name('policy');
+Route::get('/terms', [HomeController::class, 'info'])->defaults('section','terms')->name('terms');
+Route::get('/policy', [HomeController::class, 'info'])->defaults('section','policy')->name('policy');
+Route::get('/cookies', [HomeController::class, 'info'])->defaults('section','cookies')->name('cookies');
 
 Route::get('/animals/{section?}/{subsection?}/{page?}', [AnimalController::class, 'index'])->name('animals');
 Route::get('/animalsget', [AnimalController::class, 'getList'])->name('animals.get');
@@ -78,5 +83,8 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'contactSend'])->name('contact.send');
 
 Route::put('settings/language', [SettingsController::class, 'languageUpdate'])->name('language.update');
+
+// for mobile app. persistent login
+Route::get('persistentlogin', [AuthenticatedSessionController::class, 'persistentLogin']);
 
 require __DIR__.'/auth.php';

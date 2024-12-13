@@ -7,6 +7,7 @@ import { styleTabs } from '@/Utils/Styles';
 import NewsIcon from '@mui/icons-material/Newspaper';
 import AnimalIcon from '@mui/icons-material/Pets';
 import PersonIcon from '@mui/icons-material/Person';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 import AccountIcon from '@mui/icons-material/Info';
 import SettingsIcon from '@mui/icons-material/Settings';
 
@@ -17,12 +18,13 @@ import Tab from '@mui/material/Tab';
 import NewsList from '@/Pages/News/List';
 import Animals from '@/Pages/Admin/Animals';
 import PeopleList from '@/Pages/People/List';
+import Notifications from '@/Pages/Admin/Notifications';
 import Account from '@/Pages/Account/Account';
 import Settings from '@/Pages/Settings/Settings';
 
 import Toast from '@/Components/Toast';
 
-import { formatPeople, formatNews, formatPeopleOptions } from "@/Utils/Format";
+import { formatPeople, formatNews, formatPeopleOptions, formatNotificationsUsers } from "@/Utils/Format";
 
 import Sticky from '@/Components/Sticky';
 
@@ -31,13 +33,16 @@ import { applyDarkMode } from "@/Utils/Cookies";
 //import { useSwipeable } from 'react-swipeable';
 
 export default function Admin({auth,user,section,subsection,status,msg,baseUrl,
-    imagesPaths,page}){
-
-    // when logged in, it does not reload the page, so we have to force here the darkmode
-    // for the rest of pages, it is on the app.jsx
-    const darkmode = applyDarkMode();
+    imagesPaths,page,csrf_token,users,notifications,emails,social,isApp,appNotificationsEnabled}){
 
     const { t } = useTranslation('global');
+
+    // when logged in, if the user has in its preferences the darkmode, apply it
+    const darkmode = applyDarkMode(user);
+
+    const [ userSettings, setUserSettings ] = useState(user && user?.settings ? JSON.parse(user.settings) : null);
+
+    const [ usersFormattedOriginal, setUsersFormattedOriginal ] = useState(formatNotificationsUsers(t,users));
 
     // to indicate internal operations: edit, delete, add
     const [ internal, setInternal ] = useState(false);
@@ -56,7 +61,7 @@ export default function Admin({auth,user,section,subsection,status,msg,baseUrl,
 
     const [ loading, setLoading ] = useState(false);
 
-    const { stickyRef, sticky, offset } = Sticky();
+    const { stickyRef, sticky, offset, height, isApplicationOrWebApp } = Sticky();
 
     const handleTabChange = (event, newValue) => {
         
@@ -77,7 +82,7 @@ export default function Admin({auth,user,section,subsection,status,msg,baseUrl,
         window.history.pushState({path:url},'',url);
     };
 
-    const { classes, sx, sxIcon } = styleTabs();
+    const { sxTabs, sx, sxIcon } = styleTabs();
 
     const [ openToast, setOpenToast ] = useState(msg && msg.length > 0 ? true : false);
     const [ toastMsg, setToastMsg ] = useState(msg && msg.length > 0 ? t(msg) : '');
@@ -198,11 +203,12 @@ export default function Admin({auth,user,section,subsection,status,msg,baseUrl,
                     */
                 }
                 else{
+                   
                 }
             }
         }        
     },[tab])
-
+    
     return (
         <>
         <Toast 
@@ -218,12 +224,20 @@ export default function Admin({auth,user,section,subsection,status,msg,baseUrl,
                 {t('user.title')}
             </h1>            
             */}
-            <div className='tabs-container'>
+            {
+                isApp ?    
+                    <h1 className='title'>
+                        APP
+                    </h1>
+                :
+                    ''
+            }
+            <div className='tabs-container' style={{marginTop: sticky ? height+'px': '0px'}}>
                 <Tabs 
                     id="tabs"
                     ref={stickyRef} 
-                    className={`${classes.tabs} ${sticky && 'sticky'}`}
-                    sx={{zIndex:1}} 
+                    sx={sxTabs}
+                    className={`${sticky ? 'sticky-item' : ''}`}
                     value={tab} 
                     onChange={handleTabChange}
                     variant="scrollable"
@@ -232,6 +246,7 @@ export default function Admin({auth,user,section,subsection,status,msg,baseUrl,
                     <Tab icon={<NewsIcon sx={sxIcon}/>} label={t('user.news.icon')} value="news" sx={sx}/>
                     <Tab icon={<AnimalIcon sx={sxIcon}/>} label={t('user.animals.icon')} value="animals" sx={sx}/>
                     <Tab icon={<PersonIcon sx={sxIcon}/>} label={t('user.people.icon')} value="people" sx={sx}/>   
+                    <Tab icon={<NotificationsIcon sx={sxIcon}/>} label={t('user.notifications.icon')} value="notifications" sx={sx}/>   
                     <Tab icon={<SettingsIcon sx={sxIcon}/>} label={t('user.profile.settings.icon')} iconPosition="top" value="settings" sx={sx}/>
                     <Tab icon={<AccountIcon sx={sxIcon}/>} label={t('user.profile.icon')} iconPosition="top" value="account" sx={sx}/>                 
                 </Tabs>
@@ -274,33 +289,49 @@ export default function Admin({auth,user,section,subsection,status,msg,baseUrl,
                                 options={options}
                             />
                         :
-                            tab === 'settings' ?
-                                <Settings
+                            tab === 'notifications' ?
+                                <Notifications
                                     t={t}     
-                                    user={user}                       
+                                    user={user}     
+                                    usersFormattedOriginal={usersFormattedOriginal}
+                                    notifications={notifications}                                    
                                 />
                             :
-                                tab === 'account' ?
-                                    <Account
-                                        user={user}                                
-                                        status={status}
-                                        t={t}
-                                        subsection={subtab}
+                                tab === 'settings' ?
+                                    <Settings
+                                        t={t}     
+                                        user={user}
+                                        userSettings={userSettings}  
+                                        setUserSettings={setUserSettings}   
+                                        notifications={notifications}    
+                                        isApp={isApp}  
+                                        appNotificationsEnabled={appNotificationsEnabled}                                  
                                     />
                                 :
-                                    <NewsList
-                                        origin='user-news'                                
-                                        t={t}
-                                        news={news}
-                                        setNews={setNews}
-                                        imagesPaths={imagesPaths} 
-                                        loading={loading}                             
-                                        page={pageInitial}
-                                        internal={internal}
-                                        setInternal={setInternal}
-                                        baseUrl={baseUrl}
-                                        options={options}
-                                    />
+                                    tab === 'account' ?
+                                        <Account
+                                            user={user}                                
+                                            status={status}
+                                            t={t}
+                                            subsection={subtab}
+                                            emails={emails}
+                                            social={social}                                             
+                                        />
+                                    :
+                                        <NewsList
+                                            origin='user-news'                                
+                                            t={t}
+                                            news={news}
+                                            setNews={setNews}
+                                            imagesPaths={imagesPaths} 
+                                            loading={loading}                             
+                                            page={pageInitial}
+                                            internal={internal}
+                                            setInternal={setInternal}
+                                            baseUrl={baseUrl}
+                                            options={options}
+                                            csrf_token={csrf_token}
+                                        />
                 }
                 </div>
             </div>          

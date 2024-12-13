@@ -8,10 +8,17 @@ return [
         'copyright' => 'All right reserved.'
     ],
     'contact'   => [
-        'subject'   => 'Contact from Spax',
+        'subject'   => 'Contact from '.config('app.name'),
         'error' => 'Error sending email. Try again please.'
     ],
+    'notification'   => [
+        'subject'   => 'Notification from '.config('app.name'),
+        'button' => 'Open APP',
+        'salutation' => 'Regards'
+    ],
     'generic'   => [
+        'greeting' => 'Hello!',
+        'salutation' => 'Regards',
         'troubleLink' => 'If you\'re having trouble clicking the ":actionText" button, copy and paste the URL below into your web browser:'
     ],
     'verify' => [

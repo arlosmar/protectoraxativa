@@ -50,7 +50,6 @@ class RedirectIfAuthenticated
      */
     protected function defaultRedirectUri(): string
     {
-        /*
         foreach (['dashboard', 'home'] as $uri) {
             if (Route::has($uri)) {
                 return route($uri);
@@ -64,17 +63,8 @@ class RedirectIfAuthenticated
                 return '/'.$uri;
             }
         }
-        
-        return '/';
-        */
-        $user = auth()->user();
 
-        if(isset($user->admin) && !empty($user->admin)){
-            return route('admin');
-        }
-        else{            
-            return route('intranet');
-        }
+        return '/';
     }
 
     /**

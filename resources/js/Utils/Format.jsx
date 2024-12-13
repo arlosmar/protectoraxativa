@@ -437,6 +437,35 @@ export const formatPeopleOptions = (options) => {
     return optionsFormatted;
 }
 
+export const formatNotificationsUsers = (t,users) => {
+
+    var usersFormatted = [];
+
+    if(users && users.length > 0){
+
+        /*
+        usersFormatted.push(
+            {
+                value : 0,
+                label : ' '+t('trans.All-Plural')
+            }
+        );
+        */
+
+        users.map((user,index) => {
+                                
+            var element = {
+                value : user?.id,
+                label : userName(user)
+            };                      
+
+            usersFormatted.push(element);
+        });
+    }
+        
+    return usersFormatted;
+}
+
 // format news
 export const formatNews = (t,items) => {
 
@@ -465,10 +494,10 @@ export const formatNew = (t,item) => {
         image: item?.image,
         image_file : null,
         date: date(item?.date,true,true),
-        hidden: item?.hidden ? item.hidden : 0,
+        hidden: item?.hidden ? item.hidden : 0/*,
         user: item?.user ? item.user : null,
         user_name: item?.user?.name,
-        user_id: item?.user_id
+        user_id: item?.user_id*/
     };
   
     return itemFormatted;

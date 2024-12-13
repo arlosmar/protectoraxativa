@@ -19,11 +19,7 @@ import { modalStyle } from '@/Utils/Styles';
 export default function PersonEditModal({t,show,setShow,items,setItems,item,setItem,position,people,
     setPeople,filterUsed,setInternal,options,data,setData}){
 
-    const style = modalStyle();
-
-    const sxIcon = {
-        fontSize: '35px'
-    };
+    const { sx, sxIcon, sxIconClose } = modalStyle();
 
     const handleClose = () => {
         setShow(false);
@@ -113,7 +109,7 @@ export default function PersonEditModal({t,show,setShow,items,setItems,item,setI
         />
         <Modal open={show} onClose={handleClose}>
 
-            <Box sx={style} className='flex flex-col'>
+            <Box sx={sx} className='flex flex-col'>
                 
                 <div className='modal-div'>
                     <h1 className='title-user-list'>
@@ -134,7 +130,7 @@ export default function PersonEditModal({t,show,setShow,items,setItems,item,setI
                         <SaveIcon sx={sxIcon}/>
                     </IconButton> 
                     <IconButton onClick={handleClose} className='closeIcon'>
-                        <CloseIcon sx={sxIcon}/>
+                        <CloseIcon sx={sxIconClose}/>
                     </IconButton>                         
                 </div>               
             </Box>

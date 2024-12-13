@@ -5,7 +5,7 @@ import { modalStyle } from '@/Utils/Styles';
 
 export default function DeleteModal({t,show,setShow,handleDelete}){
 
-    const style = modalStyle();
+    const { sx, sxIcon, sxIconClose } = modalStyle();
 
     const handleClose = () => {
         setShow(false)
@@ -16,7 +16,7 @@ export default function DeleteModal({t,show,setShow,handleDelete}){
             open={show}
             onClose={handleClose}
         >
-            <Box sx={style} className='flex flex-col'>
+            <Box sx={sx} className='flex flex-col'>
                 <div className='text-center'>
                     {t('trans.DeleteConfirm')}
                 </div>
