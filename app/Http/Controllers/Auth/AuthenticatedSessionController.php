@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Inertia\Response;
-use App\Models\{User,Device};
+use App\Models\{User,Device,Biometric};
 use Illuminate\Support\Facades\Date;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Http\JsonResponse;
@@ -40,7 +40,16 @@ class AuthenticatedSessionController extends Controller
 
         $isApp = $this->isApp($request);
 
-        return Inertia::render('Auth/Login',compact('canResetPassword','status','isApp'/*,'path'*/));
+        // get the biometric for this device id
+        $deviceId = getCookieValue("deviceId");
+
+        $biometric = null;
+        if(isset($deviceId) && !empty($deviceId)){
+            // get the latest because we cannot check several if more than one user on the same device
+            $biometric = Biometric::where('device',$deviceId)->orderBy('updated_at','desc')->first();
+        }
+
+        return Inertia::render('Auth/Login',compact('canResetPassword','status','isApp','biometric'/*,'path'*/));
     }
 
     public function setUserSettings(){
@@ -78,19 +87,29 @@ class AuthenticatedSessionController extends Controller
     // when logging in with biometrics
     public function authentication(User $user, Request $request): RedirectResponse{
 
-        if(isset($user) && !empty($user)){
+        if(
+            isset($user) && !empty($user) &&
+            isset($request->credential) && !empty($request->credential) &&
+            isset($request->device) && !empty($request->device)
+        ){
+
+            $credential = $request->credential;
+            $device = $request->device;
+            $biometric = Biometric::where('user_id',$user->id)->where('device',$device)->where('authentication',$credential)->get();
+
+            if(isset($biometric) && !empty($biometric)){
             
-            Auth::login($user);
+                Auth::login($user);
 
-            $this->setUserSettings();
+                $this->setUserSettings();
 
-            return redirect()->intended(route('user', absolute: false));
+                return redirect()->intended(route('user', absolute: false));
+            }
         }
-        else{
-            throw ValidationException::withMessages([
-                'authentication' => trans('Error'),
-            ]);
-        }
+        
+        throw ValidationException::withMessages([
+            'authentication' => trans('Error'),
+        ]);
     }
 
     /**
@@ -198,10 +217,11 @@ class AuthenticatedSessionController extends Controller
         $found = User::where('email',$user->email)->first();
 
         $now = Date::now();
-        $loginApp = getRandomToken($found);
 
         // register
         if(!isset($found) || empty($found)){
+
+            $loginApp = getRandomToken();
             
             // create and auto verify
             $userInfo = [
@@ -338,6 +358,10 @@ class AuthenticatedSessionController extends Controller
 
         switch($type){
 
+            case 'biometric':
+                return $this->loginAndroidBiometric($request);
+                break;
+
             case 'password':
                 return $this->loginAndroidPassword($request);
                 break;
@@ -348,6 +372,49 @@ class AuthenticatedSessionController extends Controller
         }
 
         return redirect()->to(route('login').'?isApp=android&loading=0&logged=0');
+    }
+
+    public function loginAndroidBiometric(Request $request): RedirectResponse{
+
+        // if already logged in, do nothing
+        $user = auth()->user();
+
+        if(isset($user) && !empty($user)){
+
+            if(isset($user->admin) && !empty($user->admin)){
+                return redirect()->to(route('admin').'?isApp=android&loading=0&logged='.$user->id.'&token='.$user->loginApp);
+            }
+            else{                        
+                return redirect()->to(route('intranet').'?isApp=android&loading=0&logged='.$user->id.'&token='.$user->loginApp);
+            }
+        }
+        else{
+            
+            if(isset($request->token) && !empty($request->token) && isset($request->userId) && !empty($request->userId)){
+
+                $token = $request->token;
+                $userId = $request->userId;
+                
+                $found = User::where('id',$userId)->where('loginApp',$token)->first();
+                 
+                if(isset($found) && !empty($found)){
+
+                    Auth::login($found);
+
+                    $this->setUserSettings();
+
+                    if(isset($found->admin) && !empty($found->admin)){
+                        return redirect()->to(route('admin').'?isApp=android&loading=0&logged='.$found->id.'&token='.$found->loginApp);
+                    }
+                    else{                        
+                        return redirect()->to(route('intranet').'?isApp=android&loading=0&logged='.$found->id.'&token='.$found->loginApp);
+                    }
+                }
+            }
+        }
+
+        return redirect()->to(route('login').'?isApp=android&loading=0&logged=0');
+
     }
 
     public function loginAndroidPassword(Request $request): RedirectResponse{
@@ -410,12 +477,107 @@ class AuthenticatedSessionController extends Controller
             // the key is from google console => android app => debug => client_id_app_android_debug
             // the key is from google console => android app => prod => client_id_app_android
 
-            // on the app we use the web client id, so using the same here
-            $client = new Google_Client(['client_id' => config('services.google.client_id_app_android')]);
-            $payload = $client->verifyIdToken($token);
-            //echo '<pre>'.print_r($payload,true).'</pre>';die;
-
+            // tested options
             /*
+            =========================
+            dev app on android studio
+            =========================
+            app client_id web
+                backend client_id_app_android (android prod) => wrong user
+                backend client_id_app_android_debug (android debug) => wrong user
+                backend client_id (web) => WORKS
+
+            app client_id android prod
+                backend client_id_app_android (android prod) => ERROR
+                backend client_id_app_android_debug (android debug) => ERROR 
+                backend client_id (web) => ERROR
+
+            app client_id android debug
+                backend client_id_app_android (android prod) => ERROR
+                backend client_id_app_android_debug (android debug) => ERROR
+                backend client_id (web) => ERROR
+
+            when error it is:
+            androidx.credentials.exceptions.GetCredentialCustomException: [28444] Developer console is not set up correctly.
+
+            =========================
+            internal testing app on play console
+            =========================
+            app client_id web HAY QUE PROBAR OTRA VEZ
+                backend client_id_app_android (android prod) => ERROR
+                backend client_id_app_android_debug (android debug) => ERROR
+                backend client_id (web) => ERROR
+
+            app client_id android prod => ERROR BUT AT LEAST YOU GET THE POPUP TO SIGN IN
+                backend client_id_app_android (android prod) => ERROR
+                backend client_id_app_android_debug (android debug) => ERROR
+                backend client_id (web) => ERROR
+
+            app client_id android debug
+                backend client_id_app_android (android prod) =>
+                backend client_id_app_android_debug (android debug) => ERROR
+                backend client_id (web) =>
+
+
+            =========================
+            summary
+            =========================
+            testing app directly from android studio:
+                app =>  web client_id
+                backend => web client_id
+
+            testing app from play console, internal testing
+                app =>
+                backend => 
+
+            testing app from play console, beta testing
+                app => 
+                backend => 
+
+            prod app on play console
+                app => 
+                backend =>
+            */
+
+
+            // on the app we use the web client id, so using the same here
+            /*
+            $debug = 0; 
+            if(isset($request->debug) && !empty($request->debug)){
+                // app on android studio
+                $debug = 1;
+            }
+
+            $client = new Google_Client(['client_id' => config('services.google.client_id')]);
+            $payload = $client->verifyIdToken($token);
+            if(isset($payload) && !empty($payload)){
+                sendTelegram("client working: client_id. debug: ".$debug);
+            }
+            else{
+                $client = new Google_Client(['client_id' => config('services.google.client_id_app_android')]);
+                $payload = $client->verifyIdToken($token);
+                if(isset($payload) && !empty($payload)){
+                    sendTelegram("client working: client_id_app_android. debug: ".$debug);
+                }
+                else{
+                    $client = new Google_Client(['client_id' => config('services.google.client_id_app_android_debug')]);
+                    $payload = $client->verifyIdToken($token);
+                    if(isset($payload) && !empty($payload)){
+                        sendTelegram("client working: client_id_app_android_debug. debug: ".$debug);
+                    }
+                    else{
+                        sendTelegram("nothing working. debug: ".$debug);
+                    }
+                }
+            }
+            */
+
+            $client = new Google_Client(['client_id' => config('services.google.client_id')]);
+            $payload = $client->verifyIdToken($token);
+        
+            if($payload){
+
+                /*
                 Array
                 (
                     [iss] => https://accounts.google.com
@@ -430,8 +592,7 @@ class AuthenticatedSessionController extends Controller
                     [iat] => 1733938900
                     [exp] => 1733942500
                 )
-            */
-            if($payload){
+                */
 
                 $userEmail = $payload['email'];
                 // If the request specified a Google Workspace domain
@@ -444,7 +605,7 @@ class AuthenticatedSessionController extends Controller
                 // register
                 if(!isset($found) || empty($found)){
 
-                    $loginApp = getRandomToken($found);
+                    $loginApp = getRandomToken();
 
                     $name = '';
                     if(isset($payload['name']) && !empty($payload['name'])){

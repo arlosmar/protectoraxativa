@@ -9,4 +9,5 @@ use App\Http\Controllers\API\APIController;
 Route::post('/token', [APIController::class, 'token']);
 
 // must be logged in. it means it expects Bearer XXXXX with token
-Route::get('/news', [APIController::class, 'news'])->middleware('auth:sanctum');
+//Route::get('/news', [APIController::class, 'news'])->middleware('auth:sanctum');
+Route::get('/news', [APIController::class, 'news']);

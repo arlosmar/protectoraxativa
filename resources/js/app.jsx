@@ -16,13 +16,12 @@ import { I18nextProvider } from 'react-i18next';
 import i18n from './i18n';
 
 // apply dark mode
-import { applyDarkMode, setCookie } from "@/Utils/Cookies";
+import { applyDarkMode } from "@/Utils/Cookies";
 const darkmode = applyDarkMode();
 
 // save device info on cookie to have useful information
-import { getDeviceInfo } from "@/Utils/Device";
-const device = getDeviceInfo();
-setCookie('device',device);
+import { setDeviceInfo } from "@/Utils/Device";
+setDeviceInfo();
 
 // https://www.npmjs.com/package/react-error-boundary
 //import { useTranslation } from "react-i18next";

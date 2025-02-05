@@ -34,7 +34,7 @@ import { useSwipeable } from 'react-swipeable';
 import Sticky from '@/Components/Sticky';
 
 export default function Home({user,language,section,email_colaboration,email_volunteering,
-    social,partners,prices,forms,guides,message,darkmode}){
+    social,partners,prices,forms,guides,message,darkmode,deviceId}){
 
 	const { t, i18n } = useTranslation('global');
 
@@ -48,6 +48,10 @@ export default function Home({user,language,section,email_colaboration,email_vol
         // check if darkmode from the app
         if(darkmode){
             setDarkMode(darkmode,false);
+        }
+
+        if(deviceId){
+            setDeviceId(deviceId);
         }
 
     }, []);

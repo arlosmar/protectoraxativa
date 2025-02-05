@@ -24,7 +24,8 @@ import { useSwipeable } from 'react-swipeable';
 import { applyDarkMode } from "@/Utils/Cookies";
 
 export default function Intranet({auth,user,section,subsection,status,msg,
-    options,imagesPaths,baseUrl,itemsPerPage,page,notifications,emails,social,isApp,appNotificationsEnabled}){
+    options,imagesPaths,baseUrl,itemsPerPage,page,notifications,emails,social,isApp,
+    appNotificationsEnabled,biometric}){
 
     // when logged in, if the user has in its preferences the darkmode, apply it
     const darkmode = applyDarkMode(user);
@@ -121,7 +122,8 @@ export default function Intranet({auth,user,section,subsection,status,msg,
                             setUserSettings={setUserSettings}
                             notifications={notifications}    
                             isApp={isApp}   
-                            appNotificationsEnabled={appNotificationsEnabled}        
+                            appNotificationsEnabled={appNotificationsEnabled}    
+                            biometric={biometric}    
                         />
                     :
                         tab === 'account' ?

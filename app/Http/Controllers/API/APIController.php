@@ -9,6 +9,9 @@ use App\Http\Requests\API\TokenRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\{News};
 
+// to change the api prefix for the route:
+// bootstrap/app.php
+
 class APIController extends Controller
 {
 
@@ -45,6 +48,25 @@ class APIController extends Controller
         ],$language);
     }
 
+    /*
+    public function destroy(Request $request){
+
+        // if Bearer: token is valid, it gets the user
+        $user = $request->user();
+
+        $user->currentAccessToken()->delete();
+
+        $language = null;
+        if(isset($request->language) && !empty($request->language)){
+            $language = $request->language;
+        }
+
+        return apiResponse(true,'Logout',[],$language);
+    }
+    */
+
+    /*
+    news with authorization
     public function news(Request $request){
 
         // if Bearer: token is valid, it gets the user
@@ -63,13 +85,48 @@ class APIController extends Controller
             'news' => $news
         ],$language);
     }
-
-    /*
-    public function destroy(Request $request){
-
-        $request->user()->currentAccessToken()->delete();
-
-        return response()->json(['message' => 'Logout successful']);
-    }
     */
+    public function news(Request $request){
+
+        $page = $request->get('page');
+        if(isset($page) && !empty($page)){
+            if(!is_numeric($page) || $page < 1){
+                $page = 1;
+            }
+        }
+        else{
+            $page = 1;
+        }
+
+        $newsPerPage = env('NEWS_PER_PAGE',5);
+
+        $newsSettings = News::where('hidden',false)->orderBy('date','desc')->orderBy('id','desc');
+
+        $total = $newsSettings->count();
+        $pages = ceil($total/$newsPerPage);
+
+        $startAt = (($page-1)*$newsPerPage)+1;
+        $news = $newsSettings->skip($startAt-1)->take($newsPerPage)->get();
+
+        // disable load more if no news or less than requested
+        /*
+        $disabled = false;
+        if(!isset($news) || empty($news) || count($news) < $newsPerPage){
+            $disabled = true;
+        } 
+        */
+
+        $language = null;
+        if(isset($request->language) && !empty($request->language)){
+            $language = $request->language;
+        }
+
+        return apiResponse(true,'Authorized',[
+            'timestamp' => now('UTC')->format('Y-m-d H:i:s'),
+            'items' => count($news),
+            'page' => $page,
+            'pages' => $pages,
+            'news' => $news
+        ],$language);
+    }
 }

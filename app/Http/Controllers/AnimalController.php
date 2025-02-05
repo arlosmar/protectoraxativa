@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\JsonResponse;
 use DB;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Cache;
 
 class AnimalController extends Controller{
 
@@ -57,17 +58,31 @@ class AnimalController extends Controller{
             'baseUrl','imagesPaths','page','forms','prices','guides','reloadAfterTime','itemsPerPage'));
     }
 
+    public function clearCache(){
+        Cache::forget('animals_all');
+        Cache::forget('animals_adopt_animals');
+        Cache::forget('animals_adopt_adopted');
+        Cache::forget('animals_sponsor_animals');
+        Cache::forget('animals_sponsor_sponsored');
+        Cache::forget('animals_heaven_external');
+        Cache::forget('animals_heaven');
+        Cache::forget('animals_hidden');
+    }
+
     public function getAnimals($section,$subsection){
 
         $animals = [];
-        
+        $this->clearCache();
         if(isset($section) && !empty($section)){
 
             switch($section){
 
                 // when on user profile
                 case 'all':
-                    $animals = Animal::with('status','sponsor','type','age','gender','size','breed','person','person.animals')->orderBy('name','asc')->orderBy('code','asc')->get();
+                    //$animals = Animal::with('status','sponsor','type','age','gender','size','breed','person','person.animals')->orderBy('name','asc')->orderBy('code','asc')->get();
+                    $animals = Cache::rememberForever('animals_all', function () {
+                        return Animal::with('status','sponsor','type','age','gender','size','breed','person','person.animals')->orderBy('name','asc')->orderBy('code','asc')->get();
+                    });
                     break;
 
                 case 'adopt':
@@ -77,16 +92,30 @@ class AnimalController extends Controller{
                         switch($subsection){
 
                             case 'animals':
-                                $animals = Animal::where('hidden',false)->where('dead',false)->where(
+                                /*$animals = Animal::where('hidden',false)->where('dead',false)->where(
                                 function ($query) {
                                     $query->where('status_id','1')
                                     ->orWhereNull('status_id')
                                     ->orWhere('status_id', '=', '');
                                 })->with('status','sponsor','type','age','gender','size','breed','person')->orderBy('name','asc')->orderBy('code','asc')->get();
+                                */
+                                $animals = Cache::rememberForever('animals_adopt_animals', function () {
+                                    return Animal::where('hidden',false)->where('dead',false)->where(
+                                        function ($query) {
+                                            $query->where('status_id','1')
+                                            ->orWhereNull('status_id')
+                                            ->orWhere('status_id', '=', '');
+                                        })->with('status','sponsor','type','age','gender','size','breed','person')->orderBy('name','asc')->orderBy('code','asc')->get();
+                                });
                                 break;
 
                             case 'adopted':
+                                /*
                                 $animals = Animal::where('hidden',false)->where('dead',false)->where('status_id','2')->with('status','sponsor','type','age','gender','size','breed','person')->orderBy('name','asc')->orderBy('code','asc')->get();
+                                */
+                                $animals = Cache::rememberForever('animals_adopt_adopted', function () {
+                                    return Animal::where('hidden',false)->where('dead',false)->where('status_id','2')->with('status','sponsor','type','age','gender','size','breed','person')->orderBy('name','asc')->orderBy('code','asc')->get();
+                                });
                                 break;
                         }
                     }
@@ -98,21 +127,41 @@ class AnimalController extends Controller{
                         switch($subsection){
 
                             case 'animals':
+                                /*
                                 $animals = Animal::where('hidden',false)->where('dead',false)->where(
                                 function ($query) {
                                     $query->where('status_id','1')
                                     ->orWhereNull('status_id')
                                     ->orWhere('status_id', '=', '');
                                 })->where('sponsor_id','3')->with('status','sponsor','type','age','gender','size','breed','person')->orderBy('name','asc')->orderBy('code','asc')->get();
+                                */
+                                $animals = Cache::rememberForever('animals_sponsor_animals', function () {
+                                    return Animal::where('hidden',false)->where('dead',false)->where(
+                                        function ($query) {
+                                            $query->where('status_id','1')
+                                            ->orWhereNull('status_id')
+                                            ->orWhere('status_id', '=', '');
+                                        })->where('sponsor_id','3')->with('status','sponsor','type','age','gender','size','breed','person')->orderBy('name','asc')->orderBy('code','asc')->get();
+                                        });
                                 break;
 
                             case 'sponsored':
+                                /*
                                 $animals = Animal::where('hidden',false)->where('dead',false)->where(
                                 function ($query) {
                                     $query->where('status_id','1')
                                     ->orWhereNull('status_id')
                                     ->orWhere('status_id', '=', '');
                                 })->where('sponsor_id','2')->with('status','sponsor','type','age','gender','size','breed','person')->orderBy('name','asc')->orderBy('code','asc')->get();
+                                */
+                                $animals = Cache::rememberForever('animals_sponsor_sponsored', function () {
+                                    return Animal::where('hidden',false)->where('dead',false)->where(
+                                        function ($query) {
+                                            $query->where('status_id','1')
+                                            ->orWhereNull('status_id')
+                                            ->orWhere('status_id', '=', '');
+                                        })->where('sponsor_id','2')->with('status','sponsor','type','age','gender','size','breed','person')->orderBy('name','asc')->orderBy('code','asc')->get();
+                                        });
                                 break;
                         }
                     }
@@ -122,17 +171,26 @@ class AnimalController extends Controller{
 
                     // if public, show dead with hidden false. the external animals
                     if(isset($subsection) && $subsection === 'animals'){
-                        $animals = Animal::where('dead',true)->where('hidden',false)->with('status','sponsor','type','age','gender','size','breed','person')->orderBy('name','asc')->orderBy('code','asc')->get();
+                        //$animals = Animal::where('dead',true)->where('hidden',false)->with('status','sponsor','type','age','gender','size','breed','person')->orderBy('name','asc')->orderBy('code','asc')->get();
+                        $animals = Cache::rememberForever('animals_heaven_external', function () {
+                            return Animal::where('dead',true)->where('hidden',false)->with('status','sponsor','type','age','gender','size','breed','person')->orderBy('name','asc')->orderBy('code','asc')->get();
+                        });
                     }
                     else{
                         // for internal use: if dead it goes to heaven even if hidden
-                        $animals = Animal::/*where('hidden',false)->*/where('dead',true)->with('status','sponsor','type','age','gender','size','breed','person')->orderBy('name','asc')->orderBy('code','asc')->get();
+                        //$animals = Animal::/*where('hidden',false)->*/where('dead',true)->with('status','sponsor','type','age','gender','size','breed','person')->orderBy('name','asc')->orderBy('code','asc')->get();
+                        $animals = Cache::rememberForever('animals_heaven', function () {
+                            return Animal::/*where('hidden',false)->*/where('dead',true)->with('status','sponsor','type','age','gender','size','breed','person')->orderBy('name','asc')->orderBy('code','asc')->get();
+                        });
                     }
                     break;
 
                 case 'hidden':
                     // if dead it goes to heaven even if hidden
-                    $animals = Animal::where('hidden',true)->where('dead',false)->with('status','sponsor','type','age','gender','size','breed','person')->orderBy('name','asc')->orderBy('code','asc')->get();                    
+                    //$animals = Animal::where('hidden',true)->where('dead',false)->with('status','sponsor','type','age','gender','size','breed','person')->orderBy('name','asc')->orderBy('code','asc')->get();                    
+                    $animals = Cache::rememberForever('animals_hidden', function () {
+                        return Animal::where('hidden',true)->where('dead',false)->with('status','sponsor','type','age','gender','size','breed','person')->orderBy('name','asc')->orderBy('code','asc')->get();        
+                    });
                     break;
             }
         }
@@ -247,12 +305,13 @@ class AnimalController extends Controller{
                     // if external animal (dead and not hidden)
                     if(isset($isExternal) && !empty($isExternal)){                    
                         $prefix = 'animal_external_';
-                        $animalFileId = $newAnimal['id']; // external does not have code
+                        $animalFileId = $newAnimal['id'];
                         $animalFilePath = config('paths.files.animals_external');
                     }
                     else{
                         $prefix = 'animal_';
-                        $animalFileId = $newAnimal['code'];
+                        //$animalFileId = $newAnimal['code'];
+                        $animalFileId = $newAnimal['id'];
                         $animalFilePath = config('paths.files.animals');
                     }
 
@@ -314,6 +373,8 @@ class AnimalController extends Controller{
                         // update images on inserted animal
                         $updated = $newAnimal->update($images);
                     }
+
+                    $this->clearCache();
 
                     // if properly updated delete old images                    
                     if(isset($updated) && !empty($updated)){
@@ -442,6 +503,7 @@ class AnimalController extends Controller{
 
         try{
             $delete = $animal->delete();
+            $this->clearCache();
             return response()->json(['result' => true]);
         }
         catch(\Exception $e){

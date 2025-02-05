@@ -181,7 +181,8 @@ export const sendTelegram = async (message,localhost = false,extraInfo = '') => 
         if(
             !message.includes('Unable to preload CSS') &&
             !message.includes('Failed to fetch dynamically imported module') &&
-            !message.includes('Importing a module script failed')
+            !message.includes('Importing a module script failed') &&
+            !message.includes('The node to be removed is not a child of this node')
         ){
 
             const device = getDeviceInfo();

@@ -363,7 +363,8 @@ export const formatAnimal = (t,item) => {
         date_entry: date(item?.date_entry,false,false),
         date_exit: date(item?.date_exit,false,false),
         date_entry2: date(item?.date_entry2,false,false),
-        date_exit2: date(item?.date_exit2,false,false)
+        date_exit2: date(item?.date_exit2,false,false),
+        created_at: date(item?.created_at,false,false)
     };
   
     return itemFormatted;
@@ -654,6 +655,10 @@ export const descendingComparator = (a, b, orderBy, origin) => {
 
         case 'user-people':            
             datesSpanishSlash = ['birthdate','birthdate2'];
+            break;
+
+        case 'animals':
+            datesSpanishSlash = ['created_at'];
             break;
     }
 

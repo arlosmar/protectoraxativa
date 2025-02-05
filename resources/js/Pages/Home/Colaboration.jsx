@@ -236,7 +236,7 @@ export default function Colaboration({t,email_colaboration,email_volunteering,pr
                 >                
                 </div>
                 <div
-                    className='home-colaboration-sponsorship-list'
+                    id='home-colaboration-sponsorship-list'
                     dangerouslySetInnerHTML={{__html: t('introduction.colaboration.line21',
                         {shelter:t('introduction.colaboration.shelter'),
                         apu:t('introduction.colaboration.apu')})

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import Switch from '@/Components/Switch';
 import { useForm } from '@inertiajs/react';
 
-import { getDarkMode, setDarkMode, getAuthentication, removeAuthentication } from "@/Utils/Cookies";
+import { getDarkMode, setDarkMode } from "@/Utils/Cookies";
 import { register } from '@/Components/Authentication';
 
 import { notificationsSupported, checkPermission, requestPermission } from '@/Utils/Notifications';
@@ -11,21 +11,22 @@ import { notificationsSupported, checkPermission, requestPermission } from '@/Ut
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 
-export default function Settings({ t, user, userSettings, setUserSettings, notifications, isApp, appNotificationsEnabled }) {
+import { getDeviceId } from "@/Utils/Device";
 
-    const darkmode = getDarkMode();
+export default function Settings({ t, user, userSettings, setUserSettings, notifications, 
+    isApp, appNotificationsEnabled, biometric }) {
 
     const [ loading, setLoading ] = useState(false);
 
+    const [ deviceId, setDeviceId ] = useState(getDeviceId());
+
     const [ notificationsAvailable, setNotificationsAvailable ] = useState(notificationsSupported());
     
-    // authentication is enabled if the cookie is there and is for that user
-    const authenticationEnabled = getAuthentication(); 
-    const authentication = authenticationEnabled && authenticationEnabled?.authentication !== null &&
-    authenticationEnabled?.userId === user?.id ? true : false;
+    //const authenticationEnabledApp = authenticationEnabledApp(); 
 
-    const [ checkedDarkmode, setCheckedDarkMode ] = useState(darkmode);
-    const [ checkedAuthentication, setCheckedAuthentication ] = useState(authentication);
+    const [ checkedDarkmode, setCheckedDarkMode ] = useState(getDarkMode());
+    // (isApp && authenticationEnabledApp) ||
+    const [ checkedAuthentication, setCheckedAuthentication ] = useState(biometric ? true : false);
     
     var permissionNotifications = checkPermission();
 
@@ -269,31 +270,52 @@ export default function Settings({ t, user, userSettings, setUserSettings, notif
                     setCheckedAuthentication(value);
                 }
 
-                var credentialJson = null;
-                if(value){                  
-                    setLoading(true);         
-                    credentialJson = await register(user);
-                    setLoading(false);
+                // if app and enabling. because if disabling it is the same as web. remove value from database
+                if(isApp){
 
-                    if(credentialJson !== false && credentialJson.length > 0){
-                        setCheckedAuthentication(value);
+                    if(window.AndroidHandler?.biometric){
+                        setLoading(true); 
+                        var isAdmin = (user && user?.admin === 1) ? true : false;
+                        window.AndroidHandler.biometric(value,isAdmin);
                     }
                     else{
                         setError(t('user.profile.settings.authentication.notAllowed'));
                         setMessage('');
                         setOpenToast(true);
                     }
+                    return;
                 }
+                else{
+                    var credentialJson = null;
+                    if(value){                  
+                        setLoading(true);         
+                        credentialJson = await register(user);
+                        setLoading(false);
 
-                if(credentialJson !== false){                   
-                    var path = 'settings.authentication';
-                    var dataSend = {authentication: credentialJson};
-                } 
-                else{                    
-                    // false is when clicking cancel on the prompt
-                    //setCheckedAuthentication(oldValue);                    
-                    return;                    
-                }                       
+                        if(credentialJson !== false && credentialJson.length > 0){
+                            setCheckedAuthentication(value);
+                        }
+                        else{
+                            setError(t('user.profile.settings.authentication.notAllowed'));
+                            setMessage('');
+                            setOpenToast(true);
+                            return;
+                        }
+                    }
+
+                    if(credentialJson !== false){                   
+                        var path = 'settings.authentication';
+                        var dataSend = {
+                            authentication: credentialJson,
+                            device: deviceId
+                        };
+                    } 
+                    else{                    
+                        // false is when clicking cancel on the prompt
+                        //setCheckedAuthentication(oldValue);                    
+                        return;                    
+                    }  
+                }                     
                 break;
 
             default:
@@ -310,10 +332,10 @@ export default function Settings({ t, user, userSettings, setUserSettings, notif
                 //setError('');
 
                 // if success and we were removing the authentication, set the cookie
-                if(setting === 'authentication' && credentialJson === null){
-                    removeAuthentication();
-                }
-                else{
+                //if(setting === 'authentication' && credentialJson === null){
+
+                //}
+                //else{
                     // update user settings in case we change tab and come back here again
                     if( 
                         setting === 'notifications' || 
@@ -324,7 +346,7 @@ export default function Settings({ t, user, userSettings, setUserSettings, notif
                         var newSettings = response.data.settings;
                         setUserSettings(newSettings);
                     }
-                }                
+                //}                
             }
             else{
                 // error
@@ -358,7 +380,13 @@ export default function Settings({ t, user, userSettings, setUserSettings, notif
                         setCheckedAuthentication(oldValue);                        
                         break;
                 } 
-                setError(t('trans.Saved-Error'));
+
+                if(response.data?.message){
+                    setError(response.data.message);
+                }
+                else{
+                    setError(t('trans.Saved-Error'));
+                }
                 setMessage('');
                 setOpenToast(true);
             }
@@ -412,17 +440,14 @@ export default function Settings({ t, user, userSettings, setUserSettings, notif
                 label={t('user.profile.settings.dark-mode')}
             />            
         </div>
-        {
-            !isApp &&
-            <div className='settings-div-box mt-2'>
-                <Switch
-                    name="authentication"                       
-                    checked={checkedAuthentication}
-                    onChange={handleSettings}
-                    label={t('user.profile.settings.biometric')}
-                />            
-            </div>
-        }
+        <div className='settings-div-box mt-2'>
+            <Switch
+                name="authentication"                       
+                checked={checkedAuthentication}
+                onChange={handleSettings}
+                label={t('user.profile.settings.biometric')}
+            />            
+        </div>
         <div className='settings-div-box mt-2'>                    
             <Switch
                 name="notifications"

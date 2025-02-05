@@ -44,10 +44,13 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        $loginApp = getRandomToken();
+
         $userInfo = [
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
+            'loginApp' => $loginApp
         ];
 
         // if cookie language, save on user
@@ -70,11 +73,7 @@ class RegisteredUserController extends Controller
         $userInfo['settings'] = $this->getDefaultSettings($extraDefaultSettings);
 
         $user = User::create($userInfo);
-
-        // add loginApp
-        $loginApp = getRandomToken($user);
-        $user->update(['loginApp' => $loginApp]);
-
+        
         event(new Registered($user));
 
         // save device id

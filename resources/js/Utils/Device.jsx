@@ -1,5 +1,49 @@
 import * as deviceInfo from 'react-device-detect';
 import { getParameter } from "@/Utils/Variables";
+import Cookies from 'universal-cookie';
+
+// set a unique string as a kind of device id
+export const setDeviceId = (deviceId = null) => {
+
+	const cookies = new Cookies();
+
+	// coming from app
+	if(deviceId !== null){
+		localStorage.setItem("deviceId",deviceId);
+		cookies.set("deviceId",deviceId,{path: '/'});
+		//setCookie("deviceId",deviceId);
+	}
+	else{
+		// check if value on local storage
+		deviceId = localStorage.getItem("deviceId");
+		var newDeviceId = null;
+
+		// if not there, create
+		if(deviceId && deviceId.length > 0){
+			newDeviceId = deviceId;
+		}
+		else{
+			newDeviceId = Date.now();
+			localStorage.setItem("deviceId",newDeviceId); 
+		}
+
+		// set a cookie with the value. cookie because we need it on backend
+		//setCookie("deviceId",newDeviceId);
+		cookies.set("deviceId",newDeviceId,{path: '/'});
+	}
+}
+
+export const getDeviceId = () => {
+
+	var result = null;
+	var deviceId = localStorage.getItem("deviceId");//getCookie("deviceId");
+
+	if(deviceId && deviceId.length > 0){
+		result = deviceId;
+	}
+
+	return result;
+}
 
 // https://www.npmjs.com/package/react-device-detect
 // https://github.com/duskload/react-device-detect/blob/HEAD/docs/selectors.md
@@ -42,6 +86,30 @@ export const getDeviceInfo = () => {
 		deviceDetect: deviceDetect
 	};
 	*/
+}
+
+export const setDeviceInfo = () => {
+
+	const cookies = new Cookies();
+
+	var deviceInfo = localStorage.getItem("device");
+	var deviceInfoCookie = cookies.get("device");
+
+	var device = null;
+	if(!deviceInfo || deviceInfo.length === 0){
+		device = getDeviceInfo();
+		localStorage.setItem("device",device); 
+	}
+	else{
+		device = deviceInfo;
+	}
+
+	if(!deviceInfoCookie || deviceInfoCookie.length === 0){
+		cookies.set("device",device,{path: '/'});
+	}
+
+	// set unique device id
+	setDeviceId();
 }
 
 export const checkIsIOS = () => {

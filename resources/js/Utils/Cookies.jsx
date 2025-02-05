@@ -1,28 +1,31 @@
-import Cookies from 'universal-cookie';
+// using localStorage
+//import Cookies from 'universal-cookie';
 
 export const getCookie = (name) => {
-    const cookies = new Cookies();
-    return cookies.get(name);
+    //const cookies = new Cookies();
+    //return cookies.get(name);
+    return localStorage.getItem(name);
 }
 
 export const setCookie = (name,value) => {
-    const cookies = new Cookies();
-    cookies.set(name,value,{path: '/'});
+    //const cookies = new Cookies();
+    //cookies.set(name,value,{path: '/'});
+    localStorage.setItem(name,value);
 }
 
+// use localStorage to keep value
 export const getLanguage = () => {
 
-    const cookies = new Cookies();
-
-    return cookies.get('language');
+    //const cookies = new Cookies();
+    //return cookies.get('language');
+    return localStorage.getItem("language");
 }
 
 export const setLanguage = (language) => {
 
-    const cookies = new Cookies();
-
-    //localStorage.setItem('language',language);
-    cookies.set("language",language,{path: '/'});
+    //const cookies = new Cookies();
+    //cookies.set("language",language,{path: '/'});
+    localStorage.setItem("language",language);
 
     // communicate with app
     if(window?.AndroidHandler?.language){                    
@@ -32,26 +35,29 @@ export const setLanguage = (language) => {
 
 export const setDarkMode = (darkmode, sendApp = true) => {
 
-    const cookies = new Cookies();
+    var darkmodeInt = darkmode ? 1 : 0;
 
-    cookies.set("darkmode",darkmode,{path: '/'});
+    //const cookies = new Cookies();
+    //cookies.set("darkmode",darkmodeInt,{path: '/'});
+    localStorage.setItem("darkmode",darkmodeInt);
 
     applyDarkModeClasses(darkmode);
 
     // send to android app
     if(sendApp && window?.AndroidHandler?.darkmode){                    
-        window.AndroidHandler.darkmode(darkmode ? true : false);                    
+        window.AndroidHandler.darkmode(darkmode);
     }
 }
 
 export const getDarkMode = () => {
 
-    const cookies = new Cookies();
+    //const cookies = new Cookies();
+    //const darkmodeInt = cookies.get("darkmode");
+    const darkmodeInt = localStorage.getItem("darkmode");
 
-    const darkmode = cookies.get("darkmode");
-
-    if(darkmode !== null && typeof darkmode !== 'undefined'){
-        if(darkmode){
+    if(darkmodeInt !== null && typeof darkmodeInt !== 'undefined'){
+        
+        if(parseInt(darkmodeInt) === 1){
             return true;
         }
         else{
@@ -60,49 +66,6 @@ export const getDarkMode = () => {
     }
     else{
         return false;
-    }
-}
-
-export const setAuthentication = (user,authentication) => {
-
-    const cookies = new Cookies();
-    
-    // add user to know who is later
-    const credential = {
-        authentication: authentication,
-        user: user?.id
-    }; 
-
-    // if saving in json it saves strange characters in cookies
-    cookies.set("authentication",credential,{path: '/'});
-
-    const credentialJson = JSON.stringify(authentication); 
-
-    return credentialJson;
-}
-
-export const removeAuthentication = () => {
-    const cookies = new Cookies();
-    cookies.set("authentication",null,{path: '/'});
-}
-
-export const getAuthentication = () => {
-
-    const cookies = new Cookies();
-
-    const credential = cookies.get("authentication");
-
-    if(credential){
-        return {
-            userId: credential?.user,
-            authentication: credential?.authentication
-        };
-    }
-    else{
-        return {
-            userId: null,
-            authentication: null
-        }
     }
 }
 
@@ -149,7 +112,7 @@ export const applyDarkMode = (user = null) => {
 
         // send to android app
         if(window?.AndroidHandler?.darkmode){
-            window.AndroidHandler.darkmode(darkmode ? true : false);                    
+            window.AndroidHandler.darkmode(darkmode);
         }
     }
 

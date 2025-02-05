@@ -10,6 +10,10 @@ import ButtonsActions from '@/Components/ButtonsActions';
 import FilterAnimals from '@/Pages/Animals/FilterAnimals';
 import { csv } from "@/Utils/Export";
 
+import { getComparator } from "@/Utils/Format";
+
+import Toast from '@/Components/Toast'; 
+
 export default function CarouselAnimals({user,origin,title,t,animals,baseUrl,
     imagePath,imagesPaths,page,loading,options,itemsPerPage}){
 
@@ -21,6 +25,34 @@ export default function CarouselAnimals({user,origin,title,t,animals,baseUrl,
 
     const handleOpenSearch = (e) => {
         setOpenSearch(!openSearch);
+    };
+
+    const [ sortByName, setSortByName ] = useState(true);
+
+    const handleSort = (e) => {
+
+        var newValue = !sortByName;
+        
+        setSortByName(newValue);
+
+        // if true, order by name asc. if false order by created_at desc
+        if(newValue){
+            var orderBy = 'name';
+            var order = 'asc';
+            setToastMsg(t('animals.order.name'));
+        }
+        else{
+            var orderBy = 'created_at';
+            var order = 'desc';
+            setToastMsg(t('animals.order.date'));
+        }
+
+        var newOrderedList = filteredAnimals.sort(getComparator(order,orderBy,'animals'));
+
+        setFilteredAnimals(newOrderedList);
+
+        setToastErrorMsg('');
+        setOpenToast(true);
     };
 
     // when loading animals each time when clicking the tab
@@ -99,8 +131,18 @@ export default function CarouselAnimals({user,origin,title,t,animals,baseUrl,
     </div>
     */
 
+    const [ toastMsg, setToastMsg ] = useState('');
+    const [ toastErrorMsg, setToastErrorMsg ] = useState('');
+    const [ openToast, setOpenToast ] = useState(false);
+
     return (
         <>
+        <Toast 
+            open={openToast}
+            setOpen={setOpenToast}
+            message={toastMsg}
+            error={toastErrorMsg}
+        />
         <h1 className='title-carousel'>   
             {title}
             {/*
@@ -112,6 +154,7 @@ export default function CarouselAnimals({user,origin,title,t,animals,baseUrl,
             <ButtonsActions
                 origin={origin}                
                 handleExport={handleExport}
+                handleSort={handleSort}
                 handleOpenSearch={handleOpenSearch}
             />
         }

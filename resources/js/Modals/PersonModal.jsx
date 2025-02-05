@@ -120,14 +120,20 @@ export default function PersonModal({origin,t,show,setShow,imagesPaths,person,
         window.location = route('admin.people')+'?view='+person?.id;
     }
 
+    const [ link, setLink ] = useState('');
+    const [ shareTitle, setShareTitle ] = useState('');
+
     const handleShare = async () => {
+
+        var itemTitle = person?.name && person.name.length > 0 ? person.name : t('user.people.title');
 
         // if native mobile share        
         if(navigator?.share || window?.AndroidHandler?.share){
             
             try{
                 const shareData = {
-                    title: t('share.title-native'),
+                    //title: t('share.title-native'),
+                    title: itemTitle,
                     //text: t('trans.text'),
                     url: route('admin.people')+'?view='+person?.id
                 };
@@ -149,6 +155,8 @@ export default function PersonModal({origin,t,show,setShow,imagesPaths,person,
         } 
         else{
             // if no native mobile share, show popup
+            setShareTitle(itemTitle);
+            setLink(route('admin.people')+'?view='+person?.id);
             setShare(true);
         }
     }
@@ -165,7 +173,8 @@ export default function PersonModal({origin,t,show,setShow,imagesPaths,person,
             t={t}
             show={share}
             setShow={setShare}
-            link={route('admin.people')+'?view='+person?.id}          
+            title={shareTitle}
+            link={link}
         />
         <DeleteModal
             t={t}

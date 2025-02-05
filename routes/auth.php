@@ -40,6 +40,7 @@ Route::middleware('guest')->group(function () {
     });
     */
     Route::get('google', [AuthenticatedSessionController::class, 'google'])->name('google');
+    //Route::get('apple', [AuthenticatedSessionController::class, 'apple'])->name('apple');
      
     Route::get('callback/{type}', [AuthenticatedSessionController::class, 'loginCallback']);
 
@@ -150,7 +151,7 @@ Route::middleware(['auth','verified',Admin::class])->group(function () {
     //Route::patch('/person/edit', [PersonController::class, 'edit'])->name('person.edit');
     
     // optional parameter because if creating you don't have any person
-    Route::patch('/person/edit/{person?}', [PersonController::class, 'edit'])->name('person.edit');
+    Route::post('/person/edit/{person?}', [PersonController::class, 'edit'])->name('person.edit');
 
     Route::post('/person/delete/{person}', [PersonController::class, 'delete'])->name('person.delete');
 

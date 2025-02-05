@@ -1,11 +1,11 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
-import { getLanguage } from "@/Utils/Cookies";
+import { getLanguage, setLanguage } from "@/Utils/Cookies";
 
-import en from '../../lang/en.json'
-import es from '../../lang/es.json'
-import ca from '../../lang/ca.json'
+import en from '../../lang/en.json';
+import es from '../../lang/es.json';
+import ca from '../../lang/ca.json';
 
 const defaultLanguage = 'ca';
 //var language = localStorage.getItem('language');
@@ -13,6 +13,7 @@ var language = getLanguage();
 
 if(!language || language.length === 0){
     language = defaultLanguage;
+    setLanguage(language);
     //localStorage.setItem('language',language);
     //cookies.set("language",language,{path: '/'}); NOT NECESSARY TO DO ALL THE TIME.
 }

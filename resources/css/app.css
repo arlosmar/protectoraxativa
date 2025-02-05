@@ -358,6 +358,14 @@ a{
 	@apply app-button text-white bg-black;
 }
 
+.apple-button{
+	@apply app-button text-white bg-black;
+}
+
+.login-button,.google-button,.apple-button{
+	width: 200px;
+}
+
 .animal-link,.person-link{
 	@apply app-button app-background-color;
 }
@@ -726,16 +734,16 @@ ul{
 	@apply pl-6;
 }
 
-.home-colaboration-sponsorship-list{
+#home-colaboration-sponsorship-list{
 	@apply pl-4;
 }
 
 #home-adopt-info-list{
-	@apply pl-4;
+	@apply pl-6;
 }
 
-.home-colaboration-sponsorship-list li,.home-adopt-info-list li{
-	@apply pt-4;
+#home-colaboration-sponsorship-list li,#home-adopt-info-list li{
+	@apply pt-2;
 }
 
 .partners-div-generic-even{
@@ -829,7 +837,7 @@ ul{
 	@apply text-left;
 }
 
-#filter,#add,#export{
+#filter,#add,#export,#sort{
 	@apply app-text-color;	
 }
 

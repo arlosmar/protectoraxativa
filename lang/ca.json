@@ -194,6 +194,10 @@
     },
     "animals":   {
         "title" :   "Animals",
+        "order" : {
+            "name" : "Ordenat per nom",
+            "date" : "Ordenat per data més recent"
+        },
         "adopt" :   {
             "icon"  :   "Adoptar",
             "title" :   "Adoptar",
@@ -513,7 +517,8 @@
         "forgot-send" : "Enviar",
         "reset" : "Restablir",
         "register" : "Registrar-se",
-        "google" : "Google"
+        "google" : "Google",
+        "apple" : "Apple"
     },
     "contact": {
         "title" : "Contactar",

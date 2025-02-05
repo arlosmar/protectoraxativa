@@ -108,14 +108,20 @@ export default function NewsModal({user,origin,t,show,setShow,imagesPaths,newsIt
         window.location = route('admin.news')+'?view='+newsItem?.id;
     }
 
+    const [ link, setLink ] = useState('');
+    const [ shareTitle, setShareTitle ] = useState('');
+
     const handleShare = async () => {
+
+        var itemTitle = newsItem?.title && newsItem.title.length > 0 ? newsItem.title : t('Title.News');
 
         // if native mobile share        
         if(navigator?.share || window?.AndroidHandler?.share){
             
             try{
                 const shareData = {
-                    title: t('share.title-native'),
+                    //title: t('share.title-native'),
+                    title: itemTitle,
                     //text: t('trans.text'),
                     url: route('news')+'?view='+newsItem?.id
                 };
@@ -132,15 +138,18 @@ export default function NewsModal({user,origin,t,show,setShow,imagesPaths,newsIt
                 }
                 else {     
                     if(shareData.image && shareData.image.length > 0){
+
                         var split = shareData.image.split('/');   
                         var imageName = split.slice(-1);                     
                         let blob = await fetch(shareData.image).then(r => r.blob());
-                        shareData.files = [
-                            new File([blob],imageName, {
-                                type: blob.type,
-                            })
-                        ];
-                    }        
+                        var file = new File([blob],imageName, {
+                            type: blob.type,
+                        });
+
+                        if(navigator.canShare(file)){
+                            shareData.files = [file];
+                        }
+                    }     
                     await navigator.share(shareData);
                 }
             }
@@ -151,6 +160,8 @@ export default function NewsModal({user,origin,t,show,setShow,imagesPaths,newsIt
         } 
         else{
             // if no native mobile share, show popup
+            setShareTitle(itemTitle);
+            setLink(route('news')+'?view='+newsItem?.id);
             setShare(true);
         }
     }
@@ -171,7 +182,8 @@ export default function NewsModal({user,origin,t,show,setShow,imagesPaths,newsIt
             t={t}
             show={share}
             setShow={setShare}
-            link={route('news')+'?view='+newsItem?.id}          
+            title={shareTitle}
+            link={link}
         />
         <DeleteModal
             t={t}

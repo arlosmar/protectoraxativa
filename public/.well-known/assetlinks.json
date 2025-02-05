@@ -1,14 +1,26 @@
 [
   {
-    "relation" : [
+    "relation": [
       "delegate_permission/common.handle_all_urls",
       "delegate_permission/common.get_login_creds"
     ],
-    "target" : {
-      "namespace" : "spax",
-      "package_name" : "com.app.spax",
-      "sha256_cert_fingerprints" : [
-        
+    "target": {
+      "namespace": "spax",
+      "package_name": "com.app.spax",
+      "sha256_cert_fingerprints": [
+        "00:D2:04:40:93:BB:A3:0B:2D:40:46:25:8E:0F:46:0E:A1:DE:11:29:DF:26:BD:C0:35:2B:26:BC:5A:95:38:11"
+      ]
+    }
+  },
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.app.spax",
+      "sha256_cert_fingerprints": [
+        "00:D2:04:40:93:BB:A3:0B:2D:40:46:25:8E:0F:46:0E:A1:DE:11:29:DF:26:BD:C0:35:2B:26:BC:5A:95:38:11"
       ]
     }
   }

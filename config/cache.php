@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Str;
 
+//https://www.georgebuckingham.com/articles/laravel-cache-driver-performance/
+//https://medium.com/@jayprakashj/performance-optimization-in-laravel-11-caching-query-optimization-and-lazy-loading-f2fab6cd15c4
+//https://abu-sayed.medium.com/laravel-11-caching-mastery-from-basics-to-advanced-techniques-a01db71ed156
 return [
 
     /*

@@ -15,7 +15,7 @@ use Inertia\Response;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Hash;
-use App\Models\{Status,Sponsor,Type,Age,Gender,Size,Breed,Person};
+use App\Models\{Status,Sponsor,Type,Age,Gender,Size,Breed,Person,Biometric};
 use DB;
 
 class ProfileController extends Controller{
@@ -27,6 +27,35 @@ class ProfileController extends Controller{
     public function intranet(Request $request,$section = null,$subsection = null){
 
         $user = auth()->user();
+        //$user->load('biometrics');
+
+        $isApp = $this->isApp($request);
+
+        // get if user has a biometric for this device Id
+        $deviceId = getCookieValue("deviceId");
+        
+        $biometric = null;
+
+        if(isset($deviceId) && !empty($deviceId)){
+
+            // if we receive biometric=1 from the app, save on biometrics table
+            if(isset($isApp) && !empty($isApp) && isset($request->biometric)){
+
+                if(!empty($request->biometric)){
+                    $biometric = Biometric::updateOrCreate(
+                        ['user_id' => $user->id, 'device' => $deviceId],
+                        ['authentication' => 'app'] // this value does not matter
+                    );
+                }
+                else{
+                    // delete from database
+                    Biometric::where('user_id',$user->id)->where('device',$deviceId)->delete();
+                }
+            }
+            else{   
+                $biometric = $user->biometric($deviceId);
+            }
+        }
 
         $status = session('status');
 
@@ -64,15 +93,13 @@ class ProfileController extends Controller{
 
         $social = config('social.social');
 
-        $isApp = $this->isApp($request);
-
         // if app, check if notifications parameter stating notifications are disabled
         $appNotificationsEnabled = true;
         if($isApp && isset($request->notifications) && intval($request->notifications) === 0){
             $appNotificationsEnabled = false;
         }
 
-        return Inertia::render('Intranet/Intranet',compact('user','section','subsection','msg','status','options','imagesPaths','baseUrl','itemsPerPage','page','notifications','emails','social','isApp','appNotificationsEnabled'));
+        return Inertia::render('Intranet/Intranet',compact('user','section','subsection','msg','status','options','imagesPaths','baseUrl','itemsPerPage','page','notifications','emails','social','isApp','appNotificationsEnabled','biometric'));
     }
 
     // Display the user's profile form.

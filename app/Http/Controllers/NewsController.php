@@ -125,6 +125,14 @@ class NewsController extends Controller{
         try{
             
             $page = $request->get('page');
+            if(isset($page) && !empty($page)){
+                if(!is_numeric($page) || $page < 1){
+                    $page = 1;
+                }
+            }
+            else{
+                $page = 1;
+            }
 
             $newsPerPage = env('NEWS_PER_PAGE',5);
 
@@ -132,14 +140,8 @@ class NewsController extends Controller{
 
             // disable load more if no news or less than requested
             $disabled = false;
-            if(!isset($news) || empty($news)){
+            if(!isset($news) || empty($news) || count($news) < $totalNews){
                 $disabled = true;
-            }
-            else{            
-                $totalNews = $newsPerPage;
-                if(count($news) < $totalNews){
-                    $disabled = true;
-                }
             } 
 
             return response()->json(['result' => true, 'news' => json_encode($news), 'disabled' => $disabled]);

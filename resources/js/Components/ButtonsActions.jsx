@@ -2,10 +2,11 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import IconButton from '@mui/material/IconButton';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import DownloadIcon from '@mui/icons-material/Download';
+import SortIcon from '@mui/icons-material/SwapVert';
 
 import Box from '@mui/material/Box';
 
-export default function ButtonsActions({origin,handleCreate,handleExport,handleOpenSearch}){
+export default function ButtonsActions({origin,handleCreate,handleExport,handleOpenSearch,handleSort}){
 
 	const sxIcon = { fontSize: '40px' };
 
@@ -18,7 +19,7 @@ export default function ButtonsActions({origin,handleCreate,handleExport,handleO
                     <AddCircleIcon sx={sxIcon}/>
                 </IconButton> 
                 {
-                    (handleExport || handleOpenSearch) &&
+                    (handleExport || handleSort || handleOpenSearch) &&
                     <Box sx={{ flexGrow: 1 }}/>
                 }
                 </>
@@ -28,6 +29,18 @@ export default function ButtonsActions({origin,handleCreate,handleExport,handleO
                 <>
                 <IconButton onClick={handleExport} id='export'>
                     <DownloadIcon sx={sxIcon}/>
+                </IconButton>                          
+                {
+                    (handleSort || handleOpenSearch) &&
+                    <Box sx={{ flexGrow: 1 }}/>
+                }
+                </>
+            }
+            {
+                handleSort &&
+                <>
+                <IconButton onClick={handleSort} id='sort'>
+                    <SortIcon sx={sxIcon}/>
                 </IconButton>                          
                 {
                     (handleOpenSearch) &&

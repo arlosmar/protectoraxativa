@@ -24,10 +24,10 @@ export default function Carousel({user,t,origin,imagePath,imagesPaths,animals,pa
         const [ animalItem, setAnimalItem ] = useState(null);
 
         // check if concrete item by parameter. it is the id of the element
-        const parameter = parseInt(getParameter('view'));
+        const [ parameter, setParameter ] = useState(parseInt(getParameter('view')));
 
         var parameterPos = false;
-        if(parameter){
+        if(parameter && animals && animals.length > 0){
             
             parameterPos = animals.findIndex(animal => animal?.id === parameter);
 
@@ -40,8 +40,8 @@ export default function Carousel({user,t,origin,imagePath,imagesPaths,animals,pa
             }
         }
 
-        const length = animals && animals.length ? animals.length : 0;    
-        const pages = Math.ceil(length/itemsPerPage);
+        const [ length, setLength ] = useState(animals && animals.length ? animals.length : 0);
+        const [ pages, setPages ] = useState(Math.ceil(length/itemsPerPage));
         const [ pageCurrent, setPageCurrent ] = useState(parameterPos ? Math.min(Math.ceil(parameterPos/itemsPerPage),pages) : page ? Math.min(page,pages) : 1);
 
         //const [ pageCurrent, setPageCurrent ] = useState(page ? Math.min(page,pages) : 1);
@@ -54,6 +54,47 @@ export default function Carousel({user,t,origin,imagePath,imagesPaths,animals,pa
             setFrom((pageCurrent-1)*itemsPerPage);
             setTo(Math.min((pageCurrent*itemsPerPage)-1,length-1));
         },[pageCurrent]);
+
+        // when filtering
+        const setValues = (list) => {
+
+            var newLength = list && list.length ? list.length : 0;
+            setLength(newLength);
+            var newPages = Math.max(1,Math.ceil(newLength/itemsPerPage)); // in case 0 items
+            setPages(newPages);
+            
+            // show initial value
+            parameterPos = false;
+            if(parameter && animals && animals.length > 0){
+                
+                parameterPos = animals.findIndex(item => item?.id === parameter);
+
+                // add 1 because pos 0 means element 1
+                if(parameterPos !== -1){
+                    parameterPos++;
+                    handleInfo(animals[parameterPos-1],parameterPos-1); 
+                }
+                else{
+                    parameterPos = false; // we can use 0 instead of false
+                }
+
+                // remove parameter to avoid doing this every time we change a page or items per page
+                setParameter(null);
+            }    
+
+            //setPageCurrent(parameterPos ? Math.min(Math.ceil(parameterPos/itemsPerPage),newPages) : page ? Math.min(page,newPages) : 1);            
+            var newPageCurrent = parameterPos ? Math.min(Math.ceil(parameterPos/itemsPerPage),newPages) : Math.min(pageCurrent,newPages);
+            setPageCurrent(newPageCurrent);
+
+            // the useEffect for pageCurrent is not called, so changing from and to here
+            // maybe you cannot call useEffect twice?
+            setFrom((newPageCurrent-1)*itemsPerPage);
+            setTo(Math.min((newPageCurrent*itemsPerPage)-1,newLength-1));
+        }
+
+        useEffect(() => {
+            setValues(animals);
+        },[animals]);
 
         const handleInfo = (item) => {            
             setAnimalItem(item);

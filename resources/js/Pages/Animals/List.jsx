@@ -98,7 +98,7 @@ export default function List({t,origin,animals,setAnimals,baseUrl,
 
         var newLength = list && list.length ? list.length : 0;
         setLength(newLength);
-        var newPages = Math.ceil(newLength/itemsPerPage);
+        var newPages = Math.max(1,Math.ceil(newLength/itemsPerPage)); // in case there are 0 items
         setPages(newPages);
         
         // show initial value
@@ -120,7 +120,14 @@ export default function List({t,origin,animals,setAnimals,baseUrl,
             setParameter(null);
         }    
 
-        setPageCurrent(parameterPos ? Math.min(Math.ceil(parameterPos/itemsPerPage),newPages) : page ? Math.min(page,newPages) : 1);
+        //setPageCurrent(parameterPos ? Math.min(Math.ceil(parameterPos/itemsPerPage),newPages) : page ? Math.min(page,newPages) : 1);
+        var newPageCurrent = parameterPos ? Math.min(Math.ceil(parameterPos/itemsPerPage),newPages) : Math.min(pageCurrent,newPages);
+        setPageCurrent(newPageCurrent);
+
+        // the useEffect for pageCurrent is not called, so changing from and to here
+        // maybe you cannot call useEffect twice?
+        setFrom((newPageCurrent-1)*itemsPerPage);
+        setTo((newPageCurrent*itemsPerPage)-1);
     }
 
     // when filtering
@@ -357,7 +364,7 @@ export default function List({t,origin,animals,setAnimals,baseUrl,
                         </Suspense>
                     }
                     {
-                        openSearch &&
+                        (openSearch || filterUsed) &&
                         <Suspense>
                         <FilterAnimals
                             origin={origin}

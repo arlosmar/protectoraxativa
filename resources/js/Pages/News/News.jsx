@@ -33,6 +33,7 @@ export default function News({user,imagesPaths,page,news,disabled,initialNews}){
 
 	const [ share , setShare ] = useState(false);
 	const [ link, setLink ] = useState('');
+	const [ shareTitle, setShareTitle ] = useState('');
 
 	const [ showNews, setShowNews ] = useState(initialNews ? true : false);
 
@@ -99,9 +100,10 @@ export default function News({user,imagesPaths,page,news,disabled,initialNews}){
         });      
     }
 
-    const handleShare = async (newId,image) => {
+    const handleShare = async (item) => {
 
-    	const linkNews = route('news')+'?view='+newId;    	
+    	var itemTitle = item?.title && item.title.length > 0 ? item.title : t('Title.News');
+    	const linkNews = route('news')+'?view='+item?.id;    	
 
         // if native mobile share          
         // typeof (window.AndroidShareHandler) !== 'undefined'
@@ -109,13 +111,14 @@ export default function News({user,imagesPaths,page,news,disabled,initialNews}){
             
             try{
                 const shareData = {
-                    title: t('share.title-native'),
+                    //title: t('share.title-native'),
+                    title: itemTitle,
                     //text: t('trans.text'),
                     url: linkNews
                 };
 
-                if(image && image.length > 0){
-                	shareData.image = window.location.protocol+'//'+window.location.host+imagesPaths?.news+image;
+                if(item?.image && item.image.length > 0){
+                	shareData.image = window.location.protocol+'//'+window.location.host+imagesPaths?.news+item.image;
                 }
                 /*
                 await navigator.share(shareData);
@@ -126,14 +129,17 @@ export default function News({user,imagesPaths,page,news,disabled,initialNews}){
                 }
                 else {                
                 	if(shareData.image && shareData.image.length > 0){
+
                         var split = shareData.image.split('/');   
                         var imageName = split.slice(-1);                     
                         let blob = await fetch(shareData.image).then(r => r.blob());
-                        shareData.files = [
-                            new File([blob],imageName, {
-                                type: blob.type,
-                            })
-                        ];
+                        var file = new File([blob],imageName, {
+                            type: blob.type,
+                        });
+
+                        if(navigator.canShare(file)){
+                        	shareData.files = [file];
+                        }
                     }
                     await navigator.share(shareData);
                 }
@@ -145,6 +151,7 @@ export default function News({user,imagesPaths,page,news,disabled,initialNews}){
         } 
         else{
             // if no native mobile share, show popup
+            setShareTitle(itemTitle);
             setLink(linkNews);
             setShare(true);
         }
@@ -176,6 +183,7 @@ export default function News({user,imagesPaths,page,news,disabled,initialNews}){
             t={t}
             show={share}
             setShow={setShare}
+            title={shareTitle}
             link={link}          
         />
         <NewsModal
@@ -251,7 +259,7 @@ export default function News({user,imagesPaths,page,news,disabled,initialNews}){
 						            </div>
 						        }
 						        <div className={`w-full flex items-center ${user && user?.admin ? 'justify-between' : 'justify-center'}`}>
-		                            <IconButton onClick={(e) => handleShare(newsItem?.id,newsItem?.image)} className='shareIcon'>
+		                            <IconButton onClick={(e) => handleShare(newsItem)} className='shareIcon'>
 		                                <ShareIcon sx={sxIcon}/>
 		                            </IconButton> 
 		                            {

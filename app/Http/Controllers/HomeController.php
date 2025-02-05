@@ -64,6 +64,13 @@ class HomeController extends Controller{
         if(isset($lang) && !empty($lang)){
             $language = $lang;
         }
+
+        // if we receive deviceId from the app
+        $deviceId = null;
+        if(isset($request->deviceId) && !empty($request->deviceId)){
+            $deviceId = $request->deviceId;
+        }
+
         /*
         $back = route('home');
         return Inertia::render('Contact',compact('back'));
@@ -82,7 +89,7 @@ class HomeController extends Controller{
 
         $guides = config('guides');
 
-        return Inertia::render('Home',compact('user','email_colaboration','email_volunteering','language','social','partners','prices','forms','guides','message','darkmode'));
+        return Inertia::render('Home',compact('user','email_colaboration','email_volunteering','language','social','partners','prices','forms','guides','message','darkmode','deviceId'));
         //return view('welcome');
     }
 

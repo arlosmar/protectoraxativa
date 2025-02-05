@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LanguageUpdateRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\App;
+use App\Models\{Biometric};
 
 use Illuminate\Http\Request;
 
@@ -25,22 +26,31 @@ class SettingsController extends Controller{
 
                 $values = $request->all();
 
-                if(isset($values['authentication']) && !empty($values['authentication'])){
-                                                    
-                    // already json format
-                    $authentication = $values['authentication'];
-                }
-                else{
-                    $authentication = null;
-                }
-                 
-                $user->update(['authentication' => $authentication]);
+                if(isset($values['device']) && !empty($values['device'])){
 
-                return response()->json(['result' => true]);
+                    $device = $values['device'];
+
+                    if(isset($values['authentication']) && !empty($values['authentication'])){
+                                  
+                        // already json format
+                        $authentication = $values['authentication'];
+
+                        $biometric = Biometric::updateOrCreate(
+                            ['user_id' => $user->id, 'device' => $device],
+                            ['authentication' => $authentication]
+                        );
+                    }
+                    else{
+                        // remove biometric if exists
+                        Biometric::where('user_id',$user->id)->where('device',$device)->delete();
+                    }
+
+                    return response()->json(['result' => true]);
+                }
             }             
         }
-        catch(\Exception $e){            
-            return response()->json(['result' => false]);
+        catch(\Exception $e){    
+            //return response()->json(['result' => false, 'message' => $e->getMessage()]);
         }
 
         return response()->json(['result' => false]);

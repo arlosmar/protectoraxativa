@@ -33,8 +33,8 @@ protected function write(LogRecord $record): void
 */
 
 // to create random token to log in on the app
-function getRandomToken($user){
-    $random = substr($user->id.'_'.time().'_'.str()->password(100,true,true,false),0,100);
+function getRandomToken(){
+    $random = substr(time().'_'.str()->password(100,true,true,false),0,100);
     return $random;
 }
 
@@ -142,6 +142,19 @@ function formatTelegramMessage($date = '', $from = '',$url = '',$user = null,$de
     }
 
     return $info;
+}
+
+function sendTelegram($message){
+
+    $messageString = print_r($message,true);
+    $messageEncoded = urlencode($messageString);
+
+    $botToken = env('TELEGRAM_API_KEY');
+    $channel = env('TELEGRAM_CHANNEL');         
+
+    $urlTelegram = 'https://api.telegram.org/bot'.$botToken.'/sendMessage?parse_mode=html&chat_id='.$channel.'&text='.$messageEncoded.'&disable_web_page_preview=true';
+    
+    $response = Http::get($urlTelegram);
 }
 
 function getCookieValue($name){

@@ -111,7 +111,11 @@ export default function AnimalModal({user,origin,t,show,setShow,imagePath,images
         getShareLink();
     },[animal]);
 
+    const [ shareTitle, setShareTitle ] = useState('');
+
     const handleShare = async () => {
+
+        var itemTitle = animal?.name && animal.name.length > 0 ? animal.name : t('Title.Animals');
 
         // if native mobile share        
         if(navigator?.share || window?.AndroidHandler?.share){
@@ -135,7 +139,8 @@ export default function AnimalModal({user,origin,t,show,setShow,imagePath,images
                                 imagePathShare+animal.image2;
 
                 const shareData = {
-                    title: t('share.title-native'),
+                    //title: t('share.title-native'),
+                    title: itemTitle,
                     //text: t('trans.text'),
                     url: link
                 };
@@ -154,14 +159,17 @@ export default function AnimalModal({user,origin,t,show,setShow,imagePath,images
                 }
                 else {                
                     if(shareData.image && shareData.image.length > 0){
+
                         var split = shareData.image.split('/');   
                         var imageName = split.slice(-1);                     
                         let blob = await fetch(shareData.image).then(r => r.blob());
-                        shareData.files = [
-                            new File([blob],imageName, {
-                                type: blob.type,
-                            })
-                        ];
+                        var file = new File([blob],imageName, {
+                            type: blob.type,
+                        });
+
+                        if(navigator.canShare(file)){
+                            shareData.files = [file];
+                        }
                     }
                     await navigator.share(shareData);
                 }
@@ -173,6 +181,7 @@ export default function AnimalModal({user,origin,t,show,setShow,imagePath,images
         } 
         else{
             // if no native mobile share, show popup
+            setShareTitle(itemTitle);
             setShare(true);
         }
     }
@@ -269,6 +278,7 @@ export default function AnimalModal({user,origin,t,show,setShow,imagePath,images
             t={t}
             show={share}
             setShow={setShare}
+            title={shareTitle}
             link={link}          
         />
         <DeleteModal

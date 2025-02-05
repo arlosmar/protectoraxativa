@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Support\Facades\URL;
-use App\Models\{User};
+use App\Models\{User,Biometric};
 use Illuminate\Support\Facades\Http;
 use Google\Client;
 use Illuminate\Support\Facades\Storage;
@@ -120,7 +120,35 @@ class AdminController extends Controller
         }
         */
         $user = auth()->user();
-        $user->load('person');
+        $user->load('person'/*,'biometrics'*/);
+
+        $isApp = $this->isApp($request);
+
+        // get if user has a biometric for this device Id
+        $deviceId = getCookieValue("deviceId");
+
+        $biometric = null;
+
+        if(isset($deviceId) && !empty($deviceId)){
+
+            // if we receive biometric=1 from the app, save on biometrics table
+            if(isset($isApp) && !empty($isApp) && isset($request->biometric)){
+
+                if(!empty($request->biometric)){
+                    $biometric = Biometric::updateOrCreate(
+                        ['user_id' => $user->id, 'device' => $deviceId],
+                        ['authentication' => 'app'] // this value does not matter
+                    );
+                }
+                else{
+                    // delete from database
+                    Biometric::where('user_id',$user->id)->where('device',$deviceId)->delete();
+                }
+            }
+            else{   
+                $biometric = $user->biometric($deviceId);
+            }
+        }
 
         if(
             !isset($page) || 
@@ -160,8 +188,6 @@ class AdminController extends Controller
         // types of notifications to open a different url
         $notifications = $this->getNotifications();
 
-        $isApp = $this->isApp($request);
-
         // if app, check if notifications parameter stating notifications are disabled
         $appNotificationsEnabled = true;
         if($isApp && isset($request->notifications) && intval($request->notifications) === 0){
@@ -174,7 +200,7 @@ class AdminController extends Controller
 
         $social = config('social.social');
 
-        return Inertia::render('Admin/Admin',compact('user','section','subsection','status','msg','baseUrl','imagesPaths','page','csrf_token','users','notifications','emails','social','isApp','appNotificationsEnabled'));
+        return Inertia::render('Admin/Admin',compact('user','section','subsection','status','msg','baseUrl','imagesPaths','page','csrf_token','users','notifications','emails','social','isApp','appNotificationsEnabled','biometric'));
     }
 
     // Update the user's profile information.

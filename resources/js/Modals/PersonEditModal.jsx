@@ -29,7 +29,7 @@ export default function PersonEditModal({t,show,setShow,items,setItems,item,setI
 
         e.preventDefault();
 
-        axios.patch(route('person.edit',[item?.id]),{data,id: item?.id ? item.id : null})
+        axios.post(route('person.edit',[item?.id]),{data,id: item?.id ? item.id : null})
         .then(function (response){            
             
             if(response.data.result){

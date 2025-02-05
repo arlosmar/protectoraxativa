@@ -193,6 +193,10 @@
     },
     "animals":   {
         "title" :   "Animales",
+        "order" : {
+            "name" : "Ordenado por nombre",
+            "date" : "Ordenador por fecha más reciente"
+        },
         "adopt" :   {
             "icon"  :   "Adoptar",
             "title" :   "Adoptar",
@@ -512,7 +516,8 @@
         "forgot-send" : "Enviar",
         "reset" : "Resetear",
         "register" : "Registrarse",
-        "google" : "Google"
+        "google" : "Google",
+        "apple" : "Apple"
     },
     "contact": {
         "title" : "Contactar",

@@ -9,14 +9,15 @@ import { useTranslation } from "react-i18next";
 import Toast from '@/Components/Toast';
 
 import GoogleIcon from '@mui/icons-material/Google';
+import AppleIcon from '@mui/icons-material/Apple';
 
-import { authenticate, getStoredCredential } from '@/Components/Authentication';
+import { authenticate } from '@/Components/Authentication';
 
-export default function Login({ status, canResetPassword, path }) {
+export default function Login({ status, canResetPassword, path, biometric }) {
 
     const { t } = useTranslation('global');
 
-    const [ biometricSaved, setBiometricSaved ] = useState(getStoredCredential(true));
+    const [ biometricSaved, setBiometricSaved ] = useState(biometric ? true : false);
     
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
@@ -27,10 +28,10 @@ export default function Login({ status, canResetPassword, path }) {
 
     const checkAuthentication = async () => {        
         
-        const credential = await authenticate();
+        const credential = await authenticate(biometric);
 
-        if(credential?.authentication){
-            post(route('login.authentication',[credential?.userId]));
+        if(credential){
+            post(route('login.authentication',[biometric?.user_id])+'?credential='+credential+'&device='+biometric?.device);
         }
     }
 
@@ -253,6 +254,13 @@ export default function Login({ status, canResetPassword, path }) {
                     <GoogleIcon/> {t('login.google')}
                 </a>
             </div>
+            {/*
+            <div className="flex justify-center items-center mt-4">                   
+                <a className='apple-button' href={route('apple')}>
+                    <AppleIcon/> {t('login.apple')}
+                </a>
+            </div>
+            */}
             {
                 biometricSaved &&
                 <div className="text-center mt-8">                   

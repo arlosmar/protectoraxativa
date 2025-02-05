@@ -1,4 +1,4 @@
-import { getAuthentication, setAuthentication } from "@/Utils/Cookies";
+import Cookies from 'universal-cookie';
 
 export const generateRandomBuffer = (length) => {
     const randomBuffer = new Uint8Array(length);
@@ -62,7 +62,7 @@ export const register = async (user) => {
         const credential = await navigator.credentials.create({ publicKey });        
 
         // Store the credential details on the client and the server
-        const credentialJson = storeCredential(user,credential,challenge);
+        const credentialJson = storeCredential(credential,challenge);
 
         //alert("Registration successful! " + JSON.stringify(credential));
         return credentialJson;
@@ -77,20 +77,13 @@ export const register = async (user) => {
     }
 }
 
-export const authenticate = async () => {
+export const authenticate = async (biometric) => {
     
-    // Retrieve stored credential information
-    const credential = getStoredCredential();
-    
-    if(!credential?.authentication) {
-        return {
-            userId: null,
-            authentication: null
-        };
-        //throw new Error("No stored credential found. Please register first."); // Error if no credentials are found
+    if(!biometric?.authentication){
+        return null;
     }
 
-    const storedCredential = credential.authentication;
+    const storedCredential = JSON.parse(biometric.authentication);
 
     // PublicKeyCredentialRequestOptions is used to prompt the user to authenticate
     const publicKey = {
@@ -113,25 +106,21 @@ export const authenticate = async () => {
 
     try {
         // This will prompt the user to authenticate using their registered biometric credential
-        const credentials = await navigator.credentials.get({ publicKey });
+        const credential = await navigator.credentials.get({ publicKey });
+
+        const credentialJson = storeCredential(credential,publicKey.challenge);
         
         //alert("Authentication successful! "+ JSON.stringify(credential));
-        return {
-            userId: credential?.userId,
-            authentication: credentials
-        };
+        return credentialJson;
     }
     catch(err) {
         //console.error("Authentication failed:", err);
         //throw err; // Handle any errors that occur during authentication
-        return {
-            userId: false,
-            authentication: false
-        };
+        return false;
     }
 }
 
-export const storeCredential = (user,credential,challenge) => {
+export const storeCredential = (credential,challenge) => {
     
     const credentialData = {
         // Converts the raw ID to an array for storage
@@ -140,43 +129,7 @@ export const storeCredential = (user,credential,challenge) => {
         challenge: Array.from(challenge)
     };
 
-    // Store the data as a JSON string
-    //localStorage.setItem('authentication', JSON.stringify(credentialData)); 
-    const credentialJson = setAuthentication(user,credentialData);
+    const credentialJson = JSON.stringify(credentialData); 
 
     return credentialJson;
-}
-
-export const getStoredCredential = (returnBoolean = false) => {
-    
-    //const storedCredential = localStorage.getItem('authentication');
-    const credential = getAuthentication();
-    
-    //return storedCredential ? JSON.parse(storedCredential) : null;
-
-    // if saving in json it saves strange characters in cookies
-    if(credential?.authentication){
-
-        if(returnBoolean){
-            return true; 
-        }
-        else{
-            return {
-                userId: credential?.userId,
-                authentication: credential?.authentication
-            }
-        }
-    }
-    else{
-
-        if(returnBoolean){
-            return false; 
-        }
-        else{
-            return {
-                userId: null,
-                authentication: null
-            };
-        }
-    }
 }

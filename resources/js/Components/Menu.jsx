@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { checkIsIOS } from '@/Utils/Device';
-import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+//import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+import Drawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -49,14 +50,31 @@ export default function Menu({user,t,from,open,setOpen,changeLanguage,handleLogo
     const sxLogoutIcon = {color: "red"};
     const sxItemTextLogout = {color: "red"};
 
-	return (
-		<SwipeableDrawer 
+    /*
+    <SwipeableDrawer 
             anchor='right'
             open={open} 
             onOpen={(e) => handleMenu(e,true)}
             onClose={(e) => handleMenu(e,false)}
             disableBackdropTransition={!isIOS} 
             disableDiscovery={isIOS}            
+            PaperProps={{
+                sx: {
+                    backgroundColor: darkmode ? "rgb(38 38 38)" : "white",
+                    color: darkmode ? "white" : "black",
+                    width: '50%',
+                    maxWidth: '300px'
+                }
+            }}
+        >
+    */
+
+	return (
+		<Drawer 
+            anchor='right'
+            open={open} 
+            onOpen={(e) => handleMenu(e,true)}
+            onClose={(e) => handleMenu(e,false)}
             PaperProps={{
                 sx: {
                     backgroundColor: darkmode ? "rgb(38 38 38)" : "white",
@@ -131,6 +149,6 @@ export default function Menu({user,t,from,open,setOpen,changeLanguage,handleLogo
 	                }
                 </List>
             </Box>
-        </SwipeableDrawer>
+        </Drawer>
     )
 }

@@ -33,12 +33,14 @@ import { applyDarkMode } from "@/Utils/Cookies";
 //import { useSwipeable } from 'react-swipeable';
 
 export default function Admin({auth,user,section,subsection,status,msg,baseUrl,
-    imagesPaths,page,csrf_token,users,notifications,emails,social,isApp,appNotificationsEnabled}){
+    imagesPaths,page,csrf_token,users,notifications,emails,social,isApp,appNotificationsEnabled,biometric}){
 
     const { t } = useTranslation('global');
 
-    // when logged in, if the user has in its preferences the darkmode, apply it
-    const darkmode = applyDarkMode(user);
+    useEffect(() => {
+        // when logged in, if the user has in its preferences the darkmode, apply it
+        const darkmode = applyDarkMode(user);
+    },[]);
 
     const [ userSettings, setUserSettings ] = useState(user && user?.settings ? JSON.parse(user.settings) : null);
 
@@ -305,7 +307,8 @@ export default function Admin({auth,user,section,subsection,status,msg,baseUrl,
                                         setUserSettings={setUserSettings}   
                                         notifications={notifications}    
                                         isApp={isApp}  
-                                        appNotificationsEnabled={appNotificationsEnabled}                                  
+                                        appNotificationsEnabled={appNotificationsEnabled}    
+                                        biometric={biometric}                              
                                     />
                                 :
                                     tab === 'account' ?
